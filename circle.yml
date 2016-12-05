@@ -9,6 +9,10 @@ deployment:
     branch: staging
     commands:
       - ./circleci/circle_aws_deploy.sh ${STAGING_SERVER} sandbox
+  master:
+    branch: master
+    commands:
+      - ./circleci/circle_aws_deploy.sh ${STAGING_SERVER} master
   develop:
     branch: develop
     commands:
