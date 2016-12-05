@@ -1,0 +1,19 @@
+machine:
+  node:
+    version: 4.5.0
+  services:
+    - docker
+
+deployment:
+  staging:
+    branch: staging
+    commands:
+      - ./circleci/circle_aws_deploy.sh ${STAGING_SERVER} sandbox
+  develop:
+    branch: develop
+    commands:
+      - ./circleci/circle_aws_deploy.sh ${DEVELOP_SERVER} develop && ./circleci/circle_backend_ci_run.sh develop
+#  production:
+#    branch: master
+#    commands:
+#      - ./circleci/circle_aws_deploy.sh demo01
