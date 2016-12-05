@@ -1,8 +1,12 @@
 machine:
   node:
-    version: 4.5.0
+    version: 6.9.1
   services:
     - docker
+
+dependencies: 
+    override: 
+    - ./circleci/runnpm.sh
 
 deployment:
   staging:
