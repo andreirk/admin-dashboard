@@ -6,7 +6,7 @@ TARGET_STACK=$2
 
 export UIADMINV2_HASH=$(git rev-parse HEAD)
 
-
+echo pwd
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 docker build -t arammeem16/toyou-ui-admin-v2:${UIADMINV2_HASH} .
