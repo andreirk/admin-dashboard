@@ -10,6 +10,7 @@ echo Hello from pwd
 pwd
 echo Hello from ls 
 ls
+pwd
 
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
