@@ -8,5 +8,5 @@ docker rmi ui-admin-v2
 #docker run -d --name=ui-admin arammeem16/toyou-ui-admin
 
 docker build -f Dockerfile-develop -t ui-admin-v2 .
-docker run -d -p 8090:8090 --name=ui-admin-v2 -v ${PWD}/src/ui-admin-v2/:/usr/share/nginx/html/ui-admin-v2/ ui-admin-v2
+docker run -d -p 8090:8090 --name=ui-admin-v2 -v ${PWD}/dist/:/usr/share/nginx/html/ui-admin-v2/ ui-admin-v2
 
