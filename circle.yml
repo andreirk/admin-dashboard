@@ -7,7 +7,7 @@ machine:
 dependencies: 
     override: 
     - echo Hello from yml
-    - ./circleci/runnpm.sh
+    - sh ./circleci/runnpm.sh
 
 deployment:
   staging:
