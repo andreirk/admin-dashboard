@@ -24,8 +24,8 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
   title: 'To-YOU',
-  description: 'Free Angular 2 and Bootstrap 4 Admin Template',
-  baseUrl: '/',
+  description: 'to-you admin page',
+  baseUrl: '/dashboard',
   isDevServer: helpers.isWebpackDevServer()
 };
 
