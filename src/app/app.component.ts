@@ -18,7 +18,6 @@ import { ComponentsHelper } from 'ng2-bootstrap';
       <div class="additional-bg"></div>
       <router-outlet></router-outlet>
     </main>
-    
   `
 })
 export class App {
