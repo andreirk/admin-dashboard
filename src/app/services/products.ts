@@ -3,7 +3,7 @@ import { ApiService } from './api'
 
 @Injectable()
 export class ProductService {
-    path: string = '/merchants';
+    path: string = '/merchants'; // no products yet
 
     constructor(private api: ApiService){
           
