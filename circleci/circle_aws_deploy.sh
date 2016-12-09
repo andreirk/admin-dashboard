@@ -15,7 +15,8 @@ pwd
 echo Hello from ls 
 ls
 
-
+echo Hello from cat
+cat circle_aws_deploy.sh
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 docker build -t arammeem16/toyou-ui-admin-v2:${UIADMINV2_HASH} .
