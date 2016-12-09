@@ -19,7 +19,7 @@ import { ProductService } from '../../services'
         <div class="row between-xs">
           <am-product-card
             class="col-xs-12"
-            *ngFor="let product of [1,2,3,4,5,6,7,8,9]; "
+            *ngFor="let product of products; "
             [product]="product"
           >
           </am-product-card>
@@ -52,7 +52,7 @@ export class ProductListComponent {
   template: `
             <div class="col-sm-10" (click)="onProductClick($event)">
               <div class="card card-block">
-                <h5 class="card-title">Product      # {{product}}</h5>
+                <h5 class="card-title">Product id {{product.id}}</h5>
                 <p class="card-text">Short description.</p>
                 <a href="#" class="btn btn-primary">Edit</a>
               </div>
@@ -60,7 +60,7 @@ export class ProductListComponent {
   `
 })
 export class ProductCard {
-  @Input() product = 0;
+  @Input() product = {};
   @Output() checked = new EventEmitter()
   showCheck: boolean = false;
 
