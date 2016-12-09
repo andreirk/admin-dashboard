@@ -126,7 +126,7 @@
     "watch:dev:hmr": "npm run watch:dev -- --hot",
     "watch:prod": "npm run build:prod -- --watch",
     "build": "npm run build:dev",
-    "prebuild:dev": "npm run clean:distDev",
+    "prebuild:dev": "npm run clean:dist",
     "build:dev": "npm run webpack -- --config config/webpack.dev.js",
     "prebuild:prod": "npm run clean:dist",
     "build:prod": "npm run webpack -- --config config/webpack.prod.js",
