@@ -18,14 +18,38 @@ export const PAGES_MENU = [
         path: 'product',  // path for our page
         data: { // custom menu declaration
           menu: {
-            title: 'Product Page', // menu title
+            title: 'Products Page', // menu title
             icon: 'ion-android-home', // menu icon
           //  pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
             expanded: false,
             order: 101
           }
-        }
+        },
+        children: [
+          {
+            path: 'categories',
+            data: {
+              menu: {
+                title: 'Product',
+                url: '#'
+              }
+            },
+            children: [
+              {
+                path: 'catigories',
+                data: {
+                  menu: {
+                    title: 'Categoies',
+                    url: 'catigories',
+                    selected: false,
+                    expanded: false
+                  }
+                }
+              }
+            ]
+          }
+        ]
       },
 
       {
@@ -50,28 +74,28 @@ export const PAGES_MENU = [
           }
         ]
       },
-      {
-       path: 'components',
-       data: {
-         menu: {
-           title: 'Components',
-           icon: 'ion-gear-a',
-           selected: false,
-           expanded: false,
-           order: 250,
-         }
-       },
-       children: [
-         {
-           path: 'treeview',
-           data: {
-             menu: {
-               title: 'Tree View',
-             }
-           }
-         }
-       ]
-      },
+      //{
+      //  path: 'components',
+      //  data: {
+      //    menu: {
+      //      title: 'Components',
+      //      icon: 'ion-gear-a',
+      //      selected: false,
+      //      expanded: false,
+      //      order: 250,
+      //    }
+      //  },
+      //  children: [
+      //    {
+      //      path: 'treeview',
+      //      data: {
+      //        menu: {
+      //          title: 'Tree View',
+      //        }
+      //      }
+      //    }
+      //  ]
+      //},
       {
         path: 'charts',
         data: {
