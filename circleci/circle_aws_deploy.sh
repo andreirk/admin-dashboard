@@ -6,6 +6,10 @@ TARGET_STACK=$2
 
 export UIADMINV2_HASH=$(git rev-parse HEAD)
 
+npm i
+npm run build:prod
+
+
 echo Hello from pwd 
 pwd
 echo Hello from ls 
