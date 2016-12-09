@@ -50,28 +50,28 @@ export const PAGES_MENU = [
           }
         ]
       },
-      //{
-      //  path: 'components',
-      //  data: {
-      //    menu: {
-      //      title: 'Components',
-      //      icon: 'ion-gear-a',
-      //      selected: false,
-      //      expanded: false,
-      //      order: 250,
-      //    }
-      //  },
-      //  children: [
-      //    {
-      //      path: 'treeview',
-      //      data: {
-      //        menu: {
-      //          title: 'Tree View',
-      //        }
-      //      }
-      //    }
-      //  ]
-      //},
+      {
+       path: 'components',
+       data: {
+         menu: {
+           title: 'Components',
+           icon: 'ion-gear-a',
+           selected: false,
+           expanded: false,
+           order: 250,
+         }
+       },
+       children: [
+         {
+           path: 'treeview',
+           data: {
+             menu: {
+               title: 'Tree View',
+             }
+           }
+         }
+       ]
+      },
       {
         path: 'charts',
         data: {
@@ -94,60 +94,60 @@ export const PAGES_MENU = [
           }
         ]
       },
-      // {
-      //   path: 'ui',
-      //   data: {
-      //     menu: {
-      //       title: 'UI Features',
-      //       icon: 'ion-android-laptop',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 300,
-      //     }
-      //   },
-      //   children: [
-      //     {
-      //       path: 'typography',
-      //       data: {
-      //         menu: {
-      //           title: 'Typography',
-      //         }
-      //       }
-      //     },
-      //     {
-      //       path: 'buttons',
-      //       data: {
-      //         menu: {
-      //           title: 'Buttons',
-      //         }
-      //       }
-      //     },
-      //     {
-      //       path: 'icons',
-      //       data: {
-      //         menu: {
-      //           title: 'Icons',
-      //         }
-      //       }
-      //     },
-      //     {
-      //       path: 'modals',
-      //       data: {
-      //         menu: {
-      //           title: 'Modals',
-      //         }
-      //       }
-      //     },
-      //     {
-      //       path: 'grid',
-      //       data: {
-      //         menu: {
-      //           title: 'Grid',
-      //         }
-      //       }
-      //     },
-      //   ]
-      // },
+      {
+        path: 'ui',
+        data: {
+          menu: {
+            title: 'UI Features',
+            icon: 'ion-android-laptop',
+            selected: false,
+            expanded: false,
+            order: 300,
+          }
+        },
+        children: [
+          {
+            path: 'typography',
+            data: {
+              menu: {
+                title: 'Typography',
+              }
+            }
+          },
+          {
+            path: 'buttons',
+            data: {
+              menu: {
+                title: 'Buttons',
+              }
+            }
+          },
+          {
+            path: 'icons',
+            data: {
+              menu: {
+                title: 'Icons',
+              }
+            }
+          },
+          {
+            path: 'modals',
+            data: {
+              menu: {
+                title: 'Modals',
+              }
+            }
+          },
+          {
+            path: 'grid',
+            data: {
+              menu: {
+                title: 'Grid',
+              }
+            }
+          },
+        ]
+      },
       {
         path: 'forms',
         data: {

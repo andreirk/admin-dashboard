@@ -15,7 +15,7 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
   host: HOST,
@@ -156,7 +156,20 @@ module.exports = function (options) {
       watchOptions: {
         aggregateTimeout: 300,
         poll: 1000
-      }
+      },
+      proxy: {
+        '/catalog': {
+          target: 'http://lb.service:8080',
+          secure: false
+        }
+      }      
+      // proxy: [
+      //   {
+      //     context: ['/catalog/mgmt/v1/**', '/catalog/mgmt/v2/**'],
+      //     target: 'http://lb.service:8080/catalog/',
+      //     secure: false
+      //   }
+      // ]     
     },
 
     /*

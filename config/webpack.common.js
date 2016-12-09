@@ -17,6 +17,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 /*
  * Webpack Constants
@@ -25,7 +26,7 @@ const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
   title: 'To-YOU',
   description: 'to-you admin page',
-  baseUrl: '/dashboard',
+  baseUrl: helpers.isWebpackDevServer() ? '/' : '/dashboard/',
   isDevServer: helpers.isWebpackDevServer()
 };
 
@@ -196,6 +197,15 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#plugins
      */
     plugins: [
+
+      // new BrowserSyncPlugin({
+      //         // browse to http://localhost:3000/ during development, 
+      //         // ./public directory is being served 
+      //         host: 'localhost',
+      //         port: 3000,
+      //         server: { baseDir: ['dashboard'] }
+      //       }),
+
       new ExtractTextPlugin({filename: 'initial.css', allChunks: true}),
 
       new AssetsPlugin({
