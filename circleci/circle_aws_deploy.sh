@@ -6,7 +6,12 @@ TARGET_STACK=$2
 
 export UIADMINV2_HASH=$(git rev-parse HEAD)
 
-npm i
+npm i npm
+npm cache clean 
+npm install -g n
+n stable
+
+npm i --silent
 npm run build:prod
 
 
