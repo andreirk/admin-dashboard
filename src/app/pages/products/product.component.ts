@@ -52,7 +52,7 @@ export class ProductListComponent {
   template: `
             <div class="col-sm-10" (click)="onProductClick($event)">
               <div class="card card-block">
-                <h5 class="card-title">Product   # {{product}}</h5>
+                <h5 class="card-title">Product      # {{product}}</h5>
                 <p class="card-text">Short description.</p>
                 <a href="#" class="btn btn-primary">Edit</a>
               </div>
