@@ -3,6 +3,12 @@
 // rc2 workaround
 import { enableDebugTools, disableDebugTools } from '@angular/platform-browser';
 import { enableProdMode, ApplicationRef } from '@angular/core';
+import * as services from './services';
+
+
+const mapValuesToArray = (obj) => Object.keys(obj).map(key => obj[key]);
+
+
 // Environment Providers
 let PROVIDERS: any[] = [
   // common env directives
@@ -37,7 +43,8 @@ if ('production' === ENV || 'renderer' === ENV) {
 
   // Development
   PROVIDERS = [
-    ...PROVIDERS,
+
+    ...mapValuesToArray(services),
     // custom providers in development
   ];
 

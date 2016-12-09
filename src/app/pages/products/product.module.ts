@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { ProductComponent } from './product.component';
+import { ProductListComponent, ProductCard } from './product.component';
 import { routing } from './product.routing';
 
 @NgModule({
@@ -9,7 +9,7 @@ import { routing } from './product.routing';
     routing
   ],
   declarations: [
-    ProductComponent
+    ProductListComponent, ProductCard
   ]
 })
 export default class NewModule {}
