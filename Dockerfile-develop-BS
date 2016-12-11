@@ -1,7 +1,0 @@
-FROM node:6-slim
-
-RUN npm -g install browser-sync
-
-WORKDIR /dashboard
-
-ENTRYPOINT ["browser-sync"]
