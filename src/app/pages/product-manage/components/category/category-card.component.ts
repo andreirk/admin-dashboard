@@ -7,17 +7,21 @@ import {
 
 
 @Component({
-  selector: 'am-category-card',
+  selector: 'toyou-category-card',
   // styles: [require('./product.style.css')],
-  template: `
-            <div class="col-sm-10" (click)="onCategoryClick($event)">
-              <div class="card card-block">
-                <h5 class="card-title">Category id {{category.id}}</h5>
-                <p class="card-text">Short description.</p>
-                <a href="#" class="btn btn-primary">Edit</a>
-              </div>
-            </div>     
-  `
+  template: require('./category-card.html')
+  
+  
+  // `
+  //           <div class="col-sm-10" (click)="onCategoryClick($event)">
+  //             <div class="card card-block">
+  //               <h5 class="card-title">Category id {{category.id}}</h5>
+  //               <p class="card-text">Short description.</p>
+  //               <a href="#" class="btn btn-primary">Edit</a>
+  //             </div>
+  //           </div>     
+  // `
+
 })
 export class CategoryCardComponent {
   @Input() category = {};
@@ -29,7 +33,7 @@ export class CategoryCardComponent {
   }
 
   onChecked() {
-    this.checked.next(this.category); 
+    this.checked.next(this.category);
   }
 
   onCategoryClick(event){

@@ -39,7 +39,7 @@ export const PAGES_MENU = [
             path: 'catigories',
             data: {
               menu: {
-                title: 'Categoies',
+                title: 'Categories',
                 selected: false,
                 expanded: false
                 }
