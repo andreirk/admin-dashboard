@@ -4,9 +4,9 @@ machine:
   services:
     - docker
 
-# dependencies: 
-#     override: 
-#     - sh ./circleci/runnpm.sh
+dependencies: 
+    override: 
+    - sh ./circleci/runnpm.sh
 
 deployment:
   staging:
