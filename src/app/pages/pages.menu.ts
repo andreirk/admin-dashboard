@@ -15,10 +15,10 @@ export const PAGES_MENU = [
       //   }
       // },
       {
-        path: 'product',  // path for our page
+        path: 'product_manage',  // path for our page
         data: { // custom menu declaration
           menu: {
-            title: 'Products Page', // menu title
+            title: 'Product Manage', // menu title
             icon: 'ion-android-home', // menu icon
           //  pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
@@ -28,27 +28,23 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'categories',
+            path: 'products',
             data: {
               menu: {
-                title: 'Product',
-                url: '#'
+                title: 'Products'
               }
             },
-            children: [
-              {
-                path: 'catigories',
-                data: {
-                  menu: {
-                    title: 'Categoies',
-                    url: 'catigories',
-                    selected: false,
-                    expanded: false
-                  }
+          },
+          {
+            path: 'catigories',
+            data: {
+              menu: {
+                title: 'Categoies',
+                selected: false,
+                expanded: false
                 }
               }
-            ]
-          }
+          },
         ]
       },
 
@@ -74,28 +70,28 @@ export const PAGES_MENU = [
       //     }
       //   ]
       // },
-      {
-       path: 'components',
-       data: {
-         menu: {
-           title: 'Components',
-           icon: 'ion-gear-a',
-           selected: false,
-           expanded: false,
-           order: 250,
-         }
-       },
-       children: [
-         {
-           path: 'treeview',
-           data: {
-             menu: {
-               title: 'Tree View',
-             }
-           }
-         }
-       ]
-      },
+      // {
+      //  path: 'components',
+      //  data: {
+      //    menu: {
+      //      title: 'Components',
+      //      icon: 'ion-gear-a',
+      //      selected: false,
+      //      expanded: false,
+      //      order: 250,
+      //    }
+      //  },
+      //  children: [
+      //    {
+      //      path: 'treeview',
+      //      data: {
+      //        menu: {
+      //          title: 'Tree View',
+      //        }
+      //      }
+      //    }
+      //  ]
+      // },
       // {
       //   path: 'charts',
       //   data: {
@@ -325,7 +321,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'Menu Level 1.1',
-                url: '#'
+
               }
             }
           },
@@ -334,7 +330,7 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'Menu Level 1.2',
-                url: '#'
+
               }
             },
             children: [
@@ -343,7 +339,7 @@ export const PAGES_MENU = [
                 data: {
                   menu: {
                     title: 'Menu Level 1.2.1',
-                    url: '#'
+
                   }
                 }
               }
@@ -356,7 +352,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'Go to Version 1',
-            url: 'http://lb.service:8080/ui-admin',
+            url: 'http://lb.service:8080/ui-admin/',
             icon: 'ion-android-exit',
             order: 800,
             target: '_blank'
