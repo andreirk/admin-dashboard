@@ -6,10 +6,10 @@ TARGET_STACK=$2
 
 export UIADMINV2_HASH=$(git rev-parse HEAD)
 
-# npm i npm
-# npm cache clean 
-# npm install -g n
-# n stable
+npm i npm
+npm cache clean 
+npm install -g n
+n stable
 
 npm i --silent
 npm run build:prod
@@ -24,8 +24,8 @@ echo Hello from cat
 cat circle_aws_deploy.sh
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-docker build -t arammeem16/toyou-ui-admin-v2:${UIADMINV2_HASH} .
-docker push docker.io/arammeem16/toyou-ui-admin-v2:${UIADMINV2_HASH}  
+docker build -t arammeem16/toyou-dashboard:${UIADMINV2_HASH} .
+docker push docker.io/arammeem16/toyou-dashboard:${UIADMINV2_HASH}  
 
 echo Hello from ls dist
 
