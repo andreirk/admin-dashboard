@@ -14,12 +14,10 @@ export UIADMINV2_HASH=$(git rev-parse HEAD)
 # npm i --silent
 # npm run build:prod
 
-
-echo Hello from pwd 
+echo Hello from pwd
 pwd
-echo Hello from ls 
+echo Hello from ls
 ls
-
 
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS

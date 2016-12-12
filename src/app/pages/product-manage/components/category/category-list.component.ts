@@ -10,27 +10,29 @@ import { CategoryService } from './category.service'
 
 @Component({
   selector: 'am-category-list',
-  template: ` 
-  <div class="row center-xs categories">
-      <div class="col-xs-12 creator">
-      category creator here
-      </div>
-      <div class="categories col-xs-12">
-        <div class="row between-xs">
-          <am-category-card
-            class="col-xs-12"
-            *ngFor="let category of categories; let i = index; "
-          >
-          Category {{i}}
-          </am-category-card>
+  template: require('./category-list.1.html')
+  
+//   ` 
+//   <div class="row center-xs categories">
+//       <div class="col-xs-12 creator">
+//       category creator here
+//       </div>
+//       <div class="categories col-xs-12">
+//         <div class="row between-xs">
+//           <am-category-card
+//             class="col-xs-12"
+//             *ngFor="let category of categories; let i = index; "
+//             [category]="category"
+//           >
+//           </am-category-card>
           
-        </div>
-      </div>
-</div>`,
+//         </div>
+//       </div>
+// </div>`
+,
  styles: [`
-    .categories {
-      padding-top: 20px;
-    }
+
+
   `],
 })
 export class CategoryListComponent {
@@ -43,6 +45,4 @@ export class CategoryListComponent {
         console.log(this.categories)  
     })
   }
-
-
 }
