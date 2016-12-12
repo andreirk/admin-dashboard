@@ -5,6 +5,8 @@ import { ProductListComponent } from './components/product/product-list.componen
 import { ProductCardComponent } from './components/product/product-card.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category/category-list.component';
+import { CategoryCardComponent } from './components/category/category-card.component';
+import { CategoryService } from './components/category/category.service'
 
 import { routing } from './product-manage.routing';
 
@@ -18,7 +20,9 @@ import { routing } from './product-manage.routing';
     ProductListComponent,
     ProductCardComponent,
     CategoryComponent,
-    CategoryListComponent
-  ]
+    CategoryListComponent,
+    CategoryCardComponent
+  ],
+  providers: [ CategoryService ]
 })
 export default class ProductManageModule {}

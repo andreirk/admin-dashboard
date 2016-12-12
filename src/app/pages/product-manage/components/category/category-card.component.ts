@@ -10,17 +10,17 @@ import {
   selector: 'am-category-card',
   // styles: [require('./product.style.css')],
   template: `
-            <div class="col-sm-10" (click)="onProductClick($event)">
+            <div class="col-sm-10" (click)="onCategoryClick($event)">
               <div class="card card-block">
-                <h5 class="card-title">Product id {{product.id}}</h5>
+                <h5 class="card-title">Category id {{category.id}}</h5>
                 <p class="card-text">Short description.</p>
                 <a href="#" class="btn btn-primary">Edit</a>
               </div>
             </div>     
   `
 })
-export class ProductCardComponent {
-  @Input() product = {};
+export class CategoryCardComponent {
+  @Input() category = {};
   @Output() checked = new EventEmitter()
   showCheck: boolean = false;
 
@@ -29,10 +29,10 @@ export class ProductCardComponent {
   }
 
   onChecked() {
-    this.checked.next(this.product); 
+    this.checked.next(this.category); 
   }
 
-  onProductClick(event){
-    this.product++;
+  onCategoryClick(event){
+    alert(this.category);
   }
 }

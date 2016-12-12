@@ -5,7 +5,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { CategorytService } from '../../../../services'
+import { CategoryService } from './category.service'
 
 
 @Component({
@@ -17,12 +17,12 @@ import { CategorytService } from '../../../../services'
       </div>
       <div class="categories col-xs-12">
         <div class="row between-xs">
-          <li
+          <am-category-card
             class="col-xs-12"
-            *ngFor="let category of [1,2,3,4,5,6]; let i = index; "
+            *ngFor="let category of categories; let i = index; "
           >
           Category {{i}}
-          </li>
+          </am-category-card>
           
         </div>
       </div>
@@ -34,15 +34,15 @@ import { CategorytService } from '../../../../services'
   `],
 })
 export class CategoryListComponent {
-  products = []
+  categories = []
 
-//   constructor(private productService: CategoryService) {
-//     this.productService.getProducts()
-//       .subscribe(resp => {
-//         this.products = resp.content
-//         console.log(this.products)  
-//     })
-//   }
+  constructor(private categorieService: CategoryService) {
+    this.categorieService.getCategories()
+      .subscribe(resp => {
+        this.categories = resp.content
+        console.log(this.categories)  
+    })
+  }
 
 
 }

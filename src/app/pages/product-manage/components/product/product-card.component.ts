@@ -33,6 +33,6 @@ export class ProductCardComponent {
   }
 
   onProductClick(event){
-    this.product++;
+    alert(this.product)
   }
 }
