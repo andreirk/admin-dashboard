@@ -1,4 +1,4 @@
 
 
-# Admin panel framework based on Angular 2, Bootstrap 4 and Webpack
+# Dashboard To-You ui admin
 
