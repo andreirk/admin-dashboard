@@ -25,6 +25,7 @@ export class MerchantDetailsComponent {
   private merchant: Merchant = new Merchant();
   private merchantOriginal: Merchant = new Merchant();
   private wasModified = false;
+  private rtlDetect = require('rtl-detect');
 
   constructor(
     private route: ActivatedRoute,
@@ -48,8 +49,12 @@ export class MerchantDetailsComponent {
       });
   }
 
+  get langDirection() {
+    return this.rtlDetect.getLangDir(this.lang);
+  }
+
   onChangeLang(event: ChangeLangEvent) {
-    this.changeLang(event.save, event.lang, event.prevLang)
+    this.changeLang(event.save, event.lang, event.prevLang);
   }
 
   changeLang(save: boolean, lang: string, prevLang?: string) {

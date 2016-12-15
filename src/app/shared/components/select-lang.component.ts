@@ -1,9 +1,9 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { LANGUAGES } from "../constants";
-import { Lang } from "../objects";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { LANGUAGES } from '../constants';
+import { Lang } from '../objects';
 
 @Component({
   selector: 'am-select-lang',

@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<form #rootCategoryForm="ngForm">
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <button (click)="saveRootCategory()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <am-select-lang [lang]="lang"
+                    [wasModified]="wasModified"
+                    (onChange)="onChangeLang($event)"></am-select-lang>
+  </div>
+
+  <am-upload-image [title]="'Upload image'"
+                   [folder]="'ROOT_CATEGORIES'"
+                   [imageUrl]="rootCategory.imageUrl"
+                   (onUpload)="onUploadImage($event)"></am-upload-image>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="rootCategory.name" [ngStyle]="{'direction': langDirection}">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Description</label>
+      <input type="text" class="form-control" name="desc" [(ngModel)]="rootCategory.description" [ngStyle]="{'direction': langDirection}">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Root Category Type</label>
+      <select [(ngModel)]="rootCategory.type" name="type" class="form-control" required amRootCategoryTypeOptions></select>
+    </div>
+
+    <div class="form-group col-sm-3">
+      <label>Section Type</label>
+      <select [(ngModel)]="rootCategory.sectionType" name="sectionType" class="form-control" required amSectionTypeOptions></select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Sort order</label>
+      <input type="number" class="form-control" name="sortOrder" [(ngModel)]="rootCategory.sortOrder">
+    </div>
+  </div>
+
+</form>
