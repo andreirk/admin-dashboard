@@ -1,15 +1,30 @@
-<tr>
-    <td class="">Categori id {{category.id}}</td>
-    <td class="">Parent</td> 
-    
-    <td>
-        <button type="button" class="btn btn-xs btn-default">
-            <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i>
-    </span>
-        </button>
-        <button type="button" data-bind="click: $parent.remove" class="remove-news btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-original-title="Delete">
-            <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i>
-    </span>
-        </button>
-    </td>   
-</tr>
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="card card-block col-sm-12">
+            <h3 class="card-title">Categori name {{category.name}}</h3>
+            <p class="card-text">Categori description {{category.description}}</p>
+        <!--<div class="col-sm-6"></div>
+        <div class="col-sm-2"></div> -->
+        <div class="col-sm-2">
+          
+            <img class="card-img-top" src="{{category.imageUrl}}" alt="{{category.imageUrl}}">
+          
+        </div> 
+        
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-xs btn-default" (click)="editCategory()" >
+                <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i>
+        </span>
+            </button>
+            <button type="button" (click)="deleteCategory(category.id)" class="remove-news btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-original-title="Delete">
+                <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i>
+        </span>
+            </button>
+        </div>   
+        </div>
+    </div>
+
+
+
+</div>

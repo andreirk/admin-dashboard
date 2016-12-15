@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
   template: require('./category.html'),
 })
 export class CategoryComponent {
-
-  constructor( ){}
-
+    private listId = 'CATEGORY_COMPONENT_LIST';
+    private editId = 'CATEGORY_COMPONENT_EDIT'; 
 }
