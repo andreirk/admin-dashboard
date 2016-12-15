@@ -305,7 +305,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: '',
+        path: 'menu1',
         data: {
           menu: {
             title: 'Menu Level 1',
@@ -326,7 +326,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: '',
+            path: 'menu1_2',
             data: {
               menu: {
                 title: 'Menu Level 1.2',
@@ -335,7 +335,7 @@ export const PAGES_MENU = [
             },
             children: [
               {
-                path: '',
+                path: 'menu1_2_3',
                 data: {
                   menu: {
                     title: 'Menu Level 1.2.1',
@@ -348,7 +348,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: '',
+        path: 'version1',
         data: {
           menu: {
             title: 'Go to Version 1',

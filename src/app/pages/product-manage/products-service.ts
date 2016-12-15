@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { ApiService } from '../../services/api'
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class ProductService {
@@ -9,7 +10,10 @@ export class ProductService {
     }
 
     createProduct(product) {
-        return this.api.post(this.path, product)
+        let headers = new Headers({ 
+        'Content-Type': 'application/json'             
+        });
+        return this.api.post(this.path, product, headers )
     }
 
     getProducts(){

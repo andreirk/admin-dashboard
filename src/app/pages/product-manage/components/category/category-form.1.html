@@ -1,42 +1,49 @@
 <div class="container">
   <div  [hidden]="submitted">
-    <h1>Category Form</h1>
-    <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+   
+    <form (ngSubmit)="submitCategory()" #categoryForm="ngForm">
+    <h3 *ngIf="editing">Update Category or create <button (click)="categoryForm.reset()" class="btn btn-primary">New category</button> </h3>  
+    <h3 *ngIf="!editing">New Category</h3>
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name"
-               required
+               required minlength="5"
                [(ngModel)]="model.name" name="name"
                #name="ngModel" >
-        <div [hidden]="name.valid || name.pristine"
+        <div *ngIf="name.control.hasError('required') &&  !name.pristine"
              class="alert alert-danger">
           Name is required
         </div>
-      </div>
-
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text" class="form-control" id="alterEgo"
-               [(ngModel)]="model.alterEgo" name="alterEgo" >
-      </div>
-
-      <div class="form-group">
-        <label for="power">Category Power</label>
-        <select class="form-control" id="power"
-                required
-                [(ngModel)]="model.power" name="power"
-                #power="ngModel" >
-          <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-        </select>
-        <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
-          Power is required
+        <div *ngIf="name.control.hasError('minlength')"
+             class="alert alert-danger">
+          Min length is 5 char
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="newCategory(); categoryForm.reset()">New Category</button>
-      <i>with</i> reset
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description"
+               required
+               [(ngModel)]="model.description" name="description"
+               #description="ngModel" >
+      </div>
 
+      <div class="form-group">
+        <label for="imageUrl">imageUrl</label>
+        <input type="text" class="form-control" id="imageUrl"
+               [(ngModel)]="model.imageUrl" name="imageUrl" >
+      </div>
+
+      <!--<toyou-image-form ></toyou-image-form>-->
+      <ba-card title="Picture Uploader" baCardClass="with-scroll">
+        <ba-picture-uploader [picture]="model.imageUrl" [defaultPicture]="defaultPicture" [uploaderOptions]="uploaderOptions"></ba-picture-uploader>
+      </ba-card>
+
+      <!--<button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Submit</button>-->
+      <button *ngIf="!editing" type="submit" class="btn btn-primary btn-block" [disabled]="!categoryForm.form.valid" >Add</button>
+      <button *ngIf="editing" type="submit" class="btn btn-warning btn-block" (click)="categoryForm.reset()" [disabled]="!categoryForm.form.valid" >Update</button>
+      <!--<button type="button" class="btn btn-default" (click)="newCategory();categoryForm.reset()">New Category</button>-->
+     
 
      <!-- NOT SHOWN IN DOCS -->
       <div>
@@ -55,11 +62,11 @@
     </div>
     <div class="row">
       <div class="col-xs-3">Alter Ego</div>
-      <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+      <div class="col-xs-9 pull-left">{{ model.description }}</div>
     </div>
     <div class="row">
       <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ model.power }}</div>
+      <div class="col-xs-9 pull-left">{{ model.imageUrl }}</div>
     </div>
     <br>
     <button class="btn btn-default" (click)="submitted=false">Edit</button>

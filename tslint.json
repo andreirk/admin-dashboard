@@ -60,7 +60,7 @@
     "no-switch-case-fall-through": true,
     "no-unreachable": true,
     "no-unused-expression": true,
-    "no-unused-variable": false,
+    "no-unused-variable": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "radix": true,
@@ -96,7 +96,9 @@
       "check-space"
     ],
     "interface-name": false,
-    "jsdoc-format": true,
+    "jsdoc-require": [
+      true
+    ],
     "no-consecutive-blank-lines": false,
     "one-line": [
       false,
