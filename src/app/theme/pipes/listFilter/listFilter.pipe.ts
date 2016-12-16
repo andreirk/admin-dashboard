@@ -2,10 +2,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 
 @Pipe({
-  name: 'StringListSort',
+  name: 'StringListFilter',
   pure: false
 })
-export class StringListSort {
+export class StringListFilter {
   tmp = [];
   transform (value, [queryString]) {
     this.tmp.length = 0;

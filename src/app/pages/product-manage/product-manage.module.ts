@@ -10,12 +10,13 @@ import { CategoryCardComponent } from './components/category/category-card.compo
 import { CategoryService } from './components/category/category.service'
 import { ProductService } from './products-service'
 import { CategoryFormComponent } from './components/category/category-from.component';
-import { StringListSort } from './../../theme/pipes';
+import { StringListFilter } from './../../theme/pipes';
 import { NgaModule } from '../../theme/nga.module';
-
-
+import { Category } from './components/category/category';
+import { LanguageSwitchComponent } from './../../commons/components/language-switch/language-swith.component';
 
 import { routing } from './product-manage.routing';
+
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { routing } from './product-manage.routing';
     CategoryListComponent,
     CategoryCardComponent,
     CategoryFormComponent,
-    StringListSort,  
+    StringListFilter,  
+    LanguageSwitchComponent
   ],
   providers: [ CategoryService, ProductService ]
 })

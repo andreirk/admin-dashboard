@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { ApiService } from '../../../../services/api'
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Category  }           from './category';
+import { Category }    from './model/category';
 import { Observable } from 'rxjs/Rx';
 
 // Import RxJs required methods
