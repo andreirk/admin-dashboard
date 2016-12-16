@@ -1,0 +1,26 @@
+ <div class="widgets">
+
+  <div class="row">
+
+    <div class="col-md-6">
+       <div class="row">
+
+          <div class="col-md-3">
+
+            <language-switch (changeLanguage)="onChangeLanguage($event)" ></language-switch>
+          </div>
+
+       </div>
+
+      <div class="row">
+          <toyou-category-form [changedLang]="changedLang" [listId]="listId" [editId]="editId"></toyou-category-form>
+      </div>
+    
+    </div>
+
+    <div class="col-md-6">
+       <am-category-list [listId]="listId" [editId]="editId" ></am-category-list>
+    </div>
+  </div>
+
+</div>
