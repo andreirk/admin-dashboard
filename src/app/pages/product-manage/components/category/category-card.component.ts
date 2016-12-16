@@ -6,24 +6,21 @@ import {
 } from '@angular/core';
 
 import { EmitterService } from '../../emitter.service'
-import { Category } from './category';
+import { Category } from './model/category';
 import { CategoryService } from './category.service';
 
 @Component({
   selector: 'toyou-category-card',
-  // styles: [require('./product.style.css')],
-  template: require('./category-card.html')
-  
-  
-  // `
-  //           <div class="col-sm-10" (click)="onCategoryClick($event)">
-  //             <div class="card card-block">
-  //               <h5 class="card-title">Category id {{category.id}}</h5>
-  //               <p class="card-text">Short description.</p>
-  //               <a href="#" class="btn btn-primary">Edit</a>
-  //             </div>
-  //           </div>     
-  // `
+  template: require('./category-card.html'),
+  styles: [`
+    .category-card {
+      margin: 0px;
+    }
+    .card-block {
+      margin: 3px;
+    }
+
+  `]
 
 })
 export class CategoryCardComponent {
@@ -37,6 +34,7 @@ export class CategoryCardComponent {
   @Input() editId:string;
 
   @Output() checked = new EventEmitter()
+
   showCheck: boolean = false;
 
   editCategory() {
@@ -48,7 +46,7 @@ export class CategoryCardComponent {
   deleteCategory(id:string) {
     // Call removeCategory() from CategoryService to delete category
      let areYouSure = confirm(`Do you really want to delete category ${this.category.name}`);
-    if(areYouSure){
+     if(areYouSure){
         this.categoryService.removeCategory(id)
                     .subscribe(
                         categorys => {
@@ -61,8 +59,6 @@ export class CategoryCardComponent {
                         });
         }                    
   }
-
-
 
   toggleCheck() {
     this.showCheck = !this.showCheck;

@@ -16,7 +16,7 @@ export class BaPictureUploader {
   @Input() canDelete:boolean = true;
 
   onUpload:EventEmitter<any> = new EventEmitter();
-  onUploadCompleted:EventEmitter<any> = new EventEmitter();
+  @Output() onUploadCompleted:EventEmitter<any> = new EventEmitter();
 
   @ViewChild('fileUpload') protected _fileUpload:ElementRef;
 
@@ -41,11 +41,10 @@ export class BaPictureUploader {
 
   public onFiles():void {
     let files = this._fileUpload.nativeElement.files;
-    debugger;
 
     if (files.length) {
       const file = files[0];
-    //  this._changePicture(file);
+      this._changePicture(file);
       files = Object.keys(files).map(function (key) { return files[key]; });
       if (this._canUploadOnServer()) {
         this.uploadInProgress = true;
