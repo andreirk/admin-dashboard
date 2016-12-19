@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter,  } from '@angular/core';
+import { Lang } from './../../objects';
+import { LANGUAGES     } from "./../../constants";
 
 @Component({
     selector: 'language-switch',
     templateUrl: `
         <div class="form-group">
             <label for="exampleSelect">Select Language</label>
-            <select [(ngModel)]="model"
+            <select 
                 (click)="onClick($event)" 
                 class="form-control" 
                 id="exampleSelect">
@@ -22,11 +24,7 @@ export class LanguageSwitchComponent implements OnInit {
     @Output() changeLanguage = new EventEmitter()
    
 
-    public languages = [
-          {key: 'en',   name: 'English'},
-          {key: 'ar',   name: 'Arabian'},
-          {key: 'ru',   name: 'Russian'}
-        ];
+    public languages : Lang[] = LANGUAGES;
 
     onClick(event){
         console.log('event =' + event.target.value)

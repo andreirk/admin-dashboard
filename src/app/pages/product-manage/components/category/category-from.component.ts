@@ -37,8 +37,7 @@ export class CategoryFormComponent {
   @Input() editId: string;
   @Input() listId: string;
 
-
-  @Input() changedLang: Object;  
+  @Input() language: Object;  
 
   OnInit()  {
       this.model = new Category('', '', '','', 'deals', 0, 'REGULAR')
@@ -60,18 +59,19 @@ export class CategoryFormComponent {
   }  
 
   submitCategory(){
-    // Variable to hold a reference of addCategory/updateCategory
+    // Var to hold a reference of addCategory/updateCategory
     let categoryOperation: Observable<Category[]>;
-
+    debugger
     if(!this.editing){
         // Create a new Category
-        categoryOperation = this.categoryService.addCategory(this.model)
+        categoryOperation = this.categoryService.addCategory(this.model, this.language)
     } else {
         // Update an existing Category
-        categoryOperation = this.categoryService.updateCategory(this.model)
+        console.log('in update category', this.language)
+        categoryOperation = this.categoryService.updateCategory(this.model, this.language)
     }
 
-    // Subscribe to observable
+
     categoryOperation
         .subscribe(
             categorys => {
@@ -88,9 +88,15 @@ export class CategoryFormComponent {
             });
     }
 
-    ngOnChanges() {
-        // Listen to the 'edit'emitted event so as populate the model
-        // with the event payload
+    ngOnChanges(changes: any) {
+        // Listen to the 'edit' emitted
+        
+        if(changes.language.currentValue){
+          console.log('catch language change in form', changes.language.currentValue.new)
+          this.language = changes.language.currentValue.new
+        }
+
+
         EmitterService.get(this.editId).subscribe((category:Category) => {
             this.model = category
             this.editing = true;

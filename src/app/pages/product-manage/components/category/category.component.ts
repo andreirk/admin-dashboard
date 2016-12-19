@@ -9,11 +9,11 @@ import { Component } from '@angular/core';
 export class CategoryComponent {
     private listId = 'CATEGORY_COMPONENT_LIST';
     private editId = 'CATEGORY_COMPONENT_EDIT'; 
+    private changedLangObj = 'CATEGORY_LANGUAGE_ID'
 
-    changedLang: Object;
 
     onChangeLanguage(event){
       console.log(event)
-      this.changedLang = event;
+      this.changedLangObj = event;
     }
 }

@@ -1,11 +1,7 @@
 export class Category {
 
   constructor(
-    // public id: number,
-    // public name: string,
-    // public power: string,
-    // public content?: string,
-    // public alterEgo?: string  
+
     public id: string = '',
     public description: string = '',
     public imageUrl: string  = '',

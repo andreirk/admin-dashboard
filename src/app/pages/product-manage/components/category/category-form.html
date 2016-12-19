@@ -1,6 +1,6 @@
 <div class="container">
   <div  [hidden]="submitted">
-   blablah = {{changedLang | json}}
+   <!--lang = {{language | json}}-->
     <form (ngSubmit)="submitCategory()" #categoryForm="ngForm">
     <h3 *ngIf="editing">Update Category or create <button (click)="categoryForm.reset(); cleanForm()" class="btn btn-primary">New category</button> </h3>  
     <h3 *ngIf="!editing">New Category</h3>
@@ -35,7 +35,7 @@
 
       <!--<button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Submit</button>-->
       <button *ngIf="!editing" type="submit" class="btn btn-primary btn-block" [disabled]="!categoryForm.form.valid" >Add</button>
-      <button *ngIf="editing" type="submit" class="btn btn-warning btn-block" (click)="categoryForm.reset()" [disabled]="!categoryForm.form.valid" >Update</button>
+      <button *ngIf="editing" type="submit" class="btn btn-warning btn-block"  [disabled]="!categoryForm.form.valid" >Update</button>
       <!--<button type="button" class="btn btn-default" (click)="newCategory();categoryForm.reset()">New Category</button>-->
      
     </form>

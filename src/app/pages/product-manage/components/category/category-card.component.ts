@@ -20,6 +20,10 @@ import { CategoryService } from './category.service';
       margin: 3px;
     }
 
+    .active {
+      color: black
+    }
+
   `]
 
 })
@@ -33,6 +37,8 @@ export class CategoryCardComponent {
   @Input() listId: string;
   @Input() editId:string;
 
+  isEditing = false;
+
   @Output() checked = new EventEmitter()
 
   showCheck: boolean = false;
@@ -41,6 +47,7 @@ export class CategoryCardComponent {
     // Emit edit event
     EmitterService.get(this.editId).emit(this.category);
     console.log('edit category', this.editId)
+    this.isEditing = true;
   }
 
   deleteCategory(id:string) {
