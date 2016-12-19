@@ -13,7 +13,7 @@ import { CategoryFormComponent } from './components/category/category-from.compo
 import { StringListFilter } from './../../theme/pipes';
 import { NgaModule } from '../../theme/nga.module';
 import { Category } from './components/category/category';
-import { LanguageSwitchComponent } from './../../commons/components/language-switch/language-swith.component';
+import { LanguageSwitchComponent } from './../../commons/components/language-switch/language-switch.component';
 
 import { routing } from './product-manage.routing';
 
