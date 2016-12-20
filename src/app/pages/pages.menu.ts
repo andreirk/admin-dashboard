@@ -48,6 +48,21 @@ export const PAGES_MENU = [
         ]
       },
 
+      {
+        path: 'merchants',  // path for our page
+        data: { // custom menu declaration
+          menu: {
+            title: 'Merchants Page', // menu title
+            icon: 'ion-android-home', // menu icon
+            //  pathMatch: 'prefix', // use it if item children not displayed in menu
+            selected: false,
+            expanded: false,
+            order: 101
+          }
+        }
+      },
+
+
       // {
       //   path: 'editors',
       //   data: {
