@@ -10,6 +10,7 @@ import { CategoryService } from './category.service'
 import { EmitterService } from '../../emitter.service';
 import { StringListFilter } from './../../../../theme/pipes';
 import { layoutPaths } from '../../../../theme/theme.constants';
+import { Category } from './model/category';
 
 
 @Component({
@@ -25,8 +26,7 @@ import { layoutPaths } from '../../../../theme/theme.constants';
     .category-card  {
       margin: 0px;
       padding: 2em;
-    }
-  
+    }  
   `],
 })
 export class CategoryListComponent {
@@ -35,7 +35,7 @@ export class CategoryListComponent {
 
   }  
 
-  categories = []
+  categories: Category[] = []
 
   @Input() listId: string;
   @Input() editId: string;

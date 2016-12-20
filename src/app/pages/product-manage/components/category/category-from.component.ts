@@ -61,13 +61,11 @@ export class CategoryFormComponent {
   submitCategory(){
     // Var to hold a reference of addCategory/updateCategory
     let categoryOperation: Observable<Category[]>;
-    debugger
     if(!this.editing){
         // Create a new Category
         categoryOperation = this.categoryService.addCategory(this.model, this.language)
     } else {
         // Update an existing Category
-        console.log('in update category', this.language)
         categoryOperation = this.categoryService.updateCategory(this.model, this.language)
     }
 
@@ -95,7 +93,6 @@ export class CategoryFormComponent {
           console.log('catch language change in form', changes.language.currentValue.new)
           this.language = changes.language.currentValue.new
         }
-
 
         EmitterService.get(this.editId).subscribe((category:Category) => {
             this.model = category
