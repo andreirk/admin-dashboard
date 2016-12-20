@@ -6,12 +6,10 @@ import {Component, ViewEncapsulation} from '@angular/core';
   template: `
     <ba-sidebar></ba-sidebar>
     <ba-page-top></ba-page-top>
-    <div class="row">
-      <div class="al-main">
-        <div class="al-content">
-          <ba-content-top></ba-content-top>
-          <router-outlet></router-outlet>
-        </div>
+    <div class="al-main">
+      <div class="al-content">
+        <ba-content-top></ba-content-top>
+        <router-outlet></router-outlet>
       </div>
     </div>
     <footer class="al-footer clearfix">

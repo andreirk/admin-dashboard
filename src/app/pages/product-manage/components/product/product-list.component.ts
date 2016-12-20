@@ -39,7 +39,7 @@ export class ProductListComponent {
     this.productService.getProducts()
       .subscribe(resp => {
         this.products = resp.content
-        console.log(this.products)
+        console.log(this.products)  
     })
   }
 
