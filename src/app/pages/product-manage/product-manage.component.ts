@@ -11,7 +11,7 @@ import { ProductService } from './products-service'
 @Component({
   selector: 'am-product-manage',
   styles: [],
-  template: ` Product manage here
+  template: ` 
             <router-outlet></router-outlet>`
 })
 export class ProductManageComponent {

@@ -18,7 +18,7 @@ export const PAGES_MENU = [
         path: 'product_manage',  // path for our page
         data: { // custom menu declaration
           menu: {
-            title: 'Product Manage', // menu title
+            title: 'Products', // menu title
             icon: 'ion-android-home', // menu icon
           //  pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
@@ -47,6 +47,33 @@ export const PAGES_MENU = [
           },
         ]
       },
+
+      {
+        path: 'merchants',  // path for our page
+        data: { // custom menu declaration
+          menu: {
+            title: 'Merchants', // menu title
+            icon: 'ion-android-home', // menu icon
+            selected: false,
+            expanded: false,
+            order: 101
+          }
+        }
+      },
+
+      {
+        path: 'root-categories',  // path for our page
+        data: { // custom menu declaration
+          menu: {
+            title: 'Root Categories', // menu title
+            icon: 'ion-android-home', // menu icon
+            selected: false,
+            expanded: false,
+            order: 100
+          }
+        }
+      },
+
 
       // {
       //   path: 'editors',
@@ -168,6 +195,7 @@ export const PAGES_MENU = [
       //     },
       //   ]
       // },
+/*
       {
         path: 'forms',
         data: {
@@ -198,6 +226,7 @@ export const PAGES_MENU = [
           }
         ]
       },
+*/
       // {
       //   path: 'tables',
       //   data: {
@@ -228,6 +257,7 @@ export const PAGES_MENU = [
       //     }
       //   ]
       // },
+/*
       {
         path: 'maps',
         data: {
@@ -274,6 +304,7 @@ export const PAGES_MENU = [
           // }
         ]
       },
+*/
       {
         path: '',
         data: {
@@ -305,7 +336,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: '',
+        path: 'menu1',
         data: {
           menu: {
             title: 'Menu Level 1',
@@ -326,7 +357,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: '',
+            path: 'menu1_2',
             data: {
               menu: {
                 title: 'Menu Level 1.2',
@@ -335,7 +366,7 @@ export const PAGES_MENU = [
             },
             children: [
               {
-                path: '',
+                path: 'menu1_2_3',
                 data: {
                   menu: {
                     title: 'Menu Level 1.2.1',
@@ -348,7 +379,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: '',
+        path: 'version1',
         data: {
           menu: {
             title: 'Go to Version 1',

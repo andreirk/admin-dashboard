@@ -1,40 +1,25 @@
- <div class="container-fluid">
-     <div class="col-sm-10">
-    <div class="row">
-		<h1>Category list </h1>
-        <div class="col-sm-10">
-             <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2"><span class="glyphicons glyphicons-search"></span></span>
-            <input type="text" class="form-control" placeholder="Filter" >
-            </div>
+<div class="panel panel-default">
+
+  <!--<div class="panel-body" style="padding:0px">-->
+<div class="container">
+ 
+  <div class="row category-search">
+     <div class="col-sm-12 card ">
+        <div class="col-xs-6 pull-right form-group card-text">
+            <input type="text" class="form-control" #queryElem (keyup)="0" style="border-radius:0px" placeholder="Search">
         </div>
-
-       
-           <div class="col-sm-10">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th><th>Parent</th><th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><p>Categori #1</p></td>
-                        <td><p>Parent</p></td>                        
-                        <td class="col-md-2">
-                        <p>
-                            <a class="btn btn-primary btn-sm" href="#">Edit</a>
-                            <a class="btn btn-danger btn-sm"  href="#">Delete</a>  
-                        </p>
-                        </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-           </div>
-
-
-	</div>
      </div>
+  </div>
+   
+<!--Lang = {{ language | json }}-->
+    <toyou-category-card
+          class="category-card"
+          *ngFor="let category of categories | StringListFilter:queryElem.value; let i = index; "
+          [editId]="editId" 
+          [listId]="listId" 
+          [category]="category"
+    >
+    </toyou-category-card>
 
 </div>
+  <!--</div>-->

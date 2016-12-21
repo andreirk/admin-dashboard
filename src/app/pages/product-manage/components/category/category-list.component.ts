@@ -5,44 +5,67 @@ import {
   EventEmitter
 } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
 import { CategoryService } from './category.service'
+import { EmitterService } from '../../emitter.service';
+import { StringListFilter } from './../../../../theme/pipes';
+import { layoutPaths } from '../../../../theme/theme.constants';
+import { Category } from './model/category';
 
 
 @Component({
+ 
   selector: 'am-category-list',
-  template: require('./category-list.1.html')
-  
-//   ` 
-//   <div class="row center-xs categories">
-//       <div class="col-xs-12 creator">
-//       category creator here
-//       </div>
-//       <div class="categories col-xs-12">
-//         <div class="row between-xs">
-//           <am-category-card
-//             class="col-xs-12"
-//             *ngFor="let category of categories; let i = index; "
-//             [category]="category"
-//           >
-//           </am-category-card>
-          
-//         </div>
-//       </div>
-// </div>`
-,
- styles: [`
+  template: require('./category-list.html'),
+  styles: [`
+    .category-search {
+      margin: 5px;
+      padding: 2px;
+    }
 
-
+    .category-card  {
+      margin: 0px;
+      padding: 2em;
+    }  
   `],
 })
 export class CategoryListComponent {
-  categories = []
 
   constructor(private categorieService: CategoryService) {
-    this.categorieService.getCategories()
-      .subscribe(resp => {
-        this.categories = resp.content
-        console.log(this.categories)  
-    })
+
+  }  
+
+  categories: Category[] = []
+
+  @Input() listId: string;
+  @Input() editId: string;
+  @Input() language: any;  
+
+  lang: any;
+
+  ngOnInit(){
+    // Load categories
+    this.loadCategories()
+     
   }
+
+  loadCategories(){
+      // Get all categories
+        this.categorieService.getCategories(this.language)
+          .subscribe(resp => {
+            this.categories = resp.content
+        })
+  }
+
+  ngOnChanges(changes:any) {
+
+    if(changes.language.currentValue ){
+      this.language = changes.language.currentValue.new
+    }
+
+    this.loadCategories()
+    
+    EmitterService.get(this.listId).subscribe((comments:Comment[]) => {this.loadCategories()});
+  }
+
 }

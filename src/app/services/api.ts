@@ -7,9 +7,11 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ApiService {
-    headers: Headers = new Headers({
+    defautHeaders: Headers = new Headers({
+        'Authorization':'Basic ' + btoa('admin:0000'),
         'Content-Type': 'application',
-        'Accept': 'application/json'
+        'Accept': 'application/json', 
+        'Accept-Language':'en'  
     });
 
     apiUrl: string = '/catalog/mgmt/v1';
@@ -18,25 +20,35 @@ export class ApiService {
 
     }
 
-    get(path: string): Observable<any>{
-        return this.http.get(`${this.apiUrl}${path}`, this.headers)
+    get(path: string, headers: Headers = this.defautHeaders): Observable<any>{
+        return this.http.get(`${this.apiUrl}${path}`, {headers})
             .map(this.checkForError)
             .catch(err => Observable.throw(err))
             .map(this.getJson)
     }
 
-    post(path: string, body): Observable<any> {
+    post(path: string, body, headers: Headers = this.defautHeaders): Observable<any> {
         return this.http.post(
             `${this.apiUrl}${path}`,
             JSON.stringify(body),
-            {headers: this.headers} )
+            {headers: headers} )
             .map(this.checkForError)
             .catch(err => Observable.throw(err))
             .map(this.getJson)        
     }
 
-    delete(path: string): Observable<any>{
-        return this.http.delete(`${this.apiUrl}${path}`, this.headers)
+    put(path: string, body, headers: Headers = this.defautHeaders): Observable<any> {
+        return this.http.put(
+            `${this.apiUrl}${path}`,
+            JSON.stringify(body),
+            {headers: headers} )
+            .map(this.checkForError)
+            .catch(err => Observable.throw(err))
+            .map(this.getJson)        
+    }
+
+    delete(path: string, headers: Headers = this.defautHeaders): Observable<any>{
+        return this.http.delete(`${this.apiUrl}${path}`, headers)
             .map(this.checkForError)
             .catch(err => Observable.throw(err))
             .map(this.getJson)
@@ -56,7 +68,6 @@ export class ApiService {
             throw error;
         }
     }
-
    
 }
 
