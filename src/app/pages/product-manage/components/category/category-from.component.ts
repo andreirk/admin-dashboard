@@ -61,7 +61,6 @@ export class CategoryFormComponent {
 
   onUpload(data) {
     let imageUrl = JSON.parse(data.response).imageUrl;
-    console.log('image url', imageUrl)
     if (imageUrl) {
       this.model.imageUrl = imageUrl;
     }
@@ -71,7 +70,6 @@ export class CategoryFormComponent {
   submitCategory(form) {
     // Var to hold a reference of addCategory/updateCategory
     let categoryOperation: Observable < Category[] > ;
-    console.log('!!!form here',form)
     if (!this.editing) {
       // Create a new Category
       categoryOperation = this.categoryService.addCategory(this.model, this.language)
@@ -101,7 +99,6 @@ export class CategoryFormComponent {
   ngOnChanges(changes: any) {
     // Listen to the 'edit' emitted
     if (changes.language.currentValue) {
-      console.log('catch language change in form', changes.language.currentValue.new)
       this.language = changes.language.currentValue.new
     }
 

@@ -51,7 +51,6 @@ export class CategoryListComponent {
 
   loadCategories(){
       // Get all categories
-        console.log('in load categories lang', this.language)
         this.categorieService.getCategories(this.language)
           .subscribe(resp => {
             this.categories = resp.content
@@ -59,19 +58,13 @@ export class CategoryListComponent {
   }
 
   ngOnChanges(changes:any) {
-    // Listen to the 'list'emitted event so as populate the model
-    // with the event payload
-  //   console.log('changes are', changes)
-  //  EmitterService.get(this.language).subscribe((comments:Comment[]) => {this.loadCategories()});
-  // console.log('in onchanges ', this.language)
+
     if(changes.language.currentValue ){
-      console.log('catch language change', changes.language.currentValue.new)
       this.language = changes.language.currentValue.new
-   //   EmitterService.get(this.language).subscribe((comments:Comment[]) => {this.loadCategories()});
     }
-    console.log('!!!!! load cagegorys here')
 
     this.loadCategories()
+    
     EmitterService.get(this.listId).subscribe((comments:Comment[]) => {this.loadCategories()});
   }
 

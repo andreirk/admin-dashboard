@@ -9,9 +9,8 @@ export class StringListFilter {
   tmp = [];
   transform (value, [queryString]) {
     this.tmp.length = 0;
-    // console.log(value, queryString);
     var arr = value.filter((obj)=>new RegExp(queryString).test(obj.name));
-    for (var i =0; i < arr.length; ++i) {
+    for (var i = 0; i < arr.length; ++i) {
         this.tmp.push(arr[i]);
      }
 
