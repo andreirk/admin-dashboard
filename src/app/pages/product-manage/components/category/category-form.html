@@ -1,8 +1,13 @@
 <div class="container">
   <div  [hidden]="submitted">
-   <!--lang = {{language | json}}-->
-    <form (ngSubmit)="submitCategory()" #categoryForm="ngForm">
-    <h3 *ngIf="editing">Update Category or create <button (click)="categoryForm.reset(); cleanForm()" class="btn btn-primary">New category</button> </h3>  
+    <form (ngSubmit)="submitCategory(); categoryForm.reset()" #categoryForm="ngForm">
+    <h3 *ngIf="editing">Update Category or create 
+        <button (click)="categoryForm.reset(); cleanForm()" 
+                class="btn btn-primary"
+                >
+                New category
+        </button> 
+    </h3>  
     <h3 *ngIf="!editing">New Category</h3>
       <div class="form-group">
         <label for="name">Name</label>
@@ -30,13 +35,17 @@
       </div>
 
       <ba-card title="Picture Uploader" baCardClass="with-scroll">
-        <ba-picture-uploader (onUploadCompleted)="onUpload($event)" [picture]="model.imageUrl"   [uploaderOptions]="uploaderOptions"></ba-picture-uploader>
+        <ba-picture-uploader 
+            (onUploadCompleted)="onUpload($event)"
+            [picture]="model.imageUrl"   
+            [uploaderOptions]="uploaderOptions"
+            >
+        </ba-picture-uploader>
       </ba-card>
 
-      <!--<button type="submit" class="btn btn-default" [disabled]="!categoryForm.form.valid">Submit</button>-->
+      
       <button *ngIf="!editing" type="submit" class="btn btn-primary btn-block" [disabled]="!categoryForm.form.valid" >Add</button>
       <button *ngIf="editing" type="submit" class="btn btn-warning btn-block"  [disabled]="!categoryForm.form.valid" >Update</button>
-      <!--<button type="button" class="btn btn-default" (click)="newCategory();categoryForm.reset()">New Category</button>-->
      
     </form>
   </div>

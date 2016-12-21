@@ -41,8 +41,7 @@ export class BaPictureUploader {
 
   public onFiles():void {
     let files = this._fileUpload.nativeElement.files;
-
-    if (files.length) {
+   if (files.length) {
       const file = files[0];
       this._changePicture(file);
       files = Object.keys(files).map(function (key) { return files[key]; });

@@ -23,6 +23,22 @@ import { CategoryService } from './category.service';
     .active {
       color: black
     }
+    .cat-name {
+      width:100px;
+      overflow: hidden;
+      padding:5px;
+    }
+
+    .cat-description {
+      white-space: normal;
+      width:100px;
+      overflow: hidden;
+    }
+
+    .cat-buttons {
+      padding: 5px;
+      margin: 5px;
+    }
 
   `]
 
@@ -48,6 +64,7 @@ export class CategoryCardComponent {
     EmitterService.get(this.editId).emit(this.category);
     console.log('edit category', this.editId)
     this.isEditing = true;
+    jQuery('html, body').animate({scrollTop:0}, {duration:400});
   }
 
   deleteCategory(id:string) {

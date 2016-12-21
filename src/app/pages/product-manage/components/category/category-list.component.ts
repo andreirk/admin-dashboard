@@ -19,7 +19,7 @@ import { Category } from './model/category';
   template: require('./category-list.html'),
   styles: [`
     .category-search {
-      margin-bottom: 2px;
+      margin: 5px;
       padding: 2px;
     }
 
