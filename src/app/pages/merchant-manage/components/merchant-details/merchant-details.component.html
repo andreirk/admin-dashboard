@@ -19,18 +19,25 @@
                    [imageUrl]="merchant.imageUrl"
                    (onUpload)="onUploadImage($event)"></am-upload-image>
 
-  <div class="form-group checkbox">
-    <ba-checkbox [(ngModel)]="merchant.enabled" [label]="'Merchant enabled'" [ngModelOptions]="{standalone: true}"></ba-checkbox>
+  <div class="form-group">
+    <label class="checkbox-inline custom-checkbox nowrap">
+      <input type="checkbox" class="form-control" name="enabled" [(ngModel)]="merchant.enabled">
+      <span>Merchant enabled</span>
+    </label>
   </div>
 
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" class="form-control" name="name" [(ngModel)]="merchant.name" [ngStyle]="{'direction': langDirection}">
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="merchant.name" [ngStyle]="{'direction': langDirection}">
+    </div>
   </div>
 
-  <div class="form-group">
-    <label>Description</label>
-    <input type="text" class="form-control" name="desc" [(ngModel)]="merchant.description" [ngStyle]="{'direction': langDirection}">
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Description</label>
+      <input type="text" class="form-control" name="desc" [(ngModel)]="merchant.description" [ngStyle]="{'direction': langDirection}">
+    </div>
   </div>
 
   <am-upload-image [title]="'Upload default product image'"
