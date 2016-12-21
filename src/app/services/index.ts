@@ -1,1 +1,2 @@
-export { ApiService } from './api'
+export { BackendApiService as ApiService } from './backend-api.service'
+
