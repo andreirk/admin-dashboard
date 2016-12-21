@@ -1,10 +1,10 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Injectable } from "@angular/core";
-import { MerchantBackendService } from "./merchant-backend.service";
-import { MerchantList } from "../model/merchant-list";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { MerchantBackendService } from './merchant-backend.service';
+import { MerchantList } from '../model/merchant-list';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MerchantListService {

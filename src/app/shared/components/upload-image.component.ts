@@ -17,7 +17,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 </style>
 <div>
   <div class="media">
-    <img src="{{imageUrl}}" class="float-xs-left media-resources">
+    <img src="{{imageUrlResize}}" class="float-xs-left media-resources">
   </div>
   <label class="btn btn-secondary btn-file">
     {{title}}
@@ -48,6 +48,11 @@ export class UploadImageComponent {
       }
     };
   }
+
+  get imageUrlResize() {
+    return this.imageUrl ? this.imageUrl.replace('image/upload/', 'image/upload/w_300/') : '';
+  }
+
   handleUpload(data): void {
     const vm = this;
     if (data && data.response) {

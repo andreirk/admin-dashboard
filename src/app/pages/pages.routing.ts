@@ -25,7 +25,9 @@ const routes: Routes = [
       // { path: 'tables', loadChildren: () => System.import('./tables/tables.module') },
       { path: 'maps', loadChildren: () => System.import('./maps/maps.module') },
       { path: 'login', loadChildren: () => System.import('./login/login.module') },
-      { path: 'merchants',  loadChildren: () => System.import('./merchant-manage/merchant.module') }
+      { path: 'merchants',  loadChildren: () => System.import('./merchant-manage/merchant.module') },
+      { path: 'root-categories',  loadChildren: () => System.import('./root-category-manage/root-categories.module') },
+
     ]
   }
 ];
