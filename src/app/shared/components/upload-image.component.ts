@@ -1,10 +1,10 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: "am-upload-image",
+  selector: 'am-upload-image',
   template: `
 <style>
   .media-resources {
@@ -41,11 +41,11 @@ export class UploadImageComponent {
   ngOnInit() {
     this.uploadOptions = {
       url: '/catalog/mgmt/v1/upload-image?folder=' + this.folder,
+      fieldName: 'imageFile',
       customHeaders: {
         'Accept': 'application/json',
         'Authorization': 'Basic YWRtaW46MDAwMA=='
-      },
-      multipart: false
+      }
     };
   }
   handleUpload(data): void {
