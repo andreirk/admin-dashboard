@@ -80,6 +80,7 @@
     "html-webpack-plugin": "^2.21.0",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
+    "ng2-uploader": "^1.1.0",
     "node-sass": "^3.5.3",
     "parse5": "^2.2.2",
     "raw-loader": "0.5.1",
