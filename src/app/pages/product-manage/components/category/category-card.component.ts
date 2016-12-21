@@ -11,7 +11,24 @@ import { CategoryService } from './category.service';
 
 @Component({
   selector: 'toyou-category-card',
-  template: require('./category-card.html'),
+  template: `
+  <div class="col-sm-10">
+  <div class="card card-block">
+    <img class="card-img-top col-xs-4 col-sm-3" src="{{category.imageUrl}}" alt="{{category.imageUrl}}">
+    <h5 class="card-title">{{category.name}}</h5>
+    <p class="card-text">{{category.description}}</p>
+    <div class="pull-right">
+      <button type="button" class="btn btn-xs btn-default" (click)="editCategory()" >
+          <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i> </span>
+      </button>
+      <button type="button" (click)="deleteCategory(category.id)" class="remove-news btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-original-title="Delete">
+          <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i> </span>
+      </button>     
+    </div>
+
+  </div>
+</div>
+  ` ,
   styles: [`
     .category-card {
       margin: 0px;
@@ -19,32 +36,14 @@ import { CategoryService } from './category.service';
     .card-block {
       margin: 3px;
     }
-
     .active {
       color: black
     }
-    .cat-name {
-      width:100px;
-      overflow: hidden;
-      padding:5px;
-    }
-
-    .cat-description {
-      white-space: normal;
-      width:100px;
-      overflow: hidden;
-    }
-
-    .cat-buttons {
-      padding: 5px;
-      margin: 5px;
-    }
-
   `]
 
 })
 export class CategoryCardComponent {
-  // Constructor
+
   constructor(
     private categoryService: CategoryService
     ){}
@@ -62,7 +61,6 @@ export class CategoryCardComponent {
   editCategory() {
     // Emit edit event
     EmitterService.get(this.editId).emit(this.category);
-    console.log('edit category', this.editId)
     this.isEditing = true;
     jQuery('html, body').animate({scrollTop:0}, {duration:400});
   }
@@ -92,7 +90,4 @@ export class CategoryCardComponent {
     this.checked.next(this.category);
   }
 
-  onCategoryClick(event){
-    alert(this.category);
-  }
 }
