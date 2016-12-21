@@ -23,8 +23,8 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'To-YOU',
-  description: 'to-you admin page',
+  title: 'ToYou',
+  description: 'toYou admin page',
   baseUrl: helpers.isWebpackDevServer() ? '/' : '/dashboard/',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -198,8 +198,8 @@ module.exports = function (options) {
     plugins: [
 
       // new BrowserSyncPlugin({
-      //         // browse to http://localhost:3000/ during development, 
-      //         // ./public directory is being served 
+      //         // browse to http://localhost:3000/ during development,
+      //         // ./public directory is being served
       //         host: 'localhost',
       //         port: 3000,
       //         server: { baseDir: ['dashboard'] }

@@ -17,7 +17,6 @@ export class BackendApiService {
 
   get(path: string, params: Object, lang: string): Observable<any> {
     this.headers.set('Accept-Language', lang);
-    console.log('in backend api get lang', lang)
 
     return this.http.get(path, this.getRequestOptions(params, lang))
       .map(this.checkForError)
@@ -26,7 +25,6 @@ export class BackendApiService {
   }
 
   post(path: string, body: Object, params: Object, lang: string): Observable<any> {
-    console.log('in backend-api.service.ts post leng', lang  )
     return this.http.post(path, body, this.getRequestOptions(params, lang))
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
@@ -63,7 +61,6 @@ export class BackendApiService {
   }
 
   private getRequestOptions(params: Object, lang: string): RequestOptions {
-    console.log('in getRequest option lang', lang)
     this.headers.set('Accept-Language', lang);
 
     let urlparams = new URLSearchParams();

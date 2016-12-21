@@ -6,21 +6,23 @@ import {Component, ViewEncapsulation} from '@angular/core';
   template: `
     <ba-sidebar></ba-sidebar>
     <ba-page-top></ba-page-top>
-    <div class="al-main">
+    <div class="al-main row">
       <div class="al-content">
         <ba-content-top></ba-content-top>
         <router-outlet></router-outlet>
       </div>
     </div>
-    <footer class="al-footer clearfix">
-      <div class="al-footer-right">Created with <i class="ion-hammer"></i></div>
-      <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="arammeem.com">arammeem.com</a> 2016</div>
-        <ul class="al-share clearfix">
-
-        </ul>
-      </div>
-    </footer>
+    <div class="row">
+      <footer class="al-footer clearfix">
+        <div class="al-footer-right">Created with <i class="ion-hammer"></i></div>
+        <div class="al-footer-main clearfix">
+          <div class="al-copy">&copy; <a href="arammeem.com">arammeem.com</a> 2016</div>
+          <ul class="al-share clearfix">
+  
+          </ul>
+        </div>
+      </footer>
+    </div>
     <ba-back-top position="200"></ba-back-top>
     `
 })
