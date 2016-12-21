@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectLangComponent } from './components/select-lang.component';
 import { UploadImageComponent } from './components/upload-image.component';
 import { NgaModule } from '../theme/nga.module';
-import { UPLOAD_DIRECTIVES } from 'ng2-uploader';
+import { UPLOAD_DIRECTIVES } from 'ng2-uploader/ng2-uploader';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
