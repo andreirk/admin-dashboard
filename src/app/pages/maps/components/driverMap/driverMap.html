@@ -1,0 +1,25 @@
+<button (click)="loadLocations()">Load locations</button>
+ <sebm-google-map 
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+      [zoomControl]="false"
+      (mapClick)="mapClicked($event)">
+    
+      <sebm-google-map-marker 
+          *ngFor="let m of drivers; let i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lon"
+          [label]="m.capacity"
+          [iconUrl]="m.icon"
+          (dragEnd)="markerDragEnd(m, $event)">
+          
+        <sebm-google-map-info-window>
+          <strong>Driver id-{{m.driverId}} info</strong>
+        </sebm-google-map-info-window>
+        
+      </sebm-google-map-marker>
+      
+  </sebm-google-map>
