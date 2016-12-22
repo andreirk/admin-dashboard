@@ -1,6 +1,4 @@
 import { NgModule }      from '@angular/core';
-import { CommonModule }  from '@angular/common';
-import { FormsModule as AngularFormsModule } from '@angular/forms';
 import { ProductManageComponent } from './product-manage.component';
 import { ProductListComponent } from './components/product/product-list.component';
 import { ProductCardComponent } from './components/product/product-card.component';
@@ -11,18 +9,16 @@ import { CategoryService } from './components/category/category.service'
 import { ProductService } from './products-service'
 import { CategoryFormComponent } from './components/category/category-from.component';
 import { StringListFilter } from './../../theme/pipes';
-import { NgaModule } from '../../theme/nga.module';
 import { Category } from './components/category/category';
 import { LanguageSwitchComponent } from './../../commons/components/language-switch/language-switch.component';
 
 import { routing } from './product-manage.routing';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
   imports: [
-    AngularFormsModule,
-    CommonModule,
-    NgaModule,
+    SharedModule,
     routing,
   ],
   declarations: [
@@ -33,7 +29,7 @@ import { routing } from './product-manage.routing';
     CategoryListComponent,
     CategoryCardComponent,
     CategoryFormComponent,
-    StringListFilter,  
+    StringListFilter,
     LanguageSwitchComponent
   ],
   providers: [ CategoryService, ProductService ]

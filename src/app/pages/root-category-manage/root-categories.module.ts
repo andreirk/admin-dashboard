@@ -9,7 +9,7 @@ import { RootCategoryCardComponent } from "./components/root-category-card.compo
 import { SharedModule } from "../../shared/shared.module";
 import { RootCategoryDetailsComponent } from "./components/root-category-details/root-category-details.component";
 import { BackendApiService } from "../../services/backend-api.service";
-import { RootCategoryTypeOptionsDirective } from "./directives/root-category-type-options.directive";
+import { CategoryTypeOptionsDirective } from "./directives/category-type-options.directive";
 import { SectionTypeOptionsDirective } from "./directives/section-type-options.directive";
 
 @NgModule({
@@ -20,9 +20,7 @@ import { SectionTypeOptionsDirective } from "./directives/section-type-options.d
   declarations: [
     RootCategoryListComponent,
     RootCategoryCardComponent,
-    RootCategoryDetailsComponent,
-    RootCategoryTypeOptionsDirective,
-    SectionTypeOptionsDirective
+    RootCategoryDetailsComponent
   ],
   providers: [
     BackendApiService,

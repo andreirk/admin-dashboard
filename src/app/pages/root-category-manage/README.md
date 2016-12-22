@@ -6,10 +6,6 @@
 ###Root Category's services
 - *root-category.service.ts* - provides api calls to root categories backend
 
-###Root Category's directives
-- *root-category-type-options.directive.ts* - directive fills list of type options fetched from RootCategoryType enum
-- *section-type-options.directive.ts* - directive fills list of type options fetched from SectionType enum
- 
 ###Root Category's components
 - *root-category-card.component.ts* - components contains root category item view, provides deleting and navigation to editing root category
 - *root-category-list.component.ts* - component contains list root-category-cards, allows to loading more root categories by request
