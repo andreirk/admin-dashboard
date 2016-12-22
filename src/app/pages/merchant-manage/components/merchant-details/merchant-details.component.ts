@@ -86,14 +86,4 @@ export class MerchantDetailsComponent {
       }
     );
   }
-
-  onUploadImage(event) {
-    this.merchant.imageUrl = event.imageUrl;
-    this.wasModified = true;
-  }
-
-  onUploadDefaultProductImage(event) {
-    this.merchant.defaultProductImageUrl = event.imageUrl;
-    this.wasModified = true;
-  }
 }

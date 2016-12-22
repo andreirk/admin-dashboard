@@ -73,11 +73,6 @@ export class RootCategoryDetailsComponent {
     });
   }
 
-  onUploadImage(event) {
-    this.rootCategory.imageUrl = event.imageUrl;
-    this.wasModified = true;
-  }
-
   saveRootCategory() {
     const vm = this;
     vm.rootCategoryService.save(vm.rootCategory, vm.lang).subscribe(
