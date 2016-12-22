@@ -14,10 +14,17 @@
                     (onChange)="onChangeLang($event)"></am-select-lang>
   </div>
 
+<!--
   <am-upload-image [title]="'Upload image'"
                    [folder]="'ROOT_CATEGORIES'"
                    [imageUrl]="rootCategory.imageUrl"
                    (onUpload)="onUploadImage($event)"></am-upload-image>
+-->
+  <am-upload-image name="imageUrl"
+                   [title]="'Upload image'"
+                   [folder]="'ROOT_CATEGORIES'"
+                   [(ngModel)]="rootCategory.imageUrl"></am-upload-image>
+
 
   <div class="row">
     <div class="form-group col-sm-6">

@@ -14,10 +14,10 @@
                     (onChange)="onChangeLang($event)"></am-select-lang>
   </div>
 
-  <am-upload-image [title]="'Upload image'"
+  <am-upload-image name="imageUrl"
+                   [title]="'Upload image'"
                    [folder]="'MERCHANTS'"
-                   [imageUrl]="merchant.imageUrl"
-                   (onUpload)="onUploadImage($event)"></am-upload-image>
+                   [(ngModel)]="merchant.imageUrl"></am-upload-image>
 
   <div class="form-group">
     <label class="checkbox-inline custom-checkbox nowrap">
@@ -40,8 +40,8 @@
     </div>
   </div>
 
-  <am-upload-image [title]="'Upload default product image'"
+  <am-upload-image name="defaultProductImageUrl"
+                   [title]="'Upload default product image'"
                    [folder]="'MERCHANTS'"
-                   [imageUrl]="merchant.defaultProductImageUrl"
-                   (onUpload)="onUploadDefaultProductImage($event)"></am-upload-image>
+                   [(ngModel)]="merchant.defaultProductImageUrl"></am-upload-image>
 </form>

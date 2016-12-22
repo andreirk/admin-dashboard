@@ -1,7 +1,8 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'am-upload-image',
@@ -27,16 +28,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
            (onUpload)="handleUpload($event)"
            [hidden]="true">
   </label>
-</div>`
+</div>`,
+  providers: [{
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => UploadImageComponent),
+      multi: true
+  }]
 })
-export class UploadImageComponent {
+export class UploadImageComponent implements OnInit, ControlValueAccessor {
   @Input() title: string;
   @Input() folder: string;
-  @Input() imageUrl: string;
-  @Output() onUpload: EventEmitter<any> = new EventEmitter();
+  @Input() _imageUrl: string;
   private uploadOptions;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.uploadOptions = {
@@ -50,7 +55,7 @@ export class UploadImageComponent {
   }
 
   get imageUrlResize() {
-    return this.imageUrl ? this.imageUrl.replace('image/upload/', 'image/upload/w_300/') : '';
+    return this.imageUrl ? this._imageUrl.replace('image/upload/', 'image/upload/w_300/') : '';
   }
 
   handleUpload(data): void {
@@ -58,10 +63,32 @@ export class UploadImageComponent {
     if (data && data.response) {
       let response = JSON.parse(data.response);
       if (response.imageUrl) {
-        vm.onUpload.emit({
-          imageUrl: response.imageUrl
-        });
+        this.imageUrl = response.imageUrl;
       }
     }
   }
+
+// custom form control methods
+  get imageUrl() {
+    return this._imageUrl;
+  }
+
+  set imageUrl(val) {
+    this._imageUrl = val;
+    this.propagateChange(val);
+  }
+
+  writeValue(value: any): void {
+    if (value !== undefined) {
+      this.imageUrl = value;
+    }
+  }
+
+  propagateChange = (_: any) => {};
+
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {}
 }
