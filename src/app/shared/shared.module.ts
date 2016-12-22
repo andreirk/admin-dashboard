@@ -10,11 +10,19 @@ import { SelectLangComponent } from './components/select-lang.component';
 import { UploadImageComponent } from './components/upload-image.component';
 import { NgaModule } from '../theme/nga.module';
 import { UPLOAD_DIRECTIVES } from 'ng2-uploader/ng2-uploader';
+import { CategoryTypeOptionsDirective } from './directives/category-type-options.directive';
+import { SectionTypeOptionsDirective } from './directives/section-type-options.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
-  declarations: [SelectLangComponent, UploadImageComponent, UPLOAD_DIRECTIVES],
-  exports: [SelectLangComponent, UploadImageComponent,
+  declarations: [SelectLangComponent,
+    UploadImageComponent,
+    CategoryTypeOptionsDirective,
+    SectionTypeOptionsDirective, UPLOAD_DIRECTIVES],
+  exports: [SelectLangComponent,
+    UploadImageComponent,
+    CategoryTypeOptionsDirective,
+    SectionTypeOptionsDirective,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

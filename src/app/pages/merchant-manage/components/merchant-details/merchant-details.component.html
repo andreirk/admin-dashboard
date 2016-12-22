@@ -3,7 +3,7 @@
   -->
 <form #merchantForm="ngForm" class="merchant-details container">
   <div class="form-group row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <button (click)="saveMerchant()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
     </div>
   </div>
@@ -14,10 +14,14 @@
                     (onChange)="onChangeLang($event)"></am-select-lang>
   </div>
 
-  <am-upload-image name="imageUrl"
-                   [title]="'Upload image'"
-                   [folder]="'MERCHANTS'"
-                   [(ngModel)]="merchant.imageUrl"></am-upload-image>
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Product image</label>
+      <am-upload-image name="imageUrl"
+             [folder]="'MERCHANTS'"
+             [(ngModel)]="merchant.imageUrl"></am-upload-image>
+    </div>
+  </div>
 
   <div class="form-group">
     <label class="checkbox-inline custom-checkbox nowrap">
@@ -40,8 +44,12 @@
     </div>
   </div>
 
-  <am-upload-image name="defaultProductImageUrl"
-                   [title]="'Upload default product image'"
-                   [folder]="'MERCHANTS'"
-                   [(ngModel)]="merchant.defaultProductImageUrl"></am-upload-image>
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Default product image</label>
+      <am-upload-image name="defaultProductImageUrl"
+                       [folder]="'MERCHANTS'"
+                       [(ngModel)]="merchant.defaultProductImageUrl"></am-upload-image>
+    </div>
+  </div>
 </form>
