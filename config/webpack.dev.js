@@ -158,19 +158,19 @@ module.exports = function (options) {
         aggregateTimeout: 300,
         poll: 1000
       },
-      proxy: {
-        '/catalog': {
+      // proxy: {
+      //   '/catalog': {
+      //     target: 'http://lb.service:8080',
+      //     secure: false
+      //   }
+      // }      
+      proxy: [
+        {
+          context: ['/catalog','/driver'],
           target: 'http://lb.service:8080',
           secure: false
         }
-      }      
-      // proxy: [
-      //   {
-      //     context: ['/catalog/mgmt/v1/**', '/catalog/mgmt/v2/**'],
-      //     target: 'http://lb.service:8080/catalog/',
-      //     secure: false
-      //   }
-      // ]     
+      ]     
     },
 
     /*

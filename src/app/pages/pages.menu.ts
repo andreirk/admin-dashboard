@@ -257,7 +257,7 @@ export const PAGES_MENU = [
       //     }
       //   ]
       // },
-/*
+
       {
         path: 'maps',
         data: {
@@ -271,13 +271,22 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'googlemaps',
+            path: 'driver_map',
             data: {
               menu: {
-                title: 'Google Maps',
+                title: 'Drivers Locations',
               }
             }
           },
+          // {
+          //   path: 'googlemaps',
+          //   data: {
+          //     menu: {
+          //       title: 'Google Maps',
+          //     }
+          //   }
+          // },
+          
           // {
           //   path: 'leafletmaps',
           //   data: {
@@ -304,7 +313,9 @@ export const PAGES_MENU = [
           // }
         ]
       },
-*/
+
+
+      
       {
         path: '',
         data: {
