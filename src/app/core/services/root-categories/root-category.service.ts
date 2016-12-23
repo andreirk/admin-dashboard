@@ -2,9 +2,9 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Injectable } from '@angular/core';
-import { BackendApiService } from '../../../services/backend-api.service';
 import { Observable } from 'rxjs';
-import { RootCategory } from '../model/root-category';
+import { RootCategory } from '../../../commons/model/root-category';
+import { BackendApiService } from '../backend-api.service';
 
 @Injectable()
 export class RootCategoryService {
@@ -31,6 +31,14 @@ export class RootCategoryService {
     } else {
       return this.create(rootCategory, lang);
     }
+  }
+
+  linkMerchant(id: string, merchantId: string): Observable<any> {
+    return this.backendApi.post(this.path + '/' + id + '/linkmerchant/' + merchantId, {}, {});
+  }
+
+  unlinkMerchant(id: string, merchantId: string): Observable<any> {
+    return this.backendApi.delete(this.path + '/' + id + '/linkmerchant/' + merchantId);
   }
 
   private update(rootCategory: RootCategory, lang: string): Observable<RootCategory> {

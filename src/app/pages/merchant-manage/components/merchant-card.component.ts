@@ -3,9 +3,9 @@
  */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { BackendApiService } from '../../../services/backend-api.service';
-import { Merchant } from '../model/merchant';
-import { MerchantBackendService } from '../services/merchant-backend.service';
+import { BackendApiService } from '../../../core/services/backend-api.service';
+import { Merchant } from '../../../commons/model/merchant';
+import { MerchantBackendService } from '../../../core/services/merchants/merchant-backend.service';
 
 @Component({
   selector: 'am-merchant-card',

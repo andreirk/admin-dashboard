@@ -5,7 +5,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { ProductService } from '../../products-service'
+import { ProductService } from '../../../../core/services/products/products-service'
 
 
 @Component({
@@ -39,7 +39,7 @@ export class ProductListComponent {
     this.productService.getProducts()
       .subscribe(resp => {
         this.products = resp.content
-        console.log(this.products)  
+        console.log(this.products)
     })
   }
 

@@ -1,4 +1,4 @@
-import { SectionType, CategoryType } from '../../../../../shared/types';
+import { SectionType, CategoryType } from '../../shared/types';
 
 export class Category {
   public id: string = '';

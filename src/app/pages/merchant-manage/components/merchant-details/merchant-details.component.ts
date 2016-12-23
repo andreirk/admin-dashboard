@@ -2,18 +2,17 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, ViewChild } from '@angular/core';
-import { MerchantBackendService } from '../../services/merchant-backend.service';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
-import { BackendApiService } from '../../../../services/backend-api.service';
-import { Merchant } from '../../model/merchant';
 import { Observable } from 'rxjs';
 import { ChangeLangEvent } from '../../../../shared/components/select-lang.component';
+import { MerchantViewModel } from '../../model/merchant-view-model';
+import { MerchantViewModelService } from '../../services/merchant-view-model.service';
 
 @Component({
   selector: 'am-merchant-details',
   providers: [
-    MerchantBackendService, BackendApiService
+    MerchantViewModelService
   ],
   template: require('./merchant-details.component.html')
 })
@@ -22,14 +21,14 @@ export class MerchantDetailsComponent {
 
   private lang: string = 'en';
   private merchantId: string;
-  private merchant: Merchant = new Merchant();
-  private merchantOriginal: Merchant = new Merchant();
+  private viewModel: MerchantViewModel = new MerchantViewModel();
+  private viewModelOriginal: MerchantViewModel = new MerchantViewModel();
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
 
   constructor(
     private route: ActivatedRoute,
-    private merchantService: MerchantBackendService) {
+    private merchantVmService: MerchantViewModelService) {
   }
 
   ngOnInit() {
@@ -45,7 +44,7 @@ export class MerchantDetailsComponent {
     const vm = this;
     this.form.control.valueChanges
       .subscribe(values => {
-        vm.wasModified = !_.isEqual(vm.merchant, vm.merchantOriginal);
+        vm.wasModified = !_.isEqual(vm.viewModel, vm.viewModelOriginal);
       });
   }
 
@@ -59,31 +58,33 @@ export class MerchantDetailsComponent {
 
   changeLang(save: boolean, lang: string, prevLang?: string) {
     const vm = this;
-    let observ: Observable<Merchant>;
+    let observMerchantId: Observable<string>;
     if (save && prevLang) {
-      observ = vm.merchantService.save(vm.merchant, prevLang).mergeMap(merchant => {
-        vm.merchantId = merchant.id;
-        return vm.merchantService.get(vm.merchantId, lang);
-      });
+      observMerchantId = vm.merchantVmService.save(vm.viewModel, vm.viewModelOriginal, prevLang).map(viewModel => viewModel.merchant.id);
     } else {
-      observ = vm.merchantService.get(vm.merchantId, lang);
+      observMerchantId = Observable.of(vm.merchantId);
     }
 
-    observ.subscribe((merchant: Merchant) => {
-      vm.merchant = merchant;
-      vm.merchantOriginal = _.cloneDeep(merchant);
+    observMerchantId.mergeMap(merchantId => {
+      return vm.merchantVmService.get(merchantId, lang);
+    }).subscribe((viewModel: MerchantViewModel) => {
+      vm.merchantId = viewModel.merchant.id;
+      vm.viewModel = viewModel;
+      vm.viewModelOriginal = _.cloneDeep(viewModel);
       vm.lang = lang;
     });
   }
 
   saveMerchant() {
     const vm = this;
-    vm.merchantService.save(vm.merchant, vm.lang).subscribe(
-      merchant => {
-        vm.merchant = merchant;
-        vm.merchantOriginal = _.cloneDeep(merchant);
+
+    vm.merchantVmService.save(vm.viewModel, vm.viewModelOriginal, vm.lang).subscribe(
+      viewModel => {
+        vm.viewModel = viewModel;
+        vm.viewModelOriginal = _.cloneDeep(viewModel);
         vm.wasModified = false;
       }
     );
+
   }
 }

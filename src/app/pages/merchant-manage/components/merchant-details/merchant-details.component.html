@@ -19,13 +19,13 @@
       <label>Product image</label>
       <am-upload-image name="imageUrl"
              [folder]="'MERCHANTS'"
-             [(ngModel)]="merchant.imageUrl"></am-upload-image>
+             [(ngModel)]="viewModel.merchant.imageUrl"></am-upload-image>
     </div>
   </div>
 
   <div class="form-group">
     <label class="checkbox-inline custom-checkbox nowrap">
-      <input type="checkbox" class="form-control" name="enabled" [(ngModel)]="merchant.enabled">
+      <input type="checkbox" class="form-control" name="enabled" [(ngModel)]="viewModel.merchant.enabled">
       <span>Merchant enabled</span>
     </label>
   </div>
@@ -33,14 +33,22 @@
   <div class="row">
     <div class="form-group col-sm-6">
       <label>Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="merchant.name" [ngStyle]="{'direction': langDirection}">
+      <input type="text" class="form-control" name="name" [(ngModel)]="viewModel.merchant.name" [ngStyle]="{'direction': langDirection}">
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-6">
       <label>Description</label>
-      <input type="text" class="form-control" name="desc" [(ngModel)]="merchant.description" [ngStyle]="{'direction': langDirection}">
+      <textarea type="text" class="form-control" name="desc" [(ngModel)]="viewModel.merchant.description" [ngStyle]="{'direction': langDirection}">
+      </textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Root categories</label>
+      <am-root-category-multiselect name="rootCategories" [lang]="lang" [(ngModel)]="viewModel.linkedRootCategoryIds"></am-root-category-multiselect>
     </div>
   </div>
 
@@ -49,7 +57,7 @@
       <label>Default product image</label>
       <am-upload-image name="defaultProductImageUrl"
                        [folder]="'MERCHANTS'"
-                       [(ngModel)]="merchant.defaultProductImageUrl"></am-upload-image>
+                       [(ngModel)]="viewModel.merchant.defaultProductImageUrl"></am-upload-image>
     </div>
   </div>
 </form>

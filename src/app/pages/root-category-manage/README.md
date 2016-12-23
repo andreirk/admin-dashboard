@@ -1,11 +1,5 @@
 ##Contents
 
-###Root Category's model
-- *model/root-category.ts* - root category class represents response from backend for selected language
-
-###Root Category's services
-- *root-category.service.ts* - provides api calls to root categories backend
-
 ###Root Category's components
 - *root-category-card.component.ts* - components contains root category item view, provides deleting and navigation to editing root category
 - *root-category-list.component.ts* - component contains list root-category-cards, allows to loading more root categories by request

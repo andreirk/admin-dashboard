@@ -6,23 +6,25 @@ import { MerchantListComponent } from "./components/merchant-list.component";
 import { MerchantCardComponent } from "./components/merchant-card.component";
 import { MerchantDetailsComponent } from "./components/merchant-details/merchant-details.component";
 import { routing } from "./merchant.routing";
-import { MerchantBackendService } from "./services/merchant-backend.service";
-import { MerchantListService } from "./services/merchant-list.service";
 import { SharedModule } from "../../shared/shared.module";
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect/src/multiselect-dropdown';
+import { RootCategoryMultiselectComponent } from './components/root-category-mutliselect.component';
+import { MerchantViewModelService } from './services/merchant-view-model.service';
 
 @NgModule({
   imports: [
     SharedModule,
+    MultiselectDropdownModule,
     routing
   ],
   declarations: [
     MerchantListComponent,
     MerchantCardComponent,
-    MerchantDetailsComponent
+    MerchantDetailsComponent,
+    RootCategoryMultiselectComponent
   ],
   providers: [
-    MerchantBackendService,
-    MerchantListService
+    MerchantViewModelService
   ]
 })
 export default class MerchantsModule { }

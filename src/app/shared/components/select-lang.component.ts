@@ -19,7 +19,7 @@ import { Lang } from '../objects';
   <div class="alert alert-warning" role="alert" [hidden]="!showAlert">
     <strong>Warning!</strong> Do you want to save before change language
     <button (click)="emitChangeLang(true)" class="btn btn-secondary">Yes</button>
-    <button (click)="emitCchangeLang(false)" class="btn btn-secondary">No</button>
+    <button (click)="emitChangeLang(false)" class="btn btn-secondary">No</button>
   </div>
 `
 })
