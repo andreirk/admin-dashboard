@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
-import { BackendApiService as ApiService } from '../../services/backend-api.service'
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { BackendApiService as ApiService } from '../backend-api.service';
+import { Headers } from '@angular/http';
 
 @Injectable()
 export class ProductService {
@@ -12,8 +12,8 @@ export class ProductService {
     lang = 'en'
 
     createProduct(product) {
-        let headers = new Headers({ 
-        'Content-Type': 'application/json'             
+        let headers = new Headers({
+        'Content-Type': 'application/json'
         });
         return this.api.post(this.path, product, {}, this.lang )
     }

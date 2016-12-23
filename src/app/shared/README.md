@@ -1,9 +1,13 @@
 ##Contents
 
+### Shared directives
+- *category-type-options.directive.ts* - directive fills list of type options fetched from CategoryType enum
+- *section-type-options.directive.ts* - directive fills list of type options fetched from SectionType enum
+
 ### Shared components
 - *components/select-lang.component.ts* - component for selecting language in edit properties page,
  includes alert box for notification in case of unsaved data
-- *components/upload-image.component.ts* - displays and provides uploading image, returns url of 
+- *components/upload-image.component.ts* - custom form control, displays and provides uploading image, returns url of 
  saved image
  
 ### Shared data

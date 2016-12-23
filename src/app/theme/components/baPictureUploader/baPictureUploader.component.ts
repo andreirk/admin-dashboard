@@ -17,6 +17,7 @@ export class BaPictureUploader {
 
   onUpload:EventEmitter<any> = new EventEmitter();
   @Output() onUploadCompleted:EventEmitter<any> = new EventEmitter();
+  @Output() onRemove:EventEmitter<any> = new EventEmitter();
 
   @ViewChild('fileUpload') protected _fileUpload:ElementRef;
 
@@ -59,6 +60,7 @@ export class BaPictureUploader {
 
   public removePicture():boolean {
     this.picture = '';
+    this.onRemove.emit({});
     return false;
   }
 

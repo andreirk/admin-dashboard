@@ -1,18 +1,16 @@
 ##Contents
 
 ###Merchants model
-- *model/merchant.ts* - merchant class, response from backend for one selected language
-- *model/merchant-page.ts* - merchants page class, response from backend
-- *model/merchant-list.ts* - merchant list class, which contains all data from pages
+- *model/merchant-view-model.ts* - merchant view model class, which contains merchant and linked root categories
 
-###Merchants services
-- *services/merchant-backend.service.ts* : provides api calls to merchants backend
-- *services/merchant-list.service.ts* : provides api calls for working with list of merchants, which combines data from pages
+### Merchant services
+- *services/merchant-view-model.service.ts* - provides methods for loading and saving merchant's view model 
 
 ### Merchants components
 - *components/merchant-card-component.ts* - view for merchant list item, provides deleting and navigation to editing merchant
 - *components/merchant-list-component.ts* - contains list of merchant-card-components, allows to loading more merchants by request
 - *components/merchant-details/merchant-details-component.\* * - merchant details page, used for creating and editing merchant's properties
+- *components/root-category-mutliselect.component.ts* - contains view of multiselect for root categories linked with merchant
 
 ### Module files
 - *merchant.module.ts* - aggregates all metadata about merchants management module

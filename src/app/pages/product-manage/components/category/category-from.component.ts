@@ -1,19 +1,13 @@
 import {
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit
+  Input
 } from '@angular/core';
 
-import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 
 import { EmitterService } from '../../emitter.service';
-import { Category } from './model/category';
-import { CategoryService } from './category.service';
-import { CategoryCardComponent } from './category-card.component'
-
+import { Category } from '../../../../commons/model/category';
+import { CategoryService } from '../../../../core/services/categories/category.service';
 
 @Component({
 
@@ -37,7 +31,7 @@ export class CategoryFormComponent {
   ) {}
 
   private editing = false;
-  private model = new Category('', '', '', '', 'deals', 0, 'REGULAR')
+  private model = new Category();
 
   @Input() editId: string;
   @Input() listId: string;
@@ -45,26 +39,7 @@ export class CategoryFormComponent {
   @Input() language: Object;
 
   OnInit() {
-    this.model = new Category('', '', '', '', 'deals', 0, 'REGULAR')
-  }
-
-  public uploaderOptions: any = {
-    url: '/catalog/mgmt/v1/upload-image?folder=CATEGORIES',
-    customHeaders: [{
-      'Authorization': 'Basic ' + btoa('admin:0000')
-    }, {
-      'Accept': 'application/json'
-    }],
-    // multipart: false
-    fieldName: 'imageFile'
-  };
-
-  onUpload(data) {
-    let imageUrl = JSON.parse(data.response).imageUrl;
-    if (imageUrl) {
-      this.model.imageUrl = imageUrl;
-    }
-
+    this.model = new Category();
   }
 
   submitCategory(form) {
@@ -84,7 +59,7 @@ export class CategoryFormComponent {
           // Emit list event
           EmitterService.get(this.listId).emit(categorys);
           // Empty model
-          this.model = new Category('', '', '', '', 'deals', 0, 'REGULAR')
+          this.model = new Category();
             // Switch editing status
           if (this.editing) this.editing = !this.editing;
         },
@@ -92,8 +67,6 @@ export class CategoryFormComponent {
           // Log errors if any
           console.log(err);
         });
-
-        this.uploaderOptions.formUploaded = true;
   }
 
   ngOnChanges(changes: any) {
@@ -103,13 +76,13 @@ export class CategoryFormComponent {
     }
 
     EmitterService.get(this.editId).subscribe((category: Category) => {
-      this.model = category
+      this.model = category;
       this.editing = true;
     });
   }
 
   cleanForm() {
-    this.model = new Category('', '', '', '', 'deals', 0, 'REGULAR')
+    this.model = new Category();
     this.editing = false;
   }
 

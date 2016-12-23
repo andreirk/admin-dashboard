@@ -2,9 +2,9 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component } from '@angular/core';
-import { RootCategoryService } from '../services/root-category.service';
-import { BackendApiService } from '../../../services/backend-api.service';
-import { RootCategory } from '../model/root-category';
+import { RootCategoryService } from '../../../core/services/root-categories/root-category.service';
+import { BackendApiService } from '../../../core/services/backend-api.service';
+import { RootCategory } from '../../../commons/model/root-category';
 
 @Component({
   selector: 'am-root-category-list',

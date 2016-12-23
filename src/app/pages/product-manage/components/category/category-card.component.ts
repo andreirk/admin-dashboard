@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 
 import { EmitterService } from '../../emitter.service'
-import { Category } from './model/category';
-import { CategoryService } from './category.service';
+import { Category } from '../../../../commons/model/category';
+import { CategoryService } from '../../../../core/services/categories/category.service';
 
 @Component({
   selector: 'toyou-category-card',
@@ -74,12 +74,12 @@ export class CategoryCardComponent {
                         categorys => {
                             // Emit list event
                             EmitterService.get(this.listId).emit(categorys);
-                        }, 
+                        },
                         err => {
                             // Log errors if any
                             console.log(err);
                         });
-        }                    
+        }
   }
 
   toggleCheck() {

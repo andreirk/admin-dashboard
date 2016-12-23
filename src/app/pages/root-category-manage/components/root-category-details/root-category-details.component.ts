@@ -2,10 +2,10 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, ViewChild } from '@angular/core';
-import { RootCategoryService } from '../../services/root-category.service';
+import { RootCategoryService } from '../../../../core/services/root-categories/root-category.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RootCategory } from '../../model/root-category';
+import { RootCategory } from '../../../../commons/model/root-category';
 import { ChangeLangEvent } from '../../../../shared/components/select-lang.component';
 
 @Component({
@@ -71,11 +71,6 @@ export class RootCategoryDetailsComponent {
       vm.rootCategoryOriginal = _.cloneDeep(rootCategory);
       vm.lang = lang;
     });
-  }
-
-  onUploadImage(event) {
-    this.rootCategory.imageUrl = event.imageUrl;
-    this.wasModified = true;
   }
 
   saveRootCategory() {

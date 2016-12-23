@@ -5,7 +5,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { ProductService } from './products-service'
+import { ProductService } from '../../core/services/products/products-service'
 
 
 @Component({
@@ -19,7 +19,7 @@ export class ProductManageComponent {
   constructor() {
 
   }
-  
+
   ngOnInit() {
   }
 
