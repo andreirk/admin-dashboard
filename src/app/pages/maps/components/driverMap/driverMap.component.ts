@@ -38,7 +38,7 @@ export class DriverMapComponent {
   subscription: any;
   drivers: driver[] = [];
 
-  private icon: string = '/assets/icon/car20.png';
+  private icon: string = '/dashboard/assets/icon/car20.png';
   //label = '<h1>Label</h1>'
   private zoom: number = 10;
 
@@ -74,13 +74,13 @@ export class DriverMapComponent {
   onMapZoomChange(zoomNum) {
     console.info('!!! zoom is', zoomNum);
     if (zoomNum <= 10) {
-      this.icon = '/assets/icon/car' + '16' + '.png'
+      this.icon = '/dashboard/assets/icon/car' + '16' + '.png'
     }
     if (zoomNum === 11) {
-      this.icon = '/assets/icon/car' + '20' + '.png'
+      this.icon = '/dashboard/assets/icon/car' + '20' + '.png'
     }
     if (zoomNum >= 12) {
-      this.icon = '/assets/icon/car' + '24' + '.png'
+      this.icon = '/dashboard/assets/icon/car' + '24' + '.png'
     }
 
     for (let driver of this.drivers) {
