@@ -2,10 +2,10 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component } from '@angular/core';
-import { MerchantList } from '../model/merchant-list';
-import { MerchantListService } from '../services/merchant-list.service';
-import { MerchantBackendService } from '../services/merchant-backend.service';
-import { BackendApiService } from '../../../services/backend-api.service';
+import { MerchantList } from '../../../commons/model/merchant-list';
+import { MerchantListService } from '../../../core/services/merchants/merchant-list.service';
+import { MerchantBackendService } from '../../../core/services/merchants/merchant-backend.service';
+import { BackendApiService } from '../../../core/services/backend-api.service';
 
 @Component({
   selector: 'am-merchant-list',

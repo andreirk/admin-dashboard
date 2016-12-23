@@ -24,7 +24,7 @@ export class BackendApiService {
       .map(this.getJson)
   }
 
-  post(path: string, body: Object, params: Object, lang: string): Observable<any> {
+  post(path: string, body: Object, params: Object, lang?: string): Observable<any> {
     return this.http.post(path, body, this.getRequestOptions(params, lang))
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
@@ -60,8 +60,10 @@ export class BackendApiService {
     }
   }
 
-  private getRequestOptions(params: Object, lang: string): RequestOptions {
-    this.headers.set('Accept-Language', lang);
+  private getRequestOptions(params: Object, lang?: string): RequestOptions {
+    if (lang) {
+      this.headers.set('Accept-Language', lang);
+    }
 
     let urlparams = new URLSearchParams();
     Object.keys(params).forEach(key => urlparams.set(key, params[key]));

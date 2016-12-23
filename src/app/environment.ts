@@ -3,8 +3,6 @@
 // rc2 workaround
 import { enableDebugTools, disableDebugTools } from '@angular/platform-browser';
 import { enableProdMode, ApplicationRef } from '@angular/core';
-import * as services from './services';
-
 
 const mapValuesToArray = (obj) => Object.keys(obj).map(key => obj[key]);
 
@@ -40,14 +38,6 @@ if ('production' === ENV || 'renderer' === ENV) {
     (<any>window).ng.coreTokens = _ng.coreTokens;
     return modRef;
   };
-
-  // Development
-  PROVIDERS = [
-
-    ...mapValuesToArray(services),
-    // custom providers in development
-  ];
-
 }
 
 export const decorateModuleRef = _decorateModuleRef;

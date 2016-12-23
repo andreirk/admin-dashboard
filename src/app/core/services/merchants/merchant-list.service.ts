@@ -3,8 +3,8 @@
  */
 import { Injectable } from '@angular/core';
 import { MerchantBackendService } from './merchant-backend.service';
-import { MerchantList } from '../model/merchant-list';
 import { Observable } from 'rxjs';
+import { MerchantList } from '../../../commons/model/merchant-list';
 
 @Injectable()
 export class MerchantListService {

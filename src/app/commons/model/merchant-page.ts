@@ -8,6 +8,5 @@ export class MerchantPage {
   content: Merchant[];
 
   constructor() {
-
   }
 }

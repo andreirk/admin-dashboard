@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { SectionType, CategoryType } from '../../../shared/types';
+import { SectionType, CategoryType } from '../../shared/types';
 
 export class RootCategory {
   public id: string = '';
