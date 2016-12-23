@@ -12,17 +12,24 @@ import { NgaModule } from '../theme/nga.module';
 import { UPLOAD_DIRECTIVES } from 'ng2-uploader/ng2-uploader';
 import { CategoryTypeOptionsDirective } from './directives/category-type-options.directive';
 import { SectionTypeOptionsDirective } from './directives/section-type-options.directive';
+import { AddressPipe } from './pipes/address.pipe';
+import { SuffixPipe } from './pipes/suffix.pipe';
+import { DefaultValuePipe } from './pipes/default-value.pipe';
+import { DriverLocationPipe } from './pipes/driver-location.pipe';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
   declarations: [SelectLangComponent,
     UploadImageComponent,
     CategoryTypeOptionsDirective,
-    SectionTypeOptionsDirective, UPLOAD_DIRECTIVES],
+    SectionTypeOptionsDirective,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe,
+    UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

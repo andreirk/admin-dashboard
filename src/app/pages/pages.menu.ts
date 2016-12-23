@@ -74,6 +74,19 @@ export const PAGES_MENU = [
         }
       },
 
+      {
+        path: 'orders',  // path for our page
+        data: { // custom menu declaration
+          menu: {
+            title: 'Delivery orders', // menu title
+            icon: 'ion-android-home', // menu icon
+            selected: false,
+            expanded: false,
+            order: 100
+          }
+        }
+      },
+
 
       // {
       //   path: 'editors',
