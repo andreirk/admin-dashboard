@@ -1,10 +1,12 @@
-<button (click)="loadLocations()">Load locations</button>
+<!--<button (click)="loadLocations()">Load locations</button>
+<button (click)="stopLoading()">stop Loading</button>-->
  <sebm-google-map 
       [latitude]="lat"
       [longitude]="lng"
       [zoom]="zoom"
       [disableDefaultUI]="false"
       [zoomControl]="false"
+      (zoomChange)="onMapZoomChange($event)"
       (mapClick)="mapClicked($event)">
     
       <sebm-google-map-marker 
@@ -12,7 +14,6 @@
           (markerClick)="clickedMarker(m.label, i)"
           [latitude]="m.lat"
           [longitude]="m.lon"
-          [label]="m.capacity"
           [iconUrl]="m.icon"
           (dragEnd)="markerDragEnd(m, $event)">
           
