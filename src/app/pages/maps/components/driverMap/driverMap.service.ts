@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BackendApiService  } from './../../../../core/services/backend-api.service';
+import { BackendApiService  } from '../../../../core/services/backend-api.service';
 
 import {Observable} from 'rxjs/Rx';
 

@@ -4,6 +4,17 @@ import { DriverMapService } from './driverMap.service';
 
 import {Observable} from 'rxjs/Rx';
 
+
+interface driver {
+  lat: number;
+  lon: number;
+  driverId: number;
+  capacity: string;
+  alive: boolean;
+  heading: number;
+  icon? : string;
+}
+
 // get icon url for glyph
 function getIcon(glyph, color?, size = 20) {
     var canvas, ctx;
@@ -24,7 +35,6 @@ enum VehicleType {
     TRUCK  
   }
 
-let carTypeIconsMap = new Map()
 
 @Component({
   selector: '',
@@ -38,8 +48,7 @@ export class DriverMapComponent {
   subscription: any;
   drivers: driver[] = [];
 
-  private icon: string = '/dashboard/assets/icon/car20.png';
-  //label = '<h1>Label</h1>'
+  private icon: string = getIcon('\uf0d1', '#111D59');
   private zoom: number = 10;
 
   // center of Er-Riad
@@ -49,18 +58,35 @@ export class DriverMapComponent {
   ngOnInit(){
     this.loadLocations();
   }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 
   loadLocations() {
     
-    this.subscription = this.driverLocationSrvs.getLocationsByInterval(3500)
+    this.driverLocationSrvs.getDriverLocations()
+    .subscribe( drivers => {
+      this.setIcons(drivers)
+      this.drivers = drivers
+    }
+    )
+      
+    this.subscription = this.driverLocationSrvs.getLocationsByInterval(10000)  
       .subscribe(
-        data => {
-          for (let driver of data) {
-            driver.icon = this.icon;
-          }
-          this.drivers = data
+        drivers => {
+          this.setIcons(drivers)
+          drivers.map((obj,index) => {
+            this.drivers[index] = obj
+          })
+          console.log(drivers)
         }
       )
+  }
+
+  setIcons(drivers){
+  for (let driver of drivers) {
+        driver.icon = this.icon;
+      }
   }
 
   mapClicked($event) {
@@ -73,21 +99,6 @@ export class DriverMapComponent {
 
   onMapZoomChange(zoomNum) {
     console.info('!!! zoom is', zoomNum);
-    if (zoomNum <= 10) {
-      this.icon = '/dashboard/assets/icon/car' + '16' + '.png'
-    }
-    if (zoomNum === 11) {
-      this.icon = '/dashboard/assets/icon/car' + '20' + '.png'
-    }
-    if (zoomNum >= 12) {
-      this.icon = '/dashboard/assets/icon/car' + '24' + '.png'
-    }
-
-    for (let driver of this.drivers) {
-      driver.icon = this.icon;
-    }
-    //console.log('drivers', this.drivers)
-    this.zoom = zoomNum;
   }
 
   stopLoading() {
@@ -97,43 +108,6 @@ export class DriverMapComponent {
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
-
-  // drivers: driver[] = [{
-  //   lat: 24.69,
-  //   lon: 46.72,
-  //   driverId: 21,
-  //   capacity: "CAR",
-  //   alive: true,
-  //   heading: 20,
-  //   icon: this.icon
-  // }, {
-  //   lat: 24.71,
-  //   lon: 46.69,
-  //   driverId: 21,
-  //   capacity: "SCOOTER",
-  //   alive: true,
-  //   heading: 20,
-  //   icon: this.icon
-  // }, {
-  //   lat: 24.72,
-  //   lon: 46.72,
-  //   driverId: 21,
-  //   capacity: "TRUCK",
-  //   alive: true,
-  //   heading: 20,
-  //   icon: this.icon
-  // }]
-
-}
-
-interface driver {
-  lat: number;
-  lon: number;
-  driverId: number;
-  capacity: string;
-  alive: boolean;
-  heading: number;
-  icon ? : string;
 }
 
 
