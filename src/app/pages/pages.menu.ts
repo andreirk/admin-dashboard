@@ -259,10 +259,10 @@ export const PAGES_MENU = [
       // },
 
       {
-        path: 'maps',
+        path: 'drivers',
         data: {
           menu: {
-            title: 'Maps',
+            title: 'Drivers',
             icon: 'ion-ios-location-outline',
             selected: false,
             expanded: false,
@@ -271,13 +271,35 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'driver_map',
+            path: 'driver_map_locations',
             data: {
               menu: {
                 title: 'Drivers Locations',
               }
             }
           },
+        ]
+      },
+  //    {
+        // path: 'maps',
+        // data: {
+        //   menu: {
+        //     title: 'Maps',
+        //     icon: 'ion-ios-location-outline',
+        //     selected: false,
+        //     expanded: false,
+        //     order: 600,
+        //   }
+        // },
+        // children: [
+        //   {
+        //     path: 'driver_map',
+        //     data: {
+        //       menu: {
+        //         title: 'Drivers Locations',
+        //       }
+        //     }
+        //   },
           // {
           //   path: 'googlemaps',
           //   data: {
@@ -286,7 +308,7 @@ export const PAGES_MENU = [
           //     }
           //   }
           // },
-          
+
           // {
           //   path: 'leafletmaps',
           //   data: {
@@ -311,96 +333,93 @@ export const PAGES_MENU = [
           //     }
           //   }
           // }
-        ]
-      },
+        // ]
+ //     },
+      // {
+      //   path: '',
+      //   data: {
+      //     menu: {
+      //       title: 'Pages',
+      //       icon: 'ion-document',
+      //       selected: false,
+      //       expanded: false,
+      //       order: 650,
+      //     }
+      //   },
+      //   children: [
+      //     {
+      //       path: ['/login'],
+      //       data: {
+      //         menu: {
+      //           title: 'Login'
+      //         }
+      //       }
+      //     },
+      //     {
+      //       path: ['/register'],
+      //       data: {
+      //         menu: {
+      //           title: 'Register'
+      //         }
+      //       }
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'menu1',
+      //   data: {
+      //     menu: {
+      //       title: 'Menu Level 1',
+      //       icon: 'ion-ios-more',
+      //       selected: false,
+      //       expanded: false,
+      //       order: 700,
+      //     }
+      //   },
+      //   children: [
+      //     {
+      //       path: '',
+      //       data: {
+      //         menu: {
+      //           title: 'Menu Level 1.1',
 
+      //         }
+      //       }
+      //     },
+      //     {
+      //       path: 'menu1_2',
+      //       data: {
+      //         menu: {
+      //           title: 'Menu Level 1.2',
 
-      
-      {
-        path: '',
-        data: {
-          menu: {
-            title: 'Pages',
-            icon: 'ion-document',
-            selected: false,
-            expanded: false,
-            order: 650,
-          }
-        },
-        children: [
-          {
-            path: ['/login'],
-            data: {
-              menu: {
-                title: 'Login'
-              }
-            }
-          },
-          {
-            path: ['/register'],
-            data: {
-              menu: {
-                title: 'Register'
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu1',
-        data: {
-          menu: {
-            title: 'Menu Level 1',
-            icon: 'ion-ios-more',
-            selected: false,
-            expanded: false,
-            order: 700,
-          }
-        },
-        children: [
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Menu Level 1.1',
+      //         }
+      //       },
+      //       children: [
+      //         {
+      //           path: 'menu1_2_3',
+      //           data: {
+      //             menu: {
+      //               title: 'Menu Level 1.2.1',
 
-              }
-            }
-          },
-          {
-            path: 'menu1_2',
-            data: {
-              menu: {
-                title: 'Menu Level 1.2',
-
-              }
-            },
-            children: [
-              {
-                path: 'menu1_2_3',
-                data: {
-                  menu: {
-                    title: 'Menu Level 1.2.1',
-
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        path: 'version1',
-        data: {
-          menu: {
-            title: 'Go to Version 1',
-            url: 'http://lb.service:8080/ui-admin/',
-            icon: 'ion-android-exit',
-            order: 800,
-            target: '_blank'
-          }
-        }
-      }
+      //             }
+      //           }
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // },
+      // {
+      //   path: 'version1',
+      //   data: {
+      //     menu: {
+      //       title: 'Go to Version 1',
+      //       url: 'http://lb.service:8080/ui-admin/',
+      //       icon: 'ion-android-exit',
+      //       order: 800,
+      //       target: '_blank'
+      //     }
+      //   }
+      // }
     ]
   }
 ];
