@@ -14,9 +14,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
     </div>
     <div class="row">
       <footer class="al-footer clearfix">
-        <div class="al-footer-right">Created with <i class="ion-hammer"></i></div>
+        <div class="al-footer-right"></div>
         <div class="al-footer-main clearfix">
-          <div class="al-copy">&copy; <a href="arammeem.com">arammeem.com</a> 2016</div>
+          <div class="al-copy">&copy; <a href="http://toyou.com" target='_blank'>toyou.com</a> 2016</div>
           <ul class="al-share clearfix">
   
           </ul>
