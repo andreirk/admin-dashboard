@@ -5,19 +5,19 @@ import { DriverMapService } from './driverMap.service';
 
 
 const vehicleTypeIconMap = new Map([
-  ["CAR", "\uf1b9"],
-  ["SCOOTER", "\uf21c"],
-  ["TRUCK", "\uf0d1"],
+  ['CAR', '\uf1b9'],
+  ['SCOOTER', '\uf21c'],
+  ['TRUCK', '\uf0d1'],
 ])
 
 const vehicleStatusColorsMap = new Map([
-  ["ALIVE_WITH_ORDER", "#111D59"], // blue
-  ["ALIVE_NOT_ORDER", "#21C53D"], // green
-  ["NOT_ALIVE_WITH_ORDER", "#DA3E18"], // red
+  ['ALIVE_WITH_ORDER', '#111D59'], // blue
+  ['ALIVE_NOT_ORDER', '#21C53D'], // green
+  ['NOT_ALIVE_WITH_ORDER', '#DA3E18'], // red
 ])
 
 
-interface driverOnMap {
+interface DriverOnMap {
   lat: number;
   lon: number;
   driverId: number;
@@ -53,7 +53,7 @@ export class DriverMapComponent {
 
   constructor(private driverLocationSrvs: DriverMapService) {}
 
-  drivers: driverOnMap[] = [];
+  drivers: DriverOnMap[] = [];
 
   private subscription: any;
   private zoom: number = 10;
@@ -78,10 +78,9 @@ export class DriverMapComponent {
       })
 
     // then subscribe to update in interval  
-    this.subscription = this.driverLocationSrvs.getLocationsByInterval(3000)
+    this.subscription = this.driverLocationSrvs.getLocationsByInterval(10000)
       .subscribe(
         drivers => {
-          console.log('!!! in subscribe drivers', drivers)
           let driversWithIcons = this.setIcons(drivers)
 
           this.drivers = driversWithIcons;
@@ -100,7 +99,7 @@ export class DriverMapComponent {
   }
 
   onMapZoomChange(zoomNum) {
-    console.info('!!! zoom is', zoomNum);
+
   }
 
   stopLoading() {
@@ -108,12 +107,12 @@ export class DriverMapComponent {
   }
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+
   }
 
 
   private setIcons(drivers) {
-    let driversWithIcons = drivers.map((driver: driverOnMap) => {
+    let driversWithIcons = drivers.map((driver: DriverOnMap) => {
       let color = vehicleStatusColorsMap.get("NOT_ALIVE_WITH_ORDER")
 
       if (driver.alive && driver.orderId) {
