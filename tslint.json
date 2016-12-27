@@ -96,9 +96,6 @@
       "check-space"
     ],
     "interface-name": false,
-    "jsdoc-require": [
-      true
-    ],
     "no-consecutive-blank-lines": false,
     "one-line": [
       false,

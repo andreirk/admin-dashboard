@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BackendApiService  } from '../../../../core/services/backend-api.service';
 
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
+
+
+
 
 @Injectable()
 export class DriverMapService {
@@ -11,7 +14,9 @@ export class DriverMapService {
 
   }
 
+
   getLocationsByInterval(interval) {
+
     return Observable
       .interval(interval)
       .flatMap(() => {
@@ -25,3 +30,5 @@ export class DriverMapService {
 
 
 }
+
+

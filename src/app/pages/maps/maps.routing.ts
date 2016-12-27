@@ -3,7 +3,6 @@ import { Routes, RouterModule }  from '@angular/router';
 import { Maps } from './maps.component';
 //import { BubbleMaps } from './components/bubbleMaps/bubbleMaps.component';
 // import { GoogleMaps } from './components/googleMaps/googleMaps.component';
-import { DriverMapComponent } from './components/driverMap/driverMap.component';
 //import { LeafletMaps } from './components/leafletMaps/leafletMaps.component';
 //import { LineMaps } from './components/lineMaps/lineMaps.component';
 
@@ -14,7 +13,6 @@ const routes: Routes = [
     component: Maps,
     children: [
      // { path: 'bubblemaps', component: BubbleMaps },
-      { path: 'driver_map', component: DriverMapComponent },
       // { path: 'googlemaps', component: GoogleMaps },
     //  { path: 'leafletmaps', component: LeafletMaps },
     //  { path: 'linemaps', component: LineMaps }

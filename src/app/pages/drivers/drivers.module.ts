@@ -29,7 +29,7 @@ import { DriverMapService } from './components/driverMap/driverMap.service';
 
   ],
   providers: [
-   DriverMapService
+   DriverMapService,
   ]
 })
 export default class MapsModule {}
