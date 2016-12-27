@@ -15,8 +15,10 @@ export class BackendApiService {
   constructor(private http: Http) {
   }
 
-  get(path: string, params: Object, lang: string): Observable<any> {
-    this.headers.set('Accept-Language', lang);
+  get(path: string, params: Object, lang?: string): Observable<any> {
+    if (lang) {
+      this.headers.set('Accept-Language', lang);
+    }
 
     return this.http.get(path, this.getRequestOptions(params, lang))
       .map(this.checkForError)

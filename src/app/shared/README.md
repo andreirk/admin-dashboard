@@ -10,6 +10,13 @@
 - *components/upload-image.component.ts* - custom form control, displays and provides uploading image, returns url of 
  saved image
  
+### Shared pipes
+- *address.pipe.ts* - common pipe for address view
+- *default-value.pipe.ts* - pipe to display default value
+- *driver-location.pipe.ts* - pipe to display driver location as text
+- *suffix.pipe.ts* - cuts suffix from too long text 
+ 
+ 
 ### Shared data
 - *constants.ts* - contains shared constants (languages...)
 - *objects.ts* - contains shared classes
