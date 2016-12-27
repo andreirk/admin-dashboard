@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { BackendApiService } from '../backend-api.service';
 import { Observable } from 'rxjs';
 import { DriverProfile } from '../../../commons/model/driver-profile';
+import { DriverAccount } from '../../../commons/model/driver-account';
 import { Driver } from '../../../commons/model/driver';
 import { DriverLocation } from '../../../commons/model/driver-location';
 
@@ -29,7 +30,7 @@ export class DriverService {
     );
   }
 
-  getAccount(id: number): Observable<DriverProfile> {
+  getAccount(id: number): Observable<DriverAccount> {
     return this.backendApi.get(this.path + '/drivers/' + id, {});
   }
 

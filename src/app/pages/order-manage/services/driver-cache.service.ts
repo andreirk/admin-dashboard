@@ -17,7 +17,7 @@ export class DriverCacheService {
   getDriver(driverId: number): Observable<DriverProfile> {
     const vm = this;
     if (!vm.drivers.get(driverId)) {
-      vm.drivers.set(driverId, vm.driverService.getProfile(String(driverId))
+      vm.drivers.set(driverId, vm.driverService.getProfile(driverId)
         .publishReplay(1)
         .refCount());
     }
