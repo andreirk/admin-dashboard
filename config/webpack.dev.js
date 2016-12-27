@@ -164,7 +164,7 @@ module.exports = function (options) {
           target: 'http://lb.service:8080',
           secure: false
         }
-      }
+      ]
     },
 
     /*
