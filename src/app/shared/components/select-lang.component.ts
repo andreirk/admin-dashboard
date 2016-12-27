@@ -3,7 +3,7 @@
  */
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LANGUAGES } from '../constants';
-import { Lang } from '../objects';
+import { LangObj } from '../objects';
 
 @Component({
   selector: 'am-select-lang',
@@ -30,7 +30,7 @@ export class SelectLangComponent {
 
   private prevLang: string;
   private showAlert: boolean = false;
-  private LANGS: Lang[] = LANGUAGES;
+  private LANGS: LangObj[] = LANGUAGES;
 
   constructor() { }
 

@@ -28,6 +28,7 @@ const routes: Routes = [
       { path: 'login', loadChildren: () => System.import('./login/login.module') },
       { path: 'merchants',  loadChildren: () => System.import('./merchant-manage/merchant.module') },
       { path: 'root-categories',  loadChildren: () => System.import('./root-category-manage/root-categories.module') },
+      { path: 'orders',  loadChildren: () => System.import('./order-manage/order.module') },
 
     ]
   }

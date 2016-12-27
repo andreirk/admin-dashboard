@@ -1,0 +1,63 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<form #orderForm="ngForm" class="container">
+  <h3>Order # {{order.id}}</h3>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <ba-card title="General info" baCardClass="with-scroll">
+        <p>Status: {{order.status}}</p>
+        <p>Created: {{order.creationDate*1000 | date:'short'}}</p>
+      </ba-card>
+      <ba-card title="Finances" baCardClass="with-scroll">
+        <p>Pick-up cost: {{order.totalCosts.PICKUP_COST}}</p>
+        <p>Service fee: {{order.totalCosts.SERVICE_FEE}}</p>
+        <p>Delivery cost: {{order.totalCosts.DELIVERY_COST}}</p>
+      </ba-card>
+    </div>
+
+    <div class="col-sm-4">
+      <ba-card title="Customer" baCardClass="with-scroll">
+        <h5>{{user.firstName + ' ' + user.lastName}}</h5>
+        <p>Phone: {{user.phoneNumber}}</p>
+      </ba-card>
+      <ba-card title="Driver" baCardClass="with-scroll">
+        <h5>{{driver.profile.firstName + ' ' + driver.profile.lastName}}</h5>
+        <p>Phone: {{driver.account.phone}}</p>
+        <p>Vehicle type: {{driver.profile.capacity}}</p>
+        <p>Location: {{driverLocation | amDriverLocation}}</p>
+      </ba-card>
+    </div>
+
+    <div class="col-sm-4">
+      <ba-card title="Pick-up Location" baCardClass="with-scroll">
+        <am-pos-peer-details *ngIf="order.pickUp.posId" [peer]="order.pickUp"></am-pos-peer-details>
+        <am-user-peer-details *ngIf="order.pickUp.userId" [peer]="order.pickUp"></am-user-peer-details>
+      </ba-card>
+      <ba-card title="Drop-off Location" baCardClass="with-scroll">
+        <am-pos-peer-details *ngIf="order.dropOff.posId" [peer]="order.dropOff"></am-pos-peer-details>
+        <am-user-peer-details *ngIf="order.dropOff.userId" [peer]="order.dropOff"></am-user-peer-details>
+      </ba-card>
+    </div>
+  </div>
+
+  <div class="row">
+    <ba-card title="Order notes" baCardClass="with-scroll">
+      <p>{{order.message}}</p>
+    </ba-card>
+  </div>
+
+  <div class="row">
+    <ba-card title="Items" baCardClass="with-scroll">
+      <am-order-items-table [order]="order"></am-order-items-table>
+    </ba-card>
+  </div>
+
+  <div class="row">
+    <ba-card title="Changes history" baCardClass="with-scroll">
+      <am-order-history-table [orderId]="order.id"></am-order-history-table>
+    </ba-card>
+  </div>
+
+</form>

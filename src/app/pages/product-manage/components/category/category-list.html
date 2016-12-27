@@ -2,7 +2,7 @@
 
   <!--<div class="panel-body" style="padding:0px">-->
 <div class="container">
- 
+
   <div class="row category-search">
      <div class="col-sm-12 card ">
         <div class="col-xs-6 pull-right form-group card-text">
@@ -10,13 +10,13 @@
         </div>
      </div>
   </div>
-   
-<!--Lang = {{ language | json }}-->
+
+<!--LangObj = {{ language | json }}-->
     <toyou-category-card
           class="category-card"
           *ngFor="let category of categories | StringListFilter:queryElem.value; let i = index; "
-          [editId]="editId" 
-          [listId]="listId" 
+          [editId]="editId"
+          [listId]="listId"
           [category]="category"
     >
     </toyou-category-card>
