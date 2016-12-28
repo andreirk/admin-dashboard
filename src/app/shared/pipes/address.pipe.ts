@@ -9,6 +9,9 @@ import { DeliveryAddress } from '../../commons/model/order';
 })
 export class AddressPipe implements PipeTransform {
   transform(value: DeliveryAddress): string {
+    if (!value) {
+      return '';
+    }
     return 'city: ' + value.city + ' address: ' + value.addressLine1;
   }
 }
