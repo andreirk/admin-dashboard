@@ -11,7 +11,7 @@
         <div class="input-group date">
           <input class="form-control" placeholder="yyyy-mm-dd" name="dpfrom" [(ngModel)]="filterParamsForm.createdFrom" ngbDatepicker #dfrom="ngbDatepicker">
           <div class="input-group-addon" (click)="dfrom.toggle()" >
-            <span class="glyphicon glyphicon-calendar"></span>
+            <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <div class='input-group date'>
           <input class="form-control" placeholder="yyyy-mm-dd" name="dpto" [(ngModel)]="filterParamsForm.createdTo" ngbDatepicker #dto="ngbDatepicker">
           <div class="input-group-addon" (click)="dto.toggle()" >
-            <span class="glyphicon glyphicon-calendar"></span>
+            <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
