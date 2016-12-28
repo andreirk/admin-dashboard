@@ -51,6 +51,9 @@ export class OrderItemsTableComponent implements OnInit {
   fillTable() {
     const vm = this;
     vm.table = [];
+    if (!vm.order.orderLines) {
+      return;
+    }
     vm.order.orderLines.forEach(orderLine => {
       vm.table.push(<OrderItemRow> {
         type: 'item',
