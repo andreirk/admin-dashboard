@@ -16,7 +16,7 @@ import { DriverCacheService } from '../services/driver-cache.service';
 <td>{{order.id | suffix:6}}</td>
 <td>{{order.status}}</td>
 <td>{{order.creationDate*1000 | date:'short'}}</td>
-<td>{{order.requiredDeliveryDate*1000 | date:'short' | defaultValue:'n/a':(order.creationDate > order.requiredDeliveryDate)}}</td>
+<td>{{(order.requiredDeliveryDate || 0) * 1000 | date:'short' | defaultValue:'n/a':(order.creationDate > (order.requiredDeliveryDate || 0))}}</td>
 <td>{{userName}}</td>
 <td>{{driverName | defaultValue:'n/a'}}</td>
 <td>{{order.pickUp.address | amAddress}}</td>

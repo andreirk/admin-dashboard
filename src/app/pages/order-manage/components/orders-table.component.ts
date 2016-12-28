@@ -73,6 +73,7 @@ export class OrdersTableComponent implements OnInit{
   private createdTo: NgbDateStruct;
 
   private filterParams: OrderFilterParams = new OrderFilterParams();
+  private filterParamsOriginal: OrderFilterParams = new OrderFilterParams();
 
   constructor(private orderService: OrderService,
               private orderListService: OrderListService) {
@@ -87,11 +88,21 @@ export class OrdersTableComponent implements OnInit{
     const vm = this;
     this.form.control.valueChanges
       .subscribe(values => {
-        vm.filterParams = {};
-        vm.filterParams.fromDate = vm.createdFrom ? new Date(vm.createdFrom.year, vm.createdFrom.month - 1, vm.createdFrom.day).getTime() / 1000 : undefined;
-        vm.filterParams.toDate = vm.createdTo ? new Date(vm.createdTo.year, vm.createdTo.month - 1, vm.createdTo.day).getTime() / 1000 : undefined;
-        vm.orders = new OrderList();
-        vm.loadMoreOrders();
+        if (vm.createdFrom) {
+          vm.filterParams.fromDate = new Date(vm.createdFrom.year, vm.createdFrom.month - 1, vm.createdFrom.day).getTime() / 1000;
+        } else {
+          delete vm.filterParams.fromDate;
+        }
+        if (vm.createdTo) {
+          vm.filterParams.toDate = new Date(vm.createdTo.year, vm.createdTo.month - 1, vm.createdTo.day).getTime() / 1000;
+        } else {
+          delete vm.filterParams.toDate;
+        }
+        if (!_.isEqual(vm.filterParams, vm.filterParamsOriginal)) {
+          vm.orders = new OrderList();
+          vm.loadMoreOrders();
+          vm.filterParamsOriginal = _.cloneDeep(vm.filterParams);
+        }
       });
   }
 
