@@ -20,6 +20,7 @@ export class OrderService {
     return this.backendApi.get(this.path, Object.assign({
       'page': String(page),
       'size': String(size),
+      'sort': 'creationDate,desc'
     }, filterParams));
   }
 
