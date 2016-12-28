@@ -8,7 +8,7 @@ import { Order, OrderLine, OrderItemOptionsValue } from '../../../commons/model/
   selector: 'am-order-items-table',
   styleUrls: ['./style'],
   template: `
-<table class="table table-striped table-condensed table-hover">
+<table class="table table-striped table-condensed">
   <thead>
     <tr>
       <th>ID</th>
@@ -20,7 +20,7 @@ import { Order, OrderLine, OrderItemOptionsValue } from '../../../commons/model/
   </thead>
   <tbody>
     <tr *ngFor="let row of table;">
-      <td *ngIf="row.type == 'item'">{{row.value.productId | suffix:4}}</td>
+      <td *ngIf="row.type == 'item'">{{row.value.productId | amSuffix:4}}</td>
       <td *ngIf="row.type == 'item'">{{row.value.name}}</td>
       <td *ngIf="row.type == 'item'">{{row.value.note}}</td>
       <td *ngIf="row.type == 'item'">{{row.value.quantity}}</td>
@@ -51,6 +51,9 @@ export class OrderItemsTableComponent implements OnInit {
   fillTable() {
     const vm = this;
     vm.table = [];
+    if (!vm.order.orderLines) {
+      return;
+    }
     vm.order.orderLines.forEach(orderLine => {
       vm.table.push(<OrderItemRow> {
         type: 'item',

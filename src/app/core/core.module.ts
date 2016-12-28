@@ -13,7 +13,7 @@ import { OrderService } from './services/orders/order.service';
 import {UserService} from "./services/users/user.service";
 import { DriverService } from './services/drivers/driver.service';
 import { PosService } from './services/poses/pos.service';
-import { OrderListService } from './services/orders/order-list.service';
+import { OrderListService } from '../pages/order-manage/services/order-list.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -22,7 +22,7 @@ import { OrderListService } from './services/orders/order-list.service';
     RootCategoryService,
     CategoryService,
     ProductService,
-    OrderService, OrderListService,
+    OrderService,
     UserService,
     DriverService,
     PosService

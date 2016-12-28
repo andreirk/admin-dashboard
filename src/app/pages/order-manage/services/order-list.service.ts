@@ -2,10 +2,10 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Injectable } from '@angular/core';
-import { OrderService } from './order.service';
-import { OrderList } from '../../../commons/model/order-list';
+import { OrderService } from '../../../core/services/orders/order.service';
+import { OrderList } from '../model/order-list';
 import { Observable } from 'rxjs';
-import { OrderFilterParams } from '../../../commons/model/order-filter-params';
+import { OrderFilterParams } from '../model/order-filter-params';
 
 @Injectable()
 export class OrderListService {
@@ -35,4 +35,5 @@ export class OrderListService {
     orderList.total -= oldLength - orderList.content.length;
     return orderList;
   }
+
 }
