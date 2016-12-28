@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SuffixPipe implements PipeTransform {
   transform(value: string, length: number): any {
-    if (value.length < length) {
+    if (!value || value.length < length) {
       return value;
     } else {
       return value.substr(value.length - length, length);
