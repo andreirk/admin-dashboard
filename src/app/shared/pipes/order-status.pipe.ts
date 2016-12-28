@@ -12,7 +12,7 @@ export class OrderStatusPipe implements PipeTransform {
     if (!order) {
       return;
     }
-    return (order.status === OrderStatus.ACCEPTED && !order.deliveryStatus) ? order.deliveryStatus : order.status;
+    return (order.status === OrderStatus.ACCEPTED && order.deliveryStatus) ? order.deliveryStatus : order.status;
   }
 
 }
