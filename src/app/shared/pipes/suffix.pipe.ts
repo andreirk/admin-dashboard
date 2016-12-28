@@ -4,7 +4,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'suffix'
+  name: 'amSuffix'
 })
 export class SuffixPipe implements PipeTransform {
   transform(value: string, length: number): any {

@@ -23,13 +23,6 @@ export enum Currency {
   USD = <any>'USD'
 }
 
-export enum DeliveryStatus {
-  ON_THE_WAY_TO_PICK_UP = <any>'ON_THE_WAY_TO_PICK_UP',
-  AT_PICK_UP = <any>'AT_PICK_UP',
-  ON_THE_WAY_TO_DROP_OFF = <any>'ON_THE_WAY_TO_DROP_OFF',
-  AT_DROP_OFF = <any>'AT_DROP_OFF'
-}
-
 export enum PaymentType {
   CASH = <any>'CASH',
   CC = <any>'CC'
@@ -45,6 +38,15 @@ export enum OrderStatus {
   CANCELLED = <any>'CANCELLED',
   TO_SUPPORT = <any>'TO_SUPPORT'
 }
+
+export enum DeliveryStatus {
+  ON_THE_WAY_TO_PICK_UP = <any>'ON_THE_WAY_TO_PICK_UP',
+  AT_PICK_UP = <any>'AT_PICK_UP',
+  ON_THE_WAY_TO_DROP_OFF = <any>'ON_THE_WAY_TO_DROP_OFF',
+  AT_DROP_OFF = <any>'AT_DROP_OFF'
+}
+
+export type CommonOrderStatus = OrderStatus | DeliveryStatus;
 
 export enum VehicleType {
   SCOOTER = <any>'SCOOTER',

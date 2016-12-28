@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BackendApiService } from '../backend-api.service';
 import { Observable } from 'rxjs';
 import { OrderPage } from '../../../commons/model/order-page';
-import { OrderFilterParams } from '../../../commons/model/order-filter-params';
+import { OrderFilterParams } from '../../../pages/order-manage/model/order-filter-params';
 import { Order, OrderHistory } from '../../../commons/model/order';
 
 @Injectable()
