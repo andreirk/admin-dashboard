@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-sm-4">
       <ba-card title="General info" baCardClass="with-scroll">
-        <p>Status: {{order.status}}</p>
+        <p>Status: {{order | amOrderStatus}}</p>
         <p>Created: {{order.creationDate*1000 | date:'short'}}</p>
       </ba-card>
       <ba-card title="Finances" baCardClass="with-scroll">
