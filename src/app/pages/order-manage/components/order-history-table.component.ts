@@ -9,7 +9,7 @@ import { OrderService } from '../../../core/services/orders/order.service';
   selector: 'am-order-history-table',
   styleUrls: ['./style'],
   template: `
-<table class="table table-striped table-condensed table-hover">
+<table class="table table-striped table-condensed">
   <thead>
     <tr>
       <th>Type</th>

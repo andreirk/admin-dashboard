@@ -2,13 +2,28 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 
-table.order-list {
+table.am-order-list {
   thead {
     background-color: #1d5b86;
   }
 }
 
-th {
-  font-weight: bold ! important;
+table {
+  thead {
+    th {
+      font-weight: bold ! important;
+    }
+  }
+
+  tbody {
+    tr:hover {
+      background-color: darkcyan;
+    }
+  }
 }
+
+label {
+  display: block;
+}
+
 

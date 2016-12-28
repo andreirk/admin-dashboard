@@ -4,7 +4,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'defaultValue'
+  name: 'amDefaultValue'
 })
 export class DefaultValuePipe implements PipeTransform {
   transform(value: any, defaultValue: string, condition?: boolean): any {

@@ -13,12 +13,12 @@ import { DriverCacheService } from '../services/driver-cache.service';
     <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i> </span>
   </button>
 </td>
-<td>{{order.id | suffix:6}}</td>
-<td>{{order.status}}</td>
+<td>{{order.id | amSuffix:6}}</td>
+<td>{{order | amOrderStatus}}</td>
 <td>{{order.creationDate*1000 | date:'short'}}</td>
-<td>{{(order.requiredDeliveryDate || 0) * 1000 | date:'short' | defaultValue:'n/a':(order.creationDate > (order.requiredDeliveryDate || 0))}}</td>
+<td>{{(order.requiredDeliveryDate || 0)*1000 | date:'short' | amDefaultValue:'n/a':(order.creationDate > (order.requiredDeliveryDate || 0))}}</td>
 <td>{{userName}}</td>
-<td>{{driverName | defaultValue:'n/a'}}</td>
+<td>{{driverName | amDefaultValue:'n/a'}}</td>
 <td>{{order.pickUp.address | amAddress}}</td>
 <td>{{order.dropOff.address | amAddress}}</td>
 <td>{{sumCost(order.totalCosts)}}</td>`
