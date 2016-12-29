@@ -10,8 +10,9 @@ import { DriverContainerComponent } from './drivers.container.component';
 
 import { DriverMapComponent } from './components/driverMap/driverMap.component';
 
-import { DriverMapService } from './components/driverMap/driverMap.service';
+import { DriverMapApiService } from './components/driverMap/driverMap.service';
 
+import { CustomMapDirective } from './components/driverMap/driverMap.directive'
 
 @NgModule({
   imports: [
@@ -25,11 +26,12 @@ import { DriverMapService } from './components/driverMap/driverMap.service';
   ],
   declarations: [
     DriverContainerComponent,
-    DriverMapComponent
-
+    DriverMapComponent,
+    CustomMapDirective
   ],
   providers: [
-   DriverMapService,
+    DriverMapApiService,
+
   ]
 })
 export default class MapsModule {}

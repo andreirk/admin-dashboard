@@ -2,3 +2,14 @@
   height: calc(100vh - 283px);
   color: black;
 }
+
+.iw-container  {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  padding: 10px;
+  background-color: #48b5e9;
+  color: white;
+  margin: 1px;
+  border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
