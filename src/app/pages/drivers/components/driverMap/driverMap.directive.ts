@@ -22,8 +22,7 @@ export class CustomMapDirective {
           (driverProfile: any) => {
             let driverMarker = driverProfile.driverMarker;
             let orderId: number =  driverMarker.orderId;
-            let link = '<a href="/dashboard/#/pages/orders/'+ orderId + '"  target="_blank" >Order link </a>';
-
+            let link = '<a href="https://app.toyou.delivery/dashboard/#/pages/orders/'+ orderId + '"  target="_blank" >Order link </a>'
             this.infoWindowOptions.content =  `
               <div 
                   style="padding: 10px;
