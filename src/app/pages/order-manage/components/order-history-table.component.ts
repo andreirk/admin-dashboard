@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, Input, OnInit } from '@angular/core';
-import { OrderHistory } from '../../../commons/model/order';
+import {OrderHistory, Order} from '../../../commons/model/order';
 import { OrderService } from '../../../core/services/orders/order.service';
 
 @Component({
@@ -28,7 +28,7 @@ import { OrderService } from '../../../core/services/orders/order.service';
   `
 })
 export class OrderHistoryTableComponent implements OnInit {
-  @Input() orderId: string;
+  @Input() order: Order = new Order();
   private history: OrderHistory[] = [];
 
   constructor(private orderService: OrderService) {
@@ -36,14 +36,14 @@ export class OrderHistoryTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.orderId) {
-      this.loadHistory(this.orderId);
+    if (this.order) {
+      this.loadHistory(this.order.id);
     }
   }
 
   ngOnChanges() {
-    if (this.orderId) {
-      this.loadHistory(this.orderId);
+    if (this.order.id) {
+      this.loadHistory(this.order.id);
     }
   }
 

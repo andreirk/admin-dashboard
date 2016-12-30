@@ -55,5 +55,10 @@ export class OrderDetailsComponent implements OnInit {
     });
   }
 
+  completeOrder(orderId) {
+    this.orderService.completeOrder(orderId).subscribe(
+      res => this.ngOnInit()
+    );
+  }
 
 }

@@ -27,4 +27,8 @@ export class OrderService {
   getHistory(id: string): Observable<OrderHistory[]> {
     return this.backendApi.get(this.path + '/' + id + '/history', {});
   }
+
+  completeOrder(id: string): Observable<Order> {
+    return this.backendApi.put(this.path + '/' + id + '/complete', {}, {}, 'en');
+  }
 }

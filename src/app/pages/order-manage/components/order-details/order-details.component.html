@@ -56,8 +56,12 @@
 
   <div class="row">
     <ba-card title="Changes history" baCardClass="with-scroll">
-      <am-order-history-table [orderId]="order.id"></am-order-history-table>
+      <am-order-history-table [order]="order"></am-order-history-table>
     </ba-card>
+  </div>
+
+  <div class="row">
+    <a class="btn btn-primary" (click)="completeOrder(order.id)">Complete</a>
   </div>
 
 </form>
