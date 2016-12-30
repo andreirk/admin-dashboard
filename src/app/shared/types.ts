@@ -59,3 +59,9 @@ export enum PackageType {
   MEDIUM = <any>'MEDIUM',
   BIG = <any>'BIG'
 }
+
+export enum OrderAction {
+  COMPLETE = <any> 'COMPLETE',
+  CANCEL = <any> 'CANCEL',
+  TO_SUPPORT = <any> 'TO_SUPPORT'
+}

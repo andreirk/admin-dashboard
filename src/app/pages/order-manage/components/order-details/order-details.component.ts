@@ -10,6 +10,8 @@ import { User } from '../../../../commons/model/user';
 import { Driver } from '../../../../commons/model/driver';
 import { DriverService } from '../../../../core/services/drivers/driver.service';
 import { DriverLocation } from '../../../../commons/model/driver-location';
+import {OrderActionEvent} from "../order-action-select.component";
+import {OrderAction} from "../../../../shared/types";
 
 @Component({
   selector: 'am-order-details',
@@ -59,6 +61,40 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.completeOrder(orderId).subscribe(
       res => this.ngOnInit()
     );
+  }
+
+  toSupportOrder(orderId) {
+    this.orderService.toSupportOrder(orderId, 'Admin').subscribe(
+      res => this.ngOnInit()
+    );
+  }
+
+  cancelOrder(orderId) {
+    this.orderService.cancelOrder(orderId).subscribe(
+      res => this.ngOnInit()
+    );
+  }
+
+
+
+  processOrderAction(event: OrderActionEvent) {
+    switch (event.action) {
+      case OrderAction.COMPLETE:
+        this.completeOrder(this.order.id);
+        break;
+      case OrderAction.TO_SUPPORT:
+        this.toSupportOrder(this.order.id);
+        break;
+      case OrderAction.CANCEL:
+        this.cancelOrder(this.order.id);
+        break;
+      default:
+        break;
+    }
+  }
+
+  onChangeLanguage(event) {
+
   }
 
 }
