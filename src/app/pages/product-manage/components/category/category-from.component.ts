@@ -27,7 +27,6 @@ export class CategoryFormComponent {
 
   constructor(
     private categoryService: CategoryService,
-    // private model : Category
   ) {}
 
   private editing = false;

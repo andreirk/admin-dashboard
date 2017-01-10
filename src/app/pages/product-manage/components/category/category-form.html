@@ -34,6 +34,14 @@
         </textarea>
       </div>
 
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label>Section Type</label>
+          <select [(ngModel)]="model.sectionType" name="sectionType" class="form-control" required amSectionTypeOptions></select>
+        </div>
+      </div>
+
+
       <ba-card title="Picture Uploader" baCardClass="with-scroll">
         <am-upload-image name="imageUrl"
                          [folder]="'CATEGORIES'"
