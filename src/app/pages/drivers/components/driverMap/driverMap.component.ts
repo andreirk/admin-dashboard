@@ -4,6 +4,7 @@ import { DriverMapApiService } from './driverMap.service';
 import { DriverOnMap } from "./driverOnMap.model";
 
 
+
 const vehicleTypeIconMap = new Map([
   ['CAR', '\uf1b9'],
   ['SCOOTER', '\uf21c'],
@@ -24,6 +25,19 @@ const CITY_CENTER = {
 
 // how often update markers on the map sec
 const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
+
+
+// interface DriverInfoWindow {
+//   lat: number;
+//   lon: number;
+//   driverId: number;
+//   capacity: string;
+//   alive: boolean;
+//   heading: number;
+//   icon ? : string;
+//   orderId ? : number;
+// }
+
 
 // get icon url for glyph
 function getIcon(glyph, color ? , size = 20) {
@@ -52,8 +66,11 @@ export class DriverMapComponent {
   constructor(private driverLocationSrvs: DriverMapApiService) {}
 
   drivers: DriverOnMap[] = [];
+
   zoom: number = 10;
+
   private subscription: any;
+
 
   // city center
   public lat: number = CITY_CENTER.lat;
@@ -70,6 +87,9 @@ export class DriverMapComponent {
   ngAfterViewInit(){
 
   }
+  ngAfterViewInit(){
+
+  }
 
   loadLocations() {
     // initial loading on component init
@@ -79,7 +99,9 @@ export class DriverMapComponent {
       });
 
     // then subscribe to update in interval
+
     this.subscription = this.driverLocationSrvs.getLocationsByInterval(DRIVER_ON_MAP_UPDATE_INTERVAL)
+
       .subscribe(
         drivers => {
           this.drivers = this.setIcons(drivers);
@@ -110,6 +132,7 @@ export class DriverMapComponent {
         .subscribe( (driverData: any) => {
             driverData.driverMarker = driverMarker;
             this.driverLocationSrvs.confirmMarkerClick(driverData )
+
           }
         )
   }
