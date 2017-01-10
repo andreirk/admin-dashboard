@@ -137,6 +137,6 @@ export class DriverMapComponent {
     });
 
     return driversWithIcons;
-  }
+  };
 }
 
