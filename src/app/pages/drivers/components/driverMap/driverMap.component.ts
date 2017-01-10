@@ -52,7 +52,9 @@ export class DriverMapComponent {
   constructor(private driverLocationSrvs: DriverMapApiService) {}
 
   drivers: DriverOnMap[] = [];
+
   zoom: number = 10;
+
   private subscription: any;
 
   // city center
@@ -66,8 +68,10 @@ export class DriverMapComponent {
   ngOnDestroy() {
     this.stopLoading();
   }
+
   ngAfterViewInit(){
 
+  }
   ngAfterViewInit(){
 
   }
@@ -110,7 +114,7 @@ export class DriverMapComponent {
       this.driverLocationSrvs.getDriver(driverMarker.driverId)
         .subscribe( (driverData: any) => {
             driverData.driverMarker = driverMarker;
-            this.driverLocationSrvs.confirmMarkerClick(driverData )
+            this.driverLocationSrvs.confirmMarkerClick(driverData)
           }
         )
   }

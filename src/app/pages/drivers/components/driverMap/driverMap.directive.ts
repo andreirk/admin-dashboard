@@ -9,6 +9,7 @@ import {DriverOnMap} from "./driverOnMap.model";
 @Directive({
   selector: 'custom-directive'
 })
+
 export class CustomMapDirective {
 
   _map: any;
