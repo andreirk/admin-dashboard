@@ -26,6 +26,7 @@ const CITY_CENTER = {
 // how often update markers on the map sec
 const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
 
+
 // get icon url for glyph
 function getIcon(glyph, color ? , size = 20) {
   let canvas, ctx;
