@@ -1,43 +1,29 @@
 
 import { Component } from '@angular/core';
 import { DriverMapApiService } from './driverMap.service';
+import { DriverOnMap } from "./driverOnMap.model";
 
 
 const vehicleTypeIconMap = new Map([
   ['CAR', '\uf1b9'],
   ['SCOOTER', '\uf21c'],
   ['TRUCK', '\uf0d1'],
-])
+]);
 
 const vehicleStatusColorsMap = new Map([
   ['ALIVE_WITH_ORDER', '#111D59'], // blue
   ['ALIVE_NOT_ORDER', '#21C53D'],  // green
   ['NOT_ALIVE_WITH_ORDER', '#DA3E18'], // red
-])
+]);
 
+// center of ER-RIAD
+const CITY_CENTER = {
+  lat: 24.70,
+  lng: 46.71
+};
 
-interface DriverOnMap {
-  lat: number;
-  lon: number;
-  driverId: number;
-  capacity: string;
-  alive: boolean;
-  heading: number;
-  icon ? : string;
-  orderId ? : number;
-}
-
-// interface DriverInfoWindow {
-//   lat: number;
-//   lon: number;
-//   driverId: number;
-//   capacity: string;
-//   alive: boolean;
-//   heading: number;
-//   icon ? : string;
-//   orderId ? : number;
-// }
-
+// how often update markers on the map sec
+const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
 
 // get icon url for glyph
 function getIcon(glyph, color ? , size = 20) {
@@ -66,21 +52,21 @@ export class DriverMapComponent {
   constructor(private driverLocationSrvs: DriverMapApiService) {}
 
   drivers: DriverOnMap[] = [];
-  dirverInfoWindows = [1,2,3,4];
-
+  zoom: number = 10;
   private subscription: any;
-  private zoom: number = 10;
 
-  // center of ER-RIAD
-  public lat: number = 24.70;
-  public lng: number = 46.71;
+  // city center
+  public lat: number = CITY_CENTER.lat;
+  public lng: number = CITY_CENTER.lng;
 
   ngOnInit() {
     this.loadLocations();
   }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.stopLoading();
   }
+
   ngAfterViewInit(){
 
   }
@@ -93,7 +79,7 @@ export class DriverMapComponent {
       });
 
     // then subscribe to update in interval
-    this.subscription = this.driverLocationSrvs.getLocationsByInterval(10000)
+    this.subscription = this.driverLocationSrvs.getLocationsByInterval(DRIVER_ON_MAP_UPDATE_INTERVAL)
       .subscribe(
         drivers => {
           this.drivers = this.setIcons(drivers);
@@ -101,7 +87,6 @@ export class DriverMapComponent {
         }
       )
   }
-
 
   mapClicked($event) {
     let coords = {
@@ -120,16 +105,14 @@ export class DriverMapComponent {
   }
 
   clickedMarker(driverMarker: DriverOnMap, index: number) {
-      this.dirverInfoWindows.push(index);
 
       this.driverLocationSrvs.getDriver(driverMarker.driverId)
-        .subscribe( (driverProfile: any) => {
-            driverProfile.driverMarker = driverMarker;
-            this.driverLocationSrvs.confirmMarkerClick(driverProfile )
+        .subscribe( (driverData: any) => {
+            driverData.driverMarker = driverMarker;
+            this.driverLocationSrvs.confirmMarkerClick(driverData )
           }
         )
   }
-
 
   private setIcons(drivers) {
     let driversWithIcons = drivers.map((driver: DriverOnMap) => {
@@ -150,6 +133,5 @@ export class DriverMapComponent {
 
     return driversWithIcons;
   }
-
 }
 
