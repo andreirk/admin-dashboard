@@ -19,6 +19,7 @@ import { OrderListService } from './services/order-list.service';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect/src/multiselect-dropdown';
 import { OrderStatusMultiselectComponent } from './components/order-status-multiselect.component';
 import { OrderFilteringService } from './services/order-filtering.service';
+import {OrderActionSelectComponent} from "./components/order-action-select.component";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { OrderFilteringService } from './services/order-filtering.service';
     PosPeerDetailsComponent,
     OrderItemsTableComponent,
     OrderHistoryTableComponent,
-    OrderStatusMultiselectComponent
+    OrderStatusMultiselectComponent,
+    OrderActionSelectComponent
   ],
   providers: [
     UserCacheService,

@@ -31,4 +31,17 @@ export class OrderService {
   completeOrder(id: string): Observable<Order> {
     return this.backendApi.put(this.path + '/' + id + '/complete', {}, {}, 'en');
   }
+
+  toSupportOrder(id: string, reason: string): Observable<Order> {
+    let sr = {
+      reason: reason
+    }
+    return this.backendApi.put(this.path + '/' + id + '/to-support', sr, {}, 'en');
+  }
+
+  cancelOrder(id: string): Observable<Order> {
+    return this.backendApi.put(this.path + '/' + id + '/cancel', {}, {}, 'en');
+  }
+
+
 }
