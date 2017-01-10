@@ -1,10 +1,12 @@
 import { Directive } from '@angular/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
+
 import * as GOOGLE_MAPS_TYPES from 'angular2-google-maps/core/services/google-maps-types';
 import { DriverMapApiService } from './driverMap.service'
 import {DriverProfile} from "../../../../commons/model/driver-profile";
 import {DriverAccount} from "../../../../commons/model/driver-account";
 import {DriverOnMap} from "./driverOnMap.model";
+
 
 @Directive({
   selector: 'custom-directive'
@@ -31,6 +33,7 @@ export class CustomMapDirective {
 
             let link =  '<a href="#/pages/orders/'+ orderId + '"  >Order link </a>';
             let avatarImg =  profile.avatarUrl ? '<img src="' + profile.avatarUrl + '">' : '';
+
 
             this.infoWindowOptions.content =  `
               <div 
@@ -83,7 +86,9 @@ export class CustomMapDirective {
                       <td> ${orderId ? link : 'No order'}  </td>
                     </tr>                  
                     <tr>          
+
                       <td><b> ${orderId ? 'OrderID :' : 'No order ID'}  </b></td>
+
                       <td> ${orderId ? orderId : ''}  </td>
                     </tr>                        
                   </table>

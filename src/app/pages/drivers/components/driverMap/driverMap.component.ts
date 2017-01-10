@@ -25,6 +25,16 @@ const CITY_CENTER = {
 // how often update markers on the map sec
 const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
 
+
+// center of ER-RIAD
+const CITY_CENTER = {
+  lat: 24.70,
+  lng: 46.71
+};
+
+// how often update markers on the map sec
+const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
+
 // get icon url for glyph
 function getIcon(glyph, color ? , size = 20) {
   let canvas, ctx;
@@ -57,6 +67,7 @@ export class DriverMapComponent {
 
   private subscription: any;
 
+
   // city center
   public lat: number = CITY_CENTER.lat;
   public lng: number = CITY_CENTER.lng;
@@ -64,6 +75,7 @@ export class DriverMapComponent {
   ngOnInit() {
     this.loadLocations();
   }
+
 
   ngOnDestroy() {
     this.stopLoading();
@@ -77,7 +89,9 @@ export class DriverMapComponent {
       });
 
     // then subscribe to update in interval
+
     this.subscription = this.driverLocationSrvs.getLocationsByInterval(DRIVER_ON_MAP_UPDATE_INTERVAL)
+
       .subscribe(
         drivers => {
           this.drivers = this.setIcons(drivers);
@@ -107,7 +121,9 @@ export class DriverMapComponent {
       this.driverLocationSrvs.getDriver(driverMarker.driverId)
         .subscribe( (driverData: any) => {
             driverData.driverMarker = driverMarker;
+
             this.driverLocationSrvs.confirmMarkerClick(driverData)
+
           }
         )
   }
@@ -130,6 +146,8 @@ export class DriverMapComponent {
     });
 
     return driversWithIcons;
+
   };
+
 }
 
