@@ -69,13 +69,6 @@ export class DriverMapComponent {
     this.stopLoading();
   }
 
-  ngAfterViewInit(){
-
-  }
-  ngAfterViewInit(){
-
-  }
-
   loadLocations() {
     // initial loading on component init
     this.driverLocationSrvs.getDriverLocations()
