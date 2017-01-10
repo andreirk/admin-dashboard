@@ -38,9 +38,10 @@ export class CustomMapDirective {
                   color: white;
                   margin: 1px;
                   border-radius: 2px 2px 0 0;
-                  width: 250px;"
+                  width: 100%;"
                   >
-                <style>                                
+                <style>     
+                                 
                   td img{ display: block; margin: 0; width: 35%; max-width: none; }
                 </style>
                   
