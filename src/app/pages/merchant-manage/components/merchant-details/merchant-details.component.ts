@@ -33,11 +33,14 @@ export class MerchantDetailsComponent {
 
   ngOnInit() {
     const vm = this;
-    vm.merchantId = vm.route.snapshot.params['merchantId'];
-
-    if (vm.merchantId !== 'new') {
-      vm.changeLang(false, vm.lang);
-    }
+    vm.route.parent.params.subscribe(params => {
+      if (params['merchantId']) {
+        vm.merchantId = params['merchantId'];
+        if (vm.merchantId !== 'new') {
+          vm.changeLang(false, vm.lang);
+        }
+      }
+    });
   }
 
   ngAfterViewInit() {

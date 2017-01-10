@@ -18,7 +18,7 @@ import { MerchantBackendService } from '../../../core/services/merchants/merchan
   <div class="card card-block">
     <h5 class="card-title">{{merchant.name}}</h5>
     <p class="card-text">{{merchant.description}}</p>
-    <a class="btn btn-primary" [routerLink]="[merchant.id]" routerLinkActive="active">Edit</a>
+    <a class="btn btn-primary" [routerLink]="[merchant.id, 'general']" routerLinkActive="active">Edit</a>
     <a class="btn btn-primary" (click)="deleteMerchant(merchant.id)">Delete</a>
   </div>
 </div>

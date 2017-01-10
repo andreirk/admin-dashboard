@@ -3,7 +3,7 @@
  */
 import { Component, OnInit, Input } from '@angular/core';
 import { Pos } from '../../../commons/model/pos';
-import { PosService } from '../../../core/services/poses/pos.service';
+import { PosService } from '../../../core/services/pos/pos.service';
 import { Peer } from '../../../commons/model/order';
 
 @Component({

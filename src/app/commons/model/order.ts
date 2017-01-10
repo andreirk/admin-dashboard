@@ -49,7 +49,7 @@ export class DeliveryAddress {
   public area?: string;
   public city?: string;
   public country?: string;
-  public geoPoint: PointOnMap; // TODO
+  public geoPoint?: PointOnMap = new PointOnMap(); // TODO
   public note?: string;
   public state?: string;
   public zip?: string;
