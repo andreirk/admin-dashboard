@@ -4,7 +4,6 @@ import { DriverMapApiService } from './driverMap.service';
 import { DriverOnMap } from "./driverOnMap.model";
 
 
-
 const vehicleTypeIconMap = new Map([
   ['CAR', '\uf1b9'],
   ['SCOOTER', '\uf21c'],
@@ -27,17 +26,14 @@ const CITY_CENTER = {
 const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
 
 
-// interface DriverInfoWindow {
-//   lat: number;
-//   lon: number;
-//   driverId: number;
-//   capacity: string;
-//   alive: boolean;
-//   heading: number;
-//   icon ? : string;
-//   orderId ? : number;
-// }
+// center of ER-RIAD
+const CITY_CENTER = {
+  lat: 24.70,
+  lng: 46.71
+};
 
+// how often update markers on the map sec
+const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
 
 // get icon url for glyph
 function getIcon(glyph, color ? , size = 20) {
@@ -80,15 +76,9 @@ export class DriverMapComponent {
     this.loadLocations();
   }
 
+
   ngOnDestroy() {
     this.stopLoading();
-  }
-
-  ngAfterViewInit(){
-
-  }
-  ngAfterViewInit(){
-
   }
 
   loadLocations() {
@@ -131,7 +121,8 @@ export class DriverMapComponent {
       this.driverLocationSrvs.getDriver(driverMarker.driverId)
         .subscribe( (driverData: any) => {
             driverData.driverMarker = driverMarker;
-            this.driverLocationSrvs.confirmMarkerClick(driverData )
+
+            this.driverLocationSrvs.confirmMarkerClick(driverData)
 
           }
         )
@@ -155,6 +146,8 @@ export class DriverMapComponent {
     });
 
     return driversWithIcons;
-  }
+
+  };
+
 }
 

@@ -41,7 +41,6 @@ export class CustomMapDirective {
                   background-color: #48b5e9;
                   color: white;
                   margin: 1px;
-
                   border-radius: 2px 2px 0 0;
                   width: 100%;"
                   >
@@ -81,7 +80,6 @@ export class CustomMapDirective {
                     </tr>
                     <tr>
                       <td>Phone: </td><td>${account.phone || ''}</td>
-
                     </tr>                    
                     <tr>          
                       <td><b>Order:</b></td>
@@ -98,7 +96,6 @@ export class CustomMapDirective {
                   
               </div>`;
 
-
             this.gmapsApi.createMarker(
               {
                 position: {
@@ -114,7 +111,6 @@ export class CustomMapDirective {
           }
         )
     }
-
 
   ngOnInit(){
 
