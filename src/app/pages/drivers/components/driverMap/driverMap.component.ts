@@ -16,15 +16,6 @@ const vehicleStatusColorsMap = new Map([
   ['NOT_ALIVE_WITH_ORDER', '#DA3E18'], // red
 ]);
 
-// center of ER-RIAD
-const CITY_CENTER = {
-  lat: 24.70,
-  lng: 46.71
-};
-
-// how often update markers on the map sec
-const DRIVER_ON_MAP_UPDATE_INTERVAL = 10000;
-
 
 // center of ER-RIAD
 const CITY_CENTER = {
