@@ -2,9 +2,8 @@
 import {Merchant} from "../../commons/model/merchant";
 import {Product} from "../../commons/model/product";
 
-export interface AllMerchantData {
+export interface AllUserData {
 
-    merchants: Merchant[]
     products: Product[]
     // productOptions: ProductOption[]
 

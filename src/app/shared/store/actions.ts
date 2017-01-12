@@ -3,15 +3,16 @@
  */
 
 import { Action } from "@ngrx/store";
-import {AllMerchantData} from "../transferObjects/all-merchant-data";
+import { AllUserData } from "../transferObjects/all-user-data";
 
 
-export const LOAD_MERCHANTS_ACTION = 'LOAD_MERCHANTS_ACTION'
+export const LOAD_PRODUCTS_ACTION = 'LOAD_PRODUCTS_ACTION';
 
-export class LoadUserThreadsAction implements Action {
-  readonly type = LOAD_MERCHANTS_ACTION;
+export class productsLoadedAction implements Action {
 
-  constructor(public payload?: AllMerchantData){
+  readonly type = LOAD_PRODUCTS_ACTION;
+
+  constructor(public payload?: AllUserData) {
 
   }
 }
