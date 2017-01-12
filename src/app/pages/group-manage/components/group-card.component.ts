@@ -16,6 +16,7 @@ import { Group } from '../../../commons/model/group';
   template: `
 <div class="col-sm-10">
   <div class="card card-block">
+    <img class="card-img-top col-xs-4 col-sm-2" [src]="group.imageUrl | amImageResize"  [hidden]="!group.imageUrl">
     <h5 class="card-title">{{group.name}}</h5>
     <p class="card-text">{{group.description}}</p>
     <a class="btn btn-primary" [routerLink]="[group.id]" routerLinkActive="active">Edit</a>
