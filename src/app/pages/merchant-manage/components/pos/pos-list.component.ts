@@ -19,18 +19,18 @@ import { WorkTimeService } from "../../../../core/services/work-times/work-time.
   ],
   template: `
   <div class="column">
-     <div class="col-sm-3"> 
+     <div class="col-sm-3 card-block"> 
       <a class="btn btn-primary align-bottom" [routerLink]="['new']"
           routerLinkActive="active">New POS</a>
      </div>
      <div>
-       <am-pos-card *ngFor="let pos of posList;"
+       <am-pos-card *ngFor="let pos of posList | amOrderBy: 'name' : true"
               [pos]="pos"
               [lang]="lang"
               (onDelete)="deletePos($event)"></am-pos-card>
      </div>
    </div>
-`
+  `
 })
 
 export class PosListComponent implements OnInit {
