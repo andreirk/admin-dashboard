@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BackendApiService } from '../backend-api.service';
 import { Observable } from 'rxjs';
-import { OrderPage } from '../../../commons/model/order-page';
 import { OrderFilterParams } from '../../../pages/order-manage/model/order-filter-params';
 import { Order, OrderHistory } from '../../../commons/model/order';
+import { Page } from '../../../commons/model/page';
 
 @Injectable()
 export class OrderService {
@@ -16,7 +16,7 @@ export class OrderService {
     return this.backendApi.get(this.path + '/' + id, {});
   }
 
-  getPage(page: number, size: number, filterParams: OrderFilterParams): Observable<OrderPage> {
+  getPage(page: number, size: number, filterParams: OrderFilterParams): Observable<Page<Order>> {
     return this.backendApi.get(this.path, Object.assign({
       'page': String(page),
       'size': String(size),
@@ -35,7 +35,7 @@ export class OrderService {
   toSupportOrder(id: string, reason: string): Observable<Order> {
     let sr = {
       reason: reason
-    }
+    };
     return this.backendApi.put(this.path + '/' + id + '/to-support', sr, {}, 'en');
   }
 

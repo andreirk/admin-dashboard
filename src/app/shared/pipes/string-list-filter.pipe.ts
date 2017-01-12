@@ -1,8 +1,12 @@
+/*
+ * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+ */
+
 import {Pipe, PipeTransform} from '@angular/core';
 
 
 @Pipe({
-  name: 'StringListFilter',
+  name: 'amStringListFilter',
   pure: false
 })
 export class StringListFilter {

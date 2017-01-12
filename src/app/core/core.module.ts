@@ -14,6 +14,8 @@ import {UserService} from "./services/users/user.service";
 import { DriverService } from './services/drivers/driver.service';
 import { PosService } from './services/poses/pos.service';
 import { OrderListService } from '../pages/order-manage/services/order-list.service';
+import { GroupService } from './services/groups/group.service';
+import { GroupListService } from './services/groups/group-list.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -25,7 +27,9 @@ import { OrderListService } from '../pages/order-manage/services/order-list.serv
     OrderService,
     UserService,
     DriverService,
-    PosService
+    PosService,
+    GroupService,
+    GroupListService
   ]
 })
 export class CoreModule {

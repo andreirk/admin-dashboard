@@ -27,7 +27,9 @@ const routes: Routes = [
       { path: 'drivers', loadChildren: () => System.import('./drivers/drivers.module') },
       { path: 'login', loadChildren: () => System.import('./login/login.module') },
       { path: 'merchants',  loadChildren: () => System.import('./merchant-manage/merchant.module') },
-      { path: 'root-categories',  loadChildren: () => System.import('./root-category-manage/root-categories.module') },
+      { path: 'category-manage/categories',  loadChildren: () => System.import('./category-manage/categories.module') },
+      { path: 'category-manage/root-categories',  loadChildren: () => System.import('./root-category-manage/root-categories.module') },
+      { path: 'category-manage/groups',  loadChildren: () => System.import('./group-manage/groups.module') },
       { path: 'orders',  loadChildren: () => System.import('./order-manage/order.module') },
 
     ]
