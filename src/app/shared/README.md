@@ -16,11 +16,6 @@
 - *driver-location.pipe.ts* - pipe to display driver location as text
 - *suffix.pipe.ts* - cuts suffix from too long text 
  
- 
-### Shared data
-- *constants.ts* - contains shared constants (languages...)
-- *objects.ts* - contains shared classes
-
 ### Module files
 - *shared.module.ts* - aggregates all metadata about shared module, also exports
   shared components and CommonModule, FormsModule, NgaModule 
