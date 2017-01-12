@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+ */
+
 import {
   Component,
   Input
@@ -5,9 +9,9 @@ import {
 
 import { Observable } from 'rxjs/Rx';
 
-import { EmitterService } from '../../emitter.service';
-import { Category } from '../../../../commons/model/category';
-import { CategoryService } from '../../../../core/services/categories/category.service';
+import { EmitterService } from '../../product-manage/emitter.service';
+import { Category } from '../../../commons/model/category';
+import { CategoryService } from '../../../core/services/categories/category.service';
 
 @Component({
 
@@ -71,7 +75,7 @@ export class CategoryFormComponent {
   ngOnChanges(changes: any) {
     // Listen to the 'edit' emitted
     if (changes.language.currentValue) {
-      this.language = changes.language.currentValue.new
+      this.language = changes.language.currentValue
     }
 
     EmitterService.get(this.editId).subscribe((category: Category) => {

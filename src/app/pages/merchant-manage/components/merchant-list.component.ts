@@ -2,10 +2,11 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component } from '@angular/core';
-import { MerchantList } from '../../../commons/model/merchant-list';
 import { MerchantListService } from '../../../core/services/merchants/merchant-list.service';
 import { MerchantBackendService } from '../../../core/services/merchants/merchant-backend.service';
 import { BackendApiService } from '../../../core/services/backend-api.service';
+import { ViewList } from '../../../commons/model/view-list';
+import { Merchant } from '../../../commons/model/merchant';
 
 @Component({
   selector: 'am-merchant-list',
@@ -33,7 +34,7 @@ import { BackendApiService } from '../../../core/services/backend-api.service';
 `
 })
 export class MerchantListComponent {
-  private merchants: MerchantList = new MerchantList;
+  private merchants: ViewList<Merchant> = new ViewList<Merchant>();
   private lang: string = 'en';
   private pagesize = 5;
 
@@ -50,6 +51,6 @@ export class MerchantListComponent {
   }
 
   deleteMerchant(event) {
-    this.merchantListService.deleteOne(this.merchants, event.value);
+    this.merchants = this.merchantListService.deleteOne(this.merchants, event.value);
   }
 }

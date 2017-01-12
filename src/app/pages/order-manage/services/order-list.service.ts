@@ -3,37 +3,18 @@
  */
 import { Injectable } from '@angular/core';
 import { OrderService } from '../../../core/services/orders/order.service';
-import { OrderList } from '../model/order-list';
 import { Observable } from 'rxjs';
-import { OrderFilterParams } from '../model/order-filter-params';
+import { ViewListService } from '../../../core/services/view-list.service';
+import { Order } from '../../../commons/model/order';
+import { Page } from '../../../commons/model/page';
 
 @Injectable()
-export class OrderListService {
-  constructor(private orderService: OrderService) { }
-
-  update(orderList: OrderList, page: number, size: number, filterParams: OrderFilterParams): Observable<OrderList> {
-    return this.orderService.getPage(page, size, filterParams)
-      .map(orderPage => {
-          orderList.total = orderPage.total;
-          for (let i = 0; i < orderPage.content.length; ++i) {
-            orderList.content[i + page * size] = orderPage.content[i];
-          }
-          return orderList;
-        }
-      );
+export class OrderListService extends ViewListService<Order>{
+  constructor(private orderService: OrderService) {
+    super();
   }
 
-  loadMore(orderList: OrderList, size: number, filterParams: OrderFilterParams): Observable<OrderList> {
-    const vm = this;
-    let page =  orderList.content.length / size;
-    return vm.update(orderList, page, size, filterParams);
+  getPage(page: number, size: number, lang: string, filterParams?: any): Observable<Page<Order>> {
+    return this.orderService.getPage(page, size, filterParams);
   }
-
-  deleteOne(orderList: OrderList, orderId: string): OrderList {
-    let oldLength = orderList.content.length;
-    orderList.content = orderList.content.filter(order => order.id !== orderId);
-    orderList.total -= oldLength - orderList.content.length;
-    return orderList;
-  }
-
 }

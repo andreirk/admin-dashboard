@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+
 <div class="panel panel-default">
 
   <!--<div class="panel-body" style="padding:0px">-->
@@ -14,7 +18,7 @@
 <!--LangObj = {{ language | json }}-->
     <toyou-category-card
           class="category-card"
-          *ngFor="let category of categories | StringListFilter:queryElem.value; let i = index; "
+          *ngFor="let category of categories | amStringListFilter:queryElem.value; let i = index; "
           [editId]="editId"
           [listId]="listId"
           [category]="category"

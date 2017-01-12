@@ -4,11 +4,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Merchant } from '../../../commons/model/merchant';
-import { MerchantPage } from '../../../commons/model/merchant-page';
 import { BackendApiService } from '../backend-api.service';
 import { RootCategory } from '../../../commons/model/root-category';
 import { MerchantLinkableRootCategories } from '../../../shared/constants';
 import { RootCategoryService } from '../root-categories/root-category.service';
+import { Page } from '../../../commons/model/page';
 
 @Injectable()
 export class MerchantBackendService {
@@ -18,7 +18,7 @@ export class MerchantBackendService {
               private rootCategoryService: RootCategoryService) {
   }
 
-  getPage(page: number, size: number, lang: string): Observable<MerchantPage> {
+  getPage(page: number, size: number, lang: string): Observable<Page<Merchant>> {
     return this.backendApi.get(this.path, {
       'page': String(page),
       'size': String(size),

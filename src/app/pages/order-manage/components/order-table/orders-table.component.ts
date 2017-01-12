@@ -2,14 +2,13 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { OrderListService } from '../../services/order-list.service';
-import { OrderList } from '../../model/order-list';
 import { OrderFilterParams } from '../../model/order-filter-params';
 import * as _ from 'lodash';
-import { CommonOrderStatus, OrderStatus, DeliveryStatus } from '../../../../shared/types';
 import { OrderFilterParamsForm } from '../../model/order-filter-params-form';
 import { OrderFilteringService } from '../../services/order-filtering.service';
+import { ViewList } from '../../../../commons/model/view-list';
+import { Order } from '../../../../commons/model/order';
 
 @Component({
   selector: 'am-order-list',
@@ -19,7 +18,7 @@ import { OrderFilteringService } from '../../services/order-filtering.service';
 export class OrdersTableComponent implements OnInit{
   @ViewChild('ordersFilterForm') form;
 
-  private orders: OrderList = new OrderList();
+  private orders: ViewList<Order> = new ViewList<Order>();
   private pageSize = 10;
 
   private filterParamsForm: OrderFilterParamsForm = new OrderFilterParamsForm();
@@ -43,7 +42,7 @@ export class OrdersTableComponent implements OnInit{
         vm.filterParams = vm.orderFilteringService.transformFilterParams(vm.filterParamsForm);
 
         if (!_.isEqual(vm.filterParams, vm.filterParamsOriginal)) {
-          vm.orders = new OrderList();
+          vm.orders = new ViewList<Order>();
           vm.loadMoreOrders();
           vm.filterParamsOriginal = _.cloneDeep(vm.filterParams);
         }
@@ -52,7 +51,7 @@ export class OrdersTableComponent implements OnInit{
 
   loadMoreOrders() {
     const vm = this;
-    vm.orderListService.loadMore(vm.orders, vm.pageSize, vm.filterParams)
+    vm.orderListService.loadMore(vm.orders, vm.pageSize, '', vm.filterParams)
       .subscribe(orderList => {
         vm.orders = orderList;
       });

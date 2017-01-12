@@ -18,6 +18,7 @@ import { DefaultValuePipe } from './pipes/default-value.pipe';
 import { DriverLocationPipe } from './pipes/driver-location.pipe';
 import { OrderStatusPipe } from './pipes/order-status.pipe';
 import { OrderStatusOptionsDirective } from './directives/order-status-options.directive';
+import { StringListFilter } from './pipes/string-list-filter.pipe';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
@@ -25,13 +26,13 @@ import { OrderStatusOptionsDirective } from './directives/order-status-options.d
     UploadImageComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

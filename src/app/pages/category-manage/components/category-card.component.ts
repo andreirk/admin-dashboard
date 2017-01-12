@@ -1,3 +1,7 @@
+/*
+ * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+ */
+
 import {
   Component,
   Input,
@@ -5,9 +9,9 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { EmitterService } from '../../emitter.service'
-import { Category } from '../../../../commons/model/category';
-import { CategoryService } from '../../../../core/services/categories/category.service';
+import { EmitterService } from '../../product-manage/emitter.service'
+import { Category } from '../../../commons/model/category';
+import { CategoryService } from '../../../core/services/categories/category.service';
 
 @Component({
   selector: 'toyou-category-card',

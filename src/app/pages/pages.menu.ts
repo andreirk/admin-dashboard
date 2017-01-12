@@ -34,17 +34,7 @@ export const PAGES_MENU = [
                 title: 'Products'
               }
             },
-          },
-          {
-            path: 'catigories',
-            data: {
-              menu: {
-                title: 'Categories',
-                selected: false,
-                expanded: false
-                }
-              }
-          },
+          }
         ]
       },
 
@@ -62,16 +52,51 @@ export const PAGES_MENU = [
       },
 
       {
-        path: 'root-categories',  // path for our page
+        path: 'category-manage',  // path for our page
         data: { // custom menu declaration
           menu: {
-            title: 'Root Categories', // menu title
+            title: 'Category management', // menu title
             icon: 'ion-android-home', // menu icon
+            //  pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
             expanded: false,
-            order: 100
+            order: 101
           }
-        }
+        },
+        children: [
+          {
+            path: 'categories',
+            data: {
+              menu: {
+                title: 'Categories',
+                selected: false,
+                expanded: false
+              }
+            }
+          },
+          {
+            path: 'root-categories',  // path for our page
+            data: { // custom menu declaration
+              menu: {
+                title: 'Root Categories', // menu title
+                selected: false,
+                expanded: false,
+                order: 100
+              }
+            }
+          },
+          {
+            path: 'groups',  // path for our page
+            data: { // custom menu declaration
+              menu: {
+                title: 'Groups', // menu title
+                selected: false,
+                expanded: false,
+                order: 100
+              }
+            }
+          }
+        ]
       },
 
       {
