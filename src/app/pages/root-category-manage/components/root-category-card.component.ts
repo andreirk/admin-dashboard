@@ -15,6 +15,7 @@ import { RootCategory } from '../../../commons/model/root-category';
   template: `
 <div class="col-sm-10">
   <div class="card card-block">
+    <img class="card-img-top col-xs-4 col-sm-2" [src]="rootCategory.imageUrl | amImageResize" [hidden]="!rootCategory.imageUrl">
     <h5 class="card-title">{{rootCategory.name}}</h5>
     <p class="card-text">{{rootCategory.description}}</p>
     <a class="btn btn-primary" [routerLink]="[rootCategory.id]" routerLinkActive="active">Edit</a>
