@@ -9,6 +9,7 @@ import { RootCategory } from '../../../commons/model/root-category';
 import { MerchantLinkableRootCategories } from '../../../shared/constants';
 import { RootCategoryService } from '../root-categories/root-category.service';
 import { Page } from '../../../commons/model/page';
+import {Pos} from "../../../commons/model/pos";
 
 @Injectable()
 export class MerchantBackendService {
@@ -75,6 +76,14 @@ export class MerchantBackendService {
       observables.push(this.rootCategoryService.unlinkMerchant(id, merchantId));
     });
     return Observable.combineLatest(observables, () => linkedRootCategoryIds);
+  }
+
+  getMerchantsPos(merchantId: string, lang: string): Observable<Pos[]> {
+    return this.backendApi.get(this.path + '/' + merchantId + '/pos', {}, lang);
+  }
+
+  createMerchantsPos(merchantId: string, pos: Pos, lang: string): Observable<any> {
+    return this.backendApi.post(this.path + '/' + merchantId + '/pos', pos, {}, lang);
   }
 
 }

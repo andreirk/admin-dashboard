@@ -1,0 +1,87 @@
+<!--
+  ~ Copyright © 2017 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<form #posForm="ngForm" class="merchant-details container">
+
+  <div class="row">
+    <am-select-lang [lang]="lang"
+                    [wasModified]="wasModified"
+                    (onChange)="onChangeLang($event)"></am-select-lang>
+  </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6">
+        Pos ID: {{pos.id}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label class="label">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="pos.name" [ngStyle]="{'direction': langDirection}">
+      </div>
+      <div class="form-group col-sm-3">
+        <label class="label">ZIP code</label>
+        <input type="text" class="form-control" name="zip" [(ngModel)]="pos.address.zip">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label class="label">Description</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="pos.description" [ngStyle]="{'direction': langDirection}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label class="label">Address line 1</label>
+        <input type="text" class="form-control" name="line1" [(ngModel)]="pos.address.addressLine1" [ngStyle]="{'direction': langDirection}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label class="label">Address line 2</label>
+        <input type="text" class="form-control" name="line2" [(ngModel)]="pos.address.addressLine2" [ngStyle]="{'direction': langDirection}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label class="label">Area</label>
+        <input type="text" class="form-control" name="area" [(ngModel)]="pos.address.area" [ngStyle]="{'direction': langDirection}">
+      </div>
+      <div class="form-group col-sm-3">
+        <label class="label">City</label>
+        <input type="text" class="form-control" name="city" [(ngModel)]="pos.address.city" [ngStyle]="{'direction': langDirection}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label class="label">State</label>
+        <input type="text" class="form-control" name="state" [(ngModel)]="pos.address.state" [ngStyle]="{'direction': langDirection}">
+      </div>
+      <div class="form-group col-sm-3">
+        <label class="label">Country</label>
+        <input type="text" class="form-control" name="country" [(ngModel)]="pos.address.country" [ngStyle]="{'direction': langDirection}">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label class="label">Lat</label>
+        <input type="text" class="form-control" name="lat" [(ngModel)]="pos.address.geoPoint.lat">
+      </div>
+      <div class="form-group col-sm-3">
+        <label class="label">Lon</label>
+        <input type="text" class="form-control" name="lon" [(ngModel)]="pos.address.geoPoint.lon">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
+      </div>
+    </div>
+</form>

@@ -65,3 +65,8 @@ export enum OrderAction {
   CANCEL = <any> 'CANCEL',
   TO_SUPPORT = <any> 'TO_SUPPORT'
 }
+
+export enum WorkTimeType {
+  REGULAR = <any> 'REGULAR',
+  RAMADAN = <any> 'RAMADAN'
+}
