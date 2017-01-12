@@ -1,16 +1,15 @@
-
-import {Merchant} from "../../commons/model/merchant";
+import { Merchant } from "../../commons/model/merchant";
+import { Product } from "../../commons/model/product";
 
 export interface  StoreData {
 
-  merchants: {[key:number]: Merchant};
-
-  products: {[key:number]: Product};
+  products: {
+    [key: number]: Product
+  };
 }
 
-export const INITIAL_STORE_DATA : StoreData = {
+export const INITIAL_STORE_DATA: StoreData = {
 
-  merchants: {},
   products: {}
 
-}
+};

@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { StoreModule, Action } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -13,24 +15,49 @@ import { routing } from './app.routing';
 
 // App is our top level component
 import { App } from './app.component';
-import { AppState, InternalStateType } from './app.service';
+// import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LOAD_PRODUCTS_ACTION, productsLoadedAction } from "./shared/store/actions";
+import { INITIAL_APP_STATE, AppState } from "./shared/store/app-state";
 
 // Application wide providers
 const APP_PROVIDERS = [
-  AppState,
+  // AppState,
   GlobalState
 ];
 
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
+// type StoreType = {
+//   state: InternalStateType,
+//   restoreInputValues: () => void,
+//   disposeOldHosts: () => void
+// };
+
+function storeReducer(state: AppState = INITIAL_APP_STATE, action: Action): AppState {
+  switch (action.type) {
+    case LOAD_PRODUCTS_ACTION:
+      return handleLoadProductsAction(state, action);
+    default:
+      return state;
+  }
+
+}
+
+function handleLoadProductsAction(state: AppState,
+                                  action: productsLoadedAction): AppState {
+
+  const userData = action.payload;
+  const newState: AppState = Object.assign({}, state);
+
+  newState.storeData = {
+    products: _.keyBy(action.payload.products, 'id'),
+  };
+
+  return newState;
+}
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -50,7 +77,9 @@ type StoreType = {
     PagesModule,
     CoreModule,
     NgbModule.forRoot(),
-    routing
+    routing,
+    StoreModule.provideStore(storeReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -60,40 +89,46 @@ type StoreType = {
 
 export class AppModule {
 
-  constructor(public appRef: ApplicationRef, public appState: AppState) {
+  constructor(public appRef: ApplicationRef) {
   }
 
-  hmrOnInit(store: StoreType) {
-    if (!store || !store.state) return;
-    console.log('HMR store', JSON.stringify(store, null, 2));
-    // set state
-    this.appState._state = store.state;
-    // set input values
-    if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
-      setTimeout(restoreInputValues);
-    }
-    this.appRef.tick();
-    delete store.state;
-    delete store.restoreInputValues;
-  }
 
-  hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // save state
-    const state = this.appState._state;
-    store.state = state;
-    // recreate root elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues = createInputTransfer();
-    // remove styles
-    removeNgStyles();
-  }
+  /**
+   * comment out this native ui framework store managment code for possible future usage
+   */
 
-  hmrAfterDestroy(store: StoreType) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
+  // hmrOnInit(store: StoreType) {
+  //   if (!store || !store.state) return;
+  //   console.log('HMR store', JSON.stringify(store, null, 2));
+  //   // set state
+  //   this.appState._state = store.state;
+  //   // set input values
+  //   if ('restoreInputValues' in store) {
+  //     let restoreInputValues = store.restoreInputValues;
+  //     setTimeout(restoreInputValues);
+  //   }
+  //   this.appRef.tick();
+  //   delete store.state;
+  //   delete store.restoreInputValues;
+  // }
+  //
+  // hmrOnDestroy(store: StoreType) {
+  //   const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
+  //   // save state
+  //   const state = this.appState._state;
+  //   store.state = state;
+  //   // recreate root elements
+  //   store.disposeOldHosts = createNewHosts(cmpLocation);
+  //   // save input values
+  //   store.restoreInputValues = createInputTransfer();
+  //   // remove styles
+  //   removeNgStyles();
+  // }
+  //
+  // hmrAfterDestroy(store: StoreType) {
+  //   // display new elements
+  //   store.disposeOldHosts();
+  //   delete store.disposeOldHosts;
+  // }
+
 }
