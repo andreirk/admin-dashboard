@@ -14,8 +14,10 @@ import { productsLoadedAction } from "../../shared/store/actions";
 
 @Component({
   selector: 'am-products-section',
-  templateUrl: './thread-section.component.html',
-  styleUrls: ['./thread-section.component.css']
+  template: `
+            <router-outlet></router-outlet>
+`,
+
 })
 export class ProductSectionComponent implements OnInit {
 
