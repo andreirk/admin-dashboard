@@ -7,7 +7,7 @@ import {OrderAction, OrderStatus} from "../../../shared/types";
 @Component({
   selector: 'am-order-action-select',
   styleUrls: ['./style'],
-  templateUrl: `
+  template: `
         <div class="dropdown">
           <button>Order Actions</button>
           <ul class="dropdown-menu">

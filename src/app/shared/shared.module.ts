@@ -20,6 +20,7 @@ import { OrderStatusPipe } from './pipes/order-status.pipe';
 import { OrderStatusOptionsDirective } from './directives/order-status-options.directive';
 import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
+import { OrderByPipe } from "./pipes/order-by.pipe";
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
@@ -27,13 +28,13 @@ import { ImageResizePipe } from './pipes/image-resize.pipe';
     UploadImageComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, ImageResizePipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, ImageResizePipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

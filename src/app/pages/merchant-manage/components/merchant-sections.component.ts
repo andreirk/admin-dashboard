@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
       <a class="nav-link" routerLink="pos" routerLinkActive="active">Points of sales</a>
     </li>
   </ul>
-  <div style="margin-top: 12px">
+  <div class="card-block">
     <router-outlet></router-outlet>
   </div>
 `
