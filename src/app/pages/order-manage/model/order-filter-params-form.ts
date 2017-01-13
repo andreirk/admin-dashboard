@@ -6,6 +6,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class OrderFilterParamsForm {
   public orderStatuses: CommonOrderStatus[] = [];
+  public orderPersons: string[] = [];
   public createdFrom: NgbDateStruct;
   public createdTo: NgbDateStruct;
 

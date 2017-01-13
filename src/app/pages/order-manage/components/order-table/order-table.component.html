@@ -26,9 +26,15 @@
         </div>
       </div>
 
-      <div class="form-group col-sm-4">
-        <label>Status:</label>
-        <am-order-status-multiselect name="status" [(ngModel)]="filterParamsForm.orderStatuses"></am-order-status-multiselect>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label>Status:</label>
+          <am-order-status-multiselect name="status" [(ngModel)]="filterParamsForm.orderStatuses"></am-order-status-multiselect>
+        </div>
+        <div class="form-group">
+          <label>Person:</label>
+          <am-order-person-multiselect name="person" [(ngModel)]="filterParamsForm.orderPersons"></am-order-person-multiselect>
+        </div>
       </div>
     </div>
 

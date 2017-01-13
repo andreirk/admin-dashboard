@@ -17,6 +17,8 @@ export class DriverProfile {
   public carType: string;
   public licenseNumber: string;
   public maxPaymentAmounts: MaxPaymentAmount[];
+  public phone: string = '';
+  public email: string = '';
 
   constructor() {
   }

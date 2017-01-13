@@ -21,17 +21,20 @@ import { OrderStatusOptionsDirective } from './directives/order-status-options.d
 import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from "./pipes/order-by.pipe";
+import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
   declarations: [SelectLangComponent,
     UploadImageComponent,
+    MultiselectDropdownComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
+    MultiselectDropdownComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
