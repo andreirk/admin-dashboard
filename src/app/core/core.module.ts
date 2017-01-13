@@ -16,6 +16,7 @@ import { PosService } from './services/pos/pos.service';
 import { OrderListService } from '../pages/order-manage/services/order-list.service';
 import { GroupService } from './services/groups/group.service';
 import { GroupListService } from './services/groups/group-list.service';
+import { WorkTimeService } from './services/work-times/work-time.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -29,7 +30,8 @@ import { GroupListService } from './services/groups/group-list.service';
     DriverService,
     PosService,
     GroupService,
-    GroupListService
+    GroupListService,
+    WorkTimeService
   ]
 })
 export class CoreModule {
