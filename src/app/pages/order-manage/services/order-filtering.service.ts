@@ -4,8 +4,17 @@
 import { OrderFilterParamsForm } from '../model/order-filter-params-form';
 import { OrderFilterParams } from '../model/order-filter-params';
 import { OrderStatus, DeliveryStatus } from '../../../shared/types';
+import { Observable } from 'rxjs';
+import { OrderFilterPersons } from '../model/order-filter-persons';
+import { UserService } from '../../../core/services/users/user.service';
+import { DriverService } from '../../../core/services/drivers/driver.service';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class OrderFilteringService {
+  constructor(private userService: UserService,
+      private driverService: DriverService) { }
+
   transformFilterParams(filterParamsForm: OrderFilterParamsForm): OrderFilterParams {
     let filterParams: OrderFilterParams = new OrderFilterParams();
 
@@ -32,7 +41,33 @@ export class OrderFilteringService {
       });
       if (filterParams.deliveryStatusList.length == 0) delete filterParams.deliveryStatusList;
     }
+
+    if (filterParamsForm.orderPersons) {
+      filterParamsForm.orderPersons.forEach(personId => {
+          if (personId.startsWith('usr')) {
+            filterParams.peerId = personId.substring(3);
+          } else if (personId.startsWith('drv')) {
+            filterParams.driverId = parseInt(personId.substring(3), 10);
+          }
+        }
+      );
+    }
+
     return filterParams;
+  }
+
+  getPersons(searchText: string) : Observable<OrderFilterPersons> {
+    const vm = this;
+    return Observable.combineLatest(
+      vm.userService.getPage(0, 20, searchText),
+      vm.driverService.getProfilesPage(0, 20, { searchPattern: searchText }),
+      (pageUser, pageDriver) => {
+        return <OrderFilterPersons> {
+          users: pageUser,
+          drivers: pageDriver
+        }
+      }
+    );
   }
 
 }

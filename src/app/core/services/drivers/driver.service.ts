@@ -8,6 +8,7 @@ import { DriverProfile } from '../../../commons/model/driver-profile';
 import { DriverAccount } from '../../../commons/model/driver-account';
 import { Driver } from '../../../commons/model/driver';
 import { DriverLocation } from '../../../commons/model/driver-location';
+import { Page } from '../../../commons/model/page';
 
 @Injectable()
 export class DriverService {
@@ -43,6 +44,15 @@ export class DriverService {
       .catch((err) => {
         return Observable.of(err.statusText);
       });
+  }
+
+  getProfilesPage(page: number, size: number, filterParams: any): Observable<Page<DriverProfile>> {
+    return this.backendApi.get(this.path + '/profiles',
+      Object.assign({
+        'page': String(page),
+        'size': String(size)
+      }, filterParams)
+    );
   }
 
 }

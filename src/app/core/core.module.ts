@@ -10,10 +10,9 @@ import { RootCategoryService } from './services/root-categories/root-category.se
 import { CategoryService } from './services/categories/category.service';
 import { ProductService } from './services/products/products-service';
 import { OrderService } from './services/orders/order.service';
-import {UserService} from "./services/users/user.service";
+import { UserService } from './services/users/user.service';
 import { DriverService } from './services/drivers/driver.service';
 import { PosService } from './services/pos/pos.service';
-import { OrderListService } from '../pages/order-manage/services/order-list.service';
 import { GroupService } from './services/groups/group.service';
 import { GroupListService } from './services/groups/group-list.service';
 import { WorkTimeService } from './services/work-times/work-time.service';

@@ -8,6 +8,8 @@ export class OrderFilterParams {
   public toDate?: number;
   public statusList?: OrderStatus[];
   public deliveryStatusList?: DeliveryStatus[];
+  public peerId?: string;
+  public driverId?: number;
 
   constructor() {
   }

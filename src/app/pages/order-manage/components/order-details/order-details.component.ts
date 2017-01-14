@@ -10,8 +10,8 @@ import { User } from '../../../../commons/model/user';
 import { Driver } from '../../../../commons/model/driver';
 import { DriverService } from '../../../../core/services/drivers/driver.service';
 import { DriverLocation } from '../../../../commons/model/driver-location';
-import {OrderActionEvent} from "../order-action-select.component";
-import {OrderAction} from "../../../../shared/types";
+import { OrderActionEvent } from '../order-action-select.component';
+import { OrderAction } from '../../../../shared/types';
 
 @Component({
   selector: 'am-order-details',
