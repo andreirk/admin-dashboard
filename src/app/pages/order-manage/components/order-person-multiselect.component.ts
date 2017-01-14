@@ -39,8 +39,8 @@ export class OrderPersonMultiselectComponent implements ControlValueAccessor {
 
   searchChange(event) {
     const vm = this;
-    vm.orderPersonOptions = [];
     vm.filteringService.getPersons(event.query).subscribe(persons => {
+      vm.orderPersonOptions = [];
       if (persons.users.total > 0) {
         vm.orderPersonOptions.push(<IMultiSelectOption> { name: 'Customers and peers' });
       }
