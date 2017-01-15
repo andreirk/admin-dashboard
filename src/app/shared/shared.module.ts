@@ -20,7 +20,7 @@ import { OrderStatusPipe } from './pipes/order-status.pipe';
 import { OrderStatusOptionsDirective } from './directives/order-status-options.directive';
 import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
-import { OrderByPipe } from "./pipes/order-by.pipe";
+import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 
 @NgModule({
