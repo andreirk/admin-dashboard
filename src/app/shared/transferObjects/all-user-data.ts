@@ -1,10 +1,11 @@
-
-import {Merchant} from "../../commons/model/merchant";
-import {Product} from "../../commons/model/product";
+import { Merchant } from "../../commons/model/merchant";
+import { Product, ProductsRootObject } from "../../commons/model/product";
 
 export interface AllUserData {
 
-    products: Product[]
+    content: Product[],
+    total: number
+
     // productOptions: ProductOption[]
 
 }

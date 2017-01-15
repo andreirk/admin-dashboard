@@ -9,21 +9,23 @@ import { Product } from '../../../commons/model/product';
 @Injectable()
 export class ProductService {
     path: string = '/catalog/mgmt/v1/products'; // no products yet
+    lang = 'en'
 
     constructor(private api: ApiService){
     }
 
-    lang = 'en'
+
 
     createProduct(product) {
-        let headers = new Headers({
-        'Content-Type': 'application/json'
-        });
-        return this.api.post(this.path, product, {}, this.lang )
+      return this.api.post(this.path, product, {}, this.lang )
+    }
+
+    getProducts(currency, options = {}) {
+      return this.api.get(this.path, options, this.lang, currency)
     }
 
     getPage(page: number, size: number, lang: string, currency: Currency, filterParams: any): Observable<Page<Product>> {
-        return this.api.get(this.path, Object.assign({ currency: currency }, filterParams) , this.lang)
+      return this.api.get(this.path, Object.assign({ currency: currency }, filterParams) , this.lang)
     }
 
     deleteProduct(product) {
