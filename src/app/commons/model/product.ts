@@ -36,7 +36,7 @@ export interface Product {
   id: string;
   imageUrl: string;
   marketingAttribute: string;
-  mediaResources: MediaResources;
+  // mediaResources: MediaResources;
   merchantId: string;
   name: string;
   packageType: string;
@@ -68,8 +68,8 @@ export interface Content {
   upc: string;
 }
 
-export interface RootObject {
-  content: Content[];
+export interface ProductsRootObject {
+  content: Product[];
   total: number;
 }
 

@@ -10,10 +10,14 @@ import { SharedModule } from "../../shared/shared.module";
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect/src/multiselect-dropdown';
 import { RootCategoryMultiselectComponent } from './components/root-category-mutliselect.component';
 import { MerchantViewModelService } from './services/merchant-view-model.service';
-import {PosCardComponent} from "./components/pos/pos-card.component";
-import {PosListComponent} from "./components/pos/pos-list.component";
-import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
-import {MerchantSectionsComponent} from "./components/merchant-sections.component";
+import { PosCardComponent } from "./components/pos/pos-card.component";
+import { PosListComponent } from "./components/pos/pos-list.component";
+import { PosDetailsComponent } from "./components/pos/pos-details/pos-details.component";
+import { MerchantSectionsComponent } from "./components/merchant-sections.component";
+import { ProductListComponent, ProductCardComponent } from "./components/products/product-list.component";
+import { ProductDetailComponent } from "./components/products/product-details.component";
+
+
 
 @NgModule({
   imports: [
@@ -30,6 +34,9 @@ import {MerchantSectionsComponent} from "./components/merchant-sections.componen
     PosCardComponent,
     PosDetailsComponent,
     MerchantSectionsComponent,
+    ProductListComponent,
+    ProductCardComponent,
+    ProductDetailComponent
   ],
   providers: [
     MerchantViewModelService
