@@ -7,6 +7,7 @@ export class User {
   public firstName: string;
   public lastName: string;
   public phoneNumber: string;
+  public email: string;
   public gender: string;
   public avatar: string;
   public creationDate: string;

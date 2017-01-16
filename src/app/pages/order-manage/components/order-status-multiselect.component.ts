@@ -9,10 +9,10 @@ import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-mul
 @Component({
   selector: 'am-order-status-multiselect',
   template: `
-  <ss-multiselect-dropdown *ngIf="exist"
+  <am-multiselect-dropdown *ngIf="exist"
       [options]="orderStatusOptions"
       [settings]="settings"
-      [(ngModel)]="selectedOptions"></ss-multiselect-dropdown>`,
+      [(ngModel)]="selectedOptions"></am-multiselect-dropdown>`,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => OrderStatusMultiselectComponent),
@@ -21,7 +21,7 @@ import { IMultiSelectOption, IMultiSelectSettings } from 'angular-2-dropdown-mul
 
 })
 export class OrderStatusMultiselectComponent implements ControlValueAccessor {
-  @Input() _selectedOptions: string[];
+  @Input() _selectedOptions: IMultiSelectOption[];
   private orderStatusOptions: IMultiSelectOption[] = [];
   private settings: IMultiSelectSettings = <IMultiSelectSettings> {
     dynamicTitleMaxItems: 1

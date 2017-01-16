@@ -6,6 +6,6 @@ import { User } from '../../../commons/model/user';
 import { DriverProfile } from '../../../commons/model/driver-profile';
 
 export class OrderFilterPersons {
-  users: Page<User>;
-  drivers: Page<DriverProfile>;
+  users: Page<User> = new Page<User>();
+  drivers: Page<DriverProfile> = new Page<DriverProfile>();
 }

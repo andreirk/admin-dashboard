@@ -31,23 +31,23 @@ export class OrderFilteringService {
     }
 
     if (filterParamsForm.orderStatuses) {
-      filterParams.statusList = <OrderStatus[]> filterParamsForm.orderStatuses.filter(status => {
-        return OrderStatus[status] === String(status);
-      });
+      filterParams.statusList = <OrderStatus[]> filterParamsForm.orderStatuses
+        .map(statusOption => statusOption.id)
+        .filter(status => OrderStatus[status] === String(status));
       if (filterParams.statusList.length == 0) delete filterParams.statusList;
 
-      filterParams.deliveryStatusList = <DeliveryStatus[]> filterParamsForm.orderStatuses.filter(status => {
-        return DeliveryStatus[status] === String(status);
-      });
+      filterParams.deliveryStatusList = <DeliveryStatus[]> filterParamsForm.orderStatuses
+        .map(statusOption => statusOption.id)
+        .filter(status => DeliveryStatus[status] === String(status));
       if (filterParams.deliveryStatusList.length == 0) delete filterParams.deliveryStatusList;
     }
 
     if (filterParamsForm.orderPersons) {
-      filterParamsForm.orderPersons.forEach(personId => {
-          if (personId.startsWith('usr')) {
-            filterParams.peerId = personId.substring(3);
-          } else if (personId.startsWith('drv')) {
-            filterParams.driverId = parseInt(personId.substring(3), 10);
+      filterParamsForm.orderPersons.forEach(personOption => {
+          if (personOption.group === 'usr') {
+            filterParams.peerId = personOption.id;
+          } else if (personOption.group === 'drv') {
+            filterParams.driverId = parseInt(personOption.id, 10);
           }
         }
       );
@@ -58,9 +58,12 @@ export class OrderFilteringService {
 
   getPersons(searchText: string) : Observable<OrderFilterPersons> {
     const vm = this;
+    if (!searchText || searchText === '') {
+      return Observable.of(new OrderFilterPersons());
+    }
     return Observable.combineLatest(
-      vm.userService.getPage(0, 20, searchText),
-      vm.driverService.getProfilesPage(0, 20, { searchPattern: searchText }),
+      vm.userService.getPage(0, 10, searchText),
+      vm.driverService.getProfilesPage(0, 10, { searchPattern: searchText }),
       (pageUser, pageDriver) => {
         return <OrderFilterPersons> {
           users: pageUser,
