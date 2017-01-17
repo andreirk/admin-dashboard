@@ -184,6 +184,7 @@ export class MultiselectDropdownComponent implements OnInit {
 
   clearSearch() {
     this.searchFilterText = '';
+    this.searchChange();
   }
 
   toggleDropdown() {
