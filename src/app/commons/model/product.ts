@@ -3,10 +3,10 @@
  */
 
 
-export interface Attributes {
-  brand: string;
-  description: string;
-  name: string;
+export class Attributes {
+  brand: string = '';
+  description: string = '';
+  name: string = '';
 }
 
 export interface MediaResource {
@@ -16,10 +16,12 @@ export interface MediaResource {
   url: string;
 }
 
-export interface Price {
-  currency: string;
-  discountedPrice: number;
-  price: number;
+
+
+export class Price {
+  currency: string = '';
+  discountedPrice: number = 0;
+  price: number = 0;
 }
 
 export interface MediaResources {
@@ -27,21 +29,21 @@ export interface MediaResources {
   videos: string[];
 }
 
-export interface Product {
-  available: boolean;
-  brand: string;
-  defaultProductImageUrl: string;
-  description: string;
-  discountedPrice: number;
-  id: string;
-  imageUrl: string;
-  marketingAttribute: string;
-  // mediaResources: MediaResources;
-  merchantId: string;
-  name: string;
-  packageType: string;
-  price: number;
-}
+// export interface Product {
+//   available: boolean;
+//   brand: string;
+//   defaultProductImageUrl: string;
+//   description: string;
+//   discountedPrice: number;
+//   id: string;
+//   imageUrl: string;
+//   marketingAttribute: MarketingAttribute;
+//   // mediaResources: MediaResources;
+//   merchantId: string;
+//   name: string;
+//   packageType: string;
+//   price: Price;
+// }
 
 export interface Tag {
   description: string;
@@ -51,21 +53,27 @@ export interface Tag {
   products: Product[];
 }
 
-export interface Content {
-  attributes: Attributes;
-  available: boolean;
-  categoryId: string;
-  groupIds: string[];
-  id: string;
-  imageUrl: string;
-  marketingAttribute: string;
-  mediaResources: MediaResource[];
-  merchantId: string;
-  packageType: string;
-  price: Price;
-  tagValues: string[];
-  tags: Tag[];
-  upc: string;
+export class Product {
+  attributes: Attributes = new Attributes();
+  available: boolean = true;
+  categoryId: string = '';
+  groupIds: string[] = [];
+  id: string = '';
+  description: string = '';
+  imageUrl: string = '';
+  discountedPrice: number;
+  marketingAttribute: string = '';
+  mediaResources: MediaResource[] = [];
+  merchantId: string = '';
+  name: string;
+  packageType: string = '';
+  price: Price = new Price();
+  tagValues: string[] = [];
+  tags: Tag[] = [];
+  upc: string = '';
+  defaultProductImageUrl: string;
+
+  constructor(){}
 }
 
 export interface ProductsRootObject {
@@ -73,4 +81,14 @@ export interface ProductsRootObject {
   total: number;
 }
 
+export type MarketingAttribute = 'Promo'| 'Gift'| 'Tranding' | '';
+
+
+export interface ProductOption {
+  name: string
+}
+
+export interface ProductGroup {
+  name: string
+}
 

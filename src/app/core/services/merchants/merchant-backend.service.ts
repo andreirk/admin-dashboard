@@ -10,6 +10,7 @@ import { MerchantLinkableRootCategories } from '../../../shared/constants';
 import { RootCategoryService } from '../root-categories/root-category.service';
 import { Page } from '../../../commons/model/page';
 import {Pos} from "../../../commons/model/pos";
+import { Product } from "../../../commons/model/product";
 
 @Injectable()
 export class MerchantBackendService {
@@ -84,6 +85,10 @@ export class MerchantBackendService {
 
   createMerchantsPos(merchantId: string, pos: Pos, lang: string): Observable<any> {
     return this.backendApi.post(this.path + '/' + merchantId + '/pos', pos, {}, lang);
+  }
+
+  createMerchantsProduct(merchantId: string, lang: string): Observable<any> {
+    return this.backendApi.post(this.path + '/' + merchantId + '/products', null, {}, lang);
   }
 
 }

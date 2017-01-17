@@ -15,12 +15,9 @@ export class BackendApiService {
   constructor(private http: Http) {
   }
 
-  get(path: string, params: Object, lang?: string, currency?: string): Observable<any> {
+  get(path: string, params: Object, lang?: string): Observable<any> {
     if (lang) {
       this.headers.set('Accept-Language', lang);
-    }
-    if(currency) {
-      this.headers.set('currency', currency);
     }
 
     return this.http.get(path, this.getRequestOptions(params, lang))
@@ -30,14 +27,15 @@ export class BackendApiService {
   }
 
   post(path: string, body: Object, params: Object, lang?: string): Observable<any> {
-    return this.http.post(path, body, this.getRequestOptions(params, lang))
+    return this.http.post(path, body || '', this.getRequestOptions(params, lang))
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
   }
 
   put(path: string, body: Object, params: Object, lang: string): Observable<any> {
-    return this.http.put(path, body, this.getRequestOptions(params, lang))
+    const options = this.getRequestOptions(params, lang);
+    return this.http.put(path, body, options)
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
@@ -48,7 +46,6 @@ export class BackendApiService {
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
-      .map(json => Object.assign({},json,{id:path}))
   }
 
   private getJson(resp: Response){

@@ -5,7 +5,6 @@ export interface  StoreData {
 
   products: {
       content: Product[]
-
       total: number
   };
 

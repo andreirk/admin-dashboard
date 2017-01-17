@@ -16,7 +16,6 @@ export function storeData(state: StoreData = INITIAL_STORE_DATA, action: Action)
       return handleLoadProductsAction(state, action);
     case DELETE_PRODUCT_SUCCESS_ACTION:
 
-
       return handleProductDeleteSuccessAction(state, action);
 
     default:
@@ -41,7 +40,7 @@ function handleProductDeleteSuccessAction(state: StoreData, action: ProductDelet
   const newState = Object.assign({}, state);
 
   const content = state.products.content
-      .filter(product => product.id !== action.payload)
+      .filter(product => product.id !== action.payload);
 
   return  {
     products: {

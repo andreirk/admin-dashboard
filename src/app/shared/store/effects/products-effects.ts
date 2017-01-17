@@ -21,9 +21,14 @@ export class ProductsEffectsService {
       .map(action => action.payload)
       .switchMap((payload) => {
         const options = {
-          'merchant-id' : payload.merchantId
-        }
-        return this.productService.getProducts('USD', options)
+          'merchant-id' : payload.merchantId,
+          'currency' : 'USD',
+          'available' : true,
+          'page': 0,
+          'size': 20,
+          'sort': 'name'
+        };
+        return this.productService.getProducts(options, 'en')
       })
       .map(allUserData => new productsLoadedAction(allUserData))
 

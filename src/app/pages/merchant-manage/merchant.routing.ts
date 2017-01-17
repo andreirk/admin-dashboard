@@ -9,6 +9,7 @@ import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.comp
 import {MerchantSectionsComponent} from "./components/merchant-sections.component";
 import ProductSectionModule from "../product-section/product-section.module";
 import { ProductListComponent } from "./components/products/product-list.component";
+import { ProductDetailComponent } from "./components/products/product-details.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductListComponent,
+      },
+      {
+        path: 'products/:productId',
+        component: ProductDetailComponent,
       },
     ]
   },
