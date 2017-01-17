@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import { ProductService } from '../../../../core/services/products/products-service'
+import { Currency } from '../../../../shared/types';
 
 
 @Component({
@@ -36,7 +37,7 @@ import { ProductService } from '../../../../core/services/products/products-serv
 export class ProductListComponent {
   products = []
   constructor(private productService: ProductService) {
-    this.productService.getProducts()
+    this.productService.getPage(0, 20, 'en', Currency.SAR, {})
       .subscribe(resp => {
         this.products = resp.content
         console.log(this.products)
