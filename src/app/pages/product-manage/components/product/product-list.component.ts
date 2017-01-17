@@ -35,11 +35,11 @@ import { Currency } from '../../../../shared/types';
   `],
 })
 export class ProductListComponent {
-  products = []
+  products = [];
   constructor(private productService: ProductService) {
     this.productService.getPage(0, 20, 'en', Currency.SAR, {})
       .subscribe(resp => {
-        this.products = resp.content
+        this.products = resp.content;
         console.log(this.products)
     })
   }

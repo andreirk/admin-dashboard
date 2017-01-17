@@ -25,7 +25,7 @@ export abstract class ViewListService<T extends { id? }> {
 
   loadMore(viewList: ViewList<T>, size: number, lang: string, filterParams?: any): Observable<ViewList<T>> {
     const vm = this;
-    let page =  viewList.content.length / size;
+    let page =  Math.floor(viewList.content.length / size);
     return vm.update(viewList, page, size, lang, filterParams);
   }
 
