@@ -30,8 +30,7 @@ import { ModalComponent } from "../../shared/components/modal.component";
     PosListComponent,
     PosCardComponent,
     PosDetailsComponent,
-    MerchantSectionsComponent,
-    ModalComponent,
+    MerchantSectionsComponent
   ],
   providers: [
     MerchantViewModelService

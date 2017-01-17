@@ -22,12 +22,14 @@ import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
+import { ModalComponent } from './components/modal.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
   declarations: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
+    ModalComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
@@ -35,6 +37,7 @@ import { MultiselectDropdownComponent } from './components/multiselect-dropdown.
   exports: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
+    ModalComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,

@@ -1,9 +1,8 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ChangeLangEvent } from '../../../../shared/components/select-lang.component';
 import { GroupService } from '../../../../core/services/groups/group.service';
@@ -27,6 +26,7 @@ export class GroupDetailsComponent {
   private rtlDetect = require('rtl-detect');
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private groupService: GroupService) {
   }
 
@@ -81,6 +81,8 @@ export class GroupDetailsComponent {
         vm.group = group;
         vm.groupOriginal = _.cloneDeep(group);
         vm.wasModified = false;
+        vm.groupId = group.id;
+        vm.router.navigate(['../', group.id], {relativeTo: this.route});
       }
     );
   }
