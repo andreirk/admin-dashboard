@@ -12,7 +12,7 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name"
-               required minlength="5"
+               required minlength="3"
                [(ngModel)]="model.name" name="name"
                #name="ngModel" >
         <div *ngIf="name.control.hasError('required') &&  !name.pristine"
@@ -21,7 +21,7 @@
         </div>
         <div *ngIf="name.control.hasError('minlength')"
              class="alert alert-danger">
-          Min length is 5 char
+          Min length is 3 char
         </div>
       </div>
 
