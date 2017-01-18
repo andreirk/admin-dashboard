@@ -24,10 +24,6 @@ export class Price {
   price: number = 0;
 }
 
-export interface MediaResources {
-  images: string[];
-  videos: string[];
-}
 
 // export interface Product {
 //   available: boolean;

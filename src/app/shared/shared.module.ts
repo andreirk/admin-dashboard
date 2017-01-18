@@ -23,6 +23,7 @@ import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 import { ModalComponent } from './components/modal.component';
+import { MarketingAttributeTypeOptionsDirective } from "./directives/product-marketing-attributes-type-options.directive";
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
@@ -31,6 +32,7 @@ import { ModalComponent } from './components/modal.component';
     MultiselectDropdownComponent,
     ModalComponent,
     CategoryTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
@@ -39,6 +41,7 @@ import { ModalComponent } from './components/modal.component';
     MultiselectDropdownComponent,
     ModalComponent,
     CategoryTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
     CommonModule, FormsModule, NgaModule]

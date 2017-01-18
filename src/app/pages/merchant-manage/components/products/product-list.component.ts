@@ -1,14 +1,15 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable } from "rxjs";
 import { productsLoadedAction, LoadProductsAction, ProductDeleteAction } from "../../../../shared/store/actions";
 import { AppState } from "../../../../shared/store/app-state";
-import { Product, MediaResources, Tag, MediaResource } from "../../../../commons/model/product";
+import { Product, Tag, MediaResource } from "../../../../commons/model/product";
 import { ProductService } from "../../../../core/services/products/products-service";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute } from "@angular/router";
+import { ModalComponent } from "../../../../shared/components/modal.component";
 
 
 @Component({
@@ -16,14 +17,23 @@ import { ActivatedRoute } from "@angular/router";
   providers: [
     ProductService
   ],
-  template: `product card
+  template: `
 <div class="col-sm-10">
   <div class="card card-block">
     <h5 class="card-title">{{product.attributes.name}}</h5>
     <p class="card-text">{{product.attributes.description }}</p>
     <a class="btn btn-primary" [routerLink]="[product.id]" routerLinkActive="active">Edit</a>
-    <a class="btn btn-primary" (click)="onClickDelete(product.id)">Delete</a>
+    <a style="float: right" class="btn btn-primary" (click)="modal.show()">Delete</a>    
   </div>
+  <am-app-modal>
+    <div class="app-modal-body">
+      <h5 class="modal-title" id="deleteModalLabel">Delete this Product?</h5>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-primary" (click)="onClickDelete(product.id)">Confirm</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.hide()">Cancel</button>
+    </div>
+  </am-app-modal>  
 </div>
 `
 })
@@ -32,24 +42,26 @@ export class ProductCardComponent implements OnInit {
   @Input() lang: string = 'en';
   @Output() deleteProduct = new EventEmitter();
 
+  @ViewChild(ModalComponent)
+  public readonly modal: ModalComponent;
+
   constructor(private productService: ProductService) {
   }
 
   onClickDelete(productId: number){
-    console.log('in onclick delete', productId)
     this.productService.deleteProduct(productId)
       .subscribe(
         res => {
-          console.log('response from delete:', res)
          if (res) {
            this.deleteProduct.emit({ value: productId })
          }
-        }
+        },
+        err => { console.log('err', err)}
       )
   }
 
   ngOnInit() {
-    console.log('in product card', this.product)
+
   }
 
 }
@@ -58,14 +70,15 @@ export class ProductCardComponent implements OnInit {
 @Component({
   selector: 'am-product-list',
   template: `
-   <div class="col-sm-3"> 
+   <div class="col-sm-3 card-block"> 
     <a class="btn btn-primary align-bottom" [routerLink]="['new']"
         routerLinkActive="active">New Product</a>
    </div>
   <am-product-card *ngFor="let product of (products$)" 
           [product]="product"  
           (deleteProduct)="onDeleteProduct($event)"
-          ></am-product-card>`
+          >
+  </am-product-card>`
 })
 export class ProductListComponent implements OnInit {
 
@@ -131,14 +144,14 @@ export class ProductListComponent implements OnInit {
           'sort': 'name',
           'lang': this.lang
         };
-        this.loadMerchantsProductList();
+        this.loadMerchantProductList();
         // this.store.dispatch(new LoadProductsAction(payload))
       }
     });
 
   }
 
-  loadMerchantsProductList() {
+  loadMerchantProductList() {
     console.log('merchantID: ', this.merchantId);
     if (this.merchantId) {
       const options = {

@@ -70,3 +70,10 @@ export enum WorkTimeType {
   REGULAR = <any> 'REGULAR',
   RAMADAN = <any> 'RAMADAN'
 }
+
+export enum MarketingAttributeType {
+  PROMO = <any> 'PROMO',
+  GIFT = <any> 'GIFT',
+  TRENDING = <any> 'TRENDING'
+}
+

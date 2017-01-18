@@ -17,12 +17,16 @@ import { MerchantSectionsComponent } from "./components/merchant-sections.compon
 import { ProductListComponent, ProductCardComponent } from "./components/products/product-list.component";
 import { ProductDetailComponent } from "./components/products/product-details.component";
 import { ModalComponent } from "../../shared/components/modal.component";
+import { TabsModule, AccordionModule } from 'ng2-bootstrap';
+import { AutocompleteComponent } from "./components/products/category-select-component";
 
 
 @NgModule({
   imports: [
     SharedModule,
     MultiselectDropdownModule,
+    TabsModule,
+    AccordionModule,
     routing
   ],
   declarations: [
@@ -36,7 +40,8 @@ import { ModalComponent } from "../../shared/components/modal.component";
     MerchantSectionsComponent,
     ProductListComponent,
     ProductCardComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    AutocompleteComponent
   ],
   providers: [
     MerchantViewModelService
