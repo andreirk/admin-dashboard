@@ -26,9 +26,8 @@ export class ProductService {
       return this.api.get(this.path + '/' + id, options, lang);
     }
 
-    getProducts(currency, options = {}){
-
-        return this.api.get(this.path, options, this.lang, currency)
+    getProducts(options = {}, lang){
+        return this.api.get(this.path, options, lang)
     }
 
     getPage(page: number, size: number, lang: string, currency: Currency, filterParams: any): Observable<Page<Product>> {

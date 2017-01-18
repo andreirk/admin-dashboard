@@ -58,7 +58,7 @@ export class Product {
   available: boolean = true;
   categoryId: string = '';
   groupIds: string[] = [];
-  id: string = '';
+  id?: string = '';
   description: string = '';
   imageUrl: string = '';
   discountedPrice: number;
