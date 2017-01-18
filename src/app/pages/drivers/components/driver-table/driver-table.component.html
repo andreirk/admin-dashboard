@@ -1,0 +1,45 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<div>
+  <form #driversFilterForm="ngForm">
+    <p>Filter by:</p>
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label>Phone or email:</label>
+        <div class="input-group date">
+          <input class="form-control" name="searchPattern" [(ngModel)]="filterParamsForm.searchPattern">
+        </div>
+      </div>
+      <div class="form-group col-sm-2">
+        <label>Order Id:</label>
+        <div class="input-group date">
+          <input class="form-control" name="orderId" [(ngModel)]="filterParamsForm.orderId">
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed am-driver-list">
+      <thead>
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Transport</th>
+        <th>Phone</th>
+        <th>Rating</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr am-driver-row *ngFor="let driver of drivers.content;" [driver]="driver"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-3">
+    <button (click)="loadMoreDrivers()" class="btn btn-secondary"
+            [hidden]="drivers.content.length == drivers.total">Show more</button>
+  </div>
+</div>
