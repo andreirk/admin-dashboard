@@ -9,7 +9,7 @@ import { MerchantBackendService } from "../merchants/merchant-backend.service";
 
 @Injectable()
 export class ProductService {
-    path: string = '/catalog/mgmt/v1/products'; // no products yet
+    path: string = '/catalog/mgmt/v1/products';
     lang = 'en';
 
     constructor(private api: ApiService,
@@ -17,7 +17,7 @@ export class ProductService {
     }
 
 
-    createProduct(merchantId,  lang) {
+    createProduct(merchantId,  lang): Observable<string> {
       return this.merchantBackendApi.createMerchantsProduct(merchantId, lang)
         .map(result => result.id);
     }
@@ -34,42 +34,41 @@ export class ProductService {
       return this.api.get(this.path, Object.assign({ currency: currency }, filterParams) , this.lang)
     }
 
-    deleteProduct(product) {
-        return this.api.delete(`${this.path}/${product.id}`)
+    deleteProduct(productID) {
+        return this.api.delete(`${this.path}/${productID}`)
+          .map(resp => resp.result);
     }
 
     saveProduct(merchantId, product: Product, productOriginal: Product, lang): any {
-
       if (!product.id || !_.isEqual(product, productOriginal)) {
-        return this.save(merchantId, product, lang);
+        return this.save(merchantId, product, lang)
       } else {
         return Observable.of(product.id);
       }
     }
 
-    save(merchantId, product: Product, lang){
-      if(!product.id){
-        this.createProduct(merchantId, lang)
-          .subscribe(productId => {
-             console.log('in save product id ', productId)
-             return this.updateProductAttributes(productId, product.attributes, lang)
-          }
-          )
+    save(merchantId, product: Product, lang): any{
+      if(product.id){
+        return this.updateProductAttributes(product.id, product.attributes, lang)
       }
-      return this.updateProductAttributes(product.id, product.attributes, lang)
+      else {
+        return this.createProduct(merchantId, lang)
+          .switchMap(productId => {
+             return this.updateProductAttributes(productId, product.attributes, lang)
+          })
+      }
     }
 
-
     updateProductAttributes(productId, attributes, lang: string): Observable<string> {
-
-      return this.api.put(this.path + '/' + productId + '/attributes/', attributes, {}, lang)
+      return this.api.put(this.path + '/' + productId + '/attributes', attributes, {}, lang)
         .map(result => {
-          if (result.result === true) {
+          if (result.success) {
             return productId;
           } else {
             return null;
           }
-        });
+        },
+          err => console.log('error', err)
+        );
     }
-
 }
