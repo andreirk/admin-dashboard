@@ -50,7 +50,8 @@ export class DriverService {
     return this.backendApi.get(this.path + '/profiles',
       Object.assign({
         'page': String(page),
-        'size': String(size)
+        'size': String(size),
+        'sort': 'lastName,firstName'
       }, filterParams)
     );
   }

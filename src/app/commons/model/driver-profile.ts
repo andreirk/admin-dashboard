@@ -1,8 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-
-import {VehicleType, Currency} from "../../shared/types";
+import { VehicleType, Currency } from '../../shared/types';
 
 export class DriverProfile {
   public id: string= '';
