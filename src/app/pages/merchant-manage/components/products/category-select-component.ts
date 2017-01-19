@@ -1,44 +1,53 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { ElementRef, Component, Output, Input, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CategoryService } from "../../../../core/services/categories/category.service";
 
 
 @Component({
-  selector: 'category-select',
-  host: {
-    '(document:click)': 'handleClick($event)',
-  },
+  selector: 'am-category-select',
   template: `
-        <div class="container" >
-            <div class="input-field col s12">
-              <input id="country" type="text" class="validate filter-input" [(ngModel)]=query (keyup)=filter()>
-              <label for="country">Country</label>
-            </div>
 
-              <div class="form-group col-sm-3" [hidden]="showAlert">
-                <select [(ngModel)]="query" 
-                      class="form-control">
-                  <option *ngFor="let item of categories;" 
-                      class="dropdown-item" value="{{item.name}}">{{item.name}}</option>
-                </select>
-              </div>
-        </div>  	
-        `
+  <ng-select  
+              [allowClear]="true"
+              [items]="items"
+              (data)="refreshValue($event)"
+              (selected)="selected($event)"
+              (removed)="removed($event)"
+              (typed)="typed($event)"
+             >
+  </ng-select>
+
+`
 })
-export class AutocompleteComponent {
-  @Input() lang;
-  @Output() category = new EventEmitter();
-  public query = '';
-  public categories = [];
-  public filteredList = [];
-  public elementRef;
+export class CategorySelectComponent {
 
+  @Input() value:any = {};
+  @Output() valueChange = new EventEmitter();
 
-  constructor(myElement: ElementRef,
-              private categoryService: CategoryService,) {
-    this.elementRef = myElement;
+  public items:Array<string> = [];
+
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+    this.value = value;
+    this.valueChange.emit(this.value)
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public typed(value:any):void {
+    console.log('New search input: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
+
+  constructor(private categoryService: CategoryService,) {
+
   }
 
   ngOnInit(){
@@ -50,38 +59,9 @@ export class AutocompleteComponent {
       .subscribe(
         categories => {
           console.log('categories', categories);
-          this.categories = categories.content;
+          this.items = categories.content
+            .map(category => category.name);
         }
       )
   }
-
-  filter() {
-    if (this.query !== ""){
-      this.filteredList = this.categories.filter(function(el){
-        return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
-      }.bind(this));
-    }else{
-      this.filteredList = [];
-    }
-  }
-
-  select(item){
-    this.query = item;
-    this.filteredList = [];
-  }
-
-  handleClick(event){
-    var clickedComponent = event.target;
-    var inside = false;
-    do {
-      if (clickedComponent === this.elementRef.nativeElement) {
-        inside = true;
-      }
-      clickedComponent = clickedComponent.parentNode;
-    } while (clickedComponent);
-    if(!inside){
-      this.filteredList = [];
-    }
-  }
-
 }

@@ -60,13 +60,7 @@ const APP_PROVIDERS = [
     CoreModule,
     NgbModule.forRoot(),
     routing,
-    StoreModule.provideStore(combineReducers(
-      {
-        uiState,
-        storeData
-      }),INITIAL_APP_STATE),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    EffectsModule.run(ProductsEffectsService),
+
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

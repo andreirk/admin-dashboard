@@ -50,26 +50,26 @@ export interface Tag {
 }
 
 export class Product {
-  attributes: Attributes = new Attributes();
-  available: boolean = true;
-  categoryId: string = '';
-  groupIds: string[] = [];
-  id?: string = '';
-  description: string = '';
-  imageUrl: string = '';
-  discountedPrice: number;
-  marketingAttribute: string = '';
-  mediaResources: MediaResource[] = [];
-  merchantId: string = '';
-  name: string;
-  packageType: string = '';
-  price: Price = new Price();
-  tagValues: string[] = [];
-  tags: Tag[] = [];
-  upc: string = '';
-  defaultProductImageUrl: string;
-
-  constructor(){}
+  constructor(
+  public attributes: Attributes = new Attributes(),
+  public available: boolean = true,
+  public categoryId: string = '',
+  public groupIds: string[] = [],
+  public description: string = '',
+  public imageUrl: string = '',
+  public marketingAttribute: string = '',
+  public mediaResources: MediaResource[] = [],
+  public merchantId: string = '',
+  public name: string = '',
+  public packageType: string = '',
+  public price: Price = new Price(),
+  public tagValues: string[] = [],
+  public tags: Tag[] = [],
+  public upc: string = '',
+  public defaultProductImageUrl: string,
+  public id?: string,
+)
+  {}
 }
 
 export interface ProductsRootObject {

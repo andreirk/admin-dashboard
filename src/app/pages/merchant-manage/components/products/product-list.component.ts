@@ -10,6 +10,7 @@ import { ProductService } from "../../../../core/services/products/products-serv
 import { Store } from "@ngrx/store";
 import { ActivatedRoute } from "@angular/router";
 import { ModalComponent } from "../../../../shared/components/modal.component";
+import { ProductActions } from "./actions/product.actions";
 
 
 @Component({
@@ -74,7 +75,7 @@ export class ProductCardComponent implements OnInit {
     <a class="btn btn-primary align-bottom" [routerLink]="['new']"
         routerLinkActive="active">New Product</a>
    </div>
-  <am-product-card *ngFor="let product of (products$)" 
+  <am-product-card *ngFor="let product of (products$ | async)" 
           [product]="product"  
           (deleteProduct)="onDeleteProduct($event)"
           >
@@ -82,44 +83,67 @@ export class ProductCardComponent implements OnInit {
 })
 export class ProductListComponent implements OnInit {
 
-  products$: Product[] = [];
+  products$: Observable<any>;
   private lang: string = 'en';
   private merchantId: string;
 
   constructor(private route: ActivatedRoute,
               private store: Store<AppState>,
-              private productService: ProductService) {
+              private productService: ProductService,
+              private productActions: ProductActions
+  ) {
 
-    // this.products$ = store.select(this.stateToProducts)
-
-  }
-
-
-  stateToProducts(state: AppState): Product[] {
-
-    const products = state.storeData.products.content;
-
-    return products.map(
-      product => {
-
-        const newProduct = new Product();
-
-        newProduct.id = product.id;
-        newProduct.available = product.available;
-        newProduct.description = product.description;
-        newProduct.discountedPrice = product.discountedPrice;
-        newProduct.id = product.id;
-        newProduct.imageUrl = product.imageUrl;
-        newProduct.marketingAttribute = product.marketingAttribute;
-        newProduct.name = product.name;
-        newProduct.price = product.price;
-
-        return newProduct;
-
-      }
-    );
+     this.products$ = store.select('products');
+     this.products$
+       .subscribe(
+         products => console.log('!!!get products', products)
+       )
 
   }
+
+
+  // stateToProducts(state: AppState): Product[] {
+  //
+  //   const products = state.storeData.products.content;
+  //
+  //   return products.map(
+  //     product => {
+  //
+  //       const newProduct = new Product(
+  //         product.attributes,
+  //         product.available,
+  //         product.categoryId,
+  //         product.groupIds,
+  //         product.description,
+  //         product.imageUrl,
+  //         product.marketingAttribute,
+  //         product.mediaResources,
+  //         product.merchantId,
+  //         product.name,
+  //         product.packageType,
+  //         product.price,
+  //         product.tagValues,
+  //         product.tags,
+  //         product.upc,
+  //         product.defaultProductImageUrl,
+  //         product.id
+  //       );
+  //
+  //       // newProduct.id = product.id;
+  //       // newProduct.available = product.available;
+  //       // newProduct.description = product.description;
+  //       // newProduct.id = product.id;
+  //       // newProduct.imageUrl = product.imageUrl;
+  //       // newProduct.marketingAttribute = product.marketingAttribute;
+  //       // newProduct.name = product.name;
+  //       // newProduct.price = product.price;
+  //
+  //       return newProduct;
+  //
+  //     }
+  //   );
+  //
+  // }
 
   onDeleteProduct(event){
     this.products$ = this.products$.filter(product => product.id != event.value);
@@ -130,7 +154,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
 
     this.route.parent.params.subscribe(params => {
-
 
       if (params['merchantId']) {
         console.log('merchant id', params['merchantId'])
@@ -144,8 +167,8 @@ export class ProductListComponent implements OnInit {
           'sort': 'name',
           'lang': this.lang
         };
-        this.loadMerchantProductList();
-        // this.store.dispatch(new LoadProductsAction(payload))
+      //  this.loadMerchantProductList();
+        this.store.dispatch(this.productActions.loadProducts(payload));
       }
     });
 

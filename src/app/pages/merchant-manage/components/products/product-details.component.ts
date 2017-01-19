@@ -10,29 +10,29 @@ import { ProductService } from "../../../../core/services/products/products-serv
 import { Product } from "../../../../commons/model/product";
 import { TabsModule } from 'ng2-bootstrap/tabs';
 import { AccordionModule } from 'ng2-bootstrap/accordion';
-import { MarketingAttributeType } from "../../../../shared/types";
-import { Category } from "../../../../commons/model/category";
-import { CategoryService } from "../../../../core/services/categories/category.service";
+
 
 @Component({
     selector: 'am-product-detail',
     styles: [``],
     template: `<h1>Product detail</h1>
-#Product id : {{productId}}
+
 <form #productForm="ngForm" class="merchant-details container">
   <div class="form-group row">
     <div class="col-sm-4">
       <button (click)="saveProduct()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
     </div>
+    <div class="col-sm-4">
+     <pre>#Product : {{product | json}}</pre> 
+     <pre>#Product attrebutes name : {{product.attributes.name | json}}</pre> 
+    </div>
   </div>
   
-  autocomplite
-  <category-select [lang]="lang" (category)="onCategorySelect($event)" ></category-select>
   <div class="row">
-        <am-select-lang [lang]="'en'"
-                        [wasModified]="wasModified"
-                        (onChange)="onChangeLang($event)">            
-        </am-select-lang>
+        <!--<am-select-lang [lang]="'en'"-->
+                        <!--[wasModified]="wasModified"-->
+                        <!--(onChange)="onChangeLang($event)">            -->
+        <!--</am-select-lang>-->
   </div>
 <accordion [closeOthers]="true">
   <accordion-group heading="General" [isOpen]="true" >
@@ -73,45 +73,51 @@ import { CategoryService } from "../../../../core/services/categories/category.s
   
   <accordion-group heading="Marketing">
      <div class="row">
-          <div class="form-group col-sm-3">
-            <label>Marketing Attribute</label>
-            <select [(ngModel)]="product.marketingAttribute" name="marketingAttribute" class="form-control" required amProductMarketingAttributesTypeOptions ></select>
-           
-          </div>
+     
+        <div class="form-group col-sm-3">
+          <label>Marketing Attribute</label>
+          <select [(ngModel)]="product.marketingAttribute" name="marketingAttribute" class="form-control" required amProductMarketingAttributesTypeOptions ></select>
         </div>
           
-          <div class="row">
-            <div class="form-group col-sm-3">
-              <label class="label">UPC</label>
-              <input type="text" class="form-control" name="lat" [(ngModel)]="product.attributes.description">
-            </div>
-            <div class="form-group col-sm-3">
-              <label class="label">Price</label>
-              <input type="text" class="form-control" name="lon" [(ngModel)]="product.attributes.description">
-            </div>
-          </div>
+         <div class="form-group col-sm-3">
+          <label class="label">UPC</label>
+          <input type="text" class="form-control" name="lat" [(ngModel)]="product.attributes.description">
+         </div>              
+     </div>
+          
+    <div class="row">
+
+        <div class="form-group col-sm-3">
+          <label class="label">Price</label>
+          <input type="text" class="form-control" name="lon" [(ngModel)]="product.price.price">
+        </div>
+        
+        <div class="form-group col-sm-3">
+          <label class="label">Discouted Price</label>
+          <input type="text" class="form-control" name="lon" [(ngModel)]="product.price.discountedPrice">
+        </div>
+        
+    </div>
+          
+     
   </accordion-group>
   
   <accordion-group heading="Grouping">
       <div class="row">
         <div class="form-group col-sm-3">
           <label>Category</label>
-          <select name="" id="">
-           <option ngFor="let category of categories"  value="{{category}}">{{category}}
-           </option>
-          </select>
-           <input type="text" class="form-control" name="lon" [(ngModel)]="product.categoryId">
+            <am-category-select [lang]="lang" (category)="onCategorySelect($event)" ></am-category-select>
         </div>
         <div class="form-group col-sm-3">
           <label>Groups</label>
-           <input type="text" class="form-control" name="lon" [(ngModel)]="product.categoryId">
+           <am-group-multi-select> </am-group-multi-select>
         </div>
       </div> 
-       
+      
        <div class="row">
         <div class="form-group col-sm-6">
           <label>Tags</label>
-           <input type="text" class="form-control" name="lon" [(ngModel)]="product.categoryId">
+           <am-tag-multi-select></am-tag-multi-select>
         </div>
        </div>
   </accordion-group>
@@ -127,15 +133,12 @@ import { CategoryService } from "../../../../core/services/categories/category.s
 export class ProductDetailComponent implements OnInit {
   @ViewChild('productForm') form;
 
-  marketingAttr : MarketingAttributeType[];
-  categories: string[] = ['AB', 'AB','BC','TG'];
-
   private lang: string = 'en';
   private currency: string = 'SAR';
   private productId: string;
   private merchantId: string;
-  private product: Product = new Product();
-  private productOriginal = new Product();
+  private product: Product ;
+  private productOriginal: Product;
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
 
@@ -143,15 +146,16 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private productService: ProductService,
-              private categoryService: CategoryService) { }
+              ) { }
 
   ngOnInit() {
+
 
     this.route.parent.params.subscribe(params => {
       if (params['merchantId']) {
         this.merchantId = params['merchantId'];
         if (this.merchantId !== 'new') {
-          this.changeLang(false, this.lang);
+        //  this.changeLang(false, this.lang);
         }
       }
     });
@@ -161,9 +165,8 @@ export class ProductDetailComponent implements OnInit {
       if (params['productId']) {
         if (params['productId'] !== 'new') {
           this.productId = params['productId'];
-
-          this.getCategories(this.lang);
-
+          this.getProduct(this.productId, this.lang);
+          this.changeLang(false, this.lang);
         }
       }
     });
@@ -173,13 +176,14 @@ export class ProductDetailComponent implements OnInit {
   ngAfterViewInit() {
     this.form.control.valueChanges
       .subscribe(values => {
-        this.wasModified = !_.isEqual(this.product, this.productOriginal);
+      //  this.wasModified = !_.isEqual(this.product, this.productOriginal);
       });
   }
 
   onCategorySelect(){
     console.log('oncategory select')
   }
+
   changeLang(save: boolean, lang: string, prevLang?: string) {
 
     let observProductId: Observable<string>;
@@ -202,17 +206,6 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  getCategories(lang: string){
-    this.categoryService.getCategories(lang)
-      .subscribe(
-        categories => {
-          console.log('categories', categories)
-         // this.categories = categories.content;
-          this.getProduct(this.productId, this.lang);
-          this.changeLang(false, this.lang);
-        }
-      )
-  }
 
   getProduct(productID: string, lang: string) {
     const options = {
@@ -220,7 +213,27 @@ export class ProductDetailComponent implements OnInit {
     };
     this.productService.getOne(productID, options, lang)
       .subscribe(product => {
-        this.product = product;
+
+        this.product = new Product(
+          product.attributes,
+          product.available,
+          product.categoryId,
+          product.groupIds,
+          product.description,
+          product.imageUrl,
+          product.marketingAttribute,
+          product.mediaResources,
+          product.merchantId,
+          product.name,
+          product.packageType,
+          product.price,
+          product.tagValues,
+          product.tags,
+          product.upc,
+          product.defaultProductImageUrl,
+          product.id
+        )
+
         this.productOriginal = _.cloneDeep(product);
     });
   }
@@ -245,7 +258,6 @@ export class ProductDetailComponent implements OnInit {
             this.router.navigate(['../', this.productId], {relativeTo: this.route});
         }
       );
-
   }
 
 }

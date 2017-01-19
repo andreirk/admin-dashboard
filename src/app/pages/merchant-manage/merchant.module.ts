@@ -17,8 +17,17 @@ import { MerchantSectionsComponent } from "./components/merchant-sections.compon
 import { ProductListComponent, ProductCardComponent } from "./components/products/product-list.component";
 import { ProductDetailComponent } from "./components/products/product-details.component";
 import { ModalComponent } from "../../shared/components/modal.component";
-import { TabsModule, AccordionModule } from 'ng2-bootstrap';
-import { AutocompleteComponent } from "./components/products/category-select-component";
+import { TabsModule, AccordionModule, ButtonsModule } from 'ng2-bootstrap';
+import { SelectModule } from 'ng2-select';
+import { CategorySelectComponent } from "./components/products/category-select-component";
+import { GroupMultiSelectComponent } from "./components/products/group-multiselect-component";
+import { TagMultiSelectComponent } from "./components/products/tag-multiselect-component";
+import { StoreModule, combineReducers } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { EffectsModule } from "@ngrx/effects";
+import reducer from './components/products/reducers'
+import { ProductActions } from "./components/products/actions";
+import { ProductEffects } from "./components/products/effects";
 
 
 @NgModule({
@@ -27,7 +36,13 @@ import { AutocompleteComponent } from "./components/products/category-select-com
     MultiselectDropdownModule,
     TabsModule,
     AccordionModule,
-    routing
+    ButtonsModule,
+    SelectModule,
+    routing,
+
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    EffectsModule.run(ProductEffects),
   ],
   declarations: [
     MerchantListComponent,
@@ -41,10 +56,14 @@ import { AutocompleteComponent } from "./components/products/category-select-com
     ProductListComponent,
     ProductCardComponent,
     ProductDetailComponent,
-    AutocompleteComponent
+    CategorySelectComponent,
+    GroupMultiSelectComponent,
+    TagMultiSelectComponent
+
   ],
   providers: [
-    MerchantViewModelService
+    MerchantViewModelService,
+    ProductActions,
   ]
 })
 export default class MerchantsModule { }

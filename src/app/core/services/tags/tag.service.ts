@@ -4,28 +4,29 @@
 import { Injectable } from '@angular/core';
 import { BackendApiService } from '../backend-api.service';
 import { Observable } from 'rxjs';
-import { Group } from '../../../commons/model/group';
 import { Page } from '../../../commons/model/page';
+import { Tag } from '../../../commons/model/tag';
+
 
 @Injectable()
-export class GroupService {
-  private path: string = '/catalog/v1/groups';
+export class TagService {
+  private path: string = '/catalog/mgmt/v1/tags';
 
   constructor(private backendApi: BackendApiService) {
   }
 
-  get(id: string, lang: string) {
+  getOne(id: string, lang: string) {
     return this.backendApi.get(this.path + '/' + id, {}, lang);
   }
 
-  getPage(page: number, size: number, lang: string): Observable<Page<Group>> {
+  getPage(page: number, size: number, lang: string): Observable<Page<Tag>> {
     return this.backendApi.get(this.path, {
       'page': String(page),
       'size': String(size)
     }, lang);
   }
 
-  getList(lang: string): Observable<Page<Group>> {
+  getList(lang: string): Observable<Page<Tag>> {
     return this.backendApi.get(this.path, {}, lang);
   }
 
@@ -33,19 +34,19 @@ export class GroupService {
     return this.backendApi.delete(this.path + '/' + id);
   }
 
-  save(group: Group, lang: string): Observable<Group> {
-    if (group.id) {
-      return this.update(group, lang);
+  save(tag: Tag, lang: string): Observable<Tag> {
+    if (tag.id) {
+      return this.update(tag, lang);
     } else {
-      return this.create(group, lang);
+      return this.create(tag, lang);
     }
   }
 
-  private update(group: Group, lang: string): Observable<Group> {
-    return this.backendApi.put(this.path + '/' + group.id, group, {}, lang);
+  private update(tag: Tag, lang: string): Observable<Tag> {
+    return this.backendApi.put(this.path + '/' + tag.id, tag, {}, lang);
   }
 
-  private create(group: Group, lang: string): Observable<Group> {
-    return this.backendApi.post(this.path, group, {}, lang);
+  private create(tag: Tag, lang: string): Observable<Tag> {
+    return this.backendApi.post(this.path, tag, {}, lang);
   }
 }
