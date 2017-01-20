@@ -15,14 +15,20 @@ import { ModalComponent } from "../../../../../shared/components/modal.component
 @Component({
   selector: 'am-pos-details',
   providers: [],
-  template: require('./pos-details.component.html')
+  template: require('./pos-details.component.html'),
+  styleUrls: ['../style']
 })
 export class PosDetailsComponent {
 
   @ViewChild('posForm') form;
 
-  @ViewChild(ModalComponent)
-  public readonly modal: ModalComponent;
+  @ViewChild('deleteModal')
+  public readonly deleteModal: ModalComponent;
+
+  @ViewChild('deactivateGuardModal')
+  public readonly deactivateGuardModal: ModalComponent;
+
+  private guardEvent = new EventEmitter();
 
   private lang: string = 'en';
   private merchantId: string;
@@ -31,6 +37,8 @@ export class PosDetailsComponent {
   private posOriginal: Pos = new Pos();
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
+
+  private mapHidden: boolean = true;
 
   @Output() onDelete = new EventEmitter();
 
@@ -57,7 +65,29 @@ export class PosDetailsComponent {
         }
       }
     });
+
   }
+
+  onGuardClick(result: boolean) {
+    this.deactivateGuardModal.hide();
+    this.guardEvent.emit(result);
+  }
+
+  canDeactivate() {
+    if (this.wasModified) {
+/*
+      this.deactivateGuardModal.show();
+      this.guardEvent.subscribe(event => {
+        return event;
+      });
+*/
+
+      return confirm('Unsaved changes will be lost. Are you shure you want to leave this page?');
+    } else {
+      return true;
+    }
+  }
+
 
   getPos(posId: string, lang: string) {
     const vm = this;
@@ -120,6 +150,13 @@ export class PosDetailsComponent {
     this.posService.deletePos(posId).subscribe(res => {
       this.router.navigate(['../'], {relativeTo: this.route});
     });
+  }
+
+  initMap() {
+    const vm = this;
+    setTimeout(function() {
+      vm.mapHidden = false;
+    }, 400);
   }
 
 }

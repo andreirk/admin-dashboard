@@ -103,7 +103,7 @@
           <div class="form-group row">
             <div class="col-sm-12">
               <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
-              <button class="btn btn-secondary pull-right" (click)="modal.show()" *ngIf="posId">Delete
+              <button class="btn btn-secondary pull-right" (click)="deleteModal.show()" *ngIf="posId">Delete
               </button>
             </div>
           </div>
@@ -112,7 +112,28 @@
       </div>
     </div>
 
-    <div class="card">
+    <div class="card collapse">
+      <div class="card-header" role="tab" id="headingMap">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseMap" (click)="initMap()"
+             aria-controls="collapseMap">
+            Map
+          </a>
+        </h5>
+      </div>
+      <div id="collapseMap" class="collapse" role="tabpanel" aria-labelledby="headingMap">
+        <div class="card-block">
+
+          <sebm-google-map *ngIf="!mapHidden" [zoom]="16" [latitude]="pos.address.geoPoint.lat" [longitude]="pos.address.geoPoint.lon">
+            <sebm-google-map-marker [latitude]="pos.address.geoPoint.lat" [longitude]="pos.address.geoPoint.lon"></sebm-google-map-marker>
+          </sebm-google-map>
+
+        </div>
+      </div>
+    </div>
+
+
+          <div class="card">
       <div class="card-header" role="tab" id="headingSchedule">
         <h5 class="mb-0">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapseSchedule" aria-controls="collapseSchedule">
@@ -130,14 +151,24 @@
       </div>
     </div>
   </div>
-  <am-app-modal>
+  <am-app-modal #deleteModal>
     <div class="app-modal-body">
       <h5 class="modal-title" id="deleteModalLabel">Delete this POS?</h5>
     </div>
     <div class="app-modal-footer">
       <button type="button" class="btn btn-primary" (click)="deletePos(pos.id)">Confirm</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.hide()">Cancel</button>
+      <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">Cancel</button>
     </div>
   </am-app-modal>
 
+  <am-app-modal #deactivateGuardModal>
+    <div class="app-modal-body">
+      <h5 class="modal-title" id="deactivateGuardLabel">Unsaved changes will be lost.</h5>
+      <p>Are you shure you want to leave this page?</p>
+    </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-primary" (click)="onGuardClick(true)">Leave this page</button>
+      <button type="button" class="btn btn-secondary" (click)="onGuardClick(false)">Cancel</button>
+    </div>
+  </am-app-modal>
 </form>

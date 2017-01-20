@@ -15,11 +15,15 @@ import {PosListComponent} from "./components/pos/pos-list.component";
 import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
 import {MerchantSectionsComponent} from "./components/merchant-sections.component";
 import { PosWorkTimesComponent } from "./components/pos/pos-work-times/pos-work-times.component";
+import { AgmCoreModule } from "angular2-google-maps/core";
 
 @NgModule({
   imports: [
     SharedModule,
     MultiselectDropdownModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
+    }),
     routing
   ],
   declarations: [

@@ -3,8 +3,6 @@
  */
 import { Component, OnInit, Input, OnChanges } from "@angular/core";
 import { WorkTimeService } from "../../../../../core/services/work-times/work-time.service";
-import { PosService } from "../../../../../core/services/pos/pos.service";
-import { BackendApiService } from "../../../../../core/services/backend-api.service";
 import { WorkTime } from "../../../../../commons/model/work-time";
 import { ViewChild } from "@angular/core/src/metadata/di";
 import { WorkTimeModel } from "../../../model/work-time-model";
@@ -14,7 +12,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: 'am-pos-work-times',
   providers: [],
-  styleUrls: ['./style'],
+  styleUrls: ['../style'],
   template: require('./pos-work-times.component.html')
 })
 

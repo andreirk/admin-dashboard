@@ -16,6 +16,7 @@ import { PosService } from './services/pos/pos.service';
 import { GroupService } from './services/groups/group.service';
 import { GroupListService } from './services/groups/group-list.service';
 import { WorkTimeService } from './services/work-times/work-time.service';
+import { CanDeactivateGuard } from "./services/guards/can-deactivate-guard.service";
 
 @NgModule({
   imports: [CommonModule],
@@ -30,7 +31,8 @@ import { WorkTimeService } from './services/work-times/work-time.service';
     PosService,
     GroupService,
     GroupListService,
-    WorkTimeService
+    WorkTimeService,
+    CanDeactivateGuard
   ]
 })
 export class CoreModule {

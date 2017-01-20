@@ -8,9 +8,6 @@ import { Component } from '@angular/core';
     <div class="modal-dialog" role="document" style="color: darkcyan">
       <div class="modal-content">
         <div class="modal-body">
-          <button type="button" class="close" (click)="this.hide()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
           <ng-content select=".app-modal-body"></ng-content>
         </div>
         <div class="modal-footer">
