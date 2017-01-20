@@ -3,9 +3,9 @@
  */
 import { Page } from '../../../commons/model/page';
 import { User } from '../../../commons/model/user';
-import { DriverProfile } from '../../../commons/model/driver-profile';
+import { Driver } from '../../../commons/model/driver/driver';
 
 export class OrderFilterPersons {
   users: Page<User> = new Page<User>();
-  drivers: Page<DriverProfile> = new Page<DriverProfile>();
+  drivers: Page<Driver> = new Page<Driver>();
 }

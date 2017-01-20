@@ -3,8 +3,8 @@ import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
 
 import * as GOOGLE_MAPS_TYPES from 'angular2-google-maps/core/services/google-maps-types';
 import { DriverMapApiService } from './driverMap.service'
-import {DriverProfile} from "../../../../commons/model/driver-profile";
-import {DriverAccount} from "../../../../commons/model/driver-account";
+import {Driver} from "../../../../commons/model/driver/driver";
+import {DriverAccount} from "../../../../commons/model/driver/driver-account";
 import {DriverOnMap} from "./driverOnMap.model";
 
 
@@ -28,8 +28,7 @@ export class CustomMapDirective {
           (driverData: any) => {
             let driverMarker: DriverOnMap = driverData.driverMarker;
             let orderId: number = driverMarker.orderId;
-            let profile: DriverProfile = driverData.profile;
-            let account: DriverAccount = driverData.account;
+            let profile: Driver = driverData;
 
             let link =  '<a href="#/pages/orders/'+ orderId + '"  >Order link </a>';
             let avatarImg =  profile.avatarUrl ? '<img src="' + profile.avatarUrl + '">' : '';
@@ -76,10 +75,10 @@ export class CustomMapDirective {
                       <td>carPlateNumber:</td><td>${profile.carPlateNumber || ''}</td>            
                     </tr>                                                                                                                   
                     <tr>
-                      <td>email: </td><td>${account.email || ''}</td>            
+                      <td>email: </td><td>${profile.email || ''}</td>            
                     </tr>
                     <tr>
-                      <td>Phone: </td><td>${account.phone || ''}</td>
+                      <td>Phone: </td><td>${profile.phone || ''}</td>
                     </tr>                    
                     <tr>          
                       <td><b>Order:</b></td>

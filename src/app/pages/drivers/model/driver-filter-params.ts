@@ -3,7 +3,7 @@
  */
 
 export class DriverFilterParams {
-  public searchPattern: string = '';
+  public searchPattern?: string;
   public orderId?: string;
 
   constructor() {
