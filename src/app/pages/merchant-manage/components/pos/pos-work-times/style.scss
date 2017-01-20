@@ -1,0 +1,41 @@
+/*!
+ * Copyright © 2017 Aram Meem Company Limited.  All Rights Reserved.
+ */
+
+.am-wt-control {
+  width: 40px;
+  height: 28px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  padding: 0px 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.am-wt-control:focus {
+  border-color: #2ba8db;
+  outline: 0;
+}
+
+.am-float-right {
+  text-align: right;
+  float: right;
+}
+
+table.am-work-times-table {
+  thead {
+    background-color: #1d5b86;
+  }
+}
+
+.am-wt-err {
+  color: #a90000;
+  background-color: rgba(255, 255, 255, 0.1);;
+  border: 1px solid #a90000;
+  border-radius: 5px;
+}
+
+.am-close {
+  margin: 0px;
+  padding: 0px;
+}

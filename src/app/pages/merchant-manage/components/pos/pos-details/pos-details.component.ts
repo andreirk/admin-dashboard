@@ -9,16 +9,12 @@ import { Pos } from "../../../../../commons/model/pos";
 import { ViewChild } from "@angular/core/src/metadata/di";
 import { ChangeLangEvent } from "../../../../../shared/components/select-lang.component";
 import { Observable } from "rxjs";
-import { WorkTimeService } from "../../../../../core/services/work-times/work-time.service";
 import { Output } from "@angular/core/src/metadata/directives";
 import { ModalComponent } from "../../../../../shared/components/modal.component";
 
 @Component({
   selector: 'am-pos-details',
-  providers: [
-    PosService,
-    WorkTimeService
-  ],
+  providers: [],
   template: require('./pos-details.component.html')
 })
 export class PosDetailsComponent {
@@ -73,7 +69,7 @@ export class PosDetailsComponent {
 
   ngAfterViewInit() {
     const vm = this;
-    this.form.control.valueChanges
+    vm.form.control.valueChanges
       .subscribe(values => {
         vm.wasModified = !_.isEqual(vm.pos, vm.posOriginal);
       });

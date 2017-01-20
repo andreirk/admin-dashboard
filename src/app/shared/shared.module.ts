@@ -40,7 +40,7 @@ import { ModalComponent } from './components/modal.component';
     ModalComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

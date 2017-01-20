@@ -14,7 +14,7 @@ import {PosCardComponent} from "./components/pos/pos-card.component";
 import {PosListComponent} from "./components/pos/pos-list.component";
 import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
 import {MerchantSectionsComponent} from "./components/merchant-sections.component";
-import { ModalComponent } from "../../shared/components/modal.component";
+import { PosWorkTimesComponent } from "./components/pos/pos-work-times/pos-work-times.component";
 
 @NgModule({
   imports: [
@@ -30,6 +30,8 @@ import { ModalComponent } from "../../shared/components/modal.component";
     PosListComponent,
     PosCardComponent,
     PosDetailsComponent,
+    PosWorkTimesComponent,
+    MerchantSectionsComponent,
     MerchantSectionsComponent
   ],
   providers: [
