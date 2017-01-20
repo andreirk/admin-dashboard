@@ -7,11 +7,11 @@ import { OrderService } from '../../../../core/services/orders/order.service';
 import { Order } from '../../../../commons/model/order';
 import { UserCacheService } from '../../services/user-cache.service';
 import { User } from '../../../../commons/model/user';
-import { Driver } from '../../../../commons/model/driver';
 import { DriverService } from '../../../../core/services/drivers/driver.service';
-import { DriverLocation } from '../../../../commons/model/driver-location';
+import { DriverLocation } from '../../../../commons/model/driver/driver-location';
 import { OrderActionEvent } from '../order-action-select.component';
 import { OrderAction } from '../../../../shared/types';
+import { Driver } from '../../../../commons/model/driver/driver';
 
 @Component({
   selector: 'am-order-details',
@@ -45,7 +45,7 @@ export class OrderDetailsComponent implements OnInit {
           vm.user = user;
         });
       if (vm.order.driverId) {
-        vm.driverService.get(vm.order.driverId)
+        vm.driverService.getProfile(vm.order.driverId)
           .subscribe(driver => {
             vm.driver = driver;
         });

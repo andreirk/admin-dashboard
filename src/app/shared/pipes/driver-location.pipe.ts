@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Pipe, PipeTransform } from '@angular/core';
-import { DriverLocation } from '../../commons/model/driver-location';
+import { DriverLocation } from '../../commons/model/driver/driver-location';
 
 @Pipe({
   name: 'amDriverLocation'

@@ -3,9 +3,10 @@
  */
 
 export class DriverAccount {
-  public id: number;
+  public id: number = null;
   public email: string = '';
-  public phone: string = ''
+  public phone: string = '';
+  public password: string = '';
 
   constructor() {}
 }

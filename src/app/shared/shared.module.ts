@@ -23,6 +23,7 @@ import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 import { ModalComponent } from './components/modal.component';
+import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
@@ -32,6 +33,7 @@ import { ModalComponent } from './components/modal.component';
     ModalComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    VehicleTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
@@ -40,6 +42,7 @@ import { ModalComponent } from './components/modal.component';
     ModalComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    VehicleTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule]
 })

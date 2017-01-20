@@ -29,9 +29,9 @@
         <p>Phone: {{user.phoneNumber}}</p>
       </ba-card>
       <ba-card title="Driver" baCardClass="with-scroll">
-        <h5>{{driver.profile.firstName + ' ' + driver.profile.lastName}}</h5>
-        <p>Phone: {{driver.account.phone}}</p>
-        <p>Vehicle type: {{driver.profile.capacity}}</p>
+        <h5>{{driver.firstName + ' ' + driver.lastName}}</h5>
+        <p>Phone: {{driver.phone}}</p>
+        <p>Vehicle type: {{driver.capacity}}</p>
         <p>Location: {{driverLocation | amDriverLocation}}</p>
       </ba-card>
     </div>

@@ -4,6 +4,10 @@
 import { Component, Input, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+export interface IUploadSettings {
+  url: string;
+}
+
 @Component({
   selector: 'am-upload-image',
   template: `
@@ -21,14 +25,20 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class UploadImageComponent implements OnInit, ControlValueAccessor {
   @Input() folder: string;
+  @Input() settings: IUploadSettings;
   @Input() _imageUrl: string;
   private uploadOptions;
+  private defaultSettings: IUploadSettings = {
+    url: '/catalog/mgmt/v1/upload-image'
+  };
 
   constructor() {}
 
   ngOnInit() {
+    this.settings = Object.assign(this.defaultSettings, this.settings);
+
     this.uploadOptions = {
-      url: '/catalog/mgmt/v1/upload-image?folder=' + this.folder,
+      url: this.settings.url + '?folder=' + this.folder,
       fieldName: 'imageFile',
       customHeaders: {
         'Accept': 'application/json',

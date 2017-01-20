@@ -4,7 +4,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { UserCacheService } from '../services/user-cache.service';
 import { DriverCacheService } from '../services/driver-cache.service';
-import { DriverProfile } from '../../../commons/model/driver-profile';
+import { Driver } from '../../../commons/model/driver/driver';
 @Component({
   selector: '[am-driver-row]',
   template: `
@@ -21,7 +21,7 @@ import { DriverProfile } from '../../../commons/model/driver-profile';
 <td>{{'status'}}</td>`
 })
 export class DriverRowComponent implements OnInit {
-  @Input() driver: DriverProfile;
+  @Input() driver: Driver;
   @Output() onDelete = new EventEmitter();
 
   constructor() {

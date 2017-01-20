@@ -4,6 +4,7 @@ import { DriverService } from '../../../../core/services/drivers/driver.service'
 
 import { Observable } from 'rxjs/Rx';
 import { Subject }    from 'rxjs/Subject';
+import { Driver } from '../../../../commons/model/driver/driver';
 
 @Injectable()
 export class DriverMapApiService {
@@ -40,8 +41,8 @@ export class DriverMapApiService {
     return this.api.get(this.path, {}, 'en')
   }
 
-  getDriver(id){
-    return this.profileApi.get(id)
+  getDriver(id): Observable<Driver> {
+    return this.profileApi.getProfile(id)
   }
 
 }
