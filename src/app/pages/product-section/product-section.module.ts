@@ -3,7 +3,7 @@ import { NgModule }      from '@angular/core';
 import { routing } from './product-section.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductListComponent } from "../merchant-manage/components/products/product-list.component";
-import { ProductDetailComponent } from "../merchant-manage/components/products/product-details.component";
+import { ProductFormComponent } from "../merchant-manage/components/products/product-form.component";
 import { ProductSectionComponent } from "./product-section.component";
 
 
@@ -15,7 +15,7 @@ import { ProductSectionComponent } from "./product-section.component";
   declarations: [
     ProductSectionComponent,
     ProductListComponent,
-    ProductDetailComponent
+    ProductFormComponent
   ]
 })
 export default class ProductSectionModule {}

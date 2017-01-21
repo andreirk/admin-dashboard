@@ -7,9 +7,8 @@ import { MerchantDetailsComponent } from './components/merchant-details/merchant
 import {PosListComponent} from "./components/pos/pos-list.component";
 import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
 import {MerchantSectionsComponent} from "./components/merchant-sections.component";
-import ProductSectionModule from "../product-section/product-section.module";
 import { ProductListComponent } from "./components/products/product-list.component";
-import { ProductDetailComponent } from "./components/products/product-details.component";
+import { ProductDetailsContainerComponent } from "./components/products/product-details-container";
 
 const routes: Routes = [
   {
@@ -38,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'products/:productId',
-        component: ProductDetailComponent,
+        component: ProductDetailsContainerComponent,
       },
     ]
   },

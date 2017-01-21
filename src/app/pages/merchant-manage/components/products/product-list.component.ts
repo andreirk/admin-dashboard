@@ -11,6 +11,7 @@ import { Store } from "@ngrx/store";
 import { ActivatedRoute } from "@angular/router";
 import { ModalComponent } from "../../../../shared/components/modal.component";
 import { ProductActions } from "./actions/product.actions";
+import { MerchantProductAppState } from "./reducers/index";
 
 
 @Component({
@@ -50,15 +51,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   onClickDelete(productId: number){
-    this.productService.deleteProduct(productId)
-      .subscribe(
-        res => {
-         if (res) {
-           this.deleteProduct.emit({ value: productId })
-         }
-        },
-        err => { console.log('err', err)}
-      )
+    this.deleteProduct.emit({ value: productId })
   }
 
   ngOnInit() {
@@ -75,6 +68,7 @@ export class ProductCardComponent implements OnInit {
     <a class="btn btn-primary align-bottom" [routerLink]="['new']"
         routerLinkActive="active">New Product</a>
    </div>
+   
   <am-product-card *ngFor="let product of (products$ | async)" 
           [product]="product"  
           (deleteProduct)="onDeleteProduct($event)"
@@ -88,7 +82,7 @@ export class ProductListComponent implements OnInit {
   private merchantId: string;
 
   constructor(private route: ActivatedRoute,
-              private store: Store<AppState>,
+              private store: Store<MerchantProductAppState>,
               private productService: ProductService,
               private productActions: ProductActions
   ) {
@@ -146,9 +140,9 @@ export class ProductListComponent implements OnInit {
   // }
 
   onDeleteProduct(event){
-    this.products$ = this.products$.filter(product => product.id != event.value);
+    // this.products$ = this.products$.filter(product => product.id != event.value);
 
-    // this.store.dispatch(new ProductDeleteAction(productId))
+    this.store.dispatch( this.productActions.deleteProduct(event.value))
   }
 
   ngOnInit() {

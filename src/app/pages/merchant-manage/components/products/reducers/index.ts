@@ -9,7 +9,7 @@ import { combineReducers } from '@ngrx/store';
 import productListReducer, * as fromProductList from './product-list-reducer';
 import productReducer, * as fromProduct from './product.reducer';
 
-export interface AppState {
+export interface MerchantProductAppState {
   products: fromProductList.ProductListState;
   product: fromProduct.ProductState;
 };

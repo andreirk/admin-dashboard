@@ -22,11 +22,7 @@ import { PagesModule } from './pages/pages.module';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { INITIAL_APP_STATE, AppState } from "./shared/store/app-state";
-import { EffectsModule } from "@ngrx/effects";
-import { ProductsEffectsService } from "./shared/store/effects/products-effects";
-import { uiState } from "./shared/store/reducers/uiStateReducer";
-import { storeData } from "./shared/store/reducers/uiStoreDataReducer";
+
 
 // Application wide providers
 const APP_PROVIDERS = [

@@ -3,7 +3,7 @@
  */
 
 
-export class Attributes {
+export class ProductAttributes {
   brand: string = '';
   description: string = '';
   name: string = '';
@@ -20,7 +20,7 @@ export interface MediaResource {
 
 export class Price {
   currency: string = '';
-  discountedPrice: number = 0;
+  discountedPrice: number;
   price: number = 0;
 }
 
@@ -49,9 +49,13 @@ export interface Tag {
   products: Product[];
 }
 
+export class ProductSelectedImage {
+  id: string = '';
+}
+
 export class Product {
   constructor(
-  public attributes: Attributes = new Attributes(),
+  public attributes: ProductAttributes = new ProductAttributes(),
   public available: boolean = true,
   public categoryId: string = '',
   public groupIds: string[] = [],
@@ -60,13 +64,13 @@ export class Product {
   public marketingAttribute: string = '',
   public mediaResources: MediaResource[] = [],
   public merchantId: string = '',
-  public name: string = '',
   public packageType: string = '',
   public price: Price = new Price(),
   public tagValues: string[] = [],
   public tags: Tag[] = [],
   public upc: string = '',
   public defaultProductImageUrl: string,
+  public selectedImage: ProductSelectedImage = new ProductSelectedImage(),
   public id?: string,
 )
   {}

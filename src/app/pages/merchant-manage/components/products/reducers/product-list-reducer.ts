@@ -32,9 +32,13 @@ export default function (state = initialState, action: Action): ProductListState
       return state;
     }
     case ProductActions.DELETE_PRODUCT_SUCCESS: {
-      return state.filter(product => {
-        return product.id !== action.payload.id;
+
+      const newState = state.filter(product => {
+        return product.id !== action.payload;
       });
+
+      console.log('in delete reducer', {state, action, newState})
+      return newState;
     }
     default: {
       return state;
