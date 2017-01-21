@@ -9,6 +9,7 @@ import { DriverAccount } from '../../../commons/model/driver/driver-account';
 import { DriverLocation } from '../../../commons/model/driver/driver-location';
 import { Page } from '../../../commons/model/page';
 import { DriverProfile } from '../../../commons/model/driver/driver-profile';
+import { DriverBalanceRecord } from '../../../commons/model/driver/driver-balance-record';
 
 @Injectable()
 export class DriverService {
@@ -100,5 +101,14 @@ export class DriverService {
     let account: DriverAccount = <DriverAccount>_.pick(driverAccount, Object.keys(new DriverAccount()));
 
     return this.backendApi.post(this.path + '/drivers', account, {}, '');
+  }
+
+  getBalanceRecordsPage(page: number, size: number, filterParams: any): Observable<Page<DriverBalanceRecord>> {
+    return this.backendApi.get(this.path + '/driver/balance',
+      Object.assign({
+        'page': String(page),
+        'size': String(size)
+      }, filterParams)
+    );
   }
 }

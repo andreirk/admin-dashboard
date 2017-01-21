@@ -70,3 +70,12 @@ export enum WorkTimeType {
   REGULAR = <any> 'REGULAR',
   RAMADAN = <any> 'RAMADAN'
 }
+
+export enum DriverBalanceRecordType {
+  PICKUP_COST = <any>'PICKUP_COST',
+  DELIVERY_COST = <any>'DELIVERY_COST',
+  SERVICE_FEE = <any>'SERVICE_FEE',
+  COMISSION = <any>'COMISSION',
+  PAYOUT = <any>'PAYOUT',
+  MANUAL = <any>'MANUAL'
+}

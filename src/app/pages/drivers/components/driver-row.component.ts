@@ -9,7 +9,7 @@ import { Driver } from '../../../commons/model/driver/driver';
   selector: '[am-driver-row]',
   template: `
 <td>
-  <button type="button" class="btn btn-xs btn-default" [routerLink]="[driver.id]" routerLinkActive="active" >
+  <button type="button" class="btn btn-xs btn-default" [routerLink]="[driver.id, 'general']" routerLinkActive="active" >
     <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i> </span>
   </button>
 </td>
