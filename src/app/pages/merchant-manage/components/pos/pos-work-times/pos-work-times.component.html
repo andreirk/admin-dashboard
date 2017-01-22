@@ -1,0 +1,62 @@
+<!--
+  ~ Copyright © 2017 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+
+<form #workTimesForm="ngForm" class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" (click)="setRamadan(false)" [ngClass]="{'active' : !ramadan}">Regular</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="setRamadan(true)" [ngClass]="{'active' : ramadan}">Ramadan</a>
+    </li>
+  </ul>
+
+  <div class="table-responsive">
+    <table style="text-align: center" class="table table-striped table-condensed am-work-times-table">
+      <thead>
+      <tr>
+        <th><b>Week day</b></th>
+        <th style="text-align: center"><b>Work period</b></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dayWorkTimes of viewModel; let i = index">
+        <td>
+          {{weekDays[i]}}
+        </td>
+        <td>
+          <div class="row" *ngFor="let workPeriod of dayWorkTimes; let j = index"
+               [ngClass]="{'am-wt-err' : workPeriod.error}">
+            <input type="number" min="0" max="23" class="am-wt-control" name="start-hour-{{i}}-{{j}}"
+                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.startTimeHour">
+            <label> : </label>
+            <input type="number" min="0" max="59" class="am-wt-control" name="start-minute-{{i}}-{{j}}"
+                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.startTimeMinute">
+            <label> - </label>
+            <input type="number" min="0" max="23" class="am-wt-control" name="end-hour-{{i}}-{{j}}"
+                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.endTimeHour">
+            <label> : </label>
+            <input type="number" min="0" max="59" class="am-wt-control" name="end-minute-{{i}}-{{j}}"
+                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.endTimeMinute">
+            <button type="button" class="btn btn-xs btn-default" (click)="deleteWorkTime(i, j)">
+              <span class="glyphicon glyphicon-times"><i class="fa fa-times" aria-hidden="true"></i> </span>
+            </button>
+            <p *ngIf="workPeriod.error">
+              {{workPeriod.errorMessage}}
+            </p>
+          </div>
+
+          <div class="row">
+            <button type="button" class="btn btn-xs btn-default" (click)="addWorkTime(i)">
+              <span class="glyphicon glyphicon-plus"><i class="fa fa-plus" aria-hidden="true"></i> </span>
+            </button>
+          </div>
+          <div></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</form>

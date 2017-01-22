@@ -15,7 +15,7 @@ import { Currency } from '../../../shared/types';
   template: `
 <div class="column">
   <div class="col-sm-3 card-block"> 
-  <a class="btn btn-primary align-bottom" [routerLink]="['new']"
+    <a class="btn btn-primary align-bottom" [routerLink]="['new']"
       routerLinkActive="active">New Group</a>
   </div>
   <div>

@@ -9,91 +9,166 @@
                     (onChange)="onChangeLang($event)"></am-select-lang>
   </div>
 
-    <div class="row">
-      <div class="form-group col-sm-6">
-        Pos ID: {{pos.id}}
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <h5>Pos ID: {{pos.id}}</h5>
+    </div>
+  </div>
+
+  <div id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="card collapse">
+      <div class="card-header" role="tab" id="headingDetails">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseDetails"
+             aria-controls="collapseDetails">
+            Details
+          </a>
+        </h5>
+      </div>
+      <div id="collapseDetails" class="collapse in" role="tabpanel" aria-labelledby="headingDetails">
+        <div class="card-block">
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label class="label">Name</label>
+              <input type="text" class="form-control" name="name" [(ngModel)]="pos.name"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="label">ZIP code</label>
+              <input type="text" class="form-control" name="zip" [(ngModel)]="pos.address.zip">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="label">Description</label>
+              <input type="text" class="form-control" name="description" [(ngModel)]="pos.description"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="label">Address line 1</label>
+              <input type="text" class="form-control" name="line1" [(ngModel)]="pos.address.addressLine1"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <label class="label">Address line 2</label>
+              <input type="text" class="form-control" name="line2" [(ngModel)]="pos.address.addressLine2"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label class="label">Area</label>
+              <input type="text" class="form-control" name="area" [(ngModel)]="pos.address.area"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="label">City</label>
+              <input type="text" class="form-control" name="city" [(ngModel)]="pos.address.city"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label class="label">State</label>
+              <input type="text" class="form-control" name="state" [(ngModel)]="pos.address.state"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="label">Country</label>
+              <input type="text" class="form-control" name="country" [(ngModel)]="pos.address.country"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label class="label">Lat</label>
+              <input type="text" class="form-control" name="lat" [(ngModel)]="pos.address.geoPoint.lat">
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="label">Lon</label>
+              <input type="text" class="form-control" name="lon" [(ngModel)]="pos.address.geoPoint.lon">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
+              <button class="btn btn-secondary pull-right" (click)="deleteModal.show()" *ngIf="posId">Delete
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="label">Name</label>
-        <input type="text" class="form-control" name="name" [(ngModel)]="pos.name" [ngStyle]="{'direction': langDirection}">
+    <div class="card collapse">
+      <div class="card-header" role="tab" id="headingMap">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseMap" (click)="initMap()"
+             aria-controls="collapseMap">
+            Map
+          </a>
+        </h5>
       </div>
-      <div class="form-group col-sm-3">
-        <label class="label">ZIP code</label>
-        <input type="text" class="form-control" name="zip" [(ngModel)]="pos.address.zip">
+      <div id="collapseMap" class="collapse" role="tabpanel" aria-labelledby="headingMap">
+        <div class="card-block">
+
+          <sebm-google-map *ngIf="!mapHidden" [zoom]="16" [latitude]="pos.address.geoPoint.lat" [longitude]="pos.address.geoPoint.lon">
+            <sebm-google-map-marker [latitude]="pos.address.geoPoint.lat" [longitude]="pos.address.geoPoint.lon"></sebm-google-map-marker>
+          </sebm-google-map>
+
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <label class="label">Description</label>
-        <input type="text" class="form-control" name="description" [(ngModel)]="pos.description" [ngStyle]="{'direction': langDirection}">
+
+          <div class="card">
+      <div class="card-header" role="tab" id="headingSchedule">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSchedule" aria-controls="collapseSchedule">
+            Work time schedule
+          </a>
+        </h5>
+      </div>
+      <div id="collapseSchedule" class="collapse show" aria-expanded="false" role="tabpanel"
+           aria-labelledby="headingSchedule">
+        <div class="card-block">
+
+          <am-pos-work-times [posId]="posId"></am-pos-work-times>
+
+        </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <label class="label">Address line 1</label>
-        <input type="text" class="form-control" name="line1" [(ngModel)]="pos.address.addressLine1" [ngStyle]="{'direction': langDirection}">
-      </div>
+  </div>
+  <am-app-modal #deleteModal>
+    <div class="app-modal-body">
+      <h5 class="modal-title" id="deleteModalLabel">Delete this POS?</h5>
     </div>
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <label class="label">Address line 2</label>
-        <input type="text" class="form-control" name="line2" [(ngModel)]="pos.address.addressLine2" [ngStyle]="{'direction': langDirection}">
-      </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-primary" (click)="deletePos(pos.id)">Confirm</button>
+      <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">Cancel</button>
     </div>
+  </am-app-modal>
 
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="label">Area</label>
-        <input type="text" class="form-control" name="area" [(ngModel)]="pos.address.area" [ngStyle]="{'direction': langDirection}">
-      </div>
-      <div class="form-group col-sm-3">
-        <label class="label">City</label>
-        <input type="text" class="form-control" name="city" [(ngModel)]="pos.address.city" [ngStyle]="{'direction': langDirection}">
-      </div>
+  <am-app-modal #deactivateGuardModal>
+    <div class="app-modal-body">
+      <h5 class="modal-title" id="deactivateGuardLabel">Unsaved changes will be lost.</h5>
+      <p>Are you shure you want to leave this page?</p>
     </div>
-
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="label">State</label>
-        <input type="text" class="form-control" name="state" [(ngModel)]="pos.address.state" [ngStyle]="{'direction': langDirection}">
-      </div>
-      <div class="form-group col-sm-3">
-        <label class="label">Country</label>
-        <input type="text" class="form-control" name="country" [(ngModel)]="pos.address.country" [ngStyle]="{'direction': langDirection}">
-      </div>
+    <div class="app-modal-footer">
+      <button type="button" class="btn btn-primary" (click)="onGuardClick(true)">Leave this page</button>
+      <button type="button" class="btn btn-secondary" (click)="onGuardClick(false)">Cancel</button>
     </div>
-
-    <div class="row">
-      <div class="form-group col-sm-3">
-        <label class="label">Lat</label>
-        <input type="text" class="form-control" name="lat" [(ngModel)]="pos.address.geoPoint.lat">
-      </div>
-      <div class="form-group col-sm-3">
-        <label class="label">Lon</label>
-        <input type="text" class="form-control" name="lon" [(ngModel)]="pos.address.geoPoint.lon">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="col-sm-6">
-        <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
-        <button style="float: right" class="btn btn-secondary" (click)="modal.show()" *ngIf="posId">Delete</button>
-      </div>
-    </div>
-
-    <am-app-modal>
-      <div class="app-modal-body">
-        <h5 class="modal-title" id="deleteModalLabel">Delete this POS?</h5>
-      </div>
-      <div class="app-modal-footer">
-        <button type="button" class="btn btn-primary" (click)="deletePos(pos.id)">Confirm</button>
-        <button type="button" class="btn btn-secondary" (click)="modal.hide()">Cancel</button>
-      </div>
-    </am-app-modal>
-
+  </am-app-modal>
 </form>

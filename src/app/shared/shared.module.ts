@@ -23,6 +23,7 @@ import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 import { ModalComponent } from './components/modal.component';
+import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
 import { MarketingAttributeTypeOptionsDirective } from "./directives/product-marketing-attributes-type-options.directive";
 
 @NgModule({
@@ -34,6 +35,7 @@ import { MarketingAttributeTypeOptionsDirective } from "./directives/product-mar
     CategoryTypeOptionsDirective,
     MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    VehicleTypeOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
@@ -41,9 +43,9 @@ import { MarketingAttributeTypeOptionsDirective } from "./directives/product-mar
     MultiselectDropdownComponent,
     ModalComponent,
     CategoryTypeOptionsDirective,
-    MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
+    VehicleTypeOptionsDirective,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule]
 })
 export class SharedModule {

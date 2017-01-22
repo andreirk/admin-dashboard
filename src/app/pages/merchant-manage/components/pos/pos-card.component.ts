@@ -13,18 +13,14 @@ import { ViewChild } from "@angular/core/src/metadata/di";
 
 @Component({
   selector: 'am-pos-card',
-  providers: [
-    BackendApiService,
-    PosService,
-    WorkTimeService
-  ],
+  providers: [],
   template: `
 <div class="col-sm-10">
   <div class="card card-block">
     <h5 class="card-title">{{pos.name}}</h5>
     <p class="card-text">{{pos.address.country + ', '}}{{pos.address.city + ', '}}{{pos.address.addressLine1}}</p>
     <a class="btn btn-primary" [routerLink]="[pos.id]" routerLinkActive="active">Edit</a>
-    <a style="float: right" class="btn btn-primary" (click)="modal.show()">Delete</a>
+    <a class="btn btn-primary pull-right" (click)="modal.show()">Delete</a>
   </div>
   <am-app-modal>
     <div class="app-modal-body">

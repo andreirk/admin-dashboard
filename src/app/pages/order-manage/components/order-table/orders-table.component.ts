@@ -15,7 +15,7 @@ import { Order } from '../../../../commons/model/order';
   styleUrls: ['../style'],
   template: require('./order-table.component.html')
 })
-export class OrdersTableComponent implements OnInit{
+export class OrdersTableComponent implements OnInit {
   @ViewChild('ordersFilterForm') form;
 
   private orders: ViewList<Order> = new ViewList<Order>();

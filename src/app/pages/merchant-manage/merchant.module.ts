@@ -29,12 +29,16 @@ import reducer from './components/products/reducers'
 import { ProductActions } from "./components/products/actions";
 import { ProductEffects } from "./components/products/effects";
 import { ProductDetailsContainerComponent } from "./components/products/product-details-container";
-
+import { PosWorkTimesComponent } from "./components/pos/pos-work-times/pos-work-times.component";
+import { AgmCoreModule } from "angular2-google-maps/core";
 
 @NgModule({
   imports: [
     SharedModule,
     MultiselectDropdownModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
+    }),
     TabsModule,
     AccordionModule,
     ButtonsModule,
@@ -53,15 +57,8 @@ import { ProductDetailsContainerComponent } from "./components/products/product-
     PosListComponent,
     PosCardComponent,
     PosDetailsComponent,
+    PosWorkTimesComponent,
     MerchantSectionsComponent,
-    ProductListComponent,
-    ProductCardComponent,
-    ProductDetailsContainerComponent,
-    ProductFormComponent,
-    CategorySelectComponent,
-    GroupMultiSelectComponent,
-    TagMultiSelectComponent,
-
   ],
   providers: [
     MerchantViewModelService,

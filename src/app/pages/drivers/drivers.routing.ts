@@ -2,16 +2,22 @@ import { Routes, RouterModule }  from '@angular/router';
 
 import { DriverContainerComponent } from './drivers.container.component';
 import { DriverMapComponent } from './components/driverMap/driverMap.component';
+import { DriverTableComponent } from './components/driver-table/driver-table.component';
+import { DriverDetailsComponent } from './components/driver-details/driver-details.component';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
     path: '',
-    component: DriverContainerComponent,
-    children: [
-      { path: 'driver_map_locations', component: DriverMapComponent },
-
-    ]
+    component: DriverTableComponent
+  },
+  {
+    path: 'driver_map_locations',
+    component: DriverMapComponent
+  },
+  {
+    path: ':driverId',
+    component: DriverDetailsComponent
   }
 ];
 

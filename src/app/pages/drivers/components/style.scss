@@ -1,0 +1,27 @@
+/*!
+ * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+ */
+
+table.am-driver-list {
+  thead {
+    background-color: #1d5b86;
+  }
+}
+
+table {
+  thead {
+    th {
+      font-weight: bold ! important;
+    }
+  }
+
+  tbody {
+    tr:hover {
+      background-color: darkcyan;
+    }
+  }
+}
+
+label {
+  display: block;
+}

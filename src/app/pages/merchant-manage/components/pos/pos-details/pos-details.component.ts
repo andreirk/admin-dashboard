@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component } from "@angular/core";
+import { Component, EventEmitter } from "@angular/core";
 import { PosService } from "../../../../../core/services/pos/pos.service";
 import * as _ from "lodash";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,19 +9,26 @@ import { Pos } from "../../../../../commons/model/pos";
 import { ViewChild } from "@angular/core/src/metadata/di";
 import { ChangeLangEvent } from "../../../../../shared/components/select-lang.component";
 import { Observable } from "rxjs";
-import { WorkTimeService } from "../../../../../core/services/work-times/work-time.service";
+import { Output } from "@angular/core/src/metadata/directives";
+import { ModalComponent } from "../../../../../shared/components/modal.component";
 
 @Component({
   selector: 'am-pos-details',
-  providers: [
-    PosService,
-    WorkTimeService
-  ],
-  template: require('./pos-details.component.html')
+  providers: [],
+  template: require('./pos-details.component.html'),
+  styleUrls: ['../style']
 })
 export class PosDetailsComponent {
 
   @ViewChild('posForm') form;
+
+  @ViewChild('deleteModal')
+  public readonly deleteModal: ModalComponent;
+
+  @ViewChild('deactivateGuardModal')
+  public readonly deactivateGuardModal: ModalComponent;
+
+  private guardEvent = new EventEmitter();
 
   private lang: string = 'en';
   private merchantId: string;
@@ -30,6 +37,10 @@ export class PosDetailsComponent {
   private posOriginal: Pos = new Pos();
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
+
+  private mapHidden: boolean = true;
+
+  @Output() onDelete = new EventEmitter();
 
 
   constructor(private route: ActivatedRoute,
@@ -54,7 +65,29 @@ export class PosDetailsComponent {
         }
       }
     });
+
   }
+
+  onGuardClick(result: boolean) {
+    this.deactivateGuardModal.hide();
+    this.guardEvent.emit(result);
+  }
+
+  canDeactivate() {
+    if (this.wasModified) {
+/*
+      this.deactivateGuardModal.show();
+      this.guardEvent.subscribe(event => {
+        return event;
+      });
+*/
+
+      return confirm('Unsaved changes will be lost. Are you shure you want to leave this page?');
+    } else {
+      return true;
+    }
+  }
+
 
   getPos(posId: string, lang: string) {
     const vm = this;
@@ -66,7 +99,7 @@ export class PosDetailsComponent {
 
   ngAfterViewInit() {
     const vm = this;
-    this.form.control.valueChanges
+    vm.form.control.valueChanges
       .subscribe(values => {
         vm.wasModified = !_.isEqual(vm.pos, vm.posOriginal);
       });
@@ -111,6 +144,19 @@ export class PosDetailsComponent {
       }
     );
 
+  }
+
+  deletePos(posId: string) {
+    this.posService.deletePos(posId).subscribe(res => {
+      this.router.navigate(['../'], {relativeTo: this.route});
+    });
+  }
+
+  initMap() {
+    const vm = this;
+    setTimeout(function() {
+      vm.mapHidden = false;
+    }, 400);
   }
 
 }

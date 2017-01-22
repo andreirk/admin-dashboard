@@ -7,6 +7,7 @@ import { MerchantDetailsComponent } from './components/merchant-details/merchant
 import {PosListComponent} from "./components/pos/pos-list.component";
 import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
 import {MerchantSectionsComponent} from "./components/merchant-sections.component";
+import { CanDeactivateGuard } from "../../core/services/guards/can-deactivate-guard.service";
 import { ProductListComponent } from "./components/products/product-list.component";
 import { ProductDetailsContainerComponent } from "./components/products/product-details-container";
 
@@ -30,6 +31,7 @@ const routes: Routes = [
       {
         path: 'pos/:posId',
         component: PosDetailsComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: 'products',

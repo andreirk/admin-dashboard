@@ -63,8 +63,8 @@ export class PosService {
 
   fillPosWorktimes(posId: string): void {
     if (posId) {
-      for (var i = 1; i <= 7; i++) {
-        var workTime: WorkTime = new WorkTime;
+      for (let i = 1; i <= 7; i++) {
+        let workTime: WorkTime = new WorkTime;
         workTime.startTime = '00:00';
         workTime.endTime = '24:00';
         workTime.weekday = i;
