@@ -23,7 +23,7 @@ export class ProductService {
     }
 
     getOne(id: string, lang: string, options = {}): Observable<Product> {
-      console.log('in getOne pruduct service', arguments)
+      console.log('in getOne pruduct service', arguments);
       return this.api.get(this.path + '/' + id, options, lang);
     }
 
@@ -44,7 +44,7 @@ export class ProductService {
       console.log('in updateAttributes service', {
         product,
         lang
-      })
+      });
       return this.api.put(this.path + '/' + product.id + '/attributes', product.attributes, {}, lang)
         .map(result => {
             if (result.success) {
@@ -61,7 +61,7 @@ export class ProductService {
       console.log('in updateUpc service', {
         product,
         lang
-      })
+      });
       if(product.upc) {
         return this.api.put(this.path + '/' + product.id + '/upc', product.upc, {}, lang)
           .map(result => {
@@ -80,7 +80,7 @@ export class ProductService {
       console.log('in updateCategory service', {
         product,
         lang
-      })
+      });
       return this.api.put(this.path + '/' + product.id + '/category', product.categoryId, {}, lang)
         .map(result => {
             if (result.success) {
@@ -97,7 +97,7 @@ export class ProductService {
       console.log('in createOrUpdatePrice service', {
         product,
         lang
-      })
+      });
       return this.api.put(this.path + '/' + product.id + '/prices', product.price, {}, lang)
         .map(result => {
             if (result.success) {

@@ -16,7 +16,6 @@ import { PosDetailsComponent } from "./components/pos/pos-details/pos-details.co
 import { MerchantSectionsComponent } from "./components/merchant-sections.component";
 import { ProductListComponent, ProductCardComponent } from "./components/products/product-list.component";
 import { ProductFormComponent } from "./components/products/product-form.component";
-import { ModalComponent } from "../../shared/components/modal.component";
 import { TabsModule, AccordionModule, ButtonsModule } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
 import { CategorySelectComponent } from "./components/products/category-select-component";
@@ -59,6 +58,13 @@ import { AgmCoreModule } from "angular2-google-maps/core";
     PosDetailsComponent,
     PosWorkTimesComponent,
     MerchantSectionsComponent,
+    ProductListComponent,
+    ProductDetailsContainerComponent,
+    ProductCardComponent,
+    ProductFormComponent,
+    CategorySelectComponent,
+    GroupMultiSelectComponent,
+    TagMultiSelectComponent,
   ],
   providers: [
     MerchantViewModelService,
