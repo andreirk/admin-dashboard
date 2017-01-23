@@ -8,9 +8,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Pos } from "../../../../../commons/model/pos";
 import { ViewChild } from "@angular/core/src/metadata/di";
 import { ChangeLangEvent } from "../../../../../shared/components/select-lang.component";
-import { Observable } from "rxjs";
-import { Output } from "@angular/core/src/metadata/directives";
-import { ModalComponent } from "../../../../../shared/components/modal.component";
+import { Observable, Subject } from "rxjs";
+import { ModalConfirmComponent } from "../../../../../shared/components/modal-confirm.component";
 
 @Component({
   selector: 'am-pos-details',
@@ -22,13 +21,11 @@ export class PosDetailsComponent {
 
   @ViewChild('posForm') form;
 
-  @ViewChild('deleteModal')
-  public readonly deleteModal: ModalComponent;
+  @ViewChild('deleteConfirmModal')
+  public readonly deleteModal: ModalConfirmComponent;
 
-  @ViewChild('deactivateGuardModal')
-  public readonly deactivateGuardModal: ModalComponent;
-
-  private guardEvent = new EventEmitter();
+  @ViewChild('deactivateConfirmModal')
+  public readonly deactivateConfirmModal: ModalConfirmComponent;
 
   private lang: string = 'en';
   private merchantId: string;
@@ -38,9 +35,12 @@ export class PosDetailsComponent {
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
 
+  private confirmDeleteMessage = 'Delete this POS?';
+  private leaveThisPageMessage = 'Unsaved changes will be lost. Are you sure you want to leave this page?';
+
   private mapHidden: boolean = true;
 
-  @Output() onDelete = new EventEmitter();
+  private guardSubject: Subject<boolean> = new Subject<boolean>();
 
 
   constructor(private route: ActivatedRoute,
@@ -50,41 +50,31 @@ export class PosDetailsComponent {
 
   ngOnInit() {
     const vm = this;
-    vm.route.parent.params.subscribe(parentParams => {
-      if (parentParams['merchantId']) {
-        vm.merchantId = parentParams['merchantId'];
-      }
-    });
-
-    vm.route.params.subscribe(params => {
-      if (params['posId']) {
-        if (params['posId'] !== 'new') {
-          vm.posId = params['posId'];
-          vm.getPos(vm.posId, vm.lang);
-          vm.changeLang(false, vm.lang);
-        }
-      }
-    });
-
+    vm.merchantId = vm.route.parent.snapshot.params['merchantId'];
+    let id = vm.route.snapshot.params['posId'];
+    if (id !== 'new') {
+      vm.posId = id;
+      vm.getPos(vm.posId, vm.lang);
+      vm.changeLang(false, vm.lang);
+    }
   }
 
-  onGuardClick(result: boolean) {
-    this.deactivateGuardModal.hide();
-    this.guardEvent.emit(result);
+  onDeleteConfirm(event) {
+    if (event === true) this.deletePos(this.posId);
+    else this.deleteModal.hide();
+  }
+
+  onDeactivateConfirm(event) {
+    this.deactivateConfirmModal.hide();
+    this.guardSubject.next(event);
   }
 
   canDeactivate() {
     if (this.wasModified) {
-/*
-      this.deactivateGuardModal.show();
-      this.guardEvent.subscribe(event => {
-        return event;
-      });
-*/
-
-      return confirm('Unsaved changes will be lost. Are you shure you want to leave this page?');
+      this.deactivateConfirmModal.show();
+      return this.guardSubject.asObservable();
     } else {
-      return true;
+      return Observable.of(true);
     }
   }
 
@@ -154,7 +144,7 @@ export class PosDetailsComponent {
 
   initMap() {
     const vm = this;
-    setTimeout(function() {
+    setTimeout(function () {
       vm.mapHidden = false;
     }, 400);
   }

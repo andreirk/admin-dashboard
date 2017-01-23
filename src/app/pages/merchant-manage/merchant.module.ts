@@ -1,21 +1,21 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { NgModule } from "@angular/core";
-import { MerchantListComponent } from "./components/merchant-list.component";
-import { MerchantCardComponent } from "./components/merchant-card.component";
-import { MerchantDetailsComponent } from "./components/merchant-details/merchant-details.component";
-import { routing } from "./merchant.routing";
-import { SharedModule } from "../../shared/shared.module";
+import { NgModule } from '@angular/core';
+import { MerchantListComponent } from './components/merchant-list.component';
+import { MerchantCardComponent } from './components/merchant-card.component';
+import { MerchantDetailsComponent } from './components/merchant-details/merchant-details.component';
+import { routing } from './merchant.routing';
+import { SharedModule } from '../../shared/shared.module';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect/src/multiselect-dropdown';
 import { RootCategoryMultiselectComponent } from './components/root-category-mutliselect.component';
 import { MerchantViewModelService } from './services/merchant-view-model.service';
-import {PosCardComponent} from "./components/pos/pos-card.component";
-import {PosListComponent} from "./components/pos/pos-list.component";
-import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
-import {MerchantSectionsComponent} from "./components/merchant-sections.component";
-import { PosWorkTimesComponent } from "./components/pos/pos-work-times/pos-work-times.component";
-import { AgmCoreModule } from "angular2-google-maps/core";
+import { PosCardComponent } from './components/pos/pos-card.component';
+import { PosListComponent } from './components/pos/pos-list.component';
+import { PosDetailsComponent } from './components/pos/pos-details/pos-details.component';
+import { MerchantSectionsComponent } from './components/merchant-sections.component';
+import { PosWorkTimesComponent } from './components/pos/pos-work-times/pos-work-times.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
   imports: [
@@ -35,11 +35,11 @@ import { AgmCoreModule } from "angular2-google-maps/core";
     PosCardComponent,
     PosDetailsComponent,
     PosWorkTimesComponent,
-    MerchantSectionsComponent,
     MerchantSectionsComponent
   ],
   providers: [
     MerchantViewModelService
   ]
 })
-export default class MerchantsModule { }
+export default class MerchantsModule {
+}

@@ -22,7 +22,7 @@ import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
-import { ModalComponent } from './components/modal.component';
+import { ModalConfirmComponent } from './components/modal-confirm.component';
 import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
 
 @NgModule({
@@ -30,7 +30,7 @@ import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.d
   declarations: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
-    ModalComponent,
+    ModalConfirmComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
@@ -39,7 +39,7 @@ import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.d
   exports: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
-    ModalComponent,
+    ModalConfirmComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
