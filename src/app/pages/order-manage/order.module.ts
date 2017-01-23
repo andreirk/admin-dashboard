@@ -22,7 +22,6 @@ import { OrderFilteringService } from './services/order-filtering.service';
 import { OrderActionSelectComponent } from './components/order-action-select.component';
 import { OrderPersonMultiselectComponent } from './components/order-person-multiselect.component';
 
-
 @NgModule({
   imports: [
     SharedModule,
@@ -49,4 +48,4 @@ import { OrderPersonMultiselectComponent } from './components/order-person-multi
     OrderFilteringService
   ]
 })
-export default class MerchantsModule { }
+export default class OrdersModule { }

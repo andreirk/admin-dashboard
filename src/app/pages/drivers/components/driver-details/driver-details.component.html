@@ -96,9 +96,13 @@
     </div>
   </div>
 
+  <button *ngIf="driver.id" class="btn btn-primary" [routerLink]="['../../../orders']" [queryParams]="{ driverId: driver.id}" (click)="false">
+    Order list
+  </button>
+
   <div class="form-group row">
     <div class="col-sm-3">
-      <button (click)="saveDriver()" class="btn btn-secondary" [hidden]="!wasModified" [disabled]="!driverForm.form.valid">Save</button>
+      <button (click)="saveDriver(); false" class="btn btn-secondary" [hidden]="!wasModified" [disabled]="!driverForm.form.valid">Save</button>
     </div>
   </div>
 

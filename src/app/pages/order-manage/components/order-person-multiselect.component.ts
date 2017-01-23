@@ -4,14 +4,21 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import {
-  IMultiSelectOption, IMultiSelectSettings,
-  IMultiSelectGroup, IMultiSelectTexts
+  IMultiSelectOption,
+  IMultiSelectSettings,
+  IMultiSelectGroup,
+  IMultiSelectTexts
 } from '../../../shared/components/multiselect-dropdown.component';
 import { SearchService } from '../../../core/services/search/search.service';
 import { SearchQuery } from '../../../commons/model/search/search-query';
+import { Subject, Observable } from 'rxjs';
 import { UserService } from '../../../core/services/users/user.service';
-import { OrderFilteringService } from '../services/order-filtering.service';
-import { Observable, Subject } from 'rxjs';
+import { DriverService } from '../../../core/services/drivers/driver.service';
+import { OrderFilterPersons } from '../model/order-filter-persons';
+import { Page } from '../../../commons/model/page';
+import { User } from '../../../commons/model/user';
+import { DriverProfile } from '../../../commons/model/driver/driver-profile';
+import { Driver } from '../../../commons/model/driver/driver';
 
 @Component({
   selector: 'am-order-person-multiselect',
@@ -53,19 +60,20 @@ export class OrderPersonMultiselectComponent implements OnInit, ControlValueAcce
     defaultTitle: 'Select',
     searchPlaceholder: 'Search by phone or email...',
   };
-  private subjectSearchText: Subject<string> = new Subject<string>();
+  private searchTextSubject: Subject<string> = new Subject<string>();
   private exist = false;
 
 
-  constructor(private filteringService: OrderFilteringService) {
+  constructor(private userService: UserService,
+              private driverService: DriverService) {
     this.exist = true;
   }
 
   ngOnInit() {
     const vm = this;
 
-    vm.subjectSearchText.debounceTime(300).subscribe(query => {
-      vm.filteringService.getPersons(query).subscribe(persons => {
+    vm.searchTextSubject.debounceTime(300).subscribe(query => {
+      vm.getPersons(query, vm.selectedOptions).subscribe(persons => {
         vm.orderPersonOptions = [];
         let selectedUserOption: IMultiSelectOption;
         let selectedDriverOption: IMultiSelectOption;
@@ -85,11 +93,7 @@ export class OrderPersonMultiselectComponent implements OnInit, ControlValueAcce
           vm.orderPersonOptions.push(selectedUserOption);
         }
         persons.users.content.forEach(user => {
-          vm.orderPersonOptions.push(<IMultiSelectOption> {
-            id: user.id,
-            name: user.firstName + ' ' + user.lastName + '(' + user.phoneNumber + ', ' + user.email + ')',
-            group: 'usr'
-          });
+          vm.orderPersonOptions.push(OrderPersonMultiselectComponent.userOption(user));
         });
         if (persons.drivers.total > 0 || selectedDriverOption) {
           vm.orderPersonOptions.push(<IMultiSelectOption> { name: 'Drivers (total ' + persons.drivers.total + ' matched)'  });
@@ -98,19 +102,50 @@ export class OrderPersonMultiselectComponent implements OnInit, ControlValueAcce
           vm.orderPersonOptions.push(selectedDriverOption);
         }
         persons.drivers.content.forEach(driver => {
-          vm.orderPersonOptions.push(<IMultiSelectOption> {
-            id: driver.id,
-            name: driver.firstName + ' ' + driver.lastName + '(' + driver.phone + ', ' + driver.email + ')',
-            group: 'drv'
-          });
+          vm.orderPersonOptions.push(OrderPersonMultiselectComponent.driverOption(driver));
         });
       });
     });
+    vm.searchTextSubject.next('');
   }
 
   searchChange(event) {
-    this.subjectSearchText.next(event.query);
+    this.searchTextSubject.next(event.query);
   }
+
+  getPersons(searchText: string, selectedOptions: IMultiSelectOption[]) : Observable<OrderFilterPersons> {
+    const vm = this;
+    if (!searchText || searchText === '') {
+      return Observable.of(new OrderFilterPersons());
+    }
+    return Observable.combineLatest(
+      vm.userService.getPage(0, 10, searchText),
+      vm.driverService.getProfilesPage(0, 10, { searchPattern: searchText }),
+      (pageUser: Page<User>, pageDriver: Page<DriverProfile>) => {
+        return <OrderFilterPersons> {
+          users: pageUser,
+          drivers: pageDriver
+        }
+      }
+    );
+  }
+
+  static driverOption(driver: Driver): IMultiSelectOption {
+    return <IMultiSelectOption> {
+      id: driver.id,
+      name: driver.firstName + ' ' + driver.lastName + '(' + driver.phone + ', ' + driver.email + ')',
+      group: 'drv'
+    };
+  }
+
+  static userOption(user: User): IMultiSelectOption {
+    return <IMultiSelectOption> {
+      id: user.id,
+      name: user.firstName + ' ' + user.lastName + '(' + user.phoneNumber + ', ' + user.email + ')',
+      group: 'usr'
+    };
+  }
+
 
   // custom form control methods
   get selectedOptions() {
