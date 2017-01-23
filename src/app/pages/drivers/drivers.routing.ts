@@ -4,6 +4,8 @@ import { DriverContainerComponent } from './drivers.container.component';
 import { DriverMapComponent } from './components/driverMap/driverMap.component';
 import { DriverTableComponent } from './components/driver-table/driver-table.component';
 import { DriverDetailsComponent } from './components/driver-details/driver-details.component';
+import { DriverTabsComponent } from './components/driver-tabs.component';
+import { DriverBalanceHistoryTableComponent } from './components/balance-history-table/balance-history-table.component';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -17,7 +19,17 @@ const routes: Routes = [
   },
   {
     path: ':driverId',
-    component: DriverDetailsComponent
+    component: DriverTabsComponent,
+    children: [
+      {
+        path: 'general',
+        component: DriverDetailsComponent
+      },
+      {
+        path: 'balance',
+        component: DriverBalanceHistoryTableComponent
+      }
+    ]
   }
 ];
 

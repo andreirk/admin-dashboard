@@ -32,11 +32,10 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const vm = this;
-    vm.driverId = vm.route.snapshot.params['driverId'];
+    vm.driverId = vm.route.parent.snapshot.params['driverId'];
     if (vm.driverId !== 'new') {
       vm.driverService.getProfile(parseInt(vm.driverId, 10)).subscribe(driver => {
         vm.driver = driver;
-        console.log(driver);
         vm.driverOriginal = _.cloneDeep(vm.driver);
       });
     }
@@ -58,7 +57,7 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
         vm.driverOriginal = _.cloneDeep(driver);
         vm.wasModified = false;
         vm.driverId = String(driver.id);
-        vm.router.navigate(['../', driver.id], {relativeTo: this.route});
+        vm.router.navigate(['../../', driver.id, 'general'], {relativeTo: this.route});
       }
     );
   }

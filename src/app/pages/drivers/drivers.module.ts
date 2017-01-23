@@ -12,10 +12,18 @@ import { DriverFilteringService } from './services/driver-filtering.service';
 import { DriverDetailsComponent } from './components/driver-details/driver-details.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MaxPaymentAmountsComponent } from './components/max-payment-amounts.component';
+import { DriverBalanceHistoryTableComponent } from './components/balance-history-table/balance-history-table.component';
+import { DriverTabsComponent } from './components/driver-tabs.component';
+import { BalanceRecordListService } from './services/balance-record-list.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BalanceRecordRowComponent } from './components/balance-record-row.component';
+import { BalanceRecordFilteringService } from './services/balance-record-filtering.service';
+import { BalanceRecordTypeMultiselectComponent } from './components/balance-record-type-multiselect.component';
 
 @NgModule({
   imports: [
     SharedModule,
+    NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
     }),
@@ -28,12 +36,18 @@ import { MaxPaymentAmountsComponent } from './components/max-payment-amounts.com
     DriverRowComponent,
     DriverDetailsComponent,
     MaxPaymentAmountsComponent,
+    DriverBalanceHistoryTableComponent,
+    DriverTabsComponent,
+    BalanceRecordRowComponent,
+    BalanceRecordTypeMultiselectComponent,
     CustomMapDirective
   ],
   providers: [
     DriverMapApiService,
     DriverListService,
-    DriverFilteringService
+    DriverFilteringService,
+    BalanceRecordListService,
+    BalanceRecordFilteringService
   ]
 })
 export default class MapsModule {}

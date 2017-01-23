@@ -64,4 +64,7 @@ export class DriverTableComponent implements OnInit {
       });
   }
 
+  clearFilters() {
+    this.filterParamsForm = new DriverFilterParamsForm();
+  }
 }
