@@ -24,6 +24,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 import { ModalConfirmComponent } from './components/modal-confirm.component';
 import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
+import { TimeInputComponent } from './components/time-input.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule],
@@ -31,6 +32,7 @@ import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.d
     UploadImageComponent,
     MultiselectDropdownComponent,
     ModalConfirmComponent,
+    TimeInputComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
@@ -40,6 +42,7 @@ import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.d
     UploadImageComponent,
     MultiselectDropdownComponent,
     ModalConfirmComponent,
+    TimeInputComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,

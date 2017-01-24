@@ -26,24 +26,25 @@
           {{weekDays[i]}}
         </td>
         <td>
-          <div class="row" *ngFor="let workPeriod of dayWorkTimes; let j = index"
-               [ngClass]="{'am-wt-err' : workPeriod.error}">
-            <input type="number" min="0" max="23" class="am-wt-control" name="start-hour-{{i}}-{{j}}"
-                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.startTimeHour">
-            <label> : </label>
-            <input type="number" min="0" max="59" class="am-wt-control" name="start-minute-{{i}}-{{j}}"
-                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.startTimeMinute">
-            <label> - </label>
-            <input type="number" min="0" max="23" class="am-wt-control" name="end-hour-{{i}}-{{j}}"
-                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.endTimeHour">
-            <label> : </label>
-            <input type="number" min="0" max="59" class="am-wt-control" name="end-minute-{{i}}-{{j}}"
-                   [ngClass]="{'am-wt-err' : workPeriod.error}" [(ngModel)]="workPeriod.endTimeMinute">
-            <button type="button" class="btn btn-xs btn-default" (click)="deleteWorkTime(i, j)">
-              <span class="glyphicon glyphicon-times"><i class="fa fa-times" aria-hidden="true"></i> </span>
-            </button>
-            <p *ngIf="workPeriod.error">
-              {{workPeriod.errorMessage}}
+          <div class="row" *ngFor="let workTimeModel of dayWorkTimes; let j = index"
+               [ngClass]="{'am-wt-err' : workTimeModel.error}">
+
+              <am-time-input name="start-time-{{i}}-{{j}}"
+                             [error] = workTimeModel.error
+                             [(ngModel)]="workTimeModel.workPeriod.startTime"></am-time-input>
+
+              <label> - </label>
+
+              <am-time-input name="end-time-{{i}}-{{j}}"
+                             [error] = workTimeModel.error
+                             [(ngModel)]="workTimeModel.workPeriod.endTime"></am-time-input>
+
+              <button type="button" class="btn btn-xs btn-default" (click)="deleteWorkTime(i, j)">
+
+                <span class="glyphicon glyphicon-times"><i class="fa fa-times" aria-hidden="true"></i> </span>
+              </button>
+            <p *ngIf="workTimeModel.error">
+            {{workTimeModel.errorMessage}}
             </p>
           </div>
 

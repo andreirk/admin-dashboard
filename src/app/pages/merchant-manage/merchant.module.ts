@@ -16,6 +16,7 @@ import { PosDetailsComponent } from './components/pos/pos-details/pos-details.co
 import { MerchantSectionsComponent } from './components/merchant-sections.component';
 import { PosWorkTimesComponent } from './components/pos/pos-work-times/pos-work-times.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { WorkTimeViewModelService } from './services/work-time-view-model.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     MerchantSectionsComponent
   ],
   providers: [
-    MerchantViewModelService
+    MerchantViewModelService,
+    WorkTimeViewModelService
   ]
 })
 export default class MerchantsModule {

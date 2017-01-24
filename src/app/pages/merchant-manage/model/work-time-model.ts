@@ -2,17 +2,9 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 
+import { WorkTime } from '../../../commons/model/work-time';
 export class WorkTimeModel {
-  public workTimeId: string = '';
-  public weekDay: number = 0;
-
-  public startTimeHour: string = '';
-  public startTimeMinute: string = '';
-
-  public endTimeHour: string = '';
-  public endTimeMinute: string = '';
-
+  public workPeriod: WorkTime = new WorkTime();
   public error: boolean = false;
   public errorMessage: string = '';
-
 }
