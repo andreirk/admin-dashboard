@@ -28,8 +28,10 @@
         <h5>{{user.firstName + ' ' + user.lastName}}</h5>
         <p>Phone: {{user.phoneNumber}}</p>
       </ba-card>
-      <ba-card title="Driver" baCardClass="with-scroll">
-        <h5>{{driver.firstName + ' ' + driver.lastName}}</h5>
+      <ba-card *ngIf="driver.id !== null" title="Driver" baCardClass="with-scroll">
+        <a [routerLink]="['../../drivers', driver.id, 'general']" routerLinkActive="active" title="Driver profile">
+          <h5>{{driver.firstName + ' ' + driver.lastName}}</h5>
+        </a>
         <p>Phone: {{driver.phone}}</p>
         <p>Vehicle type: {{driver.capacity}}</p>
         <p>Location: {{driverLocation | amDriverLocation}}</p>

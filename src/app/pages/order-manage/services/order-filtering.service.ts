@@ -4,16 +4,14 @@
 import { OrderFilterParamsForm } from '../model/order-filter-params-form';
 import { OrderFilterParams } from '../model/order-filter-params';
 import { OrderStatus, DeliveryStatus } from '../../../shared/types';
-import { Observable } from 'rxjs';
-import { OrderFilterPersons } from '../model/order-filter-persons';
-import { UserService } from '../../../core/services/users/user.service';
-import { DriverService } from '../../../core/services/drivers/driver.service';
 import { Injectable } from '@angular/core';
+import { IMultiSelectOption } from '../../../shared/components/multiselect-dropdown.component';
+import {DriverService} from "../../../core/services/drivers/driver.service";
+import {OrderPersonMultiselectComponent} from "../components/order-person-multiselect.component";
 
 @Injectable()
 export class OrderFilteringService {
-  constructor(private userService: UserService,
-      private driverService: DriverService) { }
+  constructor(private driverService: DriverService) { }
 
   transformFilterParams(filterParamsForm: OrderFilterParamsForm): OrderFilterParams {
     let filterParams: OrderFilterParams = new OrderFilterParams();
@@ -56,22 +54,15 @@ export class OrderFilteringService {
     return filterParams;
   }
 
-  getPersons(searchText: string) : Observable<OrderFilterPersons> {
+  transformFilterParamsForm(filterParams: OrderFilterParams): OrderFilterParamsForm {
     const vm = this;
-    if (!searchText || searchText === '') {
-      return Observable.of(new OrderFilterPersons());
+    let filterParamsForm: OrderFilterParamsForm = new OrderFilterParamsForm();
+    if (filterParams.driverId) {
+      vm.driverService.getProfile(filterParams.driverId).subscribe(driver => {
+        filterParamsForm.orderPersons.push(OrderPersonMultiselectComponent.driverOption(driver));
+      });
     }
-    return Observable.combineLatest(
-      vm.userService.getPage(0, 10, searchText),
-      vm.driverService.getProfilesPage(0, 10, { searchPattern: searchText }),
-      (pageUser, pageDriver) => {
-        return <OrderFilterPersons> {
-          users: pageUser,
-          drivers: pageDriver
-        }
-      }
-    );
+    return filterParamsForm;
   }
-
 }
 

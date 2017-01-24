@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../../../core/services/orders/order.service';
 import { Order } from '../../../../commons/model/order';
 import { UserCacheService } from '../../services/user-cache.service';
@@ -18,6 +18,7 @@ import { Driver } from '../../../../commons/model/driver/driver';
   providers: [
     OrderService
   ],
+  styleUrls: ['../style'],
   template: require('./order-details.component.html')
 })
 export class OrderDetailsComponent implements OnInit {
@@ -29,6 +30,7 @@ export class OrderDetailsComponent implements OnInit {
   private driverLocation: DriverLocation = new DriverLocation();
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private orderService: OrderService,
               private userCacheService: UserCacheService,
               private driverService: DriverService) {

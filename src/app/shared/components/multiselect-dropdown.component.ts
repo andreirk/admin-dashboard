@@ -3,7 +3,7 @@
  */
 import {
   Component, Input, Output, EventEmitter, forwardRef, ElementRef, IterableDiffers,
-  HostListener, ViewChild, OnInit, AfterViewInit
+  HostListener, ViewChild, OnInit, AfterViewInit, OnChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -245,26 +245,27 @@ export class MultiselectDropdownComponent implements OnInit {
   }
 
   updateTitle() {
-    if (this.numSelected === 0) {
-      this.title = this.texts.defaultTitle;
-      this.titleList = [ this.texts.defaultTitle ];
-    } else if (this.settings.dynamicTitleMaxItems >= this.numSelected) {
-      this.titleList = this.model
+    const vm = this;
+    if (vm.numSelected === 0) {
+      vm.title = vm.texts.defaultTitle;
+      vm.titleList = [ vm.texts.defaultTitle ];
+    } else if (vm.settings.dynamicTitleMaxItems >= vm.numSelected) {
+      vm.titleList = vm.model
         .map((option: IMultiSelectOption) => {
           if (option.group) {
-            return this.groups.find(group => group.id === option.group).prefix + option.name;
+            return vm.groups.find(group => group.id === option.group).prefix + option.name;
           } else {
             return option.name;
           }
         });
-      this.title = this.model
+      vm.title = vm.model
         .map((option: IMultiSelectOption) => option.name)
         .join('\n ');
     } else {
-      this.title = this.numSelected
+      vm.title = vm.numSelected
         + ' '
-        + (this.numSelected === 1 ? this.texts.checked : this.texts.checkedPlural);
-      this.titleList = [ this.title ];
+        + (vm.numSelected === 1 ? vm.texts.checked : vm.texts.checkedPlural);
+      vm.titleList = [ vm.title ];
     }
   }
 
