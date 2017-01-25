@@ -25,3 +25,14 @@ table {
 label {
   display: block;
 }
+
+.input-group {
+  height: 32px;
+  margin-bottom: 0px;
+}
+
+select.form-control {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 2.2rem!important;
+}

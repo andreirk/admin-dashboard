@@ -10,6 +10,7 @@ import { DriverLocation } from '../../../commons/model/driver/driver-location';
 import { Page } from '../../../commons/model/page';
 import { DriverProfile } from '../../../commons/model/driver/driver-profile';
 import { DriverBalanceRecord } from '../../../commons/model/driver/driver-balance-record';
+import { DriverInfo } from '../../../commons/model/driver/driver-info';
 
 @Injectable()
 export class DriverService {
@@ -108,6 +109,16 @@ export class DriverService {
       Object.assign({
         'page': String(page),
         'size': String(size)
+      }, filterParams)
+    );
+  }
+
+  getDriverInfoPage(page: number, size: number, filterParams: any): Observable<Page<DriverInfo>> {
+    return this.backendApi.get(this.path + '/driverinfo',
+      Object.assign({
+        'page': String(page),
+        'size': String(size),
+        'sort': 'lastName,firstName'
       }, filterParams)
     );
   }
