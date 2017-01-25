@@ -7,7 +7,6 @@ import { DriverMapApiService } from './components/driverMap/driverMap.service';
 import { CustomMapDirective } from './components/driverMap/driverMap.directive';
 import { DriverTableComponent } from './components/driver-table/driver-table.component';
 import { DriverRowComponent } from './components/driver-row.component';
-import { DriverListService } from './services/driver-list.service';
 import { DriverFilteringService } from './services/driver-filtering.service';
 import { DriverDetailsComponent } from './components/driver-details/driver-details.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -19,11 +18,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BalanceRecordRowComponent } from './components/balance-record-row.component';
 import { BalanceRecordFilteringService } from './services/balance-record-filtering.service';
 import { BalanceRecordTypeMultiselectComponent } from './components/balance-record-type-multiselect.component';
+import { DriverInfoListService } from './services/driver-info-list.service';
+import { DriverStatusService } from './services/driver-status.service';
+import { RatingModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
     NgbModule,
+    RatingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
     }),
@@ -44,10 +47,11 @@ import { BalanceRecordTypeMultiselectComponent } from './components/balance-reco
   ],
   providers: [
     DriverMapApiService,
-    DriverListService,
+    DriverInfoListService,
     DriverFilteringService,
     BalanceRecordListService,
-    BalanceRecordFilteringService
+    BalanceRecordFilteringService,
+    DriverStatusService
   ]
 })
 export default class MapsModule {}

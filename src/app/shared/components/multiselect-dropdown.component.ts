@@ -53,6 +53,7 @@ export interface IMultiSelectTexts {
     input { color: #373a3c !important; border-color: #373a3c !important; }
     i { color: #373a3c !important; }
     .dropdown-toggle:after { display:none; }
+    .dropdown-toggle { height: 2.2rem!important; }
     .btn:hover { transform: none; }
     .form-control::-webkit-input-placeholder { color: grey; }
     .form-control:-moz-placeholder { color: grey; }
@@ -61,7 +62,7 @@ export interface IMultiSelectTexts {
   `],
   template: `
 <div class="dropdown">
-    <div class="input-group input-group-sm">
+    <div class="input-group">
       <button type="button" style="width:100%;" class="dropdown-toggle" [ngClass]="settings.buttonClasses" (click)="toggleDropdown()">
         <div *ngFor="let t of titleList">{{ t }}</div>
       </button>

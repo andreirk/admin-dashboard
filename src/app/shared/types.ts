@@ -79,3 +79,10 @@ export enum DriverBalanceRecordType {
   PAYOUT = <any>'PAYOUT',
   MANUAL = <any>'MANUAL'
 }
+
+export enum DriverStatus {
+  READY = <any>'READY',
+  ORDER_EXECUTION = <any>'ORDER_EXECUTION',
+  OFFLINE = <any>'OFFLINE',
+  ORDER_OFFLINE = <any>'ORDER_OFFLINE'
+}

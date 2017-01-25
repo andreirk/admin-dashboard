@@ -8,9 +8,13 @@ import { DriverService } from '../../../../core/services/drivers/driver.service'
 import { OrderActionEvent } from '../order-action-select.component';
 import { Driver } from '../../../../commons/model/driver/driver';
 import { IUploadSettings } from '../../../../shared/components/upload-image.component';
+import { DriverLocation } from '../../../../commons/model/driver/driver-location';
+import { DriverStatusService } from '../../services/driver-status.service';
+import { driverStatusColorsMap, vehicleTypeIconMap } from '../../model/driver-const';
 
 @Component({
   selector: 'am-driver-details',
+  styleUrls: ['../style'],
   template: require('./driver-details.component.html')
 })
 export class DriverDetailsComponent implements OnInit, AfterViewInit {
@@ -19,6 +23,8 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
   private driverId: string;
   private driver: Driver = new Driver();
   private driverOriginal: Driver = new Driver();
+  private driverLocation: DriverLocation;
+  private rating: number;
   private wasModified: boolean = false;
 
   private uploadSettings: IUploadSettings = {
@@ -37,7 +43,13 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
       vm.driverService.getProfile(parseInt(vm.driverId, 10)).subscribe(driver => {
         vm.driver = driver;
         vm.driverOriginal = _.cloneDeep(vm.driver);
+        if (vm.driver.rating.count != 0) {
+          vm.rating = vm.driver.rating.value / vm.driver.rating.count;
+        }
       });
+      vm.driverService.getLocation(parseInt(vm.driverId, 10)).subscribe(location => {
+        vm.driverLocation = location;
+      })
     }
   }
 
@@ -47,6 +59,18 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
       .subscribe(values => {
         vm.wasModified = !_.isEqual(vm.driver, vm.driverOriginal);
       });
+  }
+
+  getStatus(): string {
+    return String(DriverStatusService.getStatus(this.driverLocation)).replace('_', ' ');
+  }
+
+  getStatusColor(): string {
+    return driverStatusColorsMap.get(DriverStatusService.getStatus(this.driverLocation));
+  }
+
+  getIcon() {
+    return vehicleTypeIconMap.get(this.driver.capacity);
   }
 
   saveDriver() {

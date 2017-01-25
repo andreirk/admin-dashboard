@@ -3,7 +3,15 @@
   -->
 <form #driverForm="ngForm" class="container">
 
-  <h3>Driver: {{driver.firstName + ' ' + driver.lastName}}</h3>
+  <div class="row">
+    <div class="col-sm-3">
+      <h3>Driver: {{driver.firstName + ' ' + driver.lastName}}</h3>
+    </div>
+    <div *ngIf="rating" class="col-sm-3">
+      <rating [(ngModel)]="rating" max="5" [readonly]="true" stateOn="ion-android-star" stateOff="ion-android-star-outline" class="rating" name="rating"></rating>
+    </div>
+  </div>
+  <h4 [style.color]="getStatusColor()"><i class="fa">{{getIcon()}}</i> {{getStatus()}}</h4>
 
   <div class="row">
     <div class="form-group col-sm-3">
@@ -86,6 +94,12 @@
           <input type="text" class="form-control" name="carColor" [(ngModel)]="driver.carColor">
         </div>
       </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>License number</label>
+          <input type="text" class="form-control" name="carPlateNumber" [(ngModel)]="driver.carPlateNumber">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -96,9 +110,13 @@
     </div>
   </div>
 
-  <button *ngIf="driver.id" class="btn btn-primary" [routerLink]="['../../../orders']" [queryParams]="{ driverId: driver.id}" (click)="false">
-    Order list
-  </button>
+  <div class="form-group row">
+    <div class="col-sm-3">
+    <button *ngIf="driver.id" class="btn btn-primary" [routerLink]="['../../../orders']" [queryParams]="{ driverId: driver.id}" (click)="false">
+      Order list
+    </button>
+    </div>
+  </div>
 
   <div class="form-group row">
     <div class="col-sm-3">

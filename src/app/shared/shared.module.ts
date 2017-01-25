@@ -24,6 +24,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
 import { ModalConfirmComponent } from './components/modal-confirm.component';
 import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
+import { DriverStatusOptionsDirective } from './directives/driver-status-options.directive';
 import { TimeInputComponent } from './components/time-input.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { TimeInputComponent } from './components/time-input.component';
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
+    DriverStatusOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
@@ -46,6 +48,7 @@ import { TimeInputComponent } from './components/time-input.component';
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
+    DriverStatusOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule]
 })

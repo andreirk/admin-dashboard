@@ -3,6 +3,7 @@
  */
 import { DriverFilterParams } from '../model/driver-filter-params';
 import { DriverFilterParamsForm } from '../model/driver-filter-params-form';
+import { DriverStatusService } from './driver-status.service';
 
 export class DriverFilteringService {
   transformFilterParams(filterParamsForm: DriverFilterParamsForm): DriverFilterParams {
@@ -13,6 +14,10 @@ export class DriverFilteringService {
     if (filterParamsForm.orderId) {
       result.orderId = filterParamsForm.orderId;
     }
+    if (filterParamsForm.driverStatus) {
+      Object.assign(result, DriverStatusService.getStatusFilter(filterParamsForm.driverStatus));
+    }
+
     return result;
   }
 

@@ -2,13 +2,13 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { DriverListService } from '../../services/driver-list.service';
 import { ViewList } from '../../../../commons/model/view-list';
-import { Driver } from '../../../../commons/model/driver/driver';
 import { DriverFilterParamsForm } from '../../model/driver-filter-params-form';
 import { DriverFilterParams } from '../../model/driver-filter-params';
 import { DriverFilteringService } from '../../services/driver-filtering.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DriverInfoListService } from '../../services/driver-info-list.service';
+import { DriverInfo } from '../../../../commons/model/driver/driver-info';
 
 @Component({
   selector: 'am-driver-table',
@@ -18,14 +18,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DriverTableComponent implements OnInit, AfterViewInit {
   @ViewChild('driversFilterForm') form;
 
-  private drivers: ViewList<Driver> = new ViewList<Driver>();
+  private drivers: ViewList<DriverInfo> = new ViewList<DriverInfo>();
   private pageSize = 10;
   private filterParamsForm: DriverFilterParamsForm = new DriverFilterParamsForm();
   private filterParams: DriverFilterParams = new DriverFilterParams();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private driverListService: DriverListService,
+              private driverInfoListService: DriverInfoListService,
               private driverFilteringService: DriverFilteringService) {
   }
 
@@ -51,17 +51,21 @@ export class DriverTableComponent implements OnInit, AfterViewInit {
           queryParams: vm.filterParams };
         vm.router.navigate(['./'], extras);
 */
-        vm.drivers = new ViewList<Driver>();
+        vm.drivers = new ViewList<DriverInfo>();
         vm.loadMoreDrivers();
       });
   }
 
   loadMoreDrivers() {
     const vm = this;
-    vm.driverListService.loadMore(vm.drivers, vm.pageSize, '', vm.filterParams)
+    vm.driverInfoListService.loadMore(vm.drivers, vm.pageSize, '', vm.filterParams)
       .subscribe(driverList => {
         vm.drivers = driverList;
       });
+  }
+
+  clearStatus() {
+    this.filterParamsForm.driverStatus = undefined;
   }
 
   clearFilters() {

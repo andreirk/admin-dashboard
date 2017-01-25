@@ -7,7 +7,8 @@ export class DriverLocation {
   public lat: number;
   public heading: string;
   public date: string;
-  public status: string;
+  public status: number;
+  public orderId: string;
 
   constructor() {
   }
