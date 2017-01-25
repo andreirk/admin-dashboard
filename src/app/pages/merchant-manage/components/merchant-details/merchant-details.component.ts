@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { ChangeLangEvent } from '../../../../shared/components/select-lang.component';
@@ -28,6 +28,7 @@ export class MerchantDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private merchantVmService: MerchantViewModelService) {
   }
 
@@ -75,6 +76,7 @@ export class MerchantDetailsComponent {
       vm.viewModel = viewModel;
       vm.viewModelOriginal = _.cloneDeep(viewModel);
       vm.lang = lang;
+      vm.router.navigate(['../../', vm.viewModel.merchant.id, 'general'], {relativeTo: this.route});
     });
   }
 
@@ -86,6 +88,7 @@ export class MerchantDetailsComponent {
         vm.viewModel = viewModel;
         vm.viewModelOriginal = _.cloneDeep(viewModel);
         vm.wasModified = false;
+        vm.router.navigate(['../../', vm.viewModel.merchant.id, 'general'], {relativeTo: this.route});
       }
     );
 

@@ -2,6 +2,8 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'am-merchant-sections',
@@ -10,7 +12,7 @@ import { Component } from '@angular/core';
     <li class="nav-item">
       <a class="nav-link" routerLink="general" routerLinkActive="active">General</a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="merchantId !== 'new'" class="nav-item">
       <a class="nav-link" routerLink="pos" routerLinkActive="active">Points of sales</a>
     </li>
   </ul>
@@ -21,6 +23,21 @@ import { Component } from '@angular/core';
 })
 
 export class MerchantSectionsComponent {
-  constructor () {
+  private merchantId: string;
+
+  private paramsSubscr: Subscription;
+
+  constructor (private route: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    const vm = this;
+    vm.paramsSubscr = vm.route.params.subscribe(params => {
+      this.merchantId = params['merchantId'];
+    });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscr.unsubscribe();
   }
 }
