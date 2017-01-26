@@ -19,12 +19,14 @@ export class MerchantBackendService {
               private rootCategoryService: RootCategoryService) {
   }
 
-  getPage(page: number, size: number, lang: string): Observable<Page<Merchant>> {
-    return this.backendApi.get(this.path, {
-      'page': String(page),
-      'size': String(size),
-      'sort': 'name'
-    }, lang);
+  getPage(page: number, size: number, lang: string, filterParams: any): Observable<Page<Merchant>> {
+    return this.backendApi.get(this.path,
+      Object.assign({
+        'page': String(page),
+        'size': String(size),
+        'sort': 'name'
+      }, filterParams),
+      lang);
   }
 
 
