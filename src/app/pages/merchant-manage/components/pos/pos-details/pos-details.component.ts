@@ -1,15 +1,18 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, EventEmitter } from "@angular/core";
-import { PosService } from "../../../../../core/services/pos/pos.service";
-import * as _ from "lodash";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Pos } from "../../../../../commons/model/pos";
-import { ViewChild } from "@angular/core/src/metadata/di";
-import { ChangeLangEvent } from "../../../../../shared/components/select-lang.component";
-import { Observable, Subject } from "rxjs";
-import { ModalConfirmComponent } from "../../../../../shared/components/modal-confirm.component";
+import { Component, OnInit } from '@angular/core';
+import { PosService } from '../../../../../core/services/pos/pos.service';
+import * as _ from 'lodash';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Pos } from '../../../../../commons/model/pos';
+import { ViewChild } from '@angular/core/src/metadata/di';
+import { ChangeLangEvent } from '../../../../../shared/components/select-lang.component';
+import { Observable, Subject } from 'rxjs';
+import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm.component';
+import { GoogleGeocodingService } from '../../../../../core/services/geocoding/google-geocoding.service';
+import { DeliveryAddress } from '../../../../../commons/model/order';
+
 
 @Component({
   selector: 'am-pos-details',
@@ -17,21 +20,22 @@ import { ModalConfirmComponent } from "../../../../../shared/components/modal-co
   template: require('./pos-details.component.html'),
   styleUrls: ['../style']
 })
-export class PosDetailsComponent {
+export class PosDetailsComponent implements OnInit {
 
   @ViewChild('posForm') form;
-
   @ViewChild('deleteConfirmModal')
   public readonly deleteModal: ModalConfirmComponent;
-
   @ViewChild('deactivateConfirmModal')
   public readonly deactivateConfirmModal: ModalConfirmComponent;
 
   private lang: string = 'en';
   private merchantId: string;
   private posId: string;
+
   private pos: Pos = new Pos();
-  private posOriginal: Pos = new Pos();
+  private posSaved: Pos = new Pos();
+  private lastModifiedAddress: DeliveryAddress = new DeliveryAddress();
+
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
 
@@ -45,7 +49,8 @@ export class PosDetailsComponent {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private posService: PosService) {
+              private posService: PosService,
+              private geocodingService: GoogleGeocodingService) {
   }
 
   ngOnInit() {
@@ -83,16 +88,44 @@ export class PosDetailsComponent {
     const vm = this;
     vm.posService.get(vm.posId, vm.lang).subscribe(pos => {
       vm.pos = pos;
-      vm.posOriginal = _.cloneDeep(pos);
+      vm.posSaved = _.cloneDeep(pos);
+      vm.lastModifiedAddress = _.cloneDeep(pos.address);
     });
   }
 
   ngAfterViewInit() {
     const vm = this;
-    vm.form.control.valueChanges
+    vm.form.control.valueChanges.debounceTime(500)
       .subscribe(values => {
-        vm.wasModified = !_.isEqual(vm.pos, vm.posOriginal);
+        vm.wasModified = !_.isEqual(vm.pos, vm.posSaved);
+
+        if (PosDetailsComponent.checkAddressLinesModified(vm.pos.address, vm.lastModifiedAddress)) {
+          vm.geocodeAddress();
+        }
+        vm.lastModifiedAddress = _.cloneDeep(vm.pos.address);
       });
+  }
+
+  static checkAddressLinesModified(address: DeliveryAddress, originalAddress: DeliveryAddress): boolean {
+    originalAddress = Object.assign(originalAddress, {geoPoint: address.geoPoint});
+    return !_.isEqual(address, originalAddress);
+  }
+
+  geocodeAddress() {
+    const vm = this;
+    let googleResponsePromise = vm.geocodingService.geocodeAddress(vm.pos.address, vm.lang);
+    if (googleResponsePromise) {
+      googleResponsePromise.then(result => vm.onGeocodeResponse(result));
+    }
+  }
+
+  onGeocodeResponse(response) {
+    const vm = this;
+    let point = GoogleGeocodingService.getGeoPointFromGoogleResponse(response.json.results);
+    if (point) {
+//      console.log(point);
+      vm.pos.address.geoPoint = point;
+    }
   }
 
   get langDirection() {
@@ -107,7 +140,7 @@ export class PosDetailsComponent {
     const vm = this;
     let observPosId: Observable<string>;
     if (save && prevLang) {
-      observPosId = vm.posService.savePos(vm.merchantId, vm.pos, vm.posOriginal, prevLang);
+      observPosId = vm.posService.savePos(vm.merchantId, vm.pos, vm.posSaved, prevLang);
     } else {
       observPosId = Observable.of(vm.posId);
     }
@@ -117,23 +150,38 @@ export class PosDetailsComponent {
     }).subscribe((pos: Pos) => {
       vm.posId = pos.id;
       vm.pos = pos;
-      vm.posOriginal = _.cloneDeep(pos);
+      vm.posSaved = _.cloneDeep(pos);
       vm.lang = lang;
     });
   }
 
   savePos() {
     const vm = this;
-    vm.posService.savePos(vm.merchantId, vm.pos, vm.posOriginal, vm.lang).subscribe(
-      posId => {
-        if (posId) {
-          vm.posId = posId;
-          vm.wasModified = false;
+    if (PosDetailsComponent.checkRequiredFields(vm.pos)) {
+      vm.posService.savePos(vm.merchantId, vm.pos, vm.posSaved, vm.lang).subscribe(
+        posId => {
+          if (posId) {
+            vm.posId = posId;
+            vm.pos.id = posId;
+            vm.wasModified = false;
+          }
+          this.router.navigate(['../', vm.posId], {relativeTo: this.route});
         }
-        this.router.navigate(['../', vm.posId], {relativeTo: this.route});
-      }
-    );
+      );
+    }
 
+  }
+
+  static checkRequiredFields(pos: Pos): boolean {
+    if (pos
+      && pos.address
+      && pos.address.geoPoint
+      && pos.address.geoPoint.lat
+      && pos.address.geoPoint.lon) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   deletePos(posId: string) {
@@ -147,6 +195,17 @@ export class PosDetailsComponent {
     setTimeout(function () {
       vm.mapHidden = false;
     }, 400);
+  }
+
+  onMapClicked($event) {
+    const vm = this;
+    if (vm.pos && vm.pos.address && vm.pos.address.geoPoint) {
+/*
+      vm.pos.address.geoPoint.lat = $event.coords.lat;
+      vm.pos.address.geoPoint.lon = $event.coords.lng;
+      vm.reverseGeocodePosLocation();
+*/
+    }
   }
 
 }

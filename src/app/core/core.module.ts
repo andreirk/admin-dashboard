@@ -17,6 +17,7 @@ import { GroupService } from './services/groups/group.service';
 import { GroupListService } from './services/groups/group-list.service';
 import { WorkTimeService } from './services/work-times/work-time.service';
 import { CanDeactivateGuard } from "./services/guards/can-deactivate-guard.service";
+import { GoogleGeocodingService } from './services/geocoding/google-geocoding.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -32,7 +33,8 @@ import { CanDeactivateGuard } from "./services/guards/can-deactivate-guard.servi
     GroupService,
     GroupListService,
     WorkTimeService,
-    CanDeactivateGuard
+    CanDeactivateGuard,
+    GoogleGeocodingService
   ]
 })
 export class CoreModule {

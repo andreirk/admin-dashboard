@@ -92,11 +92,11 @@
           <div class="row">
             <div class="form-group col-sm-6">
               <label class="label">Lat</label>
-              <input type="text" class="form-control" name="lat" [(ngModel)]="pos.address.geoPoint.lat">
+              <input type="number" class="form-control" name="lat" step="any" [(ngModel)]="pos.address.geoPoint.lat" required>
             </div>
             <div class="form-group col-sm-6">
               <label class="label">Lon</label>
-              <input type="text" class="form-control" name="lon" [(ngModel)]="pos.address.geoPoint.lon">
+              <input type="number" class="form-control" name="lon" step="any" [(ngModel)]="pos.address.geoPoint.lon" required>
             </div>
           </div>
 
@@ -125,8 +125,12 @@
       <div id="collapseMap" class="collapse" role="tabpanel" aria-labelledby="headingMap">
         <div class="card-block">
 
-          <sebm-google-map *ngIf="!mapHidden" [zoom]="16" [latitude]="pos.address.geoPoint.lat"
-                           [longitude]="pos.address.geoPoint.lon">
+          <sebm-google-map *ngIf="!mapHidden"
+                           [zoom]="16"
+                           [latitude]="pos.address.geoPoint.lat"
+                           [longitude]="pos.address.geoPoint.lon"
+                           (mapClick)="onMapClicked($event)">
+
             <sebm-google-map-marker [latitude]="pos.address.geoPoint.lat"
                                     [longitude]="pos.address.geoPoint.lon"></sebm-google-map-marker>
           </sebm-google-map>

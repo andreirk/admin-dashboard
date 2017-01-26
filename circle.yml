@@ -4,8 +4,8 @@ machine:
   services:
     - docker
 
-dependencies: 
-    override: 
+dependencies:
+    override:
     - sh ./circleci/runnpm.sh
 
 deployment:
@@ -20,7 +20,7 @@ deployment:
   develop:
     branch: develop
     commands:
-      - ./circleci/circle_aws_deploy.sh ${DEVELOP_SERVER} develop && ./circleci/circle_backend_ci_run.sh develop
+      - ./circleci/circle_aws_deploy.sh ${DEVELOP_SERVER} develop && sleep 60 && ./circleci/circle_backend_ci_run.sh develop
 #  production:
 #    branch: master
 #    commands:
