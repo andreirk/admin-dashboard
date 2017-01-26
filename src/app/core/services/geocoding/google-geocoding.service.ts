@@ -16,6 +16,17 @@ const ORDERED_ADDRESS_FIELDS: string[] = [
   'zip'
 ];
 
+const ADDRESS_FIELDS_MAP = new Map([
+  ['street_number',               'addressLine1'],
+  ['route',                       'addressLine1'],
+  ['street_address',              'addressLine1'],
+  ['locality',                    'city'],
+  ['administrative_area_level_2', 'area'],
+  ['administrative_area_level_1', 'state'],
+  ['country',                     'country'],
+  ['postal_code',                 'zip']
+]);
+
 @Injectable()
 export class GoogleGeocodingService {
 
@@ -37,19 +48,20 @@ export class GoogleGeocodingService {
       address: addressString,
       language: lang
     };
-    return this.googleApi.geocode(requestParams).asPromise();
+    return vm.googleApi.geocode(requestParams).asPromise();
   }
 
-  static getGeoPointFromGoogleResponse(googleResponse): PointOnMap {
+  static getGeoPointFromGeocodingResponseJson(googleResponse): PointOnMap {
     if (!googleResponse
-      || !googleResponse[0]
-      || !googleResponse[0].geometry
-      || !googleResponse[0].geometry.location) {
+      || !googleResponse.results
+      || !googleResponse.results[0]
+      || !googleResponse.results[0].geometry
+      || !googleResponse.results[0].geometry.location) {
       return undefined;
     }
     let geoPoint = new PointOnMap();
-    geoPoint.lat = googleResponse[0].geometry.location.lat;
-    geoPoint.lon = googleResponse[0].geometry.location.lng;
+    geoPoint.lat = googleResponse.results[0].geometry.location.lat;
+    geoPoint.lon = googleResponse.results[0].geometry.location.lng;
     return geoPoint;
   }
 
@@ -73,10 +85,51 @@ export class GoogleGeocodingService {
     return result;
   }
 
-  reverseGeocodeLocation(location: PointOnMap): DeliveryAddress {
-    return undefined;
+  reverseGeocodeLocation(location: PointOnMap, lang: string): Promise<any> {
+    const vm = this;
+    if (!location || !location.lat || !location.lon) return undefined;
+
+    let latlng = {
+      lat: location.lat,
+      lng: location.lon
+    };
+
+    let requestParams = {
+      latlng: latlng,
+      language: lang
+    };
+
+    return vm.googleApi.reverseGeocode(requestParams).asPromise();
   }
 
+  static getAddressFromReverseGeocodingResponseJson(googleResponse): DeliveryAddress {
+    if (!googleResponse
+      || !googleResponse.results
+      || !googleResponse.results[0]
+      || !googleResponse.results[0].address_components) {
+      return undefined;
+    }
+    let addrComponents = googleResponse.results[0].address_components;
+
+    let newAddress: DeliveryAddress = new DeliveryAddress();
+
+    for (let googleField of addrComponents) {
+      let addrFieldName = undefined;
+      for (let type of googleField.types) {
+        addrFieldName = ADDRESS_FIELDS_MAP.get(type);
+        if (addrFieldName) break;
+      }
+      if (addrFieldName) {
+        if (!newAddress[addrFieldName]) {
+          newAddress[addrFieldName] = '';
+        } else {
+          newAddress[addrFieldName] += ' ';
+        }
+        newAddress[addrFieldName] += googleField.long_name;
+      }
+    }
+    return newAddress;
+  }
 
 
 }

@@ -19,11 +19,14 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { WorkTimeViewModelService } from './services/work-time-view-model.service';
 import { MerchantListService } from './services/merchant-list.service';
 import { MerchantFilteringService } from './services/merchant-filtering.service';
+import { PosViewModelService } from './services/pos-view-model.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
     MultiselectDropdownModule,
+    NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
     }),
@@ -44,7 +47,9 @@ import { MerchantFilteringService } from './services/merchant-filtering.service'
     MerchantViewModelService,
     WorkTimeViewModelService,
     MerchantListService,
-    MerchantFilteringService
+    MerchantFilteringService,
+    WorkTimeViewModelService,
+    PosViewModelService
   ]
 })
 export default class MerchantsModule {

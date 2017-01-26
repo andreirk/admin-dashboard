@@ -4,12 +4,12 @@ import { Input, Output } from "@angular/core/src/metadata/directives";
 @Component({
   selector: 'am-modal-confirm',
   template: `
-  <div style="margin-top: 35vh" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngClass]="{'in': visibleAnimate}"
+  <div style="margin-top: 35vh; padding-top: 70px" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngClass]="{'in': visibleAnimate}"
        [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
     <div class="modal-dialog" role="document" style="color: darkcyan">
       <div class="modal-content">
         <div class="modal-body">
-          <strong>{{message}}</strong>
+          <strong *ngFor="let messageLine of message.split('\n')">{{messageLine}}<br></strong>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="onClick(true)">Confirm</button>
