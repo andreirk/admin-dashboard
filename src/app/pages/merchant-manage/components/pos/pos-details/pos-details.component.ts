@@ -11,7 +11,9 @@ import { ChangeLangEvent } from '../../../../../shared/components/select-lang.co
 import { Observable, Subject } from 'rxjs';
 import { ModalConfirmComponent } from '../../../../../shared/components/modal-confirm.component';
 import { GoogleGeocodingService } from '../../../../../core/services/geocoding/google-geocoding.service';
-import { DeliveryAddress } from '../../../../../commons/model/order';
+import { DeliveryAddress, PointOnMap } from '../../../../../commons/model/order';
+import { PosViewModelService } from '../../../services/pos-view-model.service';
+import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -27,6 +29,8 @@ export class PosDetailsComponent implements OnInit {
   public readonly deleteModal: ModalConfirmComponent;
   @ViewChild('deactivateConfirmModal')
   public readonly deactivateConfirmModal: ModalConfirmComponent;
+  @ViewChild('replaceAddressModal')
+  public readonly replaceAddressModal: ModalConfirmComponent;
 
   private lang: string = 'en';
   private merchantId: string;
@@ -35,16 +39,20 @@ export class PosDetailsComponent implements OnInit {
   private pos: Pos = new Pos();
   private posSaved: Pos = new Pos();
   private lastModifiedAddress: DeliveryAddress = new DeliveryAddress();
+  private resolvedAddress: DeliveryAddress = new DeliveryAddress();
 
   private wasModified = false;
   private rtlDetect = require('rtl-detect');
 
   private confirmDeleteMessage = 'Delete this POS?';
   private leaveThisPageMessage = 'Unsaved changes will be lost. Are you sure you want to leave this page?';
+  private replaceAddressMessage = 'Replace address?';
 
   private mapHidden: boolean = true;
 
   private guardSubject: Subject<boolean> = new Subject<boolean>();
+
+  private unresolvedAddress: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -99,16 +107,11 @@ export class PosDetailsComponent implements OnInit {
       .subscribe(values => {
         vm.wasModified = !_.isEqual(vm.pos, vm.posSaved);
 
-        if (PosDetailsComponent.checkAddressLinesModified(vm.pos.address, vm.lastModifiedAddress)) {
+        if (PosViewModelService.checkAddressLinesModified(vm.pos.address, vm.lastModifiedAddress)) {
           vm.geocodeAddress();
         }
         vm.lastModifiedAddress = _.cloneDeep(vm.pos.address);
       });
-  }
-
-  static checkAddressLinesModified(address: DeliveryAddress, originalAddress: DeliveryAddress): boolean {
-    originalAddress = Object.assign(originalAddress, {geoPoint: address.geoPoint});
-    return !_.isEqual(address, originalAddress);
   }
 
   geocodeAddress() {
@@ -121,10 +124,12 @@ export class PosDetailsComponent implements OnInit {
 
   onGeocodeResponse(response) {
     const vm = this;
-    let point = GoogleGeocodingService.getGeoPointFromGoogleResponse(response.json.results);
+    let point = GoogleGeocodingService.getGeoPointFromGeocodingResponseJson(response.json);
     if (point) {
-//      console.log(point);
       vm.pos.address.geoPoint = point;
+      vm.unresolvedAddress = false;
+    } else {
+      vm.unresolvedAddress = true;
     }
   }
 
@@ -157,7 +162,7 @@ export class PosDetailsComponent implements OnInit {
 
   savePos() {
     const vm = this;
-    if (PosDetailsComponent.checkRequiredFields(vm.pos)) {
+    if (PosViewModelService.checkRequiredFields(vm.pos)) {
       vm.posService.savePos(vm.merchantId, vm.pos, vm.posSaved, vm.lang).subscribe(
         posId => {
           if (posId) {
@@ -172,22 +177,14 @@ export class PosDetailsComponent implements OnInit {
 
   }
 
-  static checkRequiredFields(pos: Pos): boolean {
-    if (pos
-      && pos.address
-      && pos.address.geoPoint
-      && pos.address.geoPoint.lat
-      && pos.address.geoPoint.lon) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   deletePos(posId: string) {
     this.posService.deletePos(posId).subscribe(res => {
       this.router.navigate(['../'], {relativeTo: this.route});
     });
+  }
+
+  onPanelChanged(event: NgbPanelChangeEvent) {
+    if (event.panelId == 'map-panel') this.initMap();
   }
 
   initMap() {
@@ -200,12 +197,35 @@ export class PosDetailsComponent implements OnInit {
   onMapClicked($event) {
     const vm = this;
     if (vm.pos && vm.pos.address && vm.pos.address.geoPoint) {
-/*
-      vm.pos.address.geoPoint.lat = $event.coords.lat;
-      vm.pos.address.geoPoint.lon = $event.coords.lng;
-      vm.reverseGeocodePosLocation();
-*/
+      vm.pos.address.geoPoint = Object.assign(new PointOnMap(), {lat: $event.coords.lat, lon: $event.coords.lng});
+      let googleResponsePromise = vm.geocodingService.reverseGeocodeLocation(vm.pos.address.geoPoint, vm.lang);
+      if (googleResponsePromise) {
+        googleResponsePromise.then(result => vm.onReverseGeocodeResponse(result));
+      }
     }
   }
 
+  onReverseGeocodeResponse(response) {
+    const vm = this;
+    vm.resolvedAddress = GoogleGeocodingService.getAddressFromReverseGeocodingResponseJson(response.json);
+    if (vm.resolvedAddress
+      && PosViewModelService.checkAddressLinesModified(vm.pos.address, vm.resolvedAddress)) {
+      let currentAddressString = GoogleGeocodingService.getAddressString(vm.pos.address);
+      let resolvedAddressString = GoogleGeocodingService.getAddressString(vm.resolvedAddress);
+
+      vm.replaceAddressMessage = 'Resolved address differs from current address.\n\nCurrent address:\n' + currentAddressString
+        + '\n\nResolved address:\n' + resolvedAddressString + '\n\nReplace current address?';
+
+      vm.replaceAddressModal.show();
+    }
+  }
+
+  onReplaceAddressConfirm(event) {
+    const vm = this;
+    if (event === true) {
+      vm.pos.address = PosViewModelService.copyAddressLines(vm.pos.address, vm.resolvedAddress);
+      vm.lastModifiedAddress = _.cloneDeep(vm.pos.address);
+    }
+    vm.replaceAddressModal.hide();
+  }
 }

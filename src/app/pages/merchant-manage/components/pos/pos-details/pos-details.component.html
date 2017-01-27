@@ -17,153 +17,127 @@
     </div>
   </div>
 
-  <div id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="card collapse">
-      <div class="card-header" role="tab" id="headingDetails">
-        <h5 class="mb-0">
-          <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseDetails"
-             aria-controls="collapseDetails">
-            Details
-          </a>
-        </h5>
-      </div>
-      <div id="collapseDetails" class="collapse show" role="tabpanel" aria-labelledby="headingDetails">
-        <div class="card-block">
+  <ngb-accordion #acc="ngbAccordion" activeIds="details-panel" (panelChange)="onPanelChanged($event)">
+    <ngb-panel id="details-panel" title="Details">
+      <template ngbPanelContent>
 
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="label">Name</label>
-              <input type="text" class="form-control" name="name" [(ngModel)]="pos.name"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="label">ZIP code</label>
-              <input type="text" class="form-control" name="zip" [(ngModel)]="pos.address.zip">
-            </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label class="label">Name</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="pos.name"
+                   [ngStyle]="{'direction': langDirection}">
           </div>
-
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <label class="label">Description</label>
-              <input type="text" class="form-control" name="description" [(ngModel)]="pos.description"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
+          <div class="form-group col-sm-6">
+            <label class="label">ZIP code</label>
+            <input type="text" class="form-control" name="zip" [(ngModel)]="pos.address.zip">
           </div>
-
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <label class="label">Address line 1</label>
-              <input type="text" class="form-control" name="line1" [(ngModel)]="pos.address.addressLine1"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <label class="label">Address line 2</label>
-              <input type="text" class="form-control" name="line2" [(ngModel)]="pos.address.addressLine2"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="label">Area</label>
-              <input type="text" class="form-control" name="area" [(ngModel)]="pos.address.area"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="label">City</label>
-              <input type="text" class="form-control" name="city" [(ngModel)]="pos.address.city"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="label">State</label>
-              <input type="text" class="form-control" name="state" [(ngModel)]="pos.address.state"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="label">Country</label>
-              <input type="text" class="form-control" name="country" [(ngModel)]="pos.address.country"
-                     [ngStyle]="{'direction': langDirection}">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-sm-6">
-              <label class="label">Lat</label>
-              <input type="number" class="form-control" name="lat" step="any" [(ngModel)]="pos.address.geoPoint.lat" required>
-            </div>
-            <div class="form-group col-sm-6">
-              <label class="label">Lon</label>
-              <input type="number" class="form-control" name="lon" step="any" [(ngModel)]="pos.address.geoPoint.lon" required>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
-              <button class="btn btn-secondary pull-right" (click)="deleteConfirmModal.show()" *ngIf="posId">Delete
-              </button>
-            </div>
-          </div>
-
         </div>
-      </div>
-    </div>
 
-    <div class="card collapse">
-      <div class="card-header" role="tab" id="headingMap">
-        <h5 class="mb-0">
-          <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseMap"
-             (click)="initMap()"
-             aria-controls="collapseMap">
-            Map
-          </a>
-        </h5>
-      </div>
-      <div id="collapseMap" class="collapse" role="tabpanel" aria-labelledby="headingMap">
-        <div class="card-block">
-
-          <sebm-google-map *ngIf="!mapHidden"
-                           [zoom]="16"
-                           [latitude]="pos.address.geoPoint.lat"
-                           [longitude]="pos.address.geoPoint.lon"
-                           (mapClick)="onMapClicked($event)">
-
-            <sebm-google-map-marker [latitude]="pos.address.geoPoint.lat"
-                                    [longitude]="pos.address.geoPoint.lon"></sebm-google-map-marker>
-          </sebm-google-map>
-
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label class="label">Description</label>
+            <input type="text" class="form-control" name="description" [(ngModel)]="pos.description"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
         </div>
-      </div>
-    </div>
 
-
-    <div class="card">
-      <div class="card-header" role="tab" id="headingSchedule">
-        <h5 class="mb-0">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSchedule" aria-controls="collapseSchedule">
-            Work time schedule
-          </a>
-        </h5>
-      </div>
-      <div id="collapseSchedule" class="collapse" aria-expanded="false" role="tabpanel"
-           aria-labelledby="headingSchedule">
-        <div class="card-block">
-
-          <am-pos-work-times [posId]="posId"></am-pos-work-times>
-
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label class="label">Address line 1</label>
+            <input type="text" class="form-control" name="line1" [(ngModel)]="pos.address.addressLine1"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="row">
+          <div class="form-group col-sm-12">
+            <label class="label">Address line 2</label>
+            <input type="text" class="form-control" name="line2" [(ngModel)]="pos.address.addressLine2"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label class="label">Area</label>
+            <input type="text" class="form-control" name="area" [(ngModel)]="pos.address.area"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="label">City</label>
+            <input type="text" class="form-control" name="city" [(ngModel)]="pos.address.city"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label class="label">State</label>
+            <input type="text" class="form-control" name="state" [(ngModel)]="pos.address.state"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="label">Country</label>
+            <input type="text" class="form-control" name="country" [(ngModel)]="pos.address.country"
+                   [ngStyle]="{'direction': langDirection}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label class="label">Lat</label>
+            <input type="number" class="form-control" name="lat" step="any" [(ngModel)]="pos.address.geoPoint.lat" required>
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="label">Lon</label>
+            <input type="number" class="form-control" name="lon" step="any" [(ngModel)]="pos.address.geoPoint.lon" required>
+          </div>
+        </div>
+
+        <div class="alert alert-warning text-center" *ngIf="unresolvedAddress">
+          <strong>Warning!</strong> Unresolved address
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button (click)="savePos()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
+            <button class="btn btn-secondary pull-right" (click)="deleteConfirmModal.show()" *ngIf="posId">Delete
+            </button>
+          </div>
+        </div>
+
+      </template>
+    </ngb-panel>
+    <ngb-panel id="map-panel" title="Map">
+      <template ngbPanelContent>
+
+        <sebm-google-map *ngIf="!mapHidden"
+                         [zoom]="16"
+                         [latitude]="pos.address.geoPoint.lat"
+                         [longitude]="pos.address.geoPoint.lon"
+                         (mapClick)="onMapClicked($event)">
+
+          <sebm-google-map-marker [latitude]="pos.address.geoPoint.lat"
+                                  [longitude]="pos.address.geoPoint.lon"></sebm-google-map-marker>
+        </sebm-google-map>
+
+      </template>
+    </ngb-panel>
+
+    <ngb-panel id="work-time-panel" title="Work time schedule">
+      <template ngbPanelContent>
+
+        <am-pos-work-times [posId]="posId"></am-pos-work-times>
+
+      </template>
+    </ngb-panel>
+
+  </ngb-accordion>
 
   <am-modal-confirm #deleteConfirmModal [message]="confirmDeleteMessage"
                     (answer)="onDeleteConfirm($event)"></am-modal-confirm>
   <am-modal-confirm #deactivateConfirmModal [message]="leaveThisPageMessage"
                     (answer)="onDeactivateConfirm($event)"></am-modal-confirm>
+  <am-modal-confirm #replaceAddressModal [message]="replaceAddressMessage"
+                    (answer)="onReplaceAddressConfirm($event)"></am-modal-confirm>
 
 </form>
