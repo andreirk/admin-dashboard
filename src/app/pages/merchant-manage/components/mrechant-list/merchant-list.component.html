@@ -1,0 +1,38 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<div>
+  <div class="col-sm-12">
+    <form #merchantsFilterForm="ngForm" class="card-margin-bottom">
+      <div class="row">
+        <div class="form-group col-sm-2">
+          <label>Filter by name:</label>
+          <input class="form-control" name="name" [(ngModel)]="filterParamsForm.name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-default" (click)="clearFilters()">
+            Clear filters
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <div class="col-sm-3 card-margin-bottom">
+      <a class="btn btn-primary align-bottom" [routerLink]="['new', 'general']"
+         routerLinkActive="active">New merchant</a>
+    </div>
+
+    <am-merchant-card *ngFor="let merchant of merchants.content;"
+                      [merchant]="merchant"
+                      (onDelete)="deleteMerchant($event)"></am-merchant-card>
+    <div class="col-sm-3">
+      <button (click)="loadMoreMerchants()" class="btn btn-secondary"
+              [hidden]="merchants.content.length == merchants.total">Show more</button>
+    </div>
+  </div>
+</div>

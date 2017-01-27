@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { NgModule } from '@angular/core';
-import { MerchantListComponent } from './components/merchant-list.component';
+import { MerchantListComponent } from './components/mrechant-list/merchant-list.component';
 import { MerchantCardComponent } from './components/merchant-card.component';
 import { MerchantDetailsComponent } from './components/merchant-details/merchant-details.component';
 import { routing } from './merchant.routing';
@@ -17,6 +17,8 @@ import { MerchantSectionsComponent } from './components/merchant-sections.compon
 import { PosWorkTimesComponent } from './components/pos/pos-work-times/pos-work-times.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { WorkTimeViewModelService } from './services/work-time-view-model.service';
+import { MerchantListService } from './services/merchant-list.service';
+import { MerchantFilteringService } from './services/merchant-filtering.service';
 
 @NgModule({
   imports: [
@@ -40,7 +42,9 @@ import { WorkTimeViewModelService } from './services/work-time-view-model.servic
   ],
   providers: [
     MerchantViewModelService,
-    WorkTimeViewModelService
+    WorkTimeViewModelService,
+    MerchantListService,
+    MerchantFilteringService
   ]
 })
 export default class MerchantsModule {

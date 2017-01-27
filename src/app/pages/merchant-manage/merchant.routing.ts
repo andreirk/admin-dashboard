@@ -2,7 +2,7 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Routes, RouterModule } from '@angular/router';
-import { MerchantListComponent } from './components/merchant-list.component';
+import { MerchantListComponent } from './components/mrechant-list/merchant-list.component';
 import { MerchantDetailsComponent } from './components/merchant-details/merchant-details.component';
 import {PosListComponent} from "./components/pos/pos-list.component";
 import {PosDetailsComponent} from "./components/pos/pos-details/pos-details.component";
