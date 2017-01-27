@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+#
+
 set -o errexit -o pipefail # Exit on error
 
 TARGET_HOST=$1

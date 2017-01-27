@@ -17,19 +17,26 @@ import { CategoryService } from '../../../core/services/categories/category.serv
   selector: 'toyou-category-card',
   template: `
   <div class="col-sm-10">
-  <div class="card card-block">
-    <img class="card-img-top col-xs-4 col-sm-3" src="{{category.imageUrl}}" alt="{{category.imageUrl}}">
-    <h5 class="card-title">{{category.name}}</h5>
-    <p class="card-text">{{category.description}}</p>
-    <div class="pull-right">
-      <button type="button" class="btn btn-xs btn-default" (click)="editCategory()" >
-          <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i> </span>
-      </button>
-      <button type="button" (click)="deleteCategory(category.id)" class="remove-news btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-original-title="Delete">
-          <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i> </span>
-      </button>     
+  <div class="card">
+    <div class="card-block">
+      <div class="d-flex">
+        <div class="col-xs-4 col-sm-3" [hidden]="!category.imageUrl">
+          <img class="w-100" src="{{category.imageUrl}}" alt="{{category.imageUrl}}">
+         </div>
+         <div class="w-100">
+          <h5 class="card-title">{{category.name}}</h5>
+          <p class="card-text">{{category.description}}</p>
+          <div class="pull-right">
+            <button type="button" class="btn btn-xs btn-default" (click)="editCategory()" >
+                <span class="glyphicon glyphicon-pencil"><i class="fa fa-pencil" aria-hidden="true"></i> </span>
+            </button>
+            <button type="button" (click)="deleteCategory(category.id)" class="remove-news btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-original-title="Delete">
+                <span class="glyphicon glyphicon-trash"><i class="fa fa-trash" aria-hidden="true"></i> </span>
+            </button>     
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
   ` ,

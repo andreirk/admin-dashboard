@@ -4,9 +4,11 @@
 <form #posForm="ngForm" class="merchant-details container">
 
   <div class="row">
-    <am-select-lang [lang]="lang"
+    <div class="form-group col-sm-2">
+      <am-select-lang [lang]="lang"
                     [wasModified]="wasModified"
                     (onChange)="onChangeLang($event)"></am-select-lang>
+    </div>
   </div>
 
   <div class="row">
@@ -25,7 +27,7 @@
           </a>
         </h5>
       </div>
-      <div id="collapseDetails" class="collapse in" role="tabpanel" aria-labelledby="headingDetails">
+      <div id="collapseDetails" class="collapse show" role="tabpanel" aria-labelledby="headingDetails">
         <div class="card-block">
 
           <div class="row">
@@ -148,7 +150,7 @@
           </a>
         </h5>
       </div>
-      <div id="collapseSchedule" class="collapse show" aria-expanded="false" role="tabpanel"
+      <div id="collapseSchedule" class="collapse" aria-expanded="false" role="tabpanel"
            aria-labelledby="headingSchedule">
         <div class="card-block">
 

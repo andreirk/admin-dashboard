@@ -50,24 +50,29 @@ export interface IMultiSelectTexts {
   providers: [MULTISELECT_VALUE_ACCESSOR],
   styles: [`
     a { outline: none !important; }
-    input { color: #373a3c !important; border-color: #373a3c !important; }
-    i { color: #373a3c !important; }
+    .dropdown-menu input, .dropdown-menu .input-group-addon { color: #373a3c !important; border-color: #373a3c !important; }
+    .input-group-addon { border-bottom-right-radius: 5px; border-top-right-radius: 5px; }
+    .dropdown-menu i { color: #373a3c !important; }     
     .dropdown-toggle:after { display:none; }
-    .dropdown-toggle { height: 2.2rem!important; }
-    .btn:hover { transform: none; }
+    .dropdown-toggle { height: auto!important; }
     .form-control::-webkit-input-placeholder { color: grey; }
     .form-control:-moz-placeholder { color: grey; }
     .form-control::-moz-placeholder { color: grey; }
     .form-control:-ms-input-placeholder { color: grey; }
+    .crop { overflow:hidden; text-overflow:ellipsis; }
   `],
   template: `
 <div class="dropdown">
     <div class="input-group">
-      <button type="button" style="width:100%;" class="dropdown-toggle" [ngClass]="settings.buttonClasses" (click)="toggleDropdown()">
-        <div *ngFor="let t of titleList">{{ t }}</div>
-      </button>
+      <span class="input-group-btn w-100">
+        <button type="button" class="dropdown-toggle" [ngClass]="settings.buttonClasses" (click)="toggleDropdown()">
+          <div>
+            <div class="crop" *ngFor="let t of titleList">{{ t }}</div>
+          </div>
+        </button>
+      </span>
       <span class="input-group-addon" (click)="toggleDropdown()">
-        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
       </span>
     </div>
       

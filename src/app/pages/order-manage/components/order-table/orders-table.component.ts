@@ -1,15 +1,15 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import {Component, OnInit, ViewChild, AfterViewInit} from "@angular/core";
-import {OrderListService} from "../../services/order-list.service";
-import {OrderFilterParams} from "../../model/order-filter-params";
-import * as _ from "lodash";
-import {OrderFilterParamsForm} from "../../model/order-filter-params-form";
-import {OrderFilteringService} from "../../services/order-filtering.service";
-import {ViewList} from "../../../../commons/model/view-list";
-import {Order} from "../../../../commons/model/order";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { OrderListService } from '../../services/order-list.service';
+import { OrderFilterParams } from '../../model/order-filter-params';
+import * as _ from 'lodash';
+import { OrderFilterParamsForm } from '../../model/order-filter-params-form';
+import { OrderFilteringService } from '../../services/order-filtering.service';
+import { ViewList } from '../../../../commons/model/view-list';
+import { Order } from '../../../../commons/model/order';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'am-order-list',

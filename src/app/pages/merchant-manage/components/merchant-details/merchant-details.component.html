@@ -3,9 +3,11 @@
   -->
 <form #merchantForm="ngForm" class="merchant-details container">
   <div class="row">
-    <am-select-lang [lang]="lang"
+    <div class="form-group col-sm-2">
+      <am-select-lang [lang]="lang"
                     [wasModified]="wasModified"
                     (onChange)="onChangeLang($event)"></am-select-lang>
+    </div>
   </div>
 
   <div class="row">
