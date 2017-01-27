@@ -14,13 +14,14 @@ import { ViewChild } from "@angular/core/src/metadata/di";
   providers: [],
   template: `
 <div class="col-sm-10">
-  <div class="card card-block">
-    <h5 class="card-title">{{pos.name}}</h5>
-    <p class="card-text">{{pos.address.country + ', '}}{{pos.address.city + ', '}}{{pos.address.addressLine1}}</p>
-    <a class="btn btn-primary" [routerLink]="[pos.id]" routerLinkActive="active">Edit</a>
-    <a class="btn btn-primary pull-right" (click)="modal.show()">Delete</a>
+  <div class="card">
+    <div class="card-block">
+      <h5 class="card-title">{{pos.name}}</h5>
+      <p class="card-text">{{pos.address.country + ', '}}{{pos.address.city + ', '}}{{pos.address.addressLine1}}</p>
+      <a class="btn btn-primary" [routerLink]="[pos.id]" routerLinkActive="active">Edit</a>
+      <a class="btn btn-primary pull-right" (click)="modal.show()">Delete</a>
+    </div>
   </div>
-
   <am-modal-confirm #deleteConfirmModal [message]="confirmDeleteMessage" (answer)="onDeleteConfirm($event)"></am-modal-confirm>
 </div>
 `

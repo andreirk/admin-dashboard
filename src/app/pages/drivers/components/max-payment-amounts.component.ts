@@ -24,6 +24,7 @@ export class MaxPaymentAmountsComponent implements ControlValueAccessor {
   private viewPaymentAmounts: MaxPaymentAmount[] = [];
 
   constructor() {
+/* skip non-SAR currencies
     for (let type in Currency) {
       if (!(parseInt(type, 10) >= 0)) {
         this.viewPaymentAmounts.push(<MaxPaymentAmount> {
@@ -32,6 +33,11 @@ export class MaxPaymentAmountsComponent implements ControlValueAccessor {
         });
       }
     }
+*/
+    this.viewPaymentAmounts.push(<MaxPaymentAmount> {
+      currency: Currency.SAR,
+      value: null
+    });
   }
 
   changeMpa() {
@@ -57,7 +63,7 @@ export class MaxPaymentAmountsComponent implements ControlValueAccessor {
       } else {
         let pa = vm.paymentAmounts.find(pa => pa.currency === viewPa.currency);
         if (pa) {
-          viewPa.value = pa.value;
+          pa.value = viewPa.value;
         } else {
           vm.paymentAmounts.push(viewPa);
         }

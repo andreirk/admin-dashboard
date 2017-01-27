@@ -23,7 +23,7 @@ import { DriverStatus } from '../../../shared/types';
 <td>{{driverInfo.profile.phone}}</td>
 <td><i class="fa" [style.color]="getColor(driverInfo.location)">{{getIcon()}}</i>&nbsp;&nbsp;&nbsp;{{driverInfo.profile.carBrand}}</td>
 <td [style.color]="getColor(driverInfo.location)">{{getStatus(driverInfo.location)}}</td>
-<td *ngIf="driverInfo.profile.rating.count == 0">NONE</td> 
+<td *ngIf="driverInfo.profile.rating.count == 0">-</td> 
 <td *ngIf="driverInfo.profile.rating.count != 0">
   <rating [(ngModel)]="rating" max="5" [readonly]="true" stateOn="ion-android-star" stateOff="ion-android-star-outline" class="rating"></rating>
 </td>`

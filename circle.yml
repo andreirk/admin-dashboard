@@ -1,3 +1,6 @@
+#
+# Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+#
 machine:
   node:
     version: 6.9.1

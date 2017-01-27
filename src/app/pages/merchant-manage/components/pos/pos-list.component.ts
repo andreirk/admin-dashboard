@@ -14,7 +14,7 @@ import { WorkTimeService } from "../../../../core/services/work-times/work-time.
   providers: [],
   template: `
   <div class="column">
-     <div class="col-sm-3 card-block"> 
+     <div class="col-sm-3 card-margin-bottom"> 
       <a class="btn btn-primary align-bottom" [routerLink]="['new']"
           routerLinkActive="active">New POS</a>
      </div>

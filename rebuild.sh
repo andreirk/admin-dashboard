@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+#
+# Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+#
 docker stop dashboard
 docker rm dashboard
 docker rmi dashboard

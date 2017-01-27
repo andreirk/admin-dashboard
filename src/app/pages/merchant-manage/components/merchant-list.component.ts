@@ -2,11 +2,11 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component } from '@angular/core';
-import { MerchantListService } from '../../../core/services/merchants/merchant-list.service';
 import { MerchantBackendService } from '../../../core/services/merchants/merchant-backend.service';
 import { BackendApiService } from '../../../core/services/backend-api.service';
 import { ViewList } from '../../../commons/model/view-list';
 import { Merchant } from '../../../commons/model/merchant';
+import { MerchantListService } from '../../../core/services/merchants/merchant-list.service';
 
 @Component({
   selector: 'am-merchant-list',
@@ -17,19 +17,18 @@ import { Merchant } from '../../../commons/model/merchant';
   ],
   template: ` 
   <div class="column">
-     <div class="col-sm-3 card-block"> 
+    <div class="col-sm-3 card-margin-bottom"> 
       <a class="btn btn-primary align-bottom" [routerLink]="['new', 'general']"
-          routerLinkActive="active">New merchant</a>
-     </div>
-     <div>
-       <am-merchant-card *ngFor="let merchant of merchants.content;"
-              [merchant]="merchant"
-              (onDelete)="deleteMerchant($event)"></am-merchant-card>
-     </div>
-     <div class="col-sm-3">
+        routerLinkActive="active">New merchant</a>
+    </div>
+
+      <am-merchant-card *ngFor="let merchant of merchants.content;"
+            [merchant]="merchant"
+            (onDelete)="deleteMerchant($event)"></am-merchant-card>
+    <div class="col-sm-3">
       <button (click)="loadMoreMerchants()" class="btn btn-secondary" 
-          [hidden]="merchants.content.length == merchants.total">Show more</button>
-     </div>
+        [hidden]="merchants.content.length == merchants.total">Show more</button>
+    </div>
    </div>
 `
 })

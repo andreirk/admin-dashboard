@@ -31,8 +31,11 @@ label {
   margin-bottom: 0px;
 }
 
-select.form-control {
-  padding-top: 4px;
-  padding-bottom: 4px;
+select.form-control, .input-group-addon {
   height: 2.2rem!important;
+}
+
+a.link {
+  text-decoration: underline!important;
+  color: whitesmoke;
 }

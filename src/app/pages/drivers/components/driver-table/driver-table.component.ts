@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Renderer } from '@angular/core';
 import { ViewList } from '../../../../commons/model/view-list';
 import { DriverFilterParamsForm } from '../../model/driver-filter-params-form';
 import { DriverFilterParams } from '../../model/driver-filter-params';
@@ -9,6 +9,7 @@ import { DriverFilteringService } from '../../services/driver-filtering.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { DriverInfoListService } from '../../services/driver-info-list.service';
 import { DriverInfo } from '../../../../commons/model/driver/driver-info';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'am-driver-table',
@@ -16,7 +17,7 @@ import { DriverInfo } from '../../../../commons/model/driver/driver-info';
   template: require('./driver-table.component.html')
 })
 export class DriverTableComponent implements OnInit, AfterViewInit {
-  @ViewChild('driversFilterForm') form;
+  @ViewChild('driversFilterForm') form: NgForm;
 
   private drivers: ViewList<DriverInfo> = new ViewList<DriverInfo>();
   private pageSize = 10;
@@ -26,7 +27,8 @@ export class DriverTableComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private driverInfoListService: DriverInfoListService,
-              private driverFilteringService: DriverFilteringService) {
+              private driverFilteringService: DriverFilteringService,
+              private renderer: Renderer) {
   }
 
   ngOnInit() {
@@ -64,8 +66,8 @@ export class DriverTableComponent implements OnInit, AfterViewInit {
       });
   }
 
-  clearStatus() {
-    this.filterParamsForm.driverStatus = undefined;
+  consoleLog(el) {
+    debugger;
   }
 
   clearFilters() {

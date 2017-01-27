@@ -197,7 +197,7 @@ textarea.form-control {
 }
 
 label.custom-radio {
-  @padding-right: 0;
+  padding-right: 0;
   padding-left: 0;
   margin-bottom: 0;
   & > input {
@@ -350,6 +350,10 @@ label.custom-input-danger {
 }
 
 .input-group-addon {
+  color: $content-text;
+  border: 1px solid $input-border;
+  border-radius: 5px;
+  background-color: $input-background;
   line-height: inherit;
 }
 
