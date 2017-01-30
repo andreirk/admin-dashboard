@@ -8,7 +8,6 @@ import { OrdersTableComponent } from './components/order-table/orders-table.comp
 import { OrderRowComponent } from './components/order-row.component';
 import { UserCacheService } from './services/user-cache.service';
 import { DriverCacheService } from './services/driver-cache.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { PeerDetailsComponent } from './components/peer-details.component';
 import { UserPeerDetailsComponent } from './components/user-peer-details.component';
@@ -25,7 +24,6 @@ import { OrderPersonMultiselectComponent } from './components/order-person-multi
 @NgModule({
   imports: [
     SharedModule,
-    NgbModule,
     MultiselectDropdownModule,
     routing
   ],

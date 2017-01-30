@@ -14,19 +14,15 @@ import { MaxPaymentAmountsComponent } from './components/max-payment-amounts.com
 import { DriverBalanceHistoryTableComponent } from './components/balance-history-table/balance-history-table.component';
 import { DriverTabsComponent } from './components/driver-tabs.component';
 import { BalanceRecordListService } from './services/balance-record-list.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BalanceRecordRowComponent } from './components/balance-record-row.component';
 import { BalanceRecordFilteringService } from './services/balance-record-filtering.service';
 import { BalanceRecordTypeMultiselectComponent } from './components/balance-record-type-multiselect.component';
 import { DriverInfoListService } from './services/driver-info-list.service';
 import { DriverStatusService } from './services/driver-status.service';
-import { RatingModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
-    NgbModule,
-    RatingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
     }),

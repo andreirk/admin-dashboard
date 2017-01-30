@@ -7,8 +7,8 @@
     <div class="col-sm-3">
       <h3>Driver: {{driver.firstName + ' ' + driver.lastName}}</h3>
     </div>
-    <div *ngIf="rating" class="col-sm-3">
-      <rating [(ngModel)]="rating" max="5" [readonly]="true" stateOn="ion-android-star" stateOff="ion-android-star-outline" class="rating" name="rating"></rating>
+    <div *ngIf="driver && driver.rating && driver.rating.count" class="col-sm-3">
+      <am-rating-component [rating]="driver.rating.value / driver.rating.count" [size]="1.7"></am-rating-component>
     </div>
   </div>
   <h4 [style.color]="getStatusColor()"><i class="fa">{{getIcon()}}</i> {{getStatus()}}</h4>

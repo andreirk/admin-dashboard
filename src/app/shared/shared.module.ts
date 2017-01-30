@@ -26,14 +26,17 @@ import { ModalConfirmComponent } from './components/modal-confirm.component';
 import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
 import { DriverStatusOptionsDirective } from './directives/driver-status-options.directive';
 import { TimeInputComponent } from './components/time-input.component';
+import { AmRatingComponent } from './components/rating.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NgaModule],
+  imports: [CommonModule, FormsModule, NgaModule, NgbModule],
   declarations: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
     ModalConfirmComponent,
     TimeInputComponent,
+    AmRatingComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
@@ -45,12 +48,13 @@ import { TimeInputComponent } from './components/time-input.component';
     MultiselectDropdownComponent,
     ModalConfirmComponent,
     TimeInputComponent,
+    AmRatingComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
-    CommonModule, FormsModule, NgaModule]
+    CommonModule, FormsModule, NgaModule, NgbModule]
 })
 export class SharedModule {
 }
