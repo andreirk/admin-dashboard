@@ -12,6 +12,7 @@ import { driverStatusColorsMap, vehicleTypeIconMap } from '../model/driver-const
 import { DriverStatus } from '../../../shared/types';
 @Component({
   selector: '[am-driver-row]',
+  styleUrls: ['./style'],
   template: `
 <td>
   <button type="button" class="btn btn-xs btn-default" [routerLink]="[driverInfo.profile.id, 'general']" routerLinkActive="active" >
@@ -25,13 +26,12 @@ import { DriverStatus } from '../../../shared/types';
 <td [style.color]="getColor(driverInfo.location)">{{getStatus(driverInfo.location)}}</td>
 <td *ngIf="driverInfo.profile.rating.count == 0">-</td> 
 <td *ngIf="driverInfo.profile.rating.count != 0">
-  <rating [(ngModel)]="rating" max="5" [readonly]="true" stateOn="ion-android-star" stateOff="ion-android-star-outline" class="rating"></rating>
+  <am-rating [rating]="driverInfo.profile.rating.value / driverInfo.profile.rating.count" [size]="1.2"></am-rating>
 </td>`
 })
 export class DriverRowComponent implements OnInit {
   @Input() driverInfo: DriverInfo;
   @Output() onDelete = new EventEmitter();
-  private rating: number;
 
   constructor() {
   }
@@ -50,9 +50,6 @@ export class DriverRowComponent implements OnInit {
 
   ngOnInit() {
     const vm = this;
-    if (vm.driverInfo.profile.rating.count != 0) {
-      vm.rating = vm.driverInfo.profile.rating.value / vm.driverInfo.profile.rating.count;
-    }
 //TODO process rating and status
   }
 }

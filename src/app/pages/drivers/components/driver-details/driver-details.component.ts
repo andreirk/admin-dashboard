@@ -24,7 +24,6 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
   private driver: Driver = new Driver();
   private driverOriginal: Driver = new Driver();
   private driverLocation: DriverLocation;
-  private rating: number;
   private wasModified: boolean = false;
 
   private uploadSettings: IUploadSettings = {
@@ -43,9 +42,6 @@ export class DriverDetailsComponent implements OnInit, AfterViewInit {
       vm.driverService.getProfile(parseInt(vm.driverId, 10)).subscribe(driver => {
         vm.driver = driver;
         vm.driverOriginal = _.cloneDeep(vm.driver);
-        if (vm.driver.rating.count != 0) {
-          vm.rating = vm.driver.rating.value / vm.driver.rating.count;
-        }
       });
       vm.driverService.getLocation(parseInt(vm.driverId, 10)).subscribe(location => {
         vm.driverLocation = location;
