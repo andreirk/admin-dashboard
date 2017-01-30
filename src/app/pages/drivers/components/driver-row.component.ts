@@ -26,7 +26,7 @@ import { DriverStatus } from '../../../shared/types';
 <td [style.color]="getColor(driverInfo.location)">{{getStatus(driverInfo.location)}}</td>
 <td *ngIf="driverInfo.profile.rating.count == 0">-</td> 
 <td *ngIf="driverInfo.profile.rating.count != 0">
-  <am-rating-component [rating]="driverInfo.profile.rating.value / driverInfo.profile.rating.count" [size]="1.2"></am-rating-component>
+  <am-rating [rating]="driverInfo.profile.rating.value / driverInfo.profile.rating.count" [size]="1.2"></am-rating>
 </td>`
 })
 export class DriverRowComponent implements OnInit {

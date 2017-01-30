@@ -4,7 +4,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: "am-rating-component",
+  selector: "am-rating",
   template: `
 <ngb-rating [(rate)]="rating" [readonly]="true" max="5">
   <template let-fill="fill">

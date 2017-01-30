@@ -8,7 +8,7 @@
       <h3>Driver: {{driver.firstName + ' ' + driver.lastName}}</h3>
     </div>
     <div *ngIf="driver && driver.rating && driver.rating.count" class="col-sm-3">
-      <am-rating-component [rating]="driver.rating.value / driver.rating.count" [size]="1.7"></am-rating-component>
+      <am-rating [rating]="driver.rating.value / driver.rating.count" [size]="1.7"></am-rating>
     </div>
   </div>
   <h4 [style.color]="getStatusColor()"><i class="fa">{{getIcon()}}</i> {{getStatus()}}</h4>
