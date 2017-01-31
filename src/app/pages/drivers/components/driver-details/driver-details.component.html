@@ -4,35 +4,28 @@
 <form #driverForm="ngForm" class="container">
 
   <div class="row">
-    <div class="col-sm-3">
-      <h3>Driver: {{driver.firstName + ' ' + driver.lastName}}</h3>
-    </div>
-    <div *ngIf="driver && driver.rating && driver.rating.count" class="col-sm-3">
-      <am-rating [rating]="driver.rating.value / driver.rating.count" [size]="1.7"></am-rating>
-    </div>
-  </div>
-  <h4 [style.color]="getStatusColor()"><i class="fa">{{getIcon()}}</i> {{getStatus()}}</h4>
-
-  <div class="row">
     <div class="form-group col-sm-3">
       <am-upload-image name="avatarUrl"
                        [folder]="'DRIVERAVATAR'"
                        [settings]="uploadSettings"
-                       [(ngModel)]="driver.avatarUrl"></am-upload-image>
+                       [(ngModel)]="vmService.driver.avatarUrl"></am-upload-image>
+    </div>
+    <div *ngIf="vmService.driver && vmService.driver.rating && vmService.driver.rating.count" class="col-sm-3">
+      <am-rating [rating]="vmService.driver.rating.value / vmService.driver.rating.count" [size]="1.7"></am-rating>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-3">
       <label>Phone</label>
-      <input type="text" class="form-control" name="phone" [(ngModel)]="driver.phone" [disabled]="driverId !== 'new'" required #phone="ngModel">
+      <input type="text" class="form-control" name="phone" [(ngModel)]="vmService.driver.phone" [disabled]="vmService.driver.id" required #phone="ngModel">
       <div [hidden]="!(phone.control.hasError('required') &&  !phone.pristine)" class="alert alert-danger">
         Phone is required
       </div>
     </div>
     <div class="form-group col-sm-3">
       <label>Email</label>
-      <input type="text" class="form-control" name="email" [(ngModel)]="driver.email" [disabled]="driverId !== 'new'" required #email="ngModel">
+      <input type="text" class="form-control" name="email" [(ngModel)]="vmService.driver.email" [disabled]="vmService.driver.id" required #email="ngModel">
       <div [hidden]="!(email.control.hasError('required') &&  !email.pristine)" class="alert alert-danger">
         Email is required
       </div>
@@ -40,86 +33,74 @@
   </div>
 
   <div class="row">
-    <div class="form-group col-sm-3" [ngSwitch]="driverId">
+    <div class="form-group col-sm-3" [ngSwitch]="vmService.driver.id">
       <label>Password</label>
-      <div *ngSwitchCase="'new'">
-        <input type="password" class="form-control" name="password" [(ngModel)]="driver.password" required #password="ngModel">
+      <div *ngSwitchCase="null">
+        <input type="password" class="form-control" name="password" [(ngModel)]="vmService.driver.password" required #password="ngModel">
         <div [hidden]="!(password.control.hasError('required') && !password.pristine)" class="alert alert-danger">
           Password is required
         </div>
       </div>
-      <input *ngSwitchDefault type="password" class="form-control" name="password" [disabled]="true" [(ngModel)]="driver.password">
+      <input *ngSwitchDefault type="password" class="form-control" name="password" [disabled]="true" [(ngModel)]="vmService.driver.password">
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-3">
       <label>First name</label>
-      <input type="text" class="form-control" name="firstName" [(ngModel)]="driver.firstName">
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="vmService.driver.firstName" amNullIfEmpty>
     </div>
     <div class="form-group col-sm-3">
       <label>Last name</label>
-      <input type="text" class="form-control" name="lastName" [(ngModel)]="driver.lastName">
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="vmService.driver.lastName" amNullIfEmpty>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-sm-3">
-      <label>License number</label>
-      <input type="text" class="form-control" name="licenseNumber" [(ngModel)]="driver.licenseNumber">
+      <label>Birth date</label>
+      <am-datepicker name="birthdate"[(ngModel)]="vmService.driver.birthDate"></am-datepicker>
     </div>
   </div>
 
-  <h3>Car details</h3>
   <div class="row">
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label>Capacity</label>
-          <select [(ngModel)]="driver.capacity" name="capacity" class="form-control" required amVehicleTypeOptions></select>
-        </div>
-        <div class="form-group col-sm-6">
-          <label>Type</label>
-          <input type="text" class="form-control" name="carType" [(ngModel)]="driver.carType">
-        </div>
+    <div class="form-group col-sm-6">
+      <label>IBAN</label>
+      <input type="text" class="form-control" minlength="34" maxlength="34"
+             name="iban" [(ngModel)]="vmService.driver.iban" #iban="ngModel" amNullIfEmpty>
+      <div [hidden]="!(iban.control.hasError('minlength'))" class="alert alert-danger">
+        IBAN must be 34 characters long.
       </div>
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label>Brand</label>
-          <input type="text" class="form-control" name="carBrand" [(ngModel)]="driver.carBrand">
-        </div>
-        <div class="form-group col-sm-6">
-          <label>Color</label>
-          <input type="text" class="form-control" name="carColor" [(ngModel)]="driver.carColor">
-        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>ID / Iqama</label>
+      <input type="text" class="form-control" minlength="10" maxlength="10"
+             name="iqama" [(ngModel)]="vmService.driver.iqama" #iqama="ngModel" amNullIfEmpty>
+      <div [hidden]="!(iqama.control.hasError('minlength'))" class="alert alert-danger">
+        Iqama must be 10 characters long.
       </div>
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label>Car plate number</label>
-          <input type="text" class="form-control" name="carPlateNumber" [(ngModel)]="driver.carPlateNumber">
-        </div>
-      </div>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>License number</label>
+      <input type="text" class="form-control" name="licenseNumber" [(ngModel)]="vmService.driver.licenseNumber" amNullIfEmpty>
     </div>
   </div>
 
   <h3>Max payment amounts</h3>
   <div class="row">
     <div class="col-sm-6">
-      <am-max-payment-amounts name="maxPaymentAmounts" [(ngModel)]="driver.maxPaymentAmounts"></am-max-payment-amounts>
+      <am-max-payment-amounts name="maxPaymentAmounts" [(ngModel)]="vmService.driver.maxPaymentAmounts"></am-max-payment-amounts>
     </div>
   </div>
 
   <div class="form-group row">
     <div class="col-sm-3">
-    <a *ngIf="driver.id" class="link" [routerLink]="['../../../orders']" [queryParams]="{ driverId: driver.id}" (click)="false">
+    <a *ngIf="vmService.driver.id" class="link" [routerLink]="['../../../orders']" [queryParams]="{ driverId: vmService.driver.id}" (click)="false">
       <h3>Order list</h3>
     </a>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <button (click)="saveDriver(); false" class="btn btn-secondary" [hidden]="!wasModified" [disabled]="!driverForm.form.valid">Save</button>
     </div>
   </div>
 

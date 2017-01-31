@@ -4,12 +4,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { UserCacheService } from '../services/user-cache.service';
 import { DriverCacheService } from '../services/driver-cache.service';
-import { Driver } from '../../../commons/model/driver/driver';
 import { DriverInfo } from '../../../commons/model/driver/driver-info';
 import { DriverLocation } from '../../../commons/model/driver/driver-location';
 import { DriverStatusService } from '../services/driver-status.service';
 import { driverStatusColorsMap, vehicleTypeIconMap } from '../model/driver-const';
-import { DriverStatus } from '../../../shared/types';
 @Component({
   selector: '[am-driver-row]',
   styleUrls: ['./style'],

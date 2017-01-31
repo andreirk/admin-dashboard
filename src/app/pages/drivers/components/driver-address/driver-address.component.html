@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+
+<form #driverAddressForm="ngForm" class="container">
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Address line 1</label>
+      <input type="text" class="form-control" name="addressLine1" [(ngModel)]="vmService.driver.address.addressLine1" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Address line 2</label>
+      <input type="text" class="form-control" name="addressLine2" [(ngModel)]="vmService.driver.address.addressLine2" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Area</label>
+      <input type="text" class="form-control" name="area" [(ngModel)]="vmService.driver.address.area" amNullIfEmpty>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>City</label>
+      <input type="text" class="form-control" name="city" [(ngModel)]="vmService.driver.address.city" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>State</label>
+      <input type="text" class="form-control" name="state" [(ngModel)]="vmService.driver.address.state" amNullIfEmpty>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>Country</label>
+      <input type="text" class="form-control" name="country" [(ngModel)]="vmService.driver.address.country" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Zip</label>
+      <input type="text" class="form-control" name="zip" [(ngModel)]="vmService.driver.address.zip">
+    </div>
+  </div>
+
+</form>

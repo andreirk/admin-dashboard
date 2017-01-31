@@ -8,22 +8,12 @@
     <div class="row">
       <div class="form-group col-sm-2">
         <label>From:</label>
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" name="dpfrom" [(ngModel)]="filterParamsForm.fromDate" ngbDatepicker #dfrom="ngbDatepicker">
-          <div class="input-group-addon" (click)="dfrom.toggle()" >
-            <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-          </div>
-        </div>
+        <am-datepicker name="dpfrom" [(ngModel)]="filterParamsForm.fromDate"></am-datepicker>
       </div>
 
       <div class="form-group col-sm-2">
         <label>to:</label>
-        <div class='input-group'>
-          <input class="form-control" placeholder="yyyy-mm-dd" name="dpto" [(ngModel)]="filterParamsForm.toDate" ngbDatepicker #dto="ngbDatepicker">
-          <div class="input-group-addon" (click)="dto.toggle()" >
-            <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-          </div>
-        </div>
+        <am-datepicker name="dpto" [(ngModel)]="filterParamsForm.toDate"></am-datepicker>
       </div>
 
       <div class="form-group col-sm-2">

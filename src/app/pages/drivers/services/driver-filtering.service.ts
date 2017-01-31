@@ -8,12 +8,8 @@ import { DriverStatusService } from './driver-status.service';
 export class DriverFilteringService {
   transformFilterParams(filterParamsForm: DriverFilterParamsForm): DriverFilterParams {
     let result: DriverFilterParams = new DriverFilterParams();
-    if (filterParamsForm.searchPattern) {
-      result.searchPattern = filterParamsForm.searchPattern;
-    }
-    if (filterParamsForm.orderId) {
-      result.orderId = filterParamsForm.orderId;
-    }
+    result.searchPattern = filterParamsForm.searchPattern;
+    result.orderId = filterParamsForm.orderId;
     if (filterParamsForm.driverStatus) {
       Object.assign(result, DriverStatusService.getStatusFilter(filterParamsForm.driverStatus));
     }
