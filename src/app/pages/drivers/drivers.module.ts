@@ -12,13 +12,16 @@ import { DriverDetailsComponent } from './components/driver-details/driver-detai
 import { SharedModule } from '../../shared/shared.module';
 import { MaxPaymentAmountsComponent } from './components/max-payment-amounts.component';
 import { DriverBalanceHistoryTableComponent } from './components/balance-history-table/balance-history-table.component';
-import { DriverTabsComponent } from './components/driver-tabs.component';
+import { DriverTabsComponent } from './components/driver-tabs/driver-tabs.component';
 import { BalanceRecordListService } from './services/balance-record-list.service';
 import { BalanceRecordRowComponent } from './components/balance-record-row.component';
 import { BalanceRecordFilteringService } from './services/balance-record-filtering.service';
 import { BalanceRecordTypeMultiselectComponent } from './components/balance-record-type-multiselect.component';
 import { DriverInfoListService } from './services/driver-info-list.service';
 import { DriverStatusService } from './services/driver-status.service';
+import { DriverViewModelService } from './services/driver-view-model.service';
+import { DriverAddressComponent } from './components/driver-address/driver-address.component';
+import { CarDetailsComponent } from './components/car-details/car-details.component';
 
 @NgModule({
   imports: [
@@ -39,7 +42,9 @@ import { DriverStatusService } from './services/driver-status.service';
     DriverTabsComponent,
     BalanceRecordRowComponent,
     BalanceRecordTypeMultiselectComponent,
-    CustomMapDirective
+    CustomMapDirective,
+    DriverAddressComponent,
+    CarDetailsComponent
   ],
   providers: [
     DriverMapApiService,
@@ -47,7 +52,8 @@ import { DriverStatusService } from './services/driver-status.service';
     DriverFilteringService,
     BalanceRecordListService,
     BalanceRecordFilteringService,
-    DriverStatusService
+    DriverStatusService,
+    DriverViewModelService
   ]
 })
 export default class MapsModule {}

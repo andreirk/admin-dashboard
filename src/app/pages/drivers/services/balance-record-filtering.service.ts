@@ -10,15 +10,11 @@ export class BalanceRecordFilteringService {
     filterParams.driverId = driverId;
 
     if (filterParamsForm.fromDate) {
-      filterParams.fromDate = new Date(filterParamsForm.fromDate.year,
-          filterParamsForm.fromDate.month - 1,
-          filterParamsForm.fromDate.day).getTime() / 1000;
+      filterParams.fromDate = filterParamsForm.fromDate;
     }
 
     if (filterParamsForm.toDate) {
-      filterParams.toDate = new Date(filterParamsForm.toDate.year,
-          filterParamsForm.toDate.month - 1,
-          filterParamsForm.toDate.day).getTime() / 1000;
+      filterParams.toDate = filterParamsForm.toDate + 60*60*24 - 1; // to date inclusive
     }
 
     if (filterParamsForm.deliveryId !== '') {

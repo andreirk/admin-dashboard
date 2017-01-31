@@ -28,6 +28,8 @@ import { DriverStatusOptionsDirective } from './directives/driver-status-options
 import { TimeInputComponent } from './components/time-input.component';
 import { AmRatingComponent } from './components/rating.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerComponent } from './components/datepicker.component';
+import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule, NgbModule],
@@ -37,10 +39,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ModalConfirmComponent,
     TimeInputComponent,
     AmRatingComponent,
+    DatepickerComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
+    NullIfEmptyDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
@@ -49,10 +53,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ModalConfirmComponent,
     TimeInputComponent,
     AmRatingComponent,
+    DatepickerComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
+    NullIfEmptyDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule, NgbModule]
 })

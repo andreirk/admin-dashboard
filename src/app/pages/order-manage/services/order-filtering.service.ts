@@ -5,9 +5,8 @@ import { OrderFilterParamsForm } from '../model/order-filter-params-form';
 import { OrderFilterParams } from '../model/order-filter-params';
 import { OrderStatus, DeliveryStatus } from '../../../shared/types';
 import { Injectable } from '@angular/core';
-import { IMultiSelectOption } from '../../../shared/components/multiselect-dropdown.component';
-import {DriverService} from "../../../core/services/drivers/driver.service";
-import {OrderPersonMultiselectComponent} from "../components/order-person-multiselect.component";
+import { DriverService } from '../../../core/services/drivers/driver.service';
+import { OrderPersonMultiselectComponent } from '../components/order-person-multiselect.component';
 
 @Injectable()
 export class OrderFilteringService {
@@ -17,15 +16,11 @@ export class OrderFilteringService {
     let filterParams: OrderFilterParams = new OrderFilterParams();
 
     if (filterParamsForm.createdFrom) {
-      filterParams.fromDate = new Date(filterParamsForm.createdFrom.year,
-          filterParamsForm.createdFrom.month - 1,
-          filterParamsForm.createdFrom.day).getTime() / 1000;
+      filterParams.fromDate = filterParamsForm.createdFrom;
     }
 
     if (filterParamsForm.createdTo) {
-      filterParams.toDate = new Date(filterParamsForm.createdTo.year,
-          filterParamsForm.createdTo.month - 1,
-          filterParamsForm.createdTo.day).getTime() / 1000;
+      filterParams.toDate = filterParamsForm.createdTo + 60*60*24 - 1; // to date inclusive
     }
 
     if (filterParamsForm.orderStatuses) {

@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Renderer, OnDestroy } from '@angular/core';
 import { ViewList } from '../../../../commons/model/view-list';
 import { DriverFilterParamsForm } from '../../model/driver-filter-params-form';
 import { DriverFilterParams } from '../../model/driver-filter-params';
@@ -10,19 +10,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DriverInfoListService } from '../../services/driver-info-list.service';
 import { DriverInfo } from '../../../../commons/model/driver/driver-info';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'am-driver-table',
   styleUrls: ['../style'],
   template: require('./driver-table.component.html')
 })
-export class DriverTableComponent implements OnInit, AfterViewInit {
+export class DriverTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('driversFilterForm') form: NgForm;
 
   private drivers: ViewList<DriverInfo> = new ViewList<DriverInfo>();
   private pageSize = 10;
   private filterParamsForm: DriverFilterParamsForm = new DriverFilterParamsForm();
   private filterParams: DriverFilterParams = new DriverFilterParams();
+
+  private formSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -42,7 +45,7 @@ export class DriverTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     const vm = this;
-    vm.form.control.valueChanges.debounceTime(400)
+    vm.formSubscription = vm.form.control.valueChanges.debounceTime(400)
       .subscribe(values => {
         vm.filterParams = vm.driverFilteringService.transformFilterParams(vm.filterParamsForm);
 /* TODO: skipped until closing https://github.com/angular/angular/issues/13806
@@ -58,16 +61,18 @@ export class DriverTableComponent implements OnInit, AfterViewInit {
       });
   }
 
+  ngOnDestroy() {
+    if (this.formSubscription) {
+      this.formSubscription.unsubscribe();
+    }
+  }
+
   loadMoreDrivers() {
     const vm = this;
     vm.driverInfoListService.loadMore(vm.drivers, vm.pageSize, '', vm.filterParams)
       .subscribe(driverList => {
         vm.drivers = driverList;
       });
-  }
-
-  consoleLog(el) {
-    debugger;
   }
 
   clearFilters() {
