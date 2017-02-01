@@ -15,6 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class DriverDetailsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('driverForm') form: NgForm;
+  private confirmPassword: string = null;
 
   private uploadSettings: IUploadSettings = {
     url: '/driver/mgmt/v1/upload-image'

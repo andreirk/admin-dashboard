@@ -18,14 +18,16 @@
   <div class="row">
     <div class="form-group col-sm-3">
       <label>Phone</label>
-      <input type="text" class="form-control" name="phone" [(ngModel)]="vmService.driver.phone" [disabled]="vmService.driver.id" required #phone="ngModel">
+      <input type="text" class="form-control" name="phone" [(ngModel)]="vmService.driver.phone"
+             required #phone="ngModel">
       <div [hidden]="!(phone.control.hasError('required') &&  !phone.pristine)" class="alert alert-danger">
         Phone is required
       </div>
     </div>
     <div class="form-group col-sm-3">
       <label>Email</label>
-      <input type="text" class="form-control" name="email" [(ngModel)]="vmService.driver.email" [disabled]="vmService.driver.id" required #email="ngModel">
+      <input type="text" class="form-control" name="email" [(ngModel)]="vmService.driver.email"
+             required #email="ngModel">
       <div [hidden]="!(email.control.hasError('required') &&  !email.pristine)" class="alert alert-danger">
         Email is required
       </div>
@@ -36,12 +38,22 @@
     <div class="form-group col-sm-3" [ngSwitch]="vmService.driver.id">
       <label>Password</label>
       <div *ngSwitchCase="null">
-        <input type="password" class="form-control" name="password" [(ngModel)]="vmService.driver.password" required #password="ngModel">
+        <input type="password" class="form-control" name="password" [(ngModel)]="vmService.driver.password"
+               required #password="ngModel" amNullIfEmpty (keyup)="confirmPassword = null">
         <div [hidden]="!(password.control.hasError('required') && !password.pristine)" class="alert alert-danger">
           Password is required
         </div>
       </div>
-      <input *ngSwitchDefault type="password" class="form-control" name="password" [disabled]="true" [(ngModel)]="vmService.driver.password">
+      <input *ngSwitchDefault type="password" class="form-control" name="password"
+             [(ngModel)]="vmService.driver.password" #password="ngModel" amNullIfEmpty (keyup)="confirmPassword = null">
+    </div>
+  </div>
+
+  <div *ngIf="!vmService.driver.id || vmService.driver.password" class="row">
+    <div class="form-group col-sm-3">
+      <label>Confirm password</label>
+      <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword"
+             required [amMatchValue]="vmService.driver.password" amNullIfEmpty>
     </div>
   </div>
 
@@ -85,7 +97,8 @@
     </div>
     <div class="form-group col-sm-3">
       <label>License number</label>
-      <input type="text" class="form-control" name="licenseNumber" [(ngModel)]="vmService.driver.licenseNumber" amNullIfEmpty>
+      <input type="text" class="form-control" name="licenseNumber"
+             [(ngModel)]="vmService.driver.licenseNumber" amNullIfEmpty>
     </div>
   </div>
 
@@ -98,7 +111,8 @@
 
   <div class="form-group row">
     <div class="col-sm-3">
-    <a *ngIf="vmService.driver.id" class="link" [routerLink]="['../../../orders']" [queryParams]="{ driverId: vmService.driver.id}" (click)="false">
+    <a *ngIf="vmService.driver.id" class="link" [routerLink]="['../../../orders']"
+       [queryParams]="{ driverId: vmService.driver.id}" (click)="false">
       <h3>Order list</h3>
     </a>
     </div>

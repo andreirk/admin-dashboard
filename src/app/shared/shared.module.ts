@@ -30,6 +30,7 @@ import { AmRatingComponent } from './components/rating.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerComponent } from './components/datepicker.component';
 import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
+import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NgaModule, NgbModule],
@@ -45,6 +46,7 @@ import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,
+    MatchValueValidatorDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
@@ -59,6 +61,7 @@ import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,
+    MatchValueValidatorDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     CommonModule, FormsModule, NgaModule, NgbModule]
 })
