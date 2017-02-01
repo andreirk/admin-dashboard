@@ -7,6 +7,7 @@ import { OrderStatus, DeliveryStatus } from '../../../shared/types';
 import { Injectable } from '@angular/core';
 import { DriverService } from '../../../core/services/drivers/driver.service';
 import { OrderPersonMultiselectComponent } from '../components/order-person-multiselect.component';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrderFilteringService {
@@ -49,15 +50,18 @@ export class OrderFilteringService {
     return filterParams;
   }
 
-  transformFilterParamsForm(filterParams: OrderFilterParams): OrderFilterParamsForm {
+  transformFilterParamsForm(filterParams: OrderFilterParams): Observable<OrderFilterParamsForm> {
     const vm = this;
-    let filterParamsForm: OrderFilterParamsForm = new OrderFilterParamsForm();
+
     if (filterParams.driverId) {
-      vm.driverService.getProfile(filterParams.driverId).subscribe(driver => {
+      return vm.driverService.getProfile(filterParams.driverId).map(driver => {
+        let filterParamsForm: OrderFilterParamsForm = new OrderFilterParamsForm();
         filterParamsForm.orderPersons.push(OrderPersonMultiselectComponent.driverOption(driver));
+        return filterParamsForm;
       });
+    } else {
+      return Observable.of(new OrderFilterParamsForm());
     }
-    return filterParamsForm;
   }
 }
 
