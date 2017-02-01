@@ -5,9 +5,9 @@ import { DriverProfile } from './driver-profile';
 import { Rating } from '../rating';
 
 export class Driver extends DriverProfile {
-  public phone: string = '';
-  public email: string = '';
-  public password: string = '';
+  public phone: string = null;
+  public email: string = null;
+  public password: string = null;
   public rating: Rating = new Rating();
 
   constructor() {

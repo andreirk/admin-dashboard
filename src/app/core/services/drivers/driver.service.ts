@@ -81,17 +81,15 @@ export class DriverService {
     }
 
     return obsAccount.mergeMap(account => {
-      return obsProfile;
+      return obsProfile.map(profile => Object.assign(profile, account));
     });
   }
 
   private updateAccount(driverAccount: DriverAccount): Observable<DriverAccount> {
     let account: DriverAccount = <DriverAccount>_.pick(driverAccount, Object.keys(new DriverAccount()));
-    if (!account.password || account.password === '') {
-      delete account.password;
-    }
 
-    return this.backendApi.put(this.path + '/drivers/' + driverAccount.id, account, {}, '');
+    return this.backendApi.put(this.path + '/drivers/' + driverAccount.id, account, {}, '')
+      .map(account => Object.assign(new DriverAccount(), account));
   }
 
   private updateProfile(driverId: number, driverProfile: DriverProfile): Observable<Driver> {
@@ -101,7 +99,8 @@ export class DriverService {
   private createAccount(driverAccount: DriverAccount): Observable<DriverAccount> {
     let account: DriverAccount = <DriverAccount>_.pick(driverAccount, Object.keys(new DriverAccount()));
 
-    return this.backendApi.post(this.path + '/drivers', account, {}, '');
+    return this.backendApi.post(this.path + '/drivers', account, {}, '')
+      .map(account => Object.assign(new DriverAccount(), account));
   }
 
   getBalanceRecordsPage(page: number, size: number, filterParams: any): Observable<Page<DriverBalanceRecord>> {
