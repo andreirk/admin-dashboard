@@ -37,15 +37,19 @@ export class OrdersTableComponent implements OnInit, AfterViewInit {
     const vm = this;
 
     if (vm.route.snapshot.queryParams['driverId']) {
-      vm.filterParams.driverId = vm.route.snapshot.queryParams['driverId'];
-      vm.filterParamsForm = vm.orderFilteringService.transformFilterParamsForm(vm.filterParams);
+      let filterParams: OrderFilterParams = new OrderFilterParams();
+      filterParams.driverId = vm.route.snapshot.queryParams['driverId'];
+      vm.orderFilteringService.transformFilterParamsForm(filterParams).subscribe(paramsForm => {
+        vm.filterParamsForm = paramsForm;
+      });
+    } else {
+      vm.loadMoreOrders();
     }
-    vm.loadMoreOrders();
   }
 
   ngAfterViewInit() {
     const vm = this;
-    vm.form.control.valueChanges
+    vm.form.control.valueChanges.debounceTime(300)
       .subscribe(values => {
         vm.filterParams = vm.orderFilteringService.transformFilterParams(vm.filterParamsForm);
 
