@@ -4,7 +4,6 @@
 
 export class DriverFilterParams {
   public searchPattern?: string;
-  public orderId?: string;
   public online?: boolean;
   public hasOrder?: boolean;
 

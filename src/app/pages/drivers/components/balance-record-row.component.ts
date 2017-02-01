@@ -7,9 +7,15 @@ import { DriverCacheService } from '../services/driver-cache.service';
 import { DriverBalanceRecord } from '../../../commons/model/driver/driver-balance-record';
 @Component({
   selector: '[am-balance-record-row]',
+  styleUrls: ['./style'],
   template: `
 <td>{{balanceRecord.creationDate*1000 | date:'short'}}</td>
-<td>{{balanceRecord.delivery}}</td>
+<td>
+<a class="link" [routerLink]="['../../../orders', balanceRecord.delivery]"
+       (click)="false">
+  {{balanceRecord.delivery | amSuffix:6}}
+</a>
+</td>
 <td>{{balanceRecord.type}}</td>
 <td>{{balanceRecord.description}}</td>
 <td>{{balanceRecord.value | currency:balanceRecord.currency}}</td>

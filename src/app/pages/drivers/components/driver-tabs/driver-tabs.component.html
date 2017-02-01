@@ -46,3 +46,5 @@
 <div>
   <router-outlet></router-outlet>
 </div>
+<am-modal-confirm #deactivateConfirmModal [message]="leaveThisPageMessage"
+                  (answer)="onDeactivateConfirm($event)"></am-modal-confirm>
