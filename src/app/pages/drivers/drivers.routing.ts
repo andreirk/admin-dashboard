@@ -6,6 +6,7 @@ import { DriverTabsComponent } from './components/driver-tabs/driver-tabs.compon
 import { DriverBalanceHistoryTableComponent } from './components/balance-history-table/balance-history-table.component';
 import { DriverAddressComponent } from './components/driver-address/driver-address.component';
 import { CarDetailsComponent } from './components/car-details/car-details.component';
+import { CanDeactivateGuard } from '../../core/services/guards/can-deactivate-guard.service';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {
     path: ':driverId',
     component: DriverTabsComponent,
+    canDeactivate: [CanDeactivateGuard],
     children: [
       {
         path: 'general',
