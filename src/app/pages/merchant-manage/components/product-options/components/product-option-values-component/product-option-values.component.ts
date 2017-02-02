@@ -33,6 +33,7 @@ export class ProductOptionValuesComponent implements OnInit {
   productOptionValuesSettings: any;
 
   @Output() newValueCreated = new EventEmitter();
+  @Output() valueDeleted = new EventEmitter();
 
   constructor( private store: Store<MerchantProductAppState>,
                ) {
@@ -109,6 +110,7 @@ export class ProductOptionValuesComponent implements OnInit {
 
   onDeleteConfirm($event){
     console.log('onDeleteConfirm', $event);
+    this.valueDeleted.emit($event);
   }
 
 

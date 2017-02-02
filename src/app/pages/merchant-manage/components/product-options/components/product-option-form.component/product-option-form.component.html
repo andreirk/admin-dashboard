@@ -54,5 +54,8 @@
 
 
 <div class="col-sm-5">
-  <am-product-option-values (newValueCreated)="onNewValueCreated($event)" ></am-product-option-values>
+  <am-product-option-values (newValueCreated)="onNewValueCreated($event)"
+                            (valueDeleted)="onValueDeleted($event)" >
+
+  </am-product-option-values>
 </div>

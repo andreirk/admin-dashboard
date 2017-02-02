@@ -72,5 +72,9 @@ export class ProductOptionFormComponent implements OnInit {
       this.saveForm.emit(this.productOption);
     }
 
+    onValueDeleted(value){
+      console.log('in form onValueDeleted', value);
+    }
+
 
 }
