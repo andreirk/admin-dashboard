@@ -2,7 +2,6 @@
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'am-product-option-card',
@@ -18,7 +17,6 @@ export class ProductOptionCardComponent implements OnInit {
     ngOnInit() { }
 
     onClickDelete(id){
-      console.log('delete id', id);
       this.deleteProductOption.emit(id)
     }
 
