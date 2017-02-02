@@ -14,6 +14,17 @@ import { PosCardComponent } from './components/pos/pos-card.component';
 import { PosListComponent } from './components/pos/pos-list.component';
 import { PosDetailsComponent } from './components/pos/pos-details/pos-details.component';
 import { MerchantSectionsComponent } from './components/merchant-sections.component';
+import { PosWorkTimesComponent } from './components/pos/pos-work-times/pos-work-times.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { WorkTimeViewModelService } from './services/work-time-view-model.service';
+import { MerchantListService } from './services/merchant-list.service';
+import { MerchantFilteringService } from './services/merchant-filtering.service';
+import { PosViewModelService } from './services/pos-view-model.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PosCardComponent } from './components/pos/pos-card.component';
+import { PosListComponent } from './components/pos/pos-list.component';
+import { PosDetailsComponent } from './components/pos/pos-details/pos-details.component';
+import { MerchantSectionsComponent } from './components/merchant-sections.component';
 import { ProductListContainerComponent } from './components/products/product-list-container.component';
 import { ProductFormComponent } from './components/products/product-form.component';
 import { TabsModule, AccordionModule, ButtonsModule } from 'ng2-bootstrap';
@@ -60,6 +71,11 @@ import { NgPipesModule } from 'ngx-pipes';
     SharedModule,
     MultiselectDropdownModule,
     NgbModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
+    }),
+    routing
+    NgbModule.forRoot(),
     Ng2SmartTableModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
@@ -87,6 +103,8 @@ import { NgPipesModule } from 'ngx-pipes';
     PosCardComponent,
     PosDetailsComponent,
     PosWorkTimesComponent,
+    MerchantSectionsComponent
+    PosWorkTimesComponent,
     MerchantSectionsComponent,
     ProductListContainerComponent,
     ProductListDisplayComponent,
@@ -112,6 +130,12 @@ import { NgPipesModule } from 'ngx-pipes';
     MerchantListService,
     MerchantFilteringService,
     WorkTimeViewModelService,
+    PosViewModelService
+    MerchantViewModelService,
+    WorkTimeViewModelService,
+    MerchantListService,
+    MerchantFilteringService,
+    WorkTimeViewModelService,
     PosViewModelService,
     MerchantViewModelService,
     MerchantActions,
@@ -119,4 +143,5 @@ import { NgPipesModule } from 'ngx-pipes';
     ProductOptionActions,
   ]
 })
-export default class MerchantsModule { }
+export default class MerchantsModule {
+}

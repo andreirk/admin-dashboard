@@ -32,6 +32,8 @@ export class MerchantDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private merchantVmService: MerchantViewModelService) {
+    private router: Router,
     private merchantVmService: MerchantViewModelService,
     private store: Store<MerchantProductAppState>,
     private merchantActions: MerchantActions) {
