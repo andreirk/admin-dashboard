@@ -36,6 +36,15 @@ select.form-control {
 }
 
 a.link {
-  text-decoration: underline!important;
   color: whitesmoke;
+}
+
+a.link:hover, a.hoverlink {
+  color: whitesmoke;
+  text-decoration: underline!important;
+}
+
+.crop {
+  overflow:hidden;
+  text-overflow:ellipsis;
 }

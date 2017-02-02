@@ -18,9 +18,19 @@ import { driverStatusColorsMap, vehicleTypeIconMap } from '../model/driver-const
   </button>
 </td>
 <td>{{driverInfo.profile.id}}</td>
-<td>{{driverInfo.profile.firstName + ' ' + driverInfo.profile.lastName}}</td>
+<td>
+  <div class="crop" style="width: 25rem">
+    <a class="link" [routerLink]="[driverInfo.profile.id, 'general']" routerLinkActive="active" title="Driver profile">
+      {{driverInfo.profile.firstName + ' ' + driverInfo.profile.lastName}}
+    </a>
+  </div>
+</td>
 <td>{{driverInfo.profile.phone}}</td>
-<td><i class="fa" [style.color]="getColor(driverInfo.location)">{{getIcon()}}</i>&nbsp;&nbsp;&nbsp;{{driverInfo.profile.carBrand}}</td>
+<td>
+  <div class="crop" style="max-width: 15rem">
+    <i class="fa" [style.color]="getColor(driverInfo.location)">{{getIcon()}}</i>&nbsp;&nbsp;&nbsp;{{driverInfo.profile.carBrand}}
+  </div>
+</td>
 <td [style.color]="getColor(driverInfo.location)">{{getStatus(driverInfo.location)}}</td>
 <td *ngIf="driverInfo.profile.rating.count == 0">-</td> 
 <td *ngIf="driverInfo.profile.rating.count != 0">
@@ -29,7 +39,6 @@ import { driverStatusColorsMap, vehicleTypeIconMap } from '../model/driver-const
 })
 export class DriverRowComponent implements OnInit {
   @Input() driverInfo: DriverInfo;
-  @Output() onDelete = new EventEmitter();
 
   constructor() {
   }
