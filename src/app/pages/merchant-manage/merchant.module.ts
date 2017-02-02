@@ -21,6 +21,9 @@ import { MerchantListService } from './services/merchant-list.service';
 import { MerchantFilteringService } from './services/merchant-filtering.service';
 import { PosViewModelService } from './services/pos-view-model.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeGeoPointCardComponent } from './components/pos/change-geo-point-card.component';
+import { PosMapComponent } from './components/pos/pos-map.component';
+import { PosDetailsInputFormComponent } from './components/pos/pos-details/pos-details-input-form.component';
 
 @NgModule({
   imports: [
@@ -41,6 +44,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PosCardComponent,
     PosDetailsComponent,
     PosWorkTimesComponent,
+    ChangeGeoPointCardComponent,
+    PosMapComponent,
+    PosDetailsInputFormComponent,
     MerchantSectionsComponent
   ],
   providers: [
