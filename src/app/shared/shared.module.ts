@@ -31,17 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerComponent } from './components/datepicker.component';
 import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
 import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
-import { ModalConfirmComponent } from './components/modal-confirm.component';
-import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
-import { DriverStatusOptionsDirective } from './directives/driver-status-options.directive';
-import { TimeInputComponent } from './components/time-input.component';
-import { AmRatingComponent } from './components/rating.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DatepickerComponent } from './components/datepicker.component';
-import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
-import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
-import { MarketingAttributeTypeOptionsDirective } from "./directives/product-marketing-attributes-type-options.directive";
-
+import { MarketingAttributeTypeOptionsDirective } from './directives/product-marketing-attributes-type-options.directive';
 
 
 @NgModule({
@@ -76,6 +66,7 @@ import { MarketingAttributeTypeOptionsDirective } from "./directives/product-mar
     DatepickerComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,

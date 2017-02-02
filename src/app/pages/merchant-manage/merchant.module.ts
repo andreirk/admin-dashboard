@@ -21,14 +21,9 @@ import { MerchantListService } from './services/merchant-list.service';
 import { MerchantFilteringService } from './services/merchant-filtering.service';
 import { PosViewModelService } from './services/pos-view-model.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PosCardComponent } from './components/pos/pos-card.component';
-import { PosListComponent } from './components/pos/pos-list.component';
-import { PosDetailsComponent } from './components/pos/pos-details/pos-details.component';
-import { MerchantSectionsComponent } from './components/merchant-sections.component';
 import { ProductListContainerComponent } from './components/products/product-list-container.component';
 import { ProductFormComponent } from './components/products/product-form.component';
 import { TabsModule, AccordionModule, ButtonsModule } from 'ng2-bootstrap';
-
 import { GroupMultiSelectComponent } from './components/products/components/group-multiselect-component';
 import { TagMultiSelectComponent } from './components/products/components/tag-multiselect-component';
 import { StoreModule } from '@ngrx/store';
@@ -38,8 +33,6 @@ import productReducer from './store';
 import { ProductActions } from './components/products/actions';
 import { ProductEffects } from './components/products/effects';
 import { ProductDetailsContainerComponent } from './components/products/product-details-container';
-import { PosWorkTimesComponent } from './components/pos/pos-work-times/pos-work-times.component';
-import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { ProductCardComponent } from './components/products/product-card.component';
 import { ProductListDisplayComponent } from './components/products/product-list-desplay.component';
@@ -54,16 +47,10 @@ import { ProductOptionValuesComponent } from './components/product-options/compo
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ProductOptionActions } from './components/product-options/actions/product-option.actions';
 import { ProductOptionsEffects } from './components/product-options/effects/productOptions.effects';
-import { WorkTimeViewModelService } from './services/work-time-view-model.service';
-import { MerchantListService } from './services/merchant-list.service';
-import { MerchantFilteringService } from './services/merchant-filtering.service';
-import { PosViewModelService } from './services/pos-view-model.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // TODO: replace with original ng2-select when support for bootstapV4-alfa6 is available
 import { SelectModule } from '../../shared/components/ng2-custom-select/ng2-select';
 import { MerchantActions } from './actions/merchant-actions';
 import { NgPipesModule } from 'ngx-pipes';
-
 
 
 @NgModule({
@@ -74,12 +61,8 @@ import { NgPipesModule } from 'ngx-pipes';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
     }),
-    routing
-    NgbModule.forRoot(),
+    routing,
     Ng2SmartTableModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
-    }),
     TabsModule,
     AccordionModule,
     ButtonsModule,
@@ -103,7 +86,7 @@ import { NgPipesModule } from 'ngx-pipes';
     PosCardComponent,
     PosDetailsComponent,
     PosWorkTimesComponent,
-    MerchantSectionsComponent
+    MerchantSectionsComponent,
     PosWorkTimesComponent,
     MerchantSectionsComponent,
     ProductListContainerComponent,
@@ -129,15 +112,7 @@ import { NgPipesModule } from 'ngx-pipes';
     WorkTimeViewModelService,
     MerchantListService,
     MerchantFilteringService,
-    WorkTimeViewModelService,
-    PosViewModelService
-    MerchantViewModelService,
-    WorkTimeViewModelService,
-    MerchantListService,
-    MerchantFilteringService,
-    WorkTimeViewModelService,
     PosViewModelService,
-    MerchantViewModelService,
     MerchantActions,
     ProductActions,
     ProductOptionActions,
