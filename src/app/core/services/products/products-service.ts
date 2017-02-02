@@ -209,16 +209,6 @@ export class ProductService {
     }
 
 
-    // saveProduct(merchantId, product: Product, productOriginal: Product, lang): any {
-    //   console.log('in save product service', arguments);
-    //   if (!product.id || !_.isEqual(product, productOriginal)) {
-    //     return this.save(merchantId, product, lang)
-    //   }
-    //   else {
-    //     return Observable.of(product.id);
-    //   }
-    // }
-
     update(originalProduct: Product, updatedProduct: Product, lang){
       console.log('in update servise ', {originalProduct, updatedProduct});
 
@@ -227,15 +217,6 @@ export class ProductService {
       return Observable
         .combineLatest(fieldsToUpdate)
         .map(results => updatedProduct.id)
-        // .flatMap(results => {
-        //   // results[0] is our character
-        //   // results[1] is our character homeworld
-        //   console.log('results', results)
-        //   //results[0].homeworld = results[1];
-        //   console.log('in update before getOne product', product)
-        //   return Observable.of(this.getOne(product.id,lang, {currency: product.price.currency})) //
-        //
-        // })
 
     }
 

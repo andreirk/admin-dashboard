@@ -3,8 +3,6 @@
  */
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { MerchantProductAppState } from '../../../../store/index';
 
 @Component({
     selector: 'am-product-option-card',
@@ -15,20 +13,13 @@ export class ProductOptionCardComponent implements OnInit {
     @Input() productOption;
     @Output() deleteProductOption = new EventEmitter();
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
-
-    ) { }
+    constructor() { }
 
     ngOnInit() { }
 
-  // editProductOption(id){
-  //   this.router.navigate(['./', id],{ relativeTo: this.route })
-  // }
-
-  onClickDelete(id){
-    console.log('delete id', id);
-    this.deleteProductOption.emit(id)
-  }
+    onClickDelete(id){
+      console.log('delete id', id);
+      this.deleteProductOption.emit(id)
+    }
 
 }

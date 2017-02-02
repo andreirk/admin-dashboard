@@ -26,22 +26,6 @@ export class Price {
 }
 
 
-// export interface Product {
-//   available: boolean;
-//   brand: string;
-//   defaultProductImageUrl: string;
-//   description: string;
-//   discountedPrice: number;
-//   id: string;
-//   imageUrl: string;
-//   marketingAttribute: MarketingAttribute;
-//   // mediaResources: MediaResources;
-//   merchantId: string;
-//   name: string;
-//   packageType: string;
-//   price: Price;
-// }
-
 export interface Tag {
   description: string;
   id: string;
@@ -84,10 +68,6 @@ export interface ProductsRootObject {
 
 export type MarketingAttribute = 'Promo'| 'Gift'| 'Tranding' | '';
 
-
-export interface ProductOption {
-  name: string
-}
 
 export interface ProductGroup {
   name: string
