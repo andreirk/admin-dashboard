@@ -1,10 +1,10 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, state } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import { StoreModule, Action } from "@ngrx/store";
+import { StoreModule, Action, combineReducers } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 /*
@@ -21,8 +21,8 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LOAD_PRODUCTS_ACTION, productsLoadedAction } from "./shared/store/actions";
-import { INITIAL_APP_STATE, AppState } from "./shared/store/app-state";
+
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -36,28 +36,6 @@ const APP_PROVIDERS = [
 //   disposeOldHosts: () => void
 // };
 
-function storeReducer(state: AppState = INITIAL_APP_STATE, action: Action): AppState {
-  switch (action.type) {
-    case LOAD_PRODUCTS_ACTION:
-      return handleLoadProductsAction(state, action);
-    default:
-      return state;
-  }
-
-}
-
-function handleLoadProductsAction(state: AppState,
-                                  action: productsLoadedAction): AppState {
-
-  const userData = action.payload;
-  const newState: AppState = Object.assign({}, state);
-
-  newState.storeData = {
-    products: _.keyBy(action.payload.products, 'id'),
-  };
-
-  return newState;
-}
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -78,8 +56,7 @@ function handleLoadProductsAction(state: AppState,
     CoreModule,
     NgbModule.forRoot(),
     routing,
-    StoreModule.provideStore(storeReducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

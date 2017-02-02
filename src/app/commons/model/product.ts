@@ -3,10 +3,11 @@
  */
 
 
-export interface Attributes {
-  brand: string;
-  description: string;
-  name: string;
+import { Currency } from '../../shared/types';
+export class ProductAttributes {
+  brand: string = '';
+  description: string = '';
+  name: string = '';
 }
 
 export interface MediaResource {
@@ -16,32 +17,30 @@ export interface MediaResource {
   url: string;
 }
 
-export interface Price {
-  currency: string;
+
+
+export class Price {
+  currency: Currency = Currency.SAR;
   discountedPrice: number;
-  price: number;
+  price: number = 0;
 }
 
-export interface MediaResources {
-  images: string[];
-  videos: string[];
-}
 
-export interface Product {
-  available: boolean;
-  brand: string;
-  defaultProductImageUrl: string;
-  description: string;
-  discountedPrice: number;
-  id: string;
-  imageUrl: string;
-  marketingAttribute: string;
-  mediaResources: MediaResources;
-  merchantId: string;
-  name: string;
-  packageType: string;
-  price: number;
-}
+// export interface Product {
+//   available: boolean;
+//   brand: string;
+//   defaultProductImageUrl: string;
+//   description: string;
+//   discountedPrice: number;
+//   id: string;
+//   imageUrl: string;
+//   marketingAttribute: MarketingAttribute;
+//   // mediaResources: MediaResources;
+//   merchantId: string;
+//   name: string;
+//   packageType: string;
+//   price: Price;
+// }
 
 export interface Tag {
   description: string;
@@ -51,26 +50,46 @@ export interface Tag {
   products: Product[];
 }
 
-export interface Content {
-  attributes: Attributes;
-  available: boolean;
-  categoryId: string;
-  groupIds: string[];
-  id: string;
-  imageUrl: string;
-  marketingAttribute: string;
-  mediaResources: MediaResource[];
-  merchantId: string;
-  packageType: string;
-  price: Price;
-  tagValues: string[];
-  tags: Tag[];
-  upc: string;
+export class ProductSelectedImage {
+  id: string = '';
 }
 
-export interface RootObject {
-  content: Content[];
+export class Product {
+  constructor(
+  public attributes: ProductAttributes = new ProductAttributes(),
+  public available: boolean = true,
+  public categoryId: string = '',
+  public groupIds: string[] = [],
+  public description: string = '',
+  public imageUrl: string = '',
+  public marketingAttribute: string = '',
+  public mediaResources: MediaResource[] = [],
+  public merchantId: string = '',
+  public packageType: string = '',
+  public price: Price = new Price(),
+  public tagValues: string[] = [],
+  public tags: Tag[] = [],
+  public upc: string = '',
+  public defaultProductImageUrl: string,
+  public selectedImage: ProductSelectedImage = new ProductSelectedImage(),
+  public id?: string,
+)
+  {}
+}
+
+export interface ProductsRootObject {
+  content: Product[];
   total: number;
 }
 
+export type MarketingAttribute = 'Promo'| 'Gift'| 'Tranding' | '';
+
+
+export interface ProductOption {
+  name: string
+}
+
+export interface ProductGroup {
+  name: string
+}
 

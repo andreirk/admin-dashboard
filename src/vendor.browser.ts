@@ -18,6 +18,7 @@ import '@angularclass/hmr';
 // RxJS
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
+import { Observable } from "rxjs";
 
 // Web dependencies
 import 'jquery';
@@ -25,8 +26,38 @@ import 'bootstrap-loader';
 import 'font-awesome-sass-loader';
 import 'lodash';
 
+let debuggerOn = true;
+
+Observable.prototype.debug = function(message:string) {
+  return this.do(
+    nextValue => {
+      if (debuggerOn) {
+        console.log(message, nextValue)
+      }
+    },
+    error => {
+      if (debuggerOn) {
+        console.error(message, error)
+      }
+    },
+    () => {
+      if (debuggerOn) {
+        console.error("Observable completed - ", message)
+      }
+    }
+  );
+};
+
+declare module 'rxjs/Observable' {
+  interface Observable<T> {
+    debug: (...any) => Observable<T>
+  }
+}
+
+
 if ('production' === ENV) {
   // Production
+  debuggerOn = false;
 } else {
   // Development
 }

@@ -1,15 +1,20 @@
 import { Merchant } from "../../commons/model/merchant";
-import { Product } from "../../commons/model/product";
+import { Product, ProductsRootObject } from "../../commons/model/product";
 
 export interface  StoreData {
 
   products: {
-    [key: number]: Product
+      content: Product[]
+      total: number
   };
+
 }
 
 export const INITIAL_STORE_DATA: StoreData = {
 
-  products: {}
+  products: {
+    content: null,
+    total: null,
+  }
 
 };

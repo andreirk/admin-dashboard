@@ -20,10 +20,10 @@ import { Maps } from './maps.component';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,  
+    FormsModule,
     NgaModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC52zimpd1o93V2W4_hDENNdFkI4nJrGo8'
+      apiKey: 'AIzaSyC2H1X8OzJNzGqRYO8FLGC64HmLEwE0Nwk'
     }),
     routing
   ],

@@ -1,7 +1,7 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { OrderListService } from '../../services/order-list.service';
 import { OrderFilterParams } from '../../model/order-filter-params';
 import * as _ from 'lodash';
@@ -9,13 +9,14 @@ import { OrderFilterParamsForm } from '../../model/order-filter-params-form';
 import { OrderFilteringService } from '../../services/order-filtering.service';
 import { ViewList } from '../../../../commons/model/view-list';
 import { Order } from '../../../../commons/model/order';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'am-order-list',
   styleUrls: ['../style'],
   template: require('./order-table.component.html')
 })
-export class OrdersTableComponent implements OnInit{
+export class OrdersTableComponent implements OnInit, AfterViewInit {
   @ViewChild('ordersFilterForm') form;
 
   private orders: ViewList<Order> = new ViewList<Order>();
@@ -26,18 +27,29 @@ export class OrdersTableComponent implements OnInit{
   private filterParams: OrderFilterParams = new OrderFilterParams();
   private filterParamsOriginal: OrderFilterParams = new OrderFilterParams();
 
-  constructor(private orderListService: OrderListService,
-      private orderFilteringService: OrderFilteringService) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private orderListService: OrderListService,
+              private orderFilteringService: OrderFilteringService) {
   }
 
   ngOnInit() {
     const vm = this;
-    vm.loadMoreOrders();
+
+    if (vm.route.snapshot.queryParams['driverId']) {
+      let filterParams: OrderFilterParams = new OrderFilterParams();
+      filterParams.driverId = vm.route.snapshot.queryParams['driverId'];
+      vm.orderFilteringService.transformFilterParamsForm(filterParams).subscribe(paramsForm => {
+        vm.filterParamsForm = paramsForm;
+      });
+    } else {
+      vm.loadMoreOrders();
+    }
   }
 
   ngAfterViewInit() {
     const vm = this;
-    this.form.control.valueChanges
+    vm.form.control.valueChanges.debounceTime(300)
       .subscribe(values => {
         vm.filterParams = vm.orderFilteringService.transformFilterParams(vm.filterParamsForm);
 

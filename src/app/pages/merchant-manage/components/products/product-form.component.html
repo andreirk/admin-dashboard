@@ -1,0 +1,183 @@
+<form #productForm="ngForm" class="merchant-details container">
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <button (click)="save.emit(product)" class="btn btn-secondary" [hidden]="!wasModified" [disabled]="!productForm.form.valid" >Save</button>
+    </div>
+  </div>
+
+
+  <accordion >
+
+    <div class="card" >
+
+      <div class="card-block">
+         <accordion-group heading="General" >
+
+
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label>Product main Image</label>
+              <am-upload-image name="imageUrl"
+                               [folder]="'PRODUCTS'"
+                               [(ngModel)]="product.imageUrl"
+              >
+              </am-upload-image>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-inline custom-checkbox nowrap">
+              <input type="checkbox" class="form-control" name="enabled"
+                     [(ngModel)]="product.available">
+              <span>Product available</span>
+            </label>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label>Name</label>
+              <input type="text" class="form-control" name="name"
+                     [(ngModel)]="product.attributes.name"
+                     [ngStyle]="{'direction': langDirection}">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label>Description</label>
+              <textarea type="text" class="form-control" name="desc"
+                        [(ngModel)]="product.attributes.description"
+                        [ngStyle]="{'direction': langDirection}">
+              </textarea>
+            </div>
+          </div>
+        </accordion-group>
+      </div>
+    </div>
+
+    <div class="card" >
+      <div class="card-block">
+        <accordion-group heading="Marketing" >
+          <div class="row">
+
+            <div class="form-group col-sm-3">
+              <label>Marketing Attribute</label>
+
+              <ng-select
+
+                [items]="marketingAttrebutes"
+                [active]="product.marketingAttribute ? [product.marketingAttribute] : []"
+                (selected)="onSelectMarketingAttrebute($event.text)"
+              >
+              </ng-select>
+
+            </div>
+
+            <div class="form-group col-sm-3">
+              <label class="label">UPC</label>
+              <input type="text" class="form-control" name="upc"
+                     [ngModel]="product?.upc"
+                     (ngModelChange)="product.upc = $event">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="form-group col-sm-3">
+              <label class="label">Price</label>
+              <input type="text" class="form-control" name="price"
+                     [ngModel]="product?.price?.price"
+                     (ngModelChange)="product.price ? product.price.price = $event : ''"
+              >
+            </div>
+
+            <div class="form-group col-sm-3">
+              <label class="label">Discounted Price</label>
+              <input type="text" class="form-control" name="discPrice"
+
+                     [ngModel]="product?.price?.discountedPrice"
+                     (ngModelChange)="product.price ? product.price.discountedPrice = $event : ''"
+              >
+            </div>
+
+          </div>
+
+        </accordion-group>
+      </div>
+    </div>
+
+    <div class="card" >
+      <div class="card-block">
+        <accordion-group heading="Grouping" >
+          <div class="row">
+            <div class="form-group col-sm-3" >
+              <label>Category</label>
+
+              <am-category-select
+                [lang]="lang"
+                [value]="product?.categoryId"
+                (valueChange)="onSelectCategory($event)"
+                (changeFired)="onChangeFired($event)"
+                name="categoryId"
+                ngDefaultControl
+              >
+              </am-category-select>
+
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="form-group col-sm-3">
+              <label>Groups</label>
+
+              <am-group-multi-select
+                [inputValues]="product?.groupIds"
+                (selectGroup)="onSelectGroup($event)"
+                (removeGroup)="onRemoveGroup($event)"
+                (changeFired)="onChangeFired($event)"
+
+                name="groupIds">
+                ngDefaultControl
+              </am-group-multi-select>
+            </div>
+
+            <div class="form-group col-sm-3">
+              <label>Tags</label>
+              <am-tag-multi-select
+                [inputValues]="product.tagValues"
+                (selectTag)="onSelectTag($event)"
+                (removeTag)="onRemoveTag($event)"
+                (changeFired)="onChangeFired($event)"
+
+                name="tags"
+                ngDefaultControl
+              >
+              </am-tag-multi-select>
+            </div>
+          </div>
+        </accordion-group>
+      </div>
+    </div>
+
+    <div class="card" >
+      <div class="card-block">
+        <accordion-group heading="Media" >
+          <am-product-media></am-product-media>
+        </accordion-group>
+      </div>
+    </div>
+
+    <div class="card" >
+      <div class="card-block">
+        <accordion-group heading="Options" >
+          <p>Options</p>
+        </accordion-group>
+      </div>
+    </div>
+
+  </accordion>
+
+</form>

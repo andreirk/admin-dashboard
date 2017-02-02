@@ -2,16 +2,12 @@
   ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
   -->
 <form #merchantForm="ngForm" class="merchant-details container">
-  <div class="form-group row">
-    <div class="col-sm-4">
-      <button (click)="saveMerchant()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
-    </div>
-  </div>
-
   <div class="row">
-    <am-select-lang [lang]="lang"
+    <div class="form-group col-sm-2">
+      <am-select-lang [lang]="lang"
                     [wasModified]="wasModified"
                     (onChange)="onChangeLang($event)"></am-select-lang>
+    </div>
   </div>
 
   <div class="row">
@@ -58,6 +54,12 @@
       <am-upload-image name="defaultProductImageUrl"
                        [folder]="'MERCHANTS'"
                        [(ngModel)]="viewModel.merchant.defaultProductImageUrl"></am-upload-image>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <button (click)="saveMerchant()" class="btn btn-secondary" [hidden]="!wasModified">Save</button>
     </div>
   </div>
 </form>

@@ -12,7 +12,7 @@ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 /**
- * Webpack Constants
+ * Webpack Constantsf
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
@@ -39,7 +39,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#devtool
      * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
      */
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-dataSource-map',
 
     /**
      * Options affecting the output of the compilation.

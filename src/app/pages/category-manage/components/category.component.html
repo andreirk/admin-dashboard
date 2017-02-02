@@ -8,17 +8,12 @@
 
     <div class="col-md-5">
       <div class="row">
-
-        <!--<div class="col-md-5 col-sm-6 col-xs-6">-->
           <am-select-lang [lang]="changedLangObj"
                           (onChange)="onChangeLanguage($event)"></am-select-lang>
-          <!--<language-switch (changeLanguage)="onChangeLanguage($event)" ></language-switch>-->
-        <!--</div>-->
-
       </div>
 
       <div class="row">
-          <toyou-category-form
+          <toyou-category-form class="w-100"
               [language]="changedLangObj"
               [listId]="listId"
               [editId]="editId"

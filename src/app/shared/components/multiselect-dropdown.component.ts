@@ -3,7 +3,7 @@
  */
 import {
   Component, Input, Output, EventEmitter, forwardRef, ElementRef, IterableDiffers,
-  HostListener, ViewChild, OnInit, AfterViewInit
+  HostListener, ViewChild, OnInit, AfterViewInit, OnChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -50,23 +50,29 @@ export interface IMultiSelectTexts {
   providers: [MULTISELECT_VALUE_ACCESSOR],
   styles: [`
     a { outline: none !important; }
-    input { color: #373a3c !important; border-color: #373a3c !important; }
-    i { color: #373a3c !important; }
+    .dropdown-menu input, .dropdown-menu .input-group-addon { color: #373a3c !important; border-color: #373a3c !important; }
+    .input-group-addon { border-bottom-right-radius: 5px; border-top-right-radius: 5px; }
+    .dropdown-menu i { color: #373a3c !important; }     
     .dropdown-toggle:after { display:none; }
-    .btn:hover { transform: none; }
+    .dropdown-toggle { height: auto!important; }
     .form-control::-webkit-input-placeholder { color: grey; }
     .form-control:-moz-placeholder { color: grey; }
     .form-control::-moz-placeholder { color: grey; }
     .form-control:-ms-input-placeholder { color: grey; }
+    .crop { overflow:hidden; text-overflow:ellipsis; }
   `],
   template: `
 <div class="dropdown">
-    <div class="input-group input-group-sm">
-      <button type="button" style="width:100%;" class="dropdown-toggle" [ngClass]="settings.buttonClasses" (click)="toggleDropdown()">
-        <div *ngFor="let t of titleList">{{ t }}</div>
-      </button>
+    <div class="input-group">
+      <span class="input-group-btn w-100">
+        <button type="button" class="dropdown-toggle" [ngClass]="settings.buttonClasses" (click)="toggleDropdown()">
+          <div>
+            <div class="crop" *ngFor="let t of titleList">{{ t }}</div>
+          </div>
+        </button>
+      </span>
       <span class="input-group-addon" (click)="toggleDropdown()">
-        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
       </span>
     </div>
       
@@ -245,26 +251,27 @@ export class MultiselectDropdownComponent implements OnInit {
   }
 
   updateTitle() {
-    if (this.numSelected === 0) {
-      this.title = this.texts.defaultTitle;
-      this.titleList = [ this.texts.defaultTitle ];
-    } else if (this.settings.dynamicTitleMaxItems >= this.numSelected) {
-      this.titleList = this.model
+    const vm = this;
+    if (vm.numSelected === 0) {
+      vm.title = vm.texts.defaultTitle;
+      vm.titleList = [ vm.texts.defaultTitle ];
+    } else if (vm.settings.dynamicTitleMaxItems >= vm.numSelected) {
+      vm.titleList = vm.model
         .map((option: IMultiSelectOption) => {
           if (option.group) {
-            return this.groups.find(group => group.id === option.group).prefix + option.name;
+            return vm.groups.find(group => group.id === option.group).prefix + option.name;
           } else {
             return option.name;
           }
         });
-      this.title = this.model
+      vm.title = vm.model
         .map((option: IMultiSelectOption) => option.name)
         .join('\n ');
     } else {
-      this.title = this.numSelected
+      vm.title = vm.numSelected
         + ' '
-        + (this.numSelected === 1 ? this.texts.checked : this.texts.checkedPlural);
-      this.titleList = [ this.title ];
+        + (vm.numSelected === 1 ? vm.texts.checked : vm.texts.checkedPlural);
+      vm.titleList = [ vm.title ];
     }
   }
 

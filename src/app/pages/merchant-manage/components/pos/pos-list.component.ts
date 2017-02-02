@@ -11,15 +11,10 @@ import { WorkTimeService } from "../../../../core/services/work-times/work-time.
 
 @Component({
   selector: 'am-pos-list',
-  providers: [
-    BackendApiService,
-    MerchantBackendService,
-    PosService,
-    WorkTimeService
-  ],
+  providers: [],
   template: `
   <div class="column">
-     <div class="col-sm-3 card-block"> 
+     <div class="col-sm-3 card-margin-bottom"> 
       <a class="btn btn-primary align-bottom" [routerLink]="['new']"
           routerLinkActive="active">New POS</a>
      </div>
@@ -56,7 +51,6 @@ export class PosListComponent implements OnInit {
 
   loadMerchantsPosList() {
     const vm = this;
-    console.log(this.merchantId);
     if (this.merchantId) {
       vm.merchantService.getMerchantsPos(vm.merchantId, vm.lang)
         .subscribe(posList => {

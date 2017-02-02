@@ -1,12 +1,13 @@
 /*
  * Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
  */
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TotalCosts, Order } from '../../../commons/model/order';
 import { UserCacheService } from '../services/user-cache.service';
 import { DriverCacheService } from '../services/driver-cache.service';
 @Component({
   selector: '[am-order-row]',
+  styleUrls: ['./style'],
   template: `
 <td>
   <button type="button" class="btn btn-xs btn-default" [routerLink]="[order.id]" routerLinkActive="active" >
@@ -18,14 +19,18 @@ import { DriverCacheService } from '../services/driver-cache.service';
 <td>{{order.creationDate*1000 | date:'short'}}</td>
 <td>{{(order.requiredDeliveryDate || 0)*1000 | date:'short' | amDefaultValue:'n/a':(order.creationDate > (order.requiredDeliveryDate || 0))}}</td>
 <td>{{userName}}</td>
-<td>{{driverName | amDefaultValue:'n/a'}}</td>
+<td>
+  <a *ngIf="driverName" class="link" [routerLink]="['../../drivers', order.driverId, 'general']" routerLinkActive="active" title="Driver profile">
+    {{driverName}}
+  </a>
+  <span *ngIf="!driverName">n/a</span>
+</td>
 <td>{{order.pickUp.address | amAddress}}</td>
 <td>{{order.dropOff.address | amAddress}}</td>
 <td>{{sumCost(order.totalCosts)}}</td>`
 })
 export class OrderRowComponent implements OnInit {
   @Input() order: Order;
-  @Output() onDelete = new EventEmitter();
 
   private userName: string;
   private driverName: string;

@@ -1,0 +1,121 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<form #driverForm="ngForm" class="container">
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <am-upload-image name="avatarUrl"
+                       [folder]="'DRIVERAVATAR'"
+                       [settings]="uploadSettings"
+                       [(ngModel)]="vmService.driver.avatarUrl"></am-upload-image>
+    </div>
+    <div *ngIf="vmService.driver && vmService.driver.rating && vmService.driver.rating.count" class="col-sm-3">
+      <am-rating [rating]="vmService.driver.rating.value / vmService.driver.rating.count" [size]="1.7"></am-rating>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Phone</label>
+      <input type="text" class="form-control" name="phone" [(ngModel)]="vmService.driver.phone"
+             required #phone="ngModel">
+      <div [hidden]="!(phone.control.hasError('required') &&  !phone.pristine)" class="alert alert-danger">
+        Phone is required
+      </div>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>Email</label>
+      <input type="text" class="form-control" name="email" [(ngModel)]="vmService.driver.email"
+             required #email="ngModel">
+      <div [hidden]="!(email.control.hasError('required') &&  !email.pristine)" class="alert alert-danger">
+        Email is required
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3" [ngSwitch]="vmService.driver.id">
+      <label>Password</label>
+      <div *ngSwitchCase="null">
+        <input type="password" class="form-control" name="password" [(ngModel)]="vmService.driver.password"
+               required #password="ngModel" amNullIfEmpty (keyup)="confirmPassword = null">
+        <div [hidden]="!(password.control.hasError('required') && !password.pristine)" class="alert alert-danger">
+          Password is required
+        </div>
+      </div>
+      <input *ngSwitchDefault type="password" class="form-control" name="password"
+             [(ngModel)]="vmService.driver.password" #password="ngModel" amNullIfEmpty (keyup)="confirmPassword = null">
+    </div>
+  </div>
+
+  <div *ngIf="!vmService.driver.id || vmService.driver.password" class="row">
+    <div class="form-group col-sm-3">
+      <label>Confirm password</label>
+      <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword"
+             required [amMatchValue]="vmService.driver.password" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>First name</label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="vmService.driver.firstName" amNullIfEmpty>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>Last name</label>
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="vmService.driver.lastName" amNullIfEmpty>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>Birth date</label>
+      <am-datepicker name="birthdate"[(ngModel)]="vmService.driver.birthDate"></am-datepicker>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>IBAN</label>
+      <input type="text" class="form-control" minlength="34" maxlength="34"
+             name="iban" [(ngModel)]="vmService.driver.iban" #iban="ngModel" amNullIfEmpty>
+      <div [hidden]="!(iban.control.hasError('minlength'))" class="alert alert-danger">
+        IBAN must be 34 characters long.
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group col-sm-3">
+      <label>ID / Iqama</label>
+      <input type="text" class="form-control" minlength="10" maxlength="10"
+             name="iqama" [(ngModel)]="vmService.driver.iqama" #iqama="ngModel" amNullIfEmpty>
+      <div [hidden]="!(iqama.control.hasError('minlength'))" class="alert alert-danger">
+        Iqama must be 10 characters long.
+      </div>
+    </div>
+    <div class="form-group col-sm-3">
+      <label>License number</label>
+      <input type="text" class="form-control" name="licenseNumber"
+             [(ngModel)]="vmService.driver.licenseNumber" amNullIfEmpty>
+    </div>
+  </div>
+
+  <h3>Max payment amounts</h3>
+  <div class="row">
+    <div class="col-sm-6">
+      <am-max-payment-amounts name="maxPaymentAmounts" [(ngModel)]="vmService.driver.maxPaymentAmounts"></am-max-payment-amounts>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+    <a *ngIf="vmService.driver.id" class="link" [routerLink]="['../../../orders']"
+       [queryParams]="{ driverId: vmService.driver.id}" (click)="false">
+      <h3>Order list</h3>
+    </a>
+    </div>
+  </div>
+
+</form>

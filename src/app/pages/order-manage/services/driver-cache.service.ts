@@ -5,16 +5,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DriverService } from '../../../core/services/drivers/driver.service';
-import { DriverProfile } from '../../../commons/model/driver-profile';
+import { Driver } from '../../../commons/model/driver/driver';
 
 @Injectable()
 export class DriverCacheService {
-  private drivers: Map<number, Observable<DriverProfile>> = new Map();
+  private drivers: Map<number, Observable<Driver>> = new Map();
 
   constructor(private driverService: DriverService) {
   }
 
-  getDriver(driverId: number): Observable<DriverProfile> {
+  getDriver(driverId: number): Observable<Driver> {
     const vm = this;
     if (!vm.drivers.get(driverId)) {
       vm.drivers.set(driverId, vm.driverService.getProfile(driverId)

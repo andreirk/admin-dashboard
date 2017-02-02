@@ -1,0 +1,59 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<div>
+  <form #driversFilterForm="ngForm">
+    <p>Filter by:</p>
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label>Phone or email:</label>
+        <input class="form-control" name="searchPattern" [(ngModel)]="filterParamsForm.searchPattern" amNullIfEmpty>
+      </div>
+      <div class="form-group col-sm-3">
+        <label>Driver status:</label>
+        <div class="input-group">
+          <select class="form-control" name="orderId" [(ngModel)]="filterParamsForm.driverStatus" amDriverStatusOptions #selectStatus>
+            <option value="null" selected>ANY</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <button type="button" class="btn btn-default" (click)="clearFilters()">
+          Clear filters
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <a class="btn btn-primary" [routerLink]="['new', 'general']" routerLinkActive="active">New Driver</a>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed am-driver-list">
+      <thead>
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Transport</th>
+        <th>Status</th>
+        <th>Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr am-driver-row *ngFor="let driver of drivers.content;" [driverInfo]="driver"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-3">
+    <button (click)="loadMoreDrivers()" class="btn btn-secondary"
+            [hidden]="drivers.content.length == drivers.total">Show more</button>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<form #carDetailsForm="ngForm" class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Capacity</label>
+          <select [(ngModel)]="vmService.driver.capacity" name="capacity" class="form-control" amVehicleTypeOptions></select>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Type</label>
+          <input type="text" class="form-control" name="carType" [(ngModel)]="vmService.driver.carType" amNullIfEmpty>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Brand</label>
+          <input type="text" class="form-control" name="carBrand" [(ngModel)]="vmService.driver.carBrand" amNullIfEmpty>
+        </div>
+        <div class="form-group col-sm-6">
+          <label>Color</label>
+          <input type="text" class="form-control" name="carColor" [(ngModel)]="vmService.driver.carColor" amNullIfEmpty>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-6">
+          <label>Car plate number</label>
+          <input type="text" class="form-control" name="carPlateNumber" [(ngModel)]="vmService.driver.carPlateNumber" amNullIfEmpty>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

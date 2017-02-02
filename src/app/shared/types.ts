@@ -70,3 +70,26 @@ export enum WorkTimeType {
   REGULAR = <any> 'REGULAR',
   RAMADAN = <any> 'RAMADAN'
 }
+
+export enum DriverBalanceRecordType {
+  PICKUP_COST = <any>'PICKUP_COST',
+  DELIVERY_COST = <any>'DELIVERY_COST',
+  SERVICE_FEE = <any>'SERVICE_FEE',
+  COMISSION = <any>'COMISSION',
+  PAYOUT = <any>'PAYOUT',
+  MANUAL = <any>'MANUAL'
+}
+
+export enum DriverStatus {
+  READY = <any>'READY',
+  ORDER_EXECUTION = <any>'ORDER_EXECUTION',
+  OFFLINE = <any>'OFFLINE',
+  ORDER_OFFLINE = <any>'ORDER_OFFLINE'
+}
+
+export enum MarketingAttributeType {
+  PROMO = <any> 'PROMO',
+  GIFT = <any> 'GIFT',
+  TRENDING = <any> 'TRENDING'
+}
+

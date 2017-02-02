@@ -22,26 +22,57 @@ import { StringListFilter } from './pipes/string-list-filter.pipe';
 import { ImageResizePipe } from './pipes/image-resize.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MultiselectDropdownComponent } from './components/multiselect-dropdown.component';
-import { ModalComponent } from './components/modal.component';
+import { ModalConfirmComponent } from './components/modal-confirm.component';
+import { VehicleTypeOptionsDirective } from './directives/vehicle-type-options.directive';
+import { DriverStatusOptionsDirective } from './directives/driver-status-options.directive';
+import { TimeInputComponent } from './components/time-input.component';
+import { AmRatingComponent } from './components/rating.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerComponent } from './components/datepicker.component';
+import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
+import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
+import { MarketingAttributeTypeOptionsDirective } from "./directives/product-marketing-attributes-type-options.directive";
+
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NgaModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgaModule,
+    NgbModule,
+  ],
   declarations: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
-    ModalComponent,
+    ModalConfirmComponent,
+    TimeInputComponent,
+    AmRatingComponent,
+    DatepickerComponent,
     CategoryTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    VehicleTypeOptionsDirective,
+    DriverStatusOptionsDirective,
+    NullIfEmptyDirective,
+    MatchValueValidatorDirective,
     AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
-    ModalComponent,
+    ModalConfirmComponent,
+    TimeInputComponent,
+    AmRatingComponent,
+    DatepickerComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe,  ImageResizePipe,
-    CommonModule, FormsModule, NgaModule]
+    VehicleTypeOptionsDirective,
+    DriverStatusOptionsDirective,
+    NullIfEmptyDirective,
+    MatchValueValidatorDirective,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
+    CommonModule, FormsModule, NgaModule, NgbModule]
 })
 export class SharedModule {
 }

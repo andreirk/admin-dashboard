@@ -1,1 +1,1 @@
-export * from './components/merchant-list.component'
+export * from './components/mrechant-list/merchant-list.component'

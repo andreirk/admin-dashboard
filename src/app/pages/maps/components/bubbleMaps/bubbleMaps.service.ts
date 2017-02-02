@@ -480,7 +480,7 @@ export class BubbleMapsService {
       theme: 'blur',
       titles: [
         {text: 'Population of the World in 2011', size: 14},
-        {text: 'source: Gapminder', size: 11}
+        {text: 'dataSource: Gapminder', size: 11}
       ],
       dataProvider: dataProvider,
 

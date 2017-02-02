@@ -14,7 +14,7 @@ import { RootCategory } from '../../../commons/model/root-category';
   ],
   template: `
   <div class="column">
-     <div class="col-sm-3 card-block"> 
+     <div class="col-sm-3 card-margin-bottom"> 
       <a class="btn btn-primary align-bottom" [routerLink]="['new']" 
           routerLinkActive="active">New Root Category</a>
      </div>
@@ -36,8 +36,9 @@ export class RootCategoryListComponent {
 
   loadRootCategories() {
     this.rootCategoryService.getList(this.lang).subscribe(rootCategories => {
+      console.log('in subscribe', rootCategories)
       this.rootCategories = rootCategories;
-    })
+    }, err => console.log('err', err))
   }
 
   onDelete(event) {

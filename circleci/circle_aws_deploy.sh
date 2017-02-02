@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+#
+
 set -o errexit -o pipefail # Exit on error
 
 TARGET_HOST=$1
@@ -7,7 +11,7 @@ TARGET_STACK=$2
 export UIADMINV2_HASH=$(git rev-parse HEAD)
 
 # npm i npm
-# npm cache clean 
+# npm cache clean
 # npm install -g n
 # n stable
 
@@ -22,7 +26,7 @@ ls
 
 docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 docker build -t arammeem16/toyou-dashboard:${UIADMINV2_HASH} .
-docker push docker.io/arammeem16/toyou-dashboard:${UIADMINV2_HASH}  
+docker push docker.io/arammeem16/toyou-dashboard:${UIADMINV2_HASH}
 
 echo Hello from ls dist
 ls dist
@@ -32,6 +36,8 @@ printf '{"UIADMINV2_HASH" : "%s"}\n' ${UIADMINV2_HASH} >/tmp/${UIADMINV2_HASH}.j
 aws --region eu-central-1 s3 cp /tmp/${UIADMINV2_HASH}.json s3://arm-conf/${TARGET_STACK}/versions/uiadmin-apps-v2.json
 echo Hello after aws
 
-ssh ubuntu@${TARGET_HOST} -t "cd backend-infrastructure && bash -lc './run-cox-update ${TARGET_STACK}'" || true # always return success
+#ssh ubuntu@${TARGET_HOST} -t "cd backend-infrastructure && bash -lc './run-cox-update ${TARGET_STACK}'" || true # always return success
+curl --user deployuser:Depl0yP@ssw0rd -X PUT -d "`date`" "https://${TARGET_HOST}/v1/kv/run-cox/deploy?dc=substrate&raw" || true # always return success
+
 echo Hello after ssh
 

@@ -4,30 +4,24 @@
 import { OrderFilterParamsForm } from '../model/order-filter-params-form';
 import { OrderFilterParams } from '../model/order-filter-params';
 import { OrderStatus, DeliveryStatus } from '../../../shared/types';
-import { Observable } from 'rxjs';
-import { OrderFilterPersons } from '../model/order-filter-persons';
-import { UserService } from '../../../core/services/users/user.service';
-import { DriverService } from '../../../core/services/drivers/driver.service';
 import { Injectable } from '@angular/core';
+import { DriverService } from '../../../core/services/drivers/driver.service';
+import { OrderPersonMultiselectComponent } from '../components/order-person-multiselect.component';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrderFilteringService {
-  constructor(private userService: UserService,
-      private driverService: DriverService) { }
+  constructor(private driverService: DriverService) { }
 
   transformFilterParams(filterParamsForm: OrderFilterParamsForm): OrderFilterParams {
     let filterParams: OrderFilterParams = new OrderFilterParams();
 
     if (filterParamsForm.createdFrom) {
-      filterParams.fromDate = new Date(filterParamsForm.createdFrom.year,
-          filterParamsForm.createdFrom.month - 1,
-          filterParamsForm.createdFrom.day).getTime() / 1000;
+      filterParams.fromDate = filterParamsForm.createdFrom;
     }
 
     if (filterParamsForm.createdTo) {
-      filterParams.toDate = new Date(filterParamsForm.createdTo.year,
-          filterParamsForm.createdTo.month - 1,
-          filterParamsForm.createdTo.day).getTime() / 1000;
+      filterParams.toDate = filterParamsForm.createdTo + 60*60*24 - 1; // to date inclusive
     }
 
     if (filterParamsForm.orderStatuses) {
@@ -56,22 +50,18 @@ export class OrderFilteringService {
     return filterParams;
   }
 
-  getPersons(searchText: string) : Observable<OrderFilterPersons> {
+  transformFilterParamsForm(filterParams: OrderFilterParams): Observable<OrderFilterParamsForm> {
     const vm = this;
-    if (!searchText || searchText === '') {
-      return Observable.of(new OrderFilterPersons());
-    }
-    return Observable.combineLatest(
-      vm.userService.getPage(0, 10, searchText),
-      vm.driverService.getProfilesPage(0, 10, { searchPattern: searchText }),
-      (pageUser, pageDriver) => {
-        return <OrderFilterPersons> {
-          users: pageUser,
-          drivers: pageDriver
-        }
-      }
-    );
-  }
 
+    if (filterParams.driverId) {
+      return vm.driverService.getProfile(filterParams.driverId).map(driver => {
+        let filterParamsForm: OrderFilterParamsForm = new OrderFilterParamsForm();
+        filterParamsForm.orderPersons.push(OrderPersonMultiselectComponent.driverOption(driver));
+        return filterParamsForm;
+      });
+    } else {
+      return Observable.of(new OrderFilterParamsForm());
+    }
+  }
 }
 

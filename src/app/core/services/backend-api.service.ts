@@ -27,14 +27,15 @@ export class BackendApiService {
   }
 
   post(path: string, body: Object, params: Object, lang?: string): Observable<any> {
-    return this.http.post(path, body, this.getRequestOptions(params, lang))
+    return this.http.post(path, body || '', this.getRequestOptions(params, lang))
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
   }
 
   put(path: string, body: Object, params: Object, lang: string): Observable<any> {
-    return this.http.put(path, body, this.getRequestOptions(params, lang))
+    const options = this.getRequestOptions(params, lang);
+    return this.http.put(path, body, options)
       .map(this.checkForError)
       .catch(err => Observable.throw(err))
       .map(this.getJson)
@@ -48,7 +49,17 @@ export class BackendApiService {
   }
 
   private getJson(resp: Response){
-    return resp.json();
+    let response ;
+    if(resp.status >= 200){
+      response = {};
+      response.success = true;
+    }
+    if (resp.text()) {
+      response = _.merge(response, resp.json()) ;
+    }
+
+    return response || {};
+
   }
 
   private checkForError(resp: Response): Response{

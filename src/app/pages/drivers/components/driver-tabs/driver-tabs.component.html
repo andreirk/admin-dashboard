@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<div class="row card-margin-bottom">
+  <div class="col-sm-3">
+    <h3>Driver: {{(vmService.driver.firstName ? vmService.driver.firstName : '')  + ' ' +
+      (vmService.driver.lastName ? vmService.driver.lastName : '')}}</h3>
+  </div>
+  <div class="col-sm-2">
+    <h3 [style.color]="getStatusColor()"><i class="fa">{{getIcon()}}</i> {{getStatus()}}</h3>
+  </div>
+  <div class="col-sm-2" [hidden]="!vmService.wasModified">
+    <span *ngIf="!vmService.isValid" placement="right" ngbTooltip="{{vmService.getValidationMessage()}}">
+      <button (click)="saveDriver(); false" class="btn btn-secondary" disabled>Save</button>
+    </span>
+    <button *ngIf="vmService.isValid" (click)="saveDriver(); false" class="btn btn-secondary">Save</button>
+  </div>
+</div>
+
+<ul class="nav nav-tabs card-margin-bottom">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="general" routerLinkActive="active">
+      <i class="fa fa-exclamation-circle align-top text-danger" aria-hidden="true"
+         [hidden]="!vmService.formValidMap.has('general') || vmService.formValidMap.get('general')"></i>
+      General
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="address" routerLinkActive="active">
+      <i class="fa fa-exclamation-circle align-top text-danger" aria-hidden="true"
+         [hidden]="!vmService.formValidMap.has('address') || vmService.formValidMap.get('address')"></i>
+      Address
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="car" routerLinkActive="active">
+      <i class="fa fa-exclamation-circle align-top text-danger" aria-hidden="true"
+         [hidden]="!vmService.formValidMap.has('car') || vmService.formValidMap.get('car')"></i>
+      Car details
+    </a>
+  </li>
+  <li *ngIf="driverId !== 'new'" class="nav-item">
+    <a class="nav-link" routerLink="balance" routerLinkActive="active">Balance history</a>
+  </li>
+</ul>
+<div>
+  <router-outlet></router-outlet>
+</div>
+<am-modal-confirm #deactivateConfirmModal [message]="leaveThisPageMessage"
+                  (answer)="onDeactivateConfirm($event)"></am-modal-confirm>

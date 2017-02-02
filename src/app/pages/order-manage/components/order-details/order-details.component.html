@@ -28,10 +28,12 @@
         <h5>{{user.firstName + ' ' + user.lastName}}</h5>
         <p>Phone: {{user.phoneNumber}}</p>
       </ba-card>
-      <ba-card title="Driver" baCardClass="with-scroll">
-        <h5>{{driver.profile.firstName + ' ' + driver.profile.lastName}}</h5>
-        <p>Phone: {{driver.account.phone}}</p>
-        <p>Vehicle type: {{driver.profile.capacity}}</p>
+      <ba-card *ngIf="driver.id !== null" title="Driver" baCardClass="with-scroll">
+        <a class="link" [routerLink]="['../../drivers', driver.id, 'general']" routerLinkActive="active" title="Driver profile">
+          <h5>{{driver.firstName + ' ' + driver.lastName}}</h5>
+        </a>
+        <p>Phone: {{driver.phone}}</p>
+        <p>Vehicle type: {{driver.capacity}}</p>
         <p>Location: {{driverLocation | amDriverLocation}}</p>
       </ba-card>
     </div>
@@ -48,22 +50,29 @@
     </div>
   </div>
 
+
   <div class="row">
-    <ba-card title="Order notes" baCardClass="with-scroll">
-      <p>{{order.message}}</p>
-    </ba-card>
+    <div class="col-sm-12">
+      <ba-card title="Order notes" baCardClass="with-scroll">
+        <p>{{order.message}}</p>
+      </ba-card>
+    </div>
   </div>
 
   <div class="row">
-    <ba-card title="Items" baCardClass="with-scroll">
-      <am-order-items-table [order]="order"></am-order-items-table>
-    </ba-card>
+    <div class="col-sm-12">
+      <ba-card title="Items" baCardClass="with-scroll">
+        <am-order-items-table [order]="order"></am-order-items-table>
+      </ba-card>
+    </div>
   </div>
 
   <div class="row">
-    <ba-card title="Changes history" baCardClass="with-scroll">
-      <am-order-history-table [order]="order"></am-order-history-table>
-    </ba-card>
+    <div class="col-sm-12">
+      <ba-card title="Changes history" baCardClass="with-scroll">
+        <am-order-history-table [order]="order"></am-order-history-table>
+      </ba-card>
+    </div>
   </div>
 
 </form>

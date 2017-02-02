@@ -108,6 +108,14 @@ export const PAGES_MENU = [
               }
             }
           },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'Drivers List',
+              }
+            }
+          }
         ]
       },
     ]

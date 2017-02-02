@@ -26,6 +26,11 @@ label {
   display: block;
 }
 
+a.link {
+  text-decoration: underline!important;
+  color: whitesmoke;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;

@@ -25,7 +25,7 @@ export class GroupService {
     }, lang);
   }
 
-  getList(lang: string): Observable<Group[]> {
+  getList(lang: string): Observable<Page<Group>> {
     return this.backendApi.get(this.path, {}, lang);
   }
 

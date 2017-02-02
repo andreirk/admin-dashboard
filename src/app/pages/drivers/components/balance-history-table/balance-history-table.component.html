@@ -1,0 +1,63 @@
+<!--
+  ~ Copyright © 2016 Aram Meem Company Limited.  All Rights Reserved.
+  -->
+<div>
+  <form #balanceRecordsFilterForm="ngForm">
+    <p>Filter by:</p>
+
+    <div class="row">
+      <div class="form-group col-sm-2">
+        <label>From:</label>
+        <am-datepicker name="dpfrom" [(ngModel)]="filterParamsForm.fromDate"></am-datepicker>
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label>to:</label>
+        <am-datepicker name="dpto" [(ngModel)]="filterParamsForm.toDate"></am-datepicker>
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label>Order Id:</label>
+        <div class="input-group date">
+          <input class="form-control" name="orderId" [(ngModel)]="filterParamsForm.deliveryId">
+        </div>
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label>Type:</label>
+        <am-balance-record-type-multiselect name="types" [(ngModel)]="filterParamsForm.types"></am-balance-record-type-multiselect>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2">
+        <button type="button" class="btn btn-default" (click)="clearFilters()">
+          Clear filters
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-condensed am-driver-list">
+      <thead>
+      <tr>
+        <th>Creation date</th>
+        <th>Order ID</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Value</th>
+        <th>Balance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr am-balance-record-row *ngFor="let balanceRecord of balanceRecords.content;" [balanceRecord]="balanceRecord"></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-3">
+    <button (click)="loadMoreBalanceRecords()" class="btn btn-secondary"
+            [hidden]="balanceRecords.content.length == balanceRecords.total">Show more</button>
+  </div>
+</div>

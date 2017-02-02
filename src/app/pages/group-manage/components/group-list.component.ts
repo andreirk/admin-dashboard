@@ -6,7 +6,7 @@ import { GroupService } from '../../../core/services/groups/group.service';
 import { GroupListService } from '../../../core/services/groups/group-list.service';
 import { ViewList } from '../../../commons/model/view-list';
 import { Group } from '../../../commons/model/group';
-import { ModalComponent } from '../../../shared/components/modal.component';
+import { ModalConfirmComponent } from '../../../shared/components/modal-confirm.component';
 import { ProductService } from '../../../core/services/products/products-service';
 import { Currency } from '../../../shared/types';
 
@@ -14,8 +14,8 @@ import { Currency } from '../../../shared/types';
   selector: 'am-group-list',
   template: `
 <div class="column">
-  <div class="col-sm-3 card-block"> 
-  <a class="btn btn-primary align-bottom" [routerLink]="['new']"
+  <div class="col-sm-3 card-margin-bottom"> 
+    <a class="btn btn-primary align-bottom" [routerLink]="['new']"
       routerLinkActive="active">New Group</a>
   </div>
   <div>
@@ -27,15 +27,7 @@ import { Currency } from '../../../shared/types';
     <button (click)="loadMoreGroups()" class="btn btn-secondary" 
         [hidden]="groups.content.length == groups.total">Show more</button>
   </div>
-  <am-app-modal>
-    <div class="app-modal-body">
-      <h5 class="modal-title" id="deleteModalLabel">{{alertTitle}}</h5>
-    </div>
-    <div class="app-modal-footer">
-      <button type="button" class="btn btn-primary" (click)="deleteGroup()">Confirm</button>
-      <button type="button" class="btn btn-secondary" (click)="modal.hide()">Cancel</button>
-    </div>
-  </am-app-modal>
+  <am-modal-confirm [message]="alertTitle" (answer)="onDeleteConfirm($event)"></am-modal-confirm>
 </div>`
 })
 export class GroupListComponent {
@@ -45,8 +37,8 @@ export class GroupListComponent {
   private alertTitle = 'All products will be deassigned, do you want to delete group?';
   private currentId: string;
 
-  @ViewChild(ModalComponent)
-  public readonly modal: ModalComponent;
+  @ViewChild(ModalConfirmComponent)
+  public readonly modal: ModalConfirmComponent;
 
   constructor(private groupService: GroupService,
               private groupListService: GroupListService,
@@ -74,6 +66,11 @@ export class GroupListComponent {
         vm.deleteGroup();
       }
     })
+  }
+
+  onDeleteConfirm(event) {
+    if (event === true) this.deleteGroup();
+    else this.modal.hide();
   }
 
   deleteGroup() {

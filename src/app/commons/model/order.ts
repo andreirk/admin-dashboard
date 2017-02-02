@@ -45,14 +45,14 @@ export class Peer {
 export class DeliveryAddress {
   public addressLine1?: string;
   public addressLine2?: string;
-  public addressType?: string;
   public area?: string;
   public city?: string;
+  public state?: string;
   public country?: string;
+  public zip?: string;
   public geoPoint?: PointOnMap = new PointOnMap(); // TODO
   public note?: string;
-  public state?: string;
-  public zip?: string;
+  public addressType?: string;
 
   constructor() {}
 }

@@ -11,9 +11,6 @@ $hover: 24;
   font-size: 0.9rem;
 }
 
-.btn:hover {
-  transform: scale(1.2);
-}
 
 @mixin styleButton($color, $borderColor) {
   background: $color;
@@ -77,6 +74,9 @@ button.btn.btn-default {
   &:active, &:target {
     background-color: rgba(0, 0, 0, 0.2);
     color: $default-text;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
