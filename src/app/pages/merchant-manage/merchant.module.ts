@@ -92,7 +92,6 @@ import { NgPipesModule } from 'ngx-pipes';
     ChangeGeoPointCardComponent,
     PosMapComponent,
     PosDetailsInputFormComponent,
-    MerchantSectionsComponent
     MerchantSectionsComponent,
     PosWorkTimesComponent,
     MerchantSectionsComponent,
