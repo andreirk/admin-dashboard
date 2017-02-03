@@ -17,6 +17,7 @@ import { MerchantActions } from '../../actions/merchant-actions';
   providers: [
     MerchantViewModelService
   ],
+  styleUrls: ['../style'],
   template: require('./merchant-details.component.html')
 })
 export class MerchantDetailsComponent {

@@ -22,7 +22,7 @@ import { PointOnMap } from '../../../../../commons/model/order';
   selector: 'am-pos-details',
   providers: [],
   template: require('./pos-details.component.html'),
-  styleUrls: ['../style']
+  styleUrls: ['../style', '../../style']
 })
 export class PosDetailsComponent implements OnInit {
 
@@ -139,7 +139,7 @@ export class PosDetailsComponent implements OnInit {
     }
 
     observPosId.mergeMap(posId => {
-      return vm.posService.get(posId, lang);
+      return posId ? vm.posService.get(posId, lang) : Observable.of(new Pos());
     }).subscribe((pos: Pos) => {
       vm.posId = pos.id;
       vm.model = Object.assign(new PosDetailsViewModel(), {
