@@ -32,7 +32,7 @@ import { DatepickerComponent } from './components/datepicker.component';
 import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
 import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
 import { MarketingAttributeTypeOptionsDirective } from './directives/product-marketing-attributes-type-options.directive';
-
+import { PosListToMarkersPipe } from './pipes/pos-list-to-markers.pipe';
 
 @NgModule({
   imports: [
@@ -55,7 +55,8 @@ import { MarketingAttributeTypeOptionsDirective } from './directives/product-mar
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,
     MatchValueValidatorDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter,
+    OrderByPipe, ImageResizePipe, PosListToMarkersPipe,
     UPLOAD_DIRECTIVES],
   exports: [SelectLangComponent,
     UploadImageComponent,
@@ -71,7 +72,8 @@ import { MarketingAttributeTypeOptionsDirective } from './directives/product-mar
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,
     MatchValueValidatorDirective,
-    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter, OrderByPipe, ImageResizePipe,
+    AddressPipe, SuffixPipe, DefaultValuePipe, DriverLocationPipe, OrderStatusPipe, StringListFilter,
+    OrderByPipe, ImageResizePipe, PosListToMarkersPipe,
     CommonModule, FormsModule, NgaModule, NgbModule]
 })
 export class SharedModule {

@@ -4,6 +4,7 @@
 
 import { Pos } from '../../../commons/model/pos';
 import { DeliveryAddress, PointOnMap } from '../../../commons/model/order';
+import { MapMarkerViewModel } from './map-marker-view-model';
 export class PosDetailsViewModel {
 
   public pos: Pos = new Pos();
@@ -19,4 +20,6 @@ export class PosDetailsViewModel {
 
   public unresolvedAddress: boolean = false;
   public showResolved: boolean = false;
+
+  public mapMarkersViewModel: MapMarkerViewModel[] = [];
 }

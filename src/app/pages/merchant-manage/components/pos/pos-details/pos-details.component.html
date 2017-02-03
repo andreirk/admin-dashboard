@@ -48,7 +48,7 @@
     <ngb-panel id="map-panel" title="Map">
       <template ngbPanelContent>
 
-        <am-pos-map *ngIf="!mapHidden" [markers]="mapMarkersViewModel" (markerClick)="onMarkerClicked($event)" (mapClick)="onMapClicked($event)"></am-pos-map>
+        <am-pos-map *ngIf="!mapHidden" [markers]="model.mapMarkersViewModel" (markerClick)="onMarkerClicked($event)" (mapClick)="onMapClicked($event)"></am-pos-map>
 
       </template>
     </ngb-panel>
