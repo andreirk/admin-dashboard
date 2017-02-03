@@ -10,6 +10,7 @@ import { MerchantProductAppState } from '../../../store/index';
 import { ProductOptionActions } from '../actions/product-option.actions';
 import { MerchantBackendService } from '../../../../../core/services/merchants/merchant-backend.service';
 import { Observable } from 'rxjs';
+import { Currency } from '../../../../../shared/types';
 
 @Injectable()
 export class ProductOptionsEffects {
@@ -68,8 +69,10 @@ export class ProductOptionsEffects {
       const originalProductOption = state.productOption;
       const updatedProductOption  = payload.productOption;
       const valuesToDelete = payload.productValuesToDelete;
+      const productOptionId = updatedProductOption.id;
       const merchantId = payload.merchantId;
       const lang = payload.lang;
+      const currency = Currency.SAR;
 
       if( _.isEqual(originalProductOption, updatedProductOption)){
         return;
@@ -77,33 +80,42 @@ export class ProductOptionsEffects {
 
       let itemsToSyncronizeWithBackend = [];
 
-      // delete productOptions values
-      valuesToDelete.forEach((value, index, arr) => {
-        if(value.id) {
-          itemsToSyncronizeWithBackend.push(this.productOptionsService.deleteProductOptionValue(value));
-        }
-      });
 
-      // update productOption main fields
+      // update productOption with values
       if(updatedProductOption.id) {
-          itemsToSyncronizeWithBackend.push( this.productOptionsService.updateMerchantProductOption(merchantId, updatedProductOption, lang) );
-        } else {
-          itemsToSyncronizeWithBackend.push( this.productOptionsService.createMerchantProductOption(merchantId, updatedProductOption, lang) );
+            itemsToSyncronizeWithBackend.push( this.productOptionsService.updateMerchantProductOption(merchantId, updatedProductOption, lang) );
+
+            // update or create product options values
+            updatedProductOption.values.forEach((value, index, arr) => {
+
+              if (value.id){
+                let valueToUpdate$ = this.productOptionsService.updateProductOptionValue(merchantId, productOptionId, value, currency, lang)
+                itemsToSyncronizeWithBackend.push( valueToUpdate$ )
+              } else {
+                let valueToCreate$ = this.productOptionsService.createProductOptionValue(merchantId, productOptionId, value,currency, lang)
+                itemsToSyncronizeWithBackend.push( valueToCreate$ )
+              }
+
+            });
+
+            // delete productOptions values
+            valuesToDelete.forEach((value, index, arr) => {
+              if(value.id) {
+                itemsToSyncronizeWithBackend.push(this.productOptionsService.deleteProductOptionValue(merchantId, value, lang));
+              }
+            });
+
+        } else { // create product option with values
+          let createdProductOption$ = this.productOptionsService.createMerchantProductOption(merchantId, updatedProductOption, lang);
+
+
+          updatedProductOption.values.forEach(value => {
+            let valueToCreate$ = this.productOptionsService.createProductOptionValue(merchantId, productOptionId, value,currency, lang);
+            itemsToSyncronizeWithBackend.push( valueToCreate$ )
+          });
+
+          itemsToSyncronizeWithBackend.push( createdProductOption$ );
       };
-
-      // update or create product options values
-      updatedProductOption.values.forEach((value, index, arr) => {
-        if (value.id){
-          let valueToUpdate$ = this.productOptionsService.updateProductOptionValue(value);
-          itemsToSyncronizeWithBackend.push( valueToUpdate$ );
-        } else {
-          let valueToCreate$ = this.productOptionsService.createProductOptionValue(value);
-          itemsToSyncronizeWithBackend.push( valueToCreate$ );
-        });
-      })  ;
-
-
-
 
 
       // proccess all async
