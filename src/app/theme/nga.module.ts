@@ -12,7 +12,7 @@ import {
 } from './theme.configProvider';
 
 import {
-  BaAmChart,
+  // BaAmChart,
   BaBackTop,
   BaCard,
   BaChartistChart,
@@ -54,7 +54,7 @@ import {
 } from './validators';
 
 const NGA_COMPONENTS = [
-  BaAmChart,
+  // BaAmChart,
   BaBackTop,
   BaCard,
   BaChartistChart,
