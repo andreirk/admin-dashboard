@@ -1,12 +1,14 @@
 <div class="page-top clearfix" baScrollPosition maxHeight="50" (scrollChange)="scrolledChanged($event)"
      [ngClass]="{scrolled: isScrolled}">
-  <a routerLink="/pages/product-manage" class="al-logo clearfix"><span>To</span>You</a>
+  <a routerLink="/pages/merchants" class="al-logo clearfix"><span>To</span>You</a>
   <a href (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
 
-  <div class="search">
-    <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
-    <input id="searchInput" type="text" placeholder="Search for...">
-  </div>
+  <ba-content-top></ba-content-top>
+
+  <!--<div class="search">-->
+    <!--<i class="ion-ios-search-strong" ng-click="startSearch()"></i>-->
+    <!--<input id="searchInput" type="text" placeholder="Search for...">-->
+  <!--</div>-->
 
   <!--<div class="user-profile clearfix">
     <div class="dropdown al-user-profile">
