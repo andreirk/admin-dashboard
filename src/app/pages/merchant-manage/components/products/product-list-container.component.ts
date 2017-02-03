@@ -26,7 +26,7 @@ export class ProductListContainerComponent implements OnInit {
 
   products$: Observable<any>;
   private lang: string = 'en';
-  private currency: Currency = Currency.USD;
+  private currency: Currency = Currency.SAR;
   private merchantId: string;
 
   constructor(private route: ActivatedRoute,

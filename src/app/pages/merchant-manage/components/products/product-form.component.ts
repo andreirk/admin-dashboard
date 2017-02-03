@@ -80,7 +80,7 @@ export class ProductFormComponent implements OnInit {
     this.product.tagValues = this.product.tagValues.filter(tag => tag !== removedTag.text);
   }
 
-  onSelectMarketingAttrebute(attribute){
+  onSelectMarketingAttribute(attribute){
       this.product.marketingAttribute = attribute;
   }
 

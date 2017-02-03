@@ -7,6 +7,7 @@ import { ProductService } from '../../../../../core/services/products/products-s
 import { ProductActions } from '../actions/product.actions';
 import { Store } from '@ngrx/store';
 import { MerchantProductAppState } from '../../../store/index';
+import { Currency } from '../../../../../shared/types';
 
 @Injectable()
 export class ProductEffects {
@@ -71,7 +72,7 @@ export class ProductEffects {
     let payload = {
       productId: result.payload,
       lang: 'en',
-      currency: 'SAR'
+      currency: Currency.SAR
     }
     return this.productActions.getProduct(payload)
   })
