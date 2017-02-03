@@ -67,7 +67,6 @@ export class ProductOptionDetailsContainerComponent implements OnInit {
           } else if(productOptionId === 'new') {
              this.store.dispatch(this.productOptionActions.resetBlankProductOption());
 
-
           }
 
       }
@@ -82,11 +81,13 @@ export class ProductOptionDetailsContainerComponent implements OnInit {
 
     }
 
-    onSaveProductOption(productOption){
+    onSaveProductOption({productOption, productValuesToDelete}){
       let payload = {
         productOption: productOption,
+        productValuesToDelete,
         merchantId: this.merchantId,
       };
+      console.log(payload);
       this.store.dispatch(this.productOptionActions.saveProductOption(payload))
     }
 

@@ -46,11 +46,11 @@ export class ProductListContainerComponent implements OnInit {
         this.merchantId = params['merchantId'];
         let payload = {
           options: {
-            'merchantId': params['merchantId'],
+            'merchant-id': params['merchantId'],
             'currency': this.currency,
             'available': true,
             'page': 0,
-            'size': 20,
+            'size': 1000,
             'sort': 'name',
           },
           'lang': this.lang

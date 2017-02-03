@@ -14,6 +14,7 @@ export class ProductOptionFormComponent implements OnInit {
 
     _productOption: ProductOption;
     _originalProductOption: ProductOption;
+    _deletedValues = [];
 
     private wasModified = false;
     private rtlDetect = require('rtl-detect');
@@ -65,16 +66,23 @@ export class ProductOptionFormComponent implements OnInit {
     }
 
     onNewValueCreated(value){
+      console.log('in form onValueDeleted', value);
       this.productOption.values.push(value);
     }
 
     onSave(){
-      this.saveForm.emit(this.productOption);
+
+      let productValuesAll = this.productOption.values;
+      let productValuesToDelete = this._deletedValues;
+      let difference = _.differenceBy(productValuesAll, productValuesToDelete, 'name');
+      console.log('on save', {productValuesAll, productValuesToDelete, difference});
+      this.productOption.values = difference;
+      this.saveForm.emit({productOption: this.productOption, productValuesToDelete});
     }
 
     onValueDeleted(value){
       console.log('in form onValueDeleted', value);
+      this._deletedValues.push(value.data);
     }
-
 
 }

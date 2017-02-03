@@ -110,6 +110,7 @@ export class ProductOptionValuesComponent implements OnInit {
 
   onDeleteConfirm($event){
     console.log('onDeleteConfirm', $event);
+    $event.confirm.resolve();
     this.valueDeleted.emit($event);
   }
 

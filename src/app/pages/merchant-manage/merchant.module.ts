@@ -49,7 +49,7 @@ import { ProductOptionFormComponent } from './components/product-options/compone
 import { ProductOptionValuesComponent } from './components/product-options/components/product-option-values-component/product-option-values.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ProductOptionActions } from './components/product-options/actions/product-option.actions';
-import { ProductOptionsEffects } from './components/product-options/effects/productOptions.effects';
+import { ProductOptionsEffects } from './components/product-options/effects/product-options.effects';
 // TODO: replace with original ng2-select when support for bootstapV4-alfa6 is available
 import { SelectModule } from '../../shared/components/ng2-custom-select/ng2-select';
 import { MerchantActions } from './actions/merchant-actions';

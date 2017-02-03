@@ -67,16 +67,47 @@ export class ProductOptionsEffects {
 
       const originalProductOption = state.productOption;
       const updatedProductOption  = payload.productOption;
+      const valuesToDelete = payload.productValuesToDelete;
+      const merchantId = payload.merchantId;
+      const lang = payload.lang;
 
       if( _.isEqual(originalProductOption, updatedProductOption)){
         return;
       }
 
-      if(updatedProductOption.id){
-        return this.productOptionsService.updateMerchantProductOption(payload.merchantId, updatedProductOption, payload.lang)
-      } else {
-        return this.productOptionsService.createMerchantProductOption(payload.merchantId, updatedProductOption, payload.lang)
-      }
+      let itemsToSyncronizeWithBackend = [];
+
+      // delete productOptions values
+      valuesToDelete.forEach((value, index, arr) => {
+        if(value.id) {
+          itemsToSyncronizeWithBackend.push(this.productOptionsService.deleteProductOptionValue(value));
+        }
+      });
+
+      // update productOption main fields
+      if(updatedProductOption.id) {
+          itemsToSyncronizeWithBackend.push( this.productOptionsService.updateMerchantProductOption(merchantId, updatedProductOption, lang) );
+        } else {
+          itemsToSyncronizeWithBackend.push( this.productOptionsService.createMerchantProductOption(merchantId, updatedProductOption, lang) );
+      };
+
+      // update or create product options values
+      updatedProductOption.values.forEach((value, index, arr) => {
+        if (value.id){
+          let valueToUpdate$ = this.productOptionsService.updateProductOptionValue(value);
+          itemsToSyncronizeWithBackend.push( valueToUpdate$ );
+        } else {
+          let valueToCreate$ = this.productOptionsService.createProductOptionValue(value);
+          itemsToSyncronizeWithBackend.push( valueToCreate$ );
+        });
+      })  ;
+
+
+
+
+
+      // proccess all async
+      return Observable.combineLatest(itemsToSyncronizeWithBackend);
 
   })
   .map(result => this.productOptionActions.saveProductOptionSuccess(result));
