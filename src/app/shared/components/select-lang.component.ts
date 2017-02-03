@@ -8,7 +8,7 @@ import { LangObj } from '../objects';
 @Component({
   selector: 'am-select-lang',
   template: `
-  <div class="form-group" [hidden]="showAlert">
+  <div [hidden]="showAlert">
     <select [(ngModel)]="lang" [ngModelOptions]="{standalone: true}"
           (change)="onChangeLang()"
           class="form-control">
