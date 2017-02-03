@@ -49,17 +49,20 @@ export class BackendApiService {
   }
 
   private getJson(resp: Response){
-    let response ;
-    if(resp.status >= 200){
+
+    if (_.isPlainObject(resp.json())) {
+      let response;
       response = {};
-      response.success = true;
-    }
-    if (resp.text()) {
-      response = _.merge(response, resp.json()) ;
-    }
+      if(resp.status >= 200){
+        response.success = true;
 
-    return response || {};
-
+        if (resp.text()) {
+          response = _.merge(response, resp.json()) ;
+          return response;
+        }
+      }
+    }
+    return resp.json()
   }
 
   private checkForError(resp: Response): Response{
