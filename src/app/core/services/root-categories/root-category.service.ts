@@ -18,6 +18,7 @@ export class RootCategoryService {
   }
 
   getList(lang: string): Observable<RootCategory[]> {
+
     return this.backendApi.get(this.path, {}, lang);
   }
 

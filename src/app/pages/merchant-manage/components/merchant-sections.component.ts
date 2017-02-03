@@ -15,6 +15,12 @@ import { Subscription } from 'rxjs';
     <li *ngIf="merchantId !== 'new'" class="nav-item">
       <a class="nav-link" routerLink="pos" routerLinkActive="active">Points of sales</a>
     </li>
+    <li *ngIf="merchantId !== 'new'" class="nav-item">
+      <a  class="nav-link" routerLink="products" routerLinkActive="active">Products</a>
+    </li>
+    <li *ngIf="merchantId !== 'new'" class="nav-item">
+      <a class="nav-link" routerLink="product-options" routerLinkActive="active">Product options</a>
+    </li>
   </ul>
   <div class="card-block">
     <router-outlet></router-outlet>

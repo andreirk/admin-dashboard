@@ -86,3 +86,10 @@ export enum DriverStatus {
   OFFLINE = <any>'OFFLINE',
   ORDER_OFFLINE = <any>'ORDER_OFFLINE'
 }
+
+export enum MarketingAttributeType {
+  PROMO = <any> 'PROMO',
+  GIFT = <any> 'GIFT',
+  TRENDING = <any> 'TRENDING',
+}
+

@@ -1,0 +1,23 @@
+
+<div class="col-sm-7">
+  <div class="card">
+    <div class="card-block">
+      <div class="d-flex">
+
+         <div class="w-100">
+          <h5 class="card-title">{{productOption.name}}</h5>
+          <p class="card-text">{{productOption.title}}</p>
+
+           <div class="pull-left">
+               <a class="btn btn-primary " [routerLink]="[productOption.id]" >Edit</a>
+           </div>
+
+           <div class="pull-right">
+             <a class="btn btn-primary"  (click)="onClickDelete(productOption.id)" >Delete</a>
+           </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

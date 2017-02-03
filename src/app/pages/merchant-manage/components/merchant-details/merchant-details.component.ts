@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 import { ChangeLangEvent } from '../../../../shared/components/select-lang.component';
 import { MerchantViewModel } from '../../model/merchant-view-model';
 import { MerchantViewModelService } from '../../services/merchant-view-model.service';
+import { Store } from '@ngrx/store';
+import { MerchantProductAppState } from '../../store/index';
+import { MerchantActions } from '../../actions/merchant-actions';
 
 @Component({
   selector: 'am-merchant-details',
@@ -29,8 +32,10 @@ export class MerchantDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private merchantVmService: MerchantViewModelService) {
-  }
+    private merchantVmService: MerchantViewModelService,
+    private store: Store<MerchantProductAppState>,
+    private merchantActions: MerchantActions) {
+    }
 
   ngOnInit() {
     const vm = this;
@@ -72,6 +77,10 @@ export class MerchantDetailsComponent {
     observMerchantId.mergeMap(merchantId => {
       return vm.merchantVmService.get(merchantId, lang);
     }).subscribe((viewModel: MerchantViewModel) => {
+      let payload = {
+        id:viewModel.merchant.id
+      };
+      this.store.dispatch(this.merchantActions.getMerchantSuccess(payload));
       vm.merchantId = viewModel.merchant.id;
       vm.viewModel = viewModel;
       vm.viewModelOriginal = _.cloneDeep(viewModel);

@@ -31,9 +31,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatepickerComponent } from './components/datepicker.component';
 import { NullIfEmptyDirective } from './directives/null-if-empty.directive';
 import { MatchValueValidatorDirective } from './directives/match-value-validator.directive';
+import { MarketingAttributeTypeOptionsDirective } from './directives/product-marketing-attributes-type-options.directive';
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NgaModule, NgbModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgaModule,
+    NgbModule,
+  ],
   declarations: [SelectLangComponent,
     UploadImageComponent,
     MultiselectDropdownComponent,
@@ -42,6 +49,7 @@ import { MatchValueValidatorDirective } from './directives/match-value-validator
     AmRatingComponent,
     DatepickerComponent,
     CategoryTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     SectionTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
@@ -58,6 +66,7 @@ import { MatchValueValidatorDirective } from './directives/match-value-validator
     DatepickerComponent,
     CategoryTypeOptionsDirective,
     SectionTypeOptionsDirective,
+    MarketingAttributeTypeOptionsDirective,
     VehicleTypeOptionsDirective,
     DriverStatusOptionsDirective,
     NullIfEmptyDirective,

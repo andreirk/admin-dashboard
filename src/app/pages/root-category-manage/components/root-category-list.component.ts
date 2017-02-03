@@ -37,7 +37,7 @@ export class RootCategoryListComponent {
   loadRootCategories() {
     this.rootCategoryService.getList(this.lang).subscribe(rootCategories => {
       this.rootCategories = rootCategories;
-    })
+    }, err => console.log('err', err))
   }
 
   onDelete(event) {

@@ -39,6 +39,10 @@ export class RootCategoryCardComponent {
     private rootCategoryService: RootCategoryService
   ) { }
 
+  ngOnInit(){
+
+  }
+
   deleteRootCategory(id: string) {
     this.rootCategoryService.deleteOne(id).subscribe(() => this.onDelete.emit({id: id}));
   }

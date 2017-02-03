@@ -8,10 +8,10 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-
-import { EmitterService } from '../../product-manage/emitter.service'
-import { Category } from '../../../commons/model/category';
 import { CategoryService } from '../../../core/services/categories/category.service';
+import { Category } from '../../../commons/model/category';
+import { EmitterService } from '../emitter.service';
+
 
 @Component({
   selector: 'toyou-category-card',

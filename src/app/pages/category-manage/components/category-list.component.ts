@@ -3,7 +3,7 @@
  */
 import { Component, Input } from '@angular/core';
 import { CategoryService } from '../../../core/services/categories/category.service';
-import { EmitterService } from '../../product-manage/emitter.service';
+import { EmitterService } from '../emitter.service';
 import { Category } from '../../../commons/model/category';
 
 

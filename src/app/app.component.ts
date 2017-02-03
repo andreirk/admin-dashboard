@@ -30,7 +30,7 @@ export class App {
               private _config: BaThemeConfig,
               private viewContainerRef: ViewContainerRef) {
 
-    this._fixModals();
+      this._fixModals();
 
     this._loadImages();
 

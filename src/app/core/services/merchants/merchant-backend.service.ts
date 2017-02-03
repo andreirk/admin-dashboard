@@ -10,6 +10,8 @@ import { MerchantLinkableRootCategories } from '../../../shared/constants';
 import { RootCategoryService } from '../root-categories/root-category.service';
 import { Page } from '../../../commons/model/page';
 import {Pos} from "../../../commons/model/pos";
+import { Product } from "../../../commons/model/product";
+import { ProductOption, ProductOptionValue } from '../../../commons/model/product-option';
 
 @Injectable()
 export class MerchantBackendService {
@@ -86,6 +88,51 @@ export class MerchantBackendService {
 
   createMerchantsPos(merchantId: string, pos: Pos, lang: string): Observable<any> {
     return this.backendApi.post(this.path + '/' + merchantId + '/pos', pos, {}, lang);
+  }
+
+  createMerchantsProduct(merchantId: string, lang: string): Observable<any> {
+    return this.backendApi.post(this.path + '/' + merchantId + '/products', null, {}, lang);
+  }
+
+
+
+  /**
+   *
+   * /////// ProductOptions //////////
+   */
+
+  updateMerchantProductOption(merchantId: string, productOption: ProductOption, lang: string){
+    return this.backendApi.put(this.path + '/' + merchantId + '/productoptions/' + productOption.id, productOption, {}, lang);
+  }
+
+  createMerchantProductOption(merchantId: string, productOption: ProductOption, lang: string){
+    return this.backendApi.post(this.path + '/' + merchantId + '/productoptions', productOption,  {}, lang);
+  }
+
+  getMerchantProductOptionsList(merchantId: string, lang: string): Observable<Page<ProductOption>> {
+    return this.backendApi.get(this.path + '/' + merchantId + '/productoptions', {}, lang);
+  }
+
+  getMerchantProductOptionOne(merchantId: string, productOptionId: string, lang: string): Observable<ProductOption> {
+    return this.backendApi.get(this.path + '/' + merchantId + '/productoptions/' + productOptionId, {}, lang);
+  }
+
+  deleteMerchantProductOption(merchantId: string, productOptionId: string): Observable<ProductOption> {
+    return this.backendApi.delete(this.path + '/' + merchantId + '/productoptions/' + productOptionId);
+  }
+
+  getProductOptionValues(merchantId, productOptionId, currency, lang){
+    return this.backendApi.get(this.path + '/' + merchantId + '/productoptions/' + productOptionId + '/productoptionvalues', {currency}, lang);
+  }
+
+  updateProductOptionValue(merchantId, productOptionId, productOptionValue, currency, lang){
+    let path = this.path + '/' + merchantId + '/productoptions/' + productOptionId + '/productoptionvalues';
+    return this.backendApi.put(path, productOptionValue, {currency}, lang);
+  }
+
+  createProductOptionValue(merchantId: string, productOptionId: string, productOptionValue: ProductOptionValue, currency, lang){
+    let path = this.path + '/' + merchantId + '/productoptions/' + productOptionId + '/productoptionvalues';
+    return this.backendApi.post(path, ProductOptionValue,  {currency}, lang);
   }
 
 }
