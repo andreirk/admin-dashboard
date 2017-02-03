@@ -82,19 +82,3 @@ export class PosMapComponent implements OnInit, OnChanges {
     this.markerClick.emit(modelIndex);
   }
 }
-
-// get icon url for glyph
-function getIcon(glyph, color ? , size = 40) {
-  let canvas, ctx;
-  canvas = document.createElement('canvas');
-  canvas.width =  size + (size * 0.4);
-  canvas.height = size + (size * 0.8);
-  ctx = canvas.getContext('2d');
-  if (color) {
-    ctx.fillStyle = color;
-  }
-  ctx.font = (size * 0.9) + 'px FontAwesome';
-  ctx.textBaseline="top";
-  ctx.fillText(glyph, size/2 - 1, size - 1);
-  return canvas.toDataURL();
-}

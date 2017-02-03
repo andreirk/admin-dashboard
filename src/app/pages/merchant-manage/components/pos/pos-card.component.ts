@@ -13,7 +13,7 @@ import { ViewChild } from "@angular/core/src/metadata/di";
   selector: 'am-pos-card',
   providers: [],
   template: `
-<div class="col-sm-10">
+<div class="col-sm-12">
   <div class="card">
     <div class="card-block">
       <h5 class="card-title">{{pos.name}}</h5>

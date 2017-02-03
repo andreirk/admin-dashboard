@@ -101,6 +101,7 @@ export class PosViewModelService {
     } else {
       model.unresolvedAddress = true;
     }
+    model.mapMarkersViewModel = PosViewModelService.updatePosMarkerViewModel(model.showResolved, model.pos.address.geoPoint, model.resolvedPoint);
     return model;
   }
 
@@ -135,6 +136,7 @@ export class PosViewModelService {
         model.lastModifiedPoint = _.cloneDeep(model.pos.address.geoPoint);
       }
     });
+    model.mapMarkersViewModel = PosViewModelService.updatePosMarkerViewModel(model.showResolved, model.pos.address.geoPoint, model.resolvedPoint);
     return model;
   }
 
@@ -145,14 +147,14 @@ export class PosViewModelService {
 function getIcon(glyph, color ? , size = 40) {
   let canvas, ctx;
   canvas = document.createElement('canvas');
-  canvas.width =  size + (size * 0.4);
-  canvas.height = size + (size * 0.8);
+  canvas.width =  size/2 + 3;
+  canvas.height = size;
   ctx = canvas.getContext('2d');
   if (color) {
     ctx.fillStyle = color;
   }
-  ctx.font = (size * 0.9) + 'px FontAwesome';
+  ctx.font = size + 'px FontAwesome';
   ctx.textBaseline="top";
-  ctx.fillText(glyph, size/2 - 1, size - 1);
+  ctx.fillText(glyph, 0, 0);
   return canvas.toDataURL();
 }
