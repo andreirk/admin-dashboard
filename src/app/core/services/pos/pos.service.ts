@@ -32,11 +32,12 @@ export class PosService {
   }
 
   save(merchantId: string, pos: Pos, lang: string): Observable<string> {
+    const vm = this;
     if (pos.id) {
-      return this.update(pos, lang);
+      return vm.update(pos, lang);
     } else {
-      return this.create(merchantId, pos, lang).map(posId => {
-        this.fillPosWorktimes(posId);
+      return vm.create(merchantId, pos, lang).map(posId => {
+        vm.fillPosWorktimes(posId);
         return posId;
       });
     }

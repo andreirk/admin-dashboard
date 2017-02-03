@@ -27,8 +27,12 @@ label {
 }
 
 a.link {
-  text-decoration: underline!important;
   color: whitesmoke;
+}
+
+a.link:hover, a.hoverlink {
+  color: whitesmoke;
+  text-decoration: underline!important;
 }
 
 .dropdown {

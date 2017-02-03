@@ -12,6 +12,7 @@ import { ModalConfirmComponent } from '../../../../shared/components/modal-confi
 
 @Component({
   selector: 'am-driver-tabs',
+  styleUrls: ['../style'],
   template: require('./driver-tabs.component.html')
 })
 
