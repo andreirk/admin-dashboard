@@ -9,7 +9,7 @@ import {
 
 import { Observable } from 'rxjs/Rx';
 
-import { EmitterService } from '../../product-manage/emitter.service';
+import { EmitterService } from '../emitter.service';
 import { Category } from '../../../commons/model/category';
 import { CategoryService } from '../../../core/services/categories/category.service';
 

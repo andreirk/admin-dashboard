@@ -4,6 +4,7 @@
 import { Action } from '@ngrx/store';
 import { ProductActions } from '../actions';
 import { Product, ProductAttributes, Price, ProductSelectedImage } from '../../../../../commons/model/product';
+import { MarketingAttributeType } from '../../../../../shared/types';
 
 export type ProductState = Product;
 

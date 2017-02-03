@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BackendApiService as ApiService } from '../backend-api.service';
-import { Currency } from '../../../shared/types';
+import { Currency, MarketingAttributeType } from '../../../shared/types';
 import { Observable } from 'rxjs';
 import { Page } from '../../../commons/model/page';
-import { Product, ProductAttributes } from '../../../commons/model/product';
+import { Product, ProductAttributes, Price } from '../../../commons/model/product';
 import { MerchantBackendService } from '../merchants/merchant-backend.service';
 
 @Injectable()
@@ -22,7 +22,6 @@ export class ProductService {
     }
 
     getOne(id: string, lang: string, options = {}): Observable<Product> {
-      console.log('in getOne pruduct service', arguments);
       return this.api.get(this.path + '/' + id, options, lang);
     }
 
@@ -40,10 +39,7 @@ export class ProductService {
     }
 
     updateAttributes(product: Product,  lang: string): Observable<ProductAttributes> {
-      console.log('in updateAttributes service', {
-        product,
-        lang
-      });
+
       return this.api.put(this.path + '/' + product.id + '/attributes', product.attributes, {}, lang)
         .map(result => {
             if (result.success) {
@@ -57,18 +53,14 @@ export class ProductService {
     }
 
     updateUpc(product: Product, lang){
-      console.log('in updateUpc service', {
-        product,
-        lang
-      });
+
       if(product.upc) {
         return this.api.put(this.path + '/' + product.id + '/upc', product.upc, {}, lang)
           .map(result => {
               if (result.success) {
-                console.log('successfuly updated upc')
+
                 return product.upc;
               } else {
-                console.log('!! not successfuly updated upc', result)
                 return null;
               }
             },
@@ -79,10 +71,7 @@ export class ProductService {
 
 
     updateCategory(product: Product, lang){
-      console.log('in updateCategory service', {
-        product,
-        lang
-      });
+
       return this.api.put(this.path + '/' + product.id + '/category', product.categoryId, {}, lang)
         .map(result => {
             if (result.success) {
@@ -95,11 +84,8 @@ export class ProductService {
         );
     }
 
-    createOrUpdatePrice(product: Product, lang){
-      console.log('in createOrUpdatePrice service', {
-        product,
-        lang
-      });
+    createOrUpdatePrice(product: Product, lang): Observable<Price> | null {
+
       return this.api.put(this.path + '/' + product.id + '/prices', product.price, {}, lang)
         .map(result => {
             if (result.success) {
@@ -113,10 +99,7 @@ export class ProductService {
     }
 
     updateGroups(product: Product, lang){
-      console.log('in updateGroups service', {
-        product,
-        lang
-      })
+
       return this.api.put(this.path + '/' + product.id + '/groups', product.groupIds, {}, lang)
         .map(result => {
             if (result.success) {
@@ -130,10 +113,7 @@ export class ProductService {
     }
 
     updateTags(product: Product, lang){
-      console.log('in updateTags service', {
-        product,
-        lang
-      })
+
       return this.api.put(this.path + '/' + product.id + '/tagValues', product.tagValues, {}, lang)
         .map(result => {
             if (result.success) {
@@ -174,10 +154,7 @@ export class ProductService {
 
 
     updateAvailablity(product: Product, lang){
-      console.log('in updateAvailablity service', {
-        product,
-        lang
-      })
+
       const availablity = product.available  ? 'AVAILABLE' : 'UNAVAILABLE';
       return this.api.put(this.path + '/' + product.id + '/' + availablity, '', {}, lang)
         .map(result => {
@@ -191,11 +168,8 @@ export class ProductService {
         );
     }
 
-    updateMarketingAttribute(product: Product, lang){
-      console.log('in updateMarketingAttribute service', {
-        product,
-        lang
-      })
+    updateMarketingAttribute(product: Product, lang): Observable<MarketingAttributeType | string> | null {
+
       return this.api.put(this.path + '/' + product.id + '/marketingattribute/' + product.marketingAttribute, '', {}, lang)
         .map(result => {
             if (result.success) {
@@ -210,7 +184,6 @@ export class ProductService {
 
 
     update(originalProduct: Product, updatedProduct: Product, lang){
-      console.log('in update servise ', {originalProduct, updatedProduct});
 
       let fieldsToUpdate: Array<Observable<any>>  = this.addFieldsToUpdate(originalProduct, updatedProduct, lang);
 
@@ -221,25 +194,19 @@ export class ProductService {
     }
 
     save(merchantId, originalProduct: Product, updatedProduct: Product,  lang): any {
-        console.log('in save service, before if',{merchantId, updatedProduct});
 
         if(updatedProduct.id){
 
           return this.update(originalProduct, updatedProduct, lang);
         }
         else {
-          console.log('in create ')
-
-          const createdProductId$ =  this.createProduct(merchantId, lang);
+           const createdProductId$ =  this.createProduct(merchantId, lang);
 
           return createdProductId$
             .switchMap(productId => {
-              console.log('in save before fork join service', {updatedProduct});
               updatedProduct.id = productId;
 
               let fieldsToUpdate: Array<Observable<any>>  = this.addFieldsToUpdate(originalProduct, updatedProduct, lang);
-
-              console.log('fieldsToUpdate',fieldsToUpdate);
 
               return Observable
                      .forkJoin(fieldsToUpdate)
@@ -254,7 +221,7 @@ export class ProductService {
    */
   addFieldsToUpdate(originalProduct: Product, editedProduct: Product, lang): Array<Observable<any>> {
 
-    let fieldsToUpdate = [];
+    let fieldsToUpdate:Array<Observable<any>> = [];
 
     if(!_.isEqual(originalProduct.attributes, editedProduct.attributes )){
       fieldsToUpdate.push(this.updateAttributes(editedProduct, lang))

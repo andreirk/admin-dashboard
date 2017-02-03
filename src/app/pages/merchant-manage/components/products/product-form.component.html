@@ -68,6 +68,7 @@
                 [items]="marketingAttrebutes"
                 [active]="product.marketingAttribute ? [product.marketingAttribute] : []"
                 (selected)="onSelectMarketingAttrebute($event.text)"
+                (data)="onChangeFired($event)"
               >
               </ng-select>
 

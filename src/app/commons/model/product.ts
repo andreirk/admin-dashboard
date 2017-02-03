@@ -3,7 +3,7 @@
  */
 
 
-import { Currency } from '../../shared/types';
+import { Currency, MarketingAttributeType } from '../../shared/types';
 export class ProductAttributes {
   brand: string = '';
   description: string = '';
@@ -46,7 +46,7 @@ export class Product {
   public groupIds: string[] = [],
   public description: string = '',
   public imageUrl: string = '',
-  public marketingAttribute: string = '',
+  public marketingAttribute: MarketingAttributeType | string = '',
   public mediaResources: MediaResource[] = [],
   public merchantId: string = '',
   public packageType: string = '',
@@ -65,8 +65,6 @@ export interface ProductsRootObject {
   content: Product[];
   total: number;
 }
-
-export type MarketingAttribute = 'Promo'| 'Gift'| 'Tranding' | '';
 
 
 export interface ProductGroup {

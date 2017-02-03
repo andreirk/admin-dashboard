@@ -55,7 +55,9 @@ export class GroupMultiSelectComponent {
   }
 
   getGroups(lang: string){
-    this.groupService.getList(lang)
+    let page = 0;
+    let size = 1000;
+    this.groupService.getPage(page, size, lang)
       .map(groupsPage => groupsPage.content)
       .subscribe(
         groups => {

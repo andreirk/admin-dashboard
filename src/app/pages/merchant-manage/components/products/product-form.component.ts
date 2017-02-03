@@ -40,9 +40,7 @@ export class ProductFormComponent implements OnInit {
 
   constructor( ) {
 
-    for (let type in MarketingAttributeType){
-      this.marketingAttrebutes.push(type);
-    }
+    this.marketingAttrebutes = this.fillMarketingAttributes(MarketingAttributeType)
 
   }
 
@@ -88,6 +86,17 @@ export class ProductFormComponent implements OnInit {
 
   onChangeFired(event){
     this.wasModified = true;
+  }
+
+  fillMarketingAttributes(enumItems){
+    let arr = [];
+    for (let type in enumItems){
+      arr.push(type);
+    }
+    // for empty
+    arr.push("-")
+
+    return arr;
   }
 
 /////////////////////////////////////////////////////////

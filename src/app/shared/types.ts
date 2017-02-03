@@ -90,6 +90,6 @@ export enum DriverStatus {
 export enum MarketingAttributeType {
   PROMO = <any> 'PROMO',
   GIFT = <any> 'GIFT',
-  TRENDING = <any> 'TRENDING'
+  TRENDING = <any> 'TRENDING',
 }
 
