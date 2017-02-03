@@ -36,7 +36,6 @@ export class RootCategoryListComponent {
 
   loadRootCategories() {
     this.rootCategoryService.getList(this.lang).subscribe(rootCategories => {
-      console.log('in subscribe', rootCategories)
       this.rootCategories = rootCategories;
     }, err => console.log('err', err))
   }
